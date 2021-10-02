@@ -1,7 +1,7 @@
 
 import Dashboard from "views/Dashboard.js";
 import ManageCompany from "views/Components/ManageCompany";
-import CreateNewCompany from "views/Components/CreateNewCompany.js";
+// import CreateNewCompany from "views/Components/CreateNewCompany.js";
 // import SweetAlert from "views/Components/SweetAlertPage.js";
 import Notifications from "views/Components/Notifications.js";
 import Icons from "views/Components/Icons.js";
@@ -9,7 +9,9 @@ import Typography from "views/Components/Typography.js";
 import RegularForms from "views/Forms/RegularForms.js";
 import ServiceTables from "views/Forms/ServiceTables.js";
 import ValidationForms from "views/Forms/ValidationForms.js";
+import ManageMajor from "views/Major/ManageMajor.js";
 import CreateNewService from "views/Forms/CreateNewService.js";
+import CreateNewMajor from "views/Major/CreateNewMajor.js";
 import CreateNewRepairMan from "views/Tables/CreateNewRepairMan.js";
 import RepairmanTable from "views/Tables/RepairmanTable.js";
 import GoogleMaps from "views/Maps/GoogleMaps.js";
@@ -54,21 +56,21 @@ var routes = [
         mini: "GS",
         component: ManageCompany,
       },
-      {
-        path: "/create/company",
-        layout: "/admin",
-        name: "Create Company",
-        mini: "CC",
-        component: CreateNewCompany,
-      },
+      // {
+      //   path: "/create/company",
+      //   layout: "/admin",
+      //   name: "Create Company",
+      //   mini: "CC",
+      //   component: CreateNewCompany,
+      // },
    
-      {
-        path: "/notifications",
-        layout: "/admin",
-        name: "Notifications",
-        mini: "N",
-        component: Notifications,
-      },
+      // {
+      //   path: "/notifications",
+      //   layout: "/admin",
+      //   name: "Notifications",
+      //   mini: "N",
+      //   component: Notifications,
+      // },
       // {
       //   path: "/icons",
       //   layout: "/admin",
@@ -120,6 +122,51 @@ var routes = [
         mini: "Cs",
         component: CreateNewService,
       },
+    ],
+  },
+  {
+    collapse: true,
+    path: "/major",
+    name: "Major",
+    state: "openMajor",
+    icon: "nc-icon nc-bank",
+    views: [
+      {
+        path: "/major",
+        layout: "/admin",
+        name: "Manage Major",
+        mini: "GS",
+        component: ManageMajor,
+      },
+      {
+        path: "/create/major",
+        layout: "/admin",
+        name: "Create Major",
+        mini: "CC",
+        component: CreateNewMajor,
+      },
+   
+      // {
+      //   path: "/notifications",
+      //   layout: "/admin",
+      //   name: "Notifications",
+      //   mini: "N",
+      //   component: Notifications,
+      // },
+      // {
+      //   path: "/icons",
+      //   layout: "/admin",
+      //   name: "Icons",
+      //   mini: "I",
+      //   component: Icons,
+      // },
+      // {
+      //   path: "/typography",
+      //   layout: "/admin",
+      //   name: "Typography",
+      //   mini: "T",
+      //   component: Typography,
+      // },
     ],
   },
   {

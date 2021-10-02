@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 // import { postWithToken } from "../ReadAPI";
 // import moment from "moment";
 
-export default function CreateNewCompany() {
+export default function CreateNewMajor() {
   const [button, setButton] = useState(true);
   const [male, setMale] = useState(true);
   const [female, setFemale] = useState(false);
@@ -117,7 +117,7 @@ export default function CreateNewCompany() {
   return (
     <div className="container-createuser-form">
       <Container>
-        <h3 class="logo-title">Create New Company</h3>
+        <h3 class="logo-title">Create New Major</h3>
         <Col md={9}>
           <Form
             onSubmit={(e) => {
@@ -203,7 +203,7 @@ export default function CreateNewCompany() {
 
             <div className="btn-container">
               <Button color="danger">Save</Button>
-              <Link to="/admin/company">
+              <Link to="/admin/major">
                 <button className="btn-cancel">Cancel</button>
               </Link>
             </div>

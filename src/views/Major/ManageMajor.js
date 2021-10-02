@@ -9,6 +9,7 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
+
 import {
   Media,
   Modal,
@@ -21,28 +22,28 @@ import editIcon from "assets/img/edit.png";
 import { Link } from "react-router-dom";
 
 
-function ManageCompany() {
-  const [CompanyDelete, setCompanyDelete] = useState(null);
-  const [modalDelete, setCompanyModalDelete] = useState(false);
+function ManageMajor() {
+  const [MajorDelete, setMajorDelete] = useState(null);
+  const [modalDelete, setMajorModalDelete] = useState(false);
 
-  const toggleDelete = () => setCompanyModalDelete(!modalDelete);
+  const toggleDelete = () => setMajorModalDelete(!modalDelete);
 
-  function handleCompanyDetele() {
-    del("api/company/" + CompanyDelete.companyId, localStorage.getItem("token"))
-      .then((res) => {
-        if (res.status === 200 || res.status === 202) {
-          // var temp;
-          // temp = useList.filter((x) => x.repairmanId !== CompanyDelete.repairmanId);
-          // setUseListShow(temp);
-          // setUseListShowPage(temp.slice(numberPage * 5 - 5, numberPage * 5));
-          // setTotalNumberPage(Math.ceil(temp.length / 5));
-        }
-      })
-      .catch((err) => {
-        setErrorMessage(err.response.data.message);
-        setModalConfirm(true);
-      });
-  }
+  // function handleMajorDetele() {
+  //   del("api/company/" + MajorDelete.companyId, localStorage.getItem("token"))
+  //     .then((res) => {
+  //       if (res.status === 200 || res.status === 202) {
+  //         // var temp;
+  //         // temp = useList.filter((x) => x.repairmanId !== CompanyDelete.repairmanId);
+  //         // setUseListShow(temp);
+  //         // setUseListShowPage(temp.slice(numberPage * 5 - 5, numberPage * 5));
+  //         // setTotalNumberPage(Math.ceil(temp.length / 5));
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       setErrorMessage(err.response.data.message);
+  //       setModalConfirm(true);
+  //     });
+  // }
   const closeBtn = (x) => (
     <button
       className="btn border border-danger"
@@ -59,10 +60,10 @@ function ManageCompany() {
           <Col md="12">
             <Card className="strpied-tabled-with-hover">
               <Card.Header>
-                <Card.Title as="h4">Manage Company</Card.Title>
-                {/* <Link to="/admin/create/company">
-                  Create new Company
-                </Link> */}
+                <Card.Title as="h4">Manage Major</Card.Title>
+                <Link to="/admin/create/major">
+                    Create new Major
+                </Link>
               </Card.Header>
               <Card.Body className="table-full-width table-responsive px-0">
                 <Table className="table-hover table-striped">
@@ -87,8 +88,8 @@ function ManageCompany() {
                         <Media
                           src={deleteIcon}
                           onClick={() => {
-                            setCompanyDelete();
-                            setCompanyModalDelete(true);
+                            setMajorDelete();
+                            setMajorModalDelete(true);
                           }}
                         />
                       </td>
@@ -104,8 +105,8 @@ function ManageCompany() {
                         <Media
                           src={deleteIcon}
                           onClick={() => {
-                            setCompanyDelete();
-                            setCompanyModalDelete(true);
+                            setMajorDelete();
+                            setMajorModalDelete(true);
                           }}
                         />
                       </td>
@@ -121,8 +122,8 @@ function ManageCompany() {
                         <Media
                           src={deleteIcon}
                           onClick={() => {
-                            setCompanyDelete();
-                            setCompanyModalDelete(true);
+                            setMajorDelete();
+                            setMajorModalDelete(true);
                           }}
                         />
                       </td>
@@ -138,8 +139,8 @@ function ManageCompany() {
                         <Media
                           src={deleteIcon}
                           onClick={() => {
-                            setCompanyDelete();
-                            setCompanyModalDelete(true);
+                            setMajorDelete();
+                            setMajorModalDelete(true);
                           }}
                         />
                       </td>
@@ -155,8 +156,8 @@ function ManageCompany() {
                         <Media
                           src={deleteIcon}
                           onClick={() => {
-                            setCompanyDelete();
-                            setCompanyModalDelete(true);
+                            setMajorDelete();
+                            setMajorModalDelete(true);
                           }}
                         />
                       </td>
@@ -170,7 +171,7 @@ function ManageCompany() {
           <Col md="12">
             <Card className="card-plain table-plain-bg">
               <Card.Header>
-                <Card.Title as="h4">Hot Service </Card.Title>
+                <Card.Title as="h4">Major Field</Card.Title>
                 <p className="card-category">
                   This is a text
                 </p>
@@ -257,8 +258,8 @@ function ManageCompany() {
           <Button
             color="danger"
             onClick={() => {
-              handleCompanyDetele();
-              setCompanyModalDelete(false);
+              handleMajorDetele();
+              setMajorModalDelete(false);
             }}
           >
             Delete
@@ -272,4 +273,4 @@ function ManageCompany() {
   );
 }
 
-export default ManageCompany;
+export default ManageMajor;
