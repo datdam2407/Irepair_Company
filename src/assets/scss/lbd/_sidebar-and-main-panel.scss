@@ -734,9 +734,9 @@
         width: 100%;
         display: block;
         top: 0;
-        left: 0;
+        left: 1000;
         background-size: cover;
-        background-position: center center;
+        background-position: value;
     }
 
     &:before,

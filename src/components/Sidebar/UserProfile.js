@@ -121,7 +121,7 @@ function User() {
                         <label>About Me</label>
                         <Form.Control
                           cols="80"
-                          defaultValue="Nguyen Khanh"
+                          defaultValue="Nguyễn Khánh"
                           placeholder="Here can be your description"
                           rows="4"
                           as="textarea"
