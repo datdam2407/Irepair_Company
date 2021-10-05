@@ -22,7 +22,7 @@ export default function EditService() {
   const [imageUrl, setImage] = useState("");
   const [companyId, setCompanyID] = useState("");
   const [fieldId, setFieldId] = useState("");
-  const [statusService, setStatusService] = useState("updating");
+  const [statusService, setStatusService] = useState("");
   // load resdata
   useEffect(() => {
     let params = {};
@@ -36,7 +36,7 @@ export default function EditService() {
 
       setImage(res.data.imageUrl);
 
-      setStatusService(res.data.status);
+      setStatusService(3);
 
       setCompanyID(res.data.companyId);
 
@@ -61,9 +61,11 @@ export default function EditService() {
       description: description,
       price:  newPrice,
       imageUrl: newImageUrl,
-      status: 0,
+      status: 3,
       companyId: companyId, 
       fieldId: newFieldId
+      
+
     })
       .then((res) => {
         if (res.status === 200) {

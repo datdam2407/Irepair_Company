@@ -23,16 +23,15 @@ import {
   Tooltip,
   ModalTitle,
 } from "react-bootstrap";
-import { del, post, get } from "../../service/ReadAPI";
+import { del, post, get , put} from "../../service/ReadAPI";
 import { createLogicalAnd } from "typescript";
 
-
 function ServiceTables() {
-  //delete modal  
+  //delete modal
   // const [ServiceDelete, setServiceDelete] = useState(null);
   // const [modalDelete, setServiceModalDelete] = useState(false);
   // const toggleServiceDelete = () => setServiceModalDelete(!modalDelete);
-  //edit modal  
+  //edit modal
   const [ServiceEdit, setServiceEdit] = useState(null);
   // const [modalEdit, setServiceModalEdit] = useState(false);
   // const toggleEdit = () => setServiceModalEdit(!modalEdit);
@@ -40,11 +39,16 @@ function ServiceTables() {
   //Edit Service
   // const [ServiceEdit, setServiceEdit] = useState(null);
   const [modalEdit, setServiceModalEdit] = useState(false);
-  const toggleEdit = () => setServiceModalEdit(!modalEdit)
+  const toggleEdit = () => setServiceModalEdit(!modalEdit);
   //Delete Service
   const [ServiceDelete, setServiceDelete] = useState(null);
   const [modalServiceDelete, setServiceModalDelete] = useState(false);
-  const toggleServiceDelete = () => setServiceModalDelete(!modalEdit)
+  const toggleServiceDelete = () => setServiceModalDelete(!modalServiceDelete);
+  // undo Service
+  const [ServiceUndo, setServiceUndo] = useState(null);
+  const [modalServiceUndo, setServiceModalUndo] = useState(false);
+  const toggleServiceUndo = () => setServiceModalUndo(!modalServiceUndo);
+
 
   //view modal
   const [modalStatus, setModalStatus] = useState(false);
@@ -53,22 +57,24 @@ function ServiceTables() {
   const [selectField, setSelectField] = useState();
   // const [FieldId, setFieldId] = useState("");
   // const [Status, setStatus] = useState("");
-  
 
   //Service List
   const [useListServiceShow, setUseListServiceShow] = useState([]);
-  const [useListServiceStatusShowPage, setUseListServiceStatusShow] = useState([]);
+  const [useListServiceStatusShowPage, setUseListServiceStatusShow] = useState(
+    []
+  );
   const [useListServiceShowPage, setUseListServiceShowPage] = useState([]);
-  const [useListServiceShowStatusPage, setUseListServiceShowStatusPage] = useState([]);
+  const [useListServiceShowStatusPage, setUseListServiceShowStatusPage] =
+    useState([]);
   const [ServiceList, setServiceList] = useState([]);
   const [ServiceListState, setServiceStatusList] = useState([]);
   const [ServiceListID, setServiceListID] = useState([]);
   const [numberPage, setNumberPage] = useState(1);
   const [totalNumberPage, setTotalNumberPage] = useState(1);
   const [count, setCount] = useState(1);
+  const [Status, setStatus] = useState("");
 
   const [filterState, setListFilterState] = useState([]);
-
 
   // field edit
   const [name, setName] = useState("");
@@ -77,7 +83,7 @@ function ServiceTables() {
   const [isDeleted, setIsDeleted] = useState("");
 
   const setData = (data) => {
-    console.log("aaaaa", data)
+    console.log("aaaaa", data);
     let { Id } = data;
     localStorage.setItem("serviceID", Id);
   };
@@ -103,60 +109,78 @@ function ServiceTables() {
   //     console.log(err);
   //   });
   // }
-  
-  //delete fc
-  function deleteServiceByID(){
-    del(`/api/v1.0/service/${ServiceDelete}`)
-    .then((res)=>{
-      if (res.status === 200) {
-        window.location = "/admin/service";
 
-      }
-    }).catch((err)=>{
-      console.log(err);
-    });
+  //delete fc
+  function deleteServiceByID() {
+    del(`/api/v1.0/service/${ServiceDelete}`)
+      .then((res) => {
+        if (res.status === 200) {
+          window.location = "/admin/service";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  //reverse
+  function ReverseByID() {
+    del(`/api/v1.0/service/${ServiceUndo}`)
+      .then((res) => {
+        if (res.status === 200 && res.data.Status == "3") {
+          setStatus("3");
+          console.log(Status)
+          window.location = "/admin/service";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   //Load Service
   useEffect(() => {
     getServiceList();
     displayFIeldName();
     displayStateName();
-    get("​/api​/v1.0​/company​").then(
-      (res) => {
-        if (res && res.status === 200) {
-          setListFilterState(res.data);
-        }
+    get("​/api​/v1.0​/company​").then((res) => {
+      if (res && res.status === 200) {
+        setListFilterState(res.data);
       }
-    );
+    });
     get("/api​/v1.0​/major_field​").then((res) => {
       if (res && res.status === 200) {
         setListFilterState(res.data);
       }
     });
   }, []);
-//6aeac270-3ce6-4693-b9af-07e8575e72e6
-  
+  //6aeac270-3ce6-4693-b9af-07e8575e72e6
+
   function getServiceList() {
-    get("​/api/v1.0/service").then((res) => {
-      var temp = res.data;
-      // setName(temp.name);
-      // setDescription(temp.description);
-      // setImage(temp.picture);
-      // setIsDeleted(temp.is_Delete);
-      setServiceList(temp);
-      setUseListServiceShow(temp);
-      setUseListServiceShowPage(temp.slice(numberPage * 5 - 5, numberPage * 5));
-      setTotalNumberPage(Math.ceil(temp.length / 5));
-      setCount(count);
-    }).catch((err) => {
-      console.log(err);
-    });
+    get("​/api/v1.0/service")
+      .then((res) => {
+        var temp = res.data;
+        // setName(temp.name);
+        // setDescription(temp.description);
+        // setImage(temp.picture);
+        // setIsDeleted(temp.is_Delete);
+        setServiceList(temp);
+        setUseListServiceShow(temp);
+        setUseListServiceShowPage(
+          temp.slice(numberPage * 5 - 5, numberPage * 5)
+        );
+        setTotalNumberPage(Math.ceil(temp.length / 5));
+        setCount(count);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
- 
+
   //Paging
   function onClickPage(number) {
     setNumberPage(number);
-    setUseListServiceShowPage(useListServiceShow.slice(number * 5 - 5, number * 5));
+    setUseListServiceShowPage(
+      useListServiceShow.slice(number * 5 - 5, number * 5)
+    );
     setTotalNumberPage(Math.ceil(useListServiceShow.length / 5));
   }
   // Delete Fc
@@ -185,19 +209,20 @@ function ServiceTables() {
       X
     </button>
   );
-  // Custom state 
+  // Custom state
   function displayStateName(type) {
     const stateValue = {
       1: "Approved",
       0: "New",
-      2: "Delete"
+      2: "Delete",
+      3: "Updating",
     };
     return stateValue[type] ? stateValue[type] : "";
   }
   // Custome fieldID tạm thời
   function displayFIeldName(type) {
     const nameValue = {
-      "6cf49d92-03f7-4b27-852c-09255e380fcc" : "Két sắt",
+      "6cf49d92-03f7-4b27-852c-09255e380fcc": "Két sắt",
       "813a4c08-fa29-48bb-9d76-0beaa4d133f8": "Xe đạp điện",
       "82ab0ec7-8341-4faa-a342-2b5b407f5ee4": "Máy lạnh",
       "8d55b787-eb63-4bf6-b60c-0c1de5595f37": "Tủ đông",
@@ -216,9 +241,7 @@ function ServiceTables() {
             <Card className="table-with-links">
               <Card.Header>
                 <Card.Title as="h4">Table with Service</Card.Title>
-                <Link to="/admin/create/Service">
-                  Create new Service
-                </Link>
+                <Link to="/admin/create/Service">Create new Service</Link>
               </Card.Header>
               <Card.Body className="table-full-width">
                 <Table>
@@ -226,7 +249,7 @@ function ServiceTables() {
                     <tr>
                       {/* <th className="text-center">#</th> */}
                       {/* <th>CompanyId</th> */}
-                      <th>Name</th>
+                      {/* <th>Name</th> */}
                       <th>ServiceName</th>
                       <th>Description</th>
                       <th>Price</th>
@@ -237,87 +260,79 @@ function ServiceTables() {
                   </thead>
                   <tbody>
                     {useListServiceShowPage.map((e, index) => {
-                      if (e.Status != "2"){
-                      return (
-                        <tr key={index}>
-                          {/* <td>
+                      if (e.Status != "2") {
+                        return (
+                          <tr key={index}>
+                            {/* <td>
                             {e.CompanyName}
                           </td> */}
-                          <td>
-                            {displayFIeldName(e.FieldId)}
-                          </td>
-                          <td>
-                            {e.ServiceName}
-                          </td>
-                          <td>
-                            {e.Description}
-                          </td>
-                          <td>
-                            {e.Price}
-                          </td>
-                          <td>
-                            {e.ImageUrl}
-                          </td>
-                          <td>
-                            {displayStateName(e.Status)}
-                          </td>
-                          <td className="td-actions text-right">
-                            <OverlayTrigger
-                              onClick={(e) => e.preventDefault()}
-                              overlay={
-                                <Tooltip id="tooltip-150479227">
-                                  View Profile..
-                                </Tooltip>
-                              }
-                            >
-                              <Button
-                                onClick={() => {
-                                  setModalStatus(true);
-                                  setSelectService(e);
-                                }}
-                                variant="info"
-                                size="sm"
-                                className="text-info btn-link like"
+                            {/* <td>{displayFIeldName(e.FieldId)}</td> */}
+                            <td>{e.ServiceName}</td>
+                            <td>{e.ServiceName}</td>
+                            <td>{e.Description}</td>
+                            <td>{e.Price}</td>
+                            <td>{e.ImageUrl}</td>
+                            <td>{displayStateName(e.Status)}</td>
+                            <td className="td-actions text-right">
+                              <OverlayTrigger
+                                onClick={(e) => e.preventDefault()}
+                                overlay={
+                                  <Tooltip id="tooltip-150479227">
+                                    View Profile..
+                                  </Tooltip>
+                                }
                               >
-                                <i className="fa fa-heart" />
-                              </Button>
-                            </OverlayTrigger>
-                            <OverlayTrigger
-                              overlay={
-                                <Tooltip id="tooltip-292560270">
-                                  Edit Profile..
-                                </Tooltip>
-                              }
-                            >
-                             
-                               <Link to ="/admin/update"
-                               onClick={() => setData(e)}
-                               className="btn-link btn-xs"
-                                variant="success"
+                                <Button
+                                  onClick={() => {
+                                    setModalStatus(true);
+                                    setSelectService(e);
+                                  }}
+                                  variant="info"
+                                  size="sm"
+                                  className="text-info btn-link like"
+                                >
+                                  <i className="fa fa-heart" />
+                                </Button>
+                              </OverlayTrigger>
+                              <OverlayTrigger
+                                overlay={
+                                  <Tooltip id="tooltip-292560270">
+                                    Edit Profile..
+                                  </Tooltip>
+                                }
                               >
-                                <i className="fas fa-edit"></i>
-                              </Link>
-                            </OverlayTrigger>
-                            <OverlayTrigger
-                              onClick={(e) => e.preventDefault()}
-                              overlay={
-                                <Tooltip id="tooltip-410038576">Remove..</Tooltip>
-                              }
-                            >
-                              <Button
-                                className="btn-link btn-xs"
-                                onClick={() => {
-                                  setServiceDelete(e.Id);
-                                  setServiceModalDelete(true);
-                                }}
-                                variant="danger"
+                                <Link
+                                  to="/admin/update"
+                                  onClick={() => setData(e)}
+                                  className="btn-link btn-xs"
+                                  variant="success"
+                                >
+                                  <i className="fas fa-edit"></i>
+                                </Link>
+                              </OverlayTrigger>
+                              <OverlayTrigger
+                                onClick={(e) => e.preventDefault()}
+                                overlay={
+                                  <Tooltip id="tooltip-410038576">
+                                    Remove..
+                                  </Tooltip>
+                                }
                               >
-                                <i className="fas fa-times"></i>
-                              </Button>
-                            </OverlayTrigger>
-                          </td>
-                        </tr>
-                      );}
+                                <Button
+                                  className="btn-link btn-xs"
+                                  onClick={() => {
+                                    setServiceDelete(e.Id);
+                                    setServiceModalDelete(true);
+                                  }}
+                                  variant="danger"
+                                >
+                                  <i className="fas fa-times"></i>
+                                </Button>
+                              </OverlayTrigger>
+                            </td>
+                          </tr>
+                        );
+                      }
                     })}
                   </tbody>
                 </Table>
@@ -411,7 +426,7 @@ function ServiceTables() {
               </Card.Body>
             </Card>
           </Col>
-          
+
           <Col md="4">
             <Card className="table-with-switches">
               <Card.Header>
@@ -420,7 +435,7 @@ function ServiceTables() {
               <Card.Body className="table-full-width">
                 <Table className="table-striped">
                   <thead>
-                  <tr>
+                    <tr>
                       {/* <th className="text-center">#</th> */}
                       {/* <th>CompanyId</th> */}
                       {/* <th>FieldId</th> */}
@@ -432,72 +447,66 @@ function ServiceTables() {
                     </tr>
                   </thead>
                   <tbody>
-                    
                     {useListServiceShowPage.map((e, index) => {
-                      if (e.Status == "2"){
-                      return (
-                        /* load all status not avaliable*/
-                        <tr key={index}>
-                          {/* <td>
+                      if (e.Status == "2") {
+                        return (
+                          /* load all status not avaliable*/
+                          <tr key={index}>
+                            {/* <td>
                             {e.CompanyName}
                           </td>
                           <td>
                             {e.Name}
                           </td> */}
-                          <td>
-                            {e.ServiceName}
-                          </td>
-                          <td>
-                            {e.Description}
-                          </td>
-                          <td>
-                            {e.Price}
-                          </td>
-                          <td>
-                            {e.ImageUrl}
-                          </td>
-                          <td className="td-actions text-right">
-                            <OverlayTrigger
-                              onClick={(e) => e.preventDefault()}
-                              overlay={
-                                <Tooltip id="tooltip-150479227">
-                                  View Profile..
-                                </Tooltip>
-                              }
-                            >
-                              <Button
-                                onClick={() => {
-                                  setModalStatus(true);
-                                  setSelectService(e);
-                                }}
-                                variant="info"
-                                size="sm"
-                                className="text-info btn-link like"
+                            <td>{e.ServiceName}</td>
+                            <td>{e.Description}</td>
+                            <td>{e.Price}</td>
+                            <td>{e.ImageUrl}</td>
+                            <td className="td-actions text-right">
+                              <OverlayTrigger
+                                onClick={(e) => e.preventDefault()}
+                                overlay={
+                                  <Tooltip id="tooltip-150479227">
+                                    View Profile..
+                                  </Tooltip>
+                                }
                               >
-                                <i className="fa fa-heart" />
-                              </Button>
-                            </OverlayTrigger>
-                           
-                            <OverlayTrigger
-                              onClick={(e) => e.preventDefault()}
-                              overlay={
-                                <Tooltip id="tooltip-410038576">Remove..</Tooltip>
-                              }
-                            >
-                              <Button
-                                className="btn-link btn-xs"
-                                onClick={() => {
-                                  setServiceDelete(e.Id);
-                                  setServiceModalDelete(true);
-                                }}
-                                variant="danger"
+                                <Button
+                                  onClick={() => {
+                                    setModalStatus(true);
+                                    setSelectService(e);
+                                  }}
+                                  variant="info"
+                                  size="sm"
+                                  className="text-info btn-link like"
+                                >
+                                  <i className="fa fa-heart" />
+                                </Button>
+                              </OverlayTrigger>
+
+                              <OverlayTrigger
+                                onClick={(e) => e.preventDefault()}
+                                overlay={
+                                  <Tooltip id="tooltip-410038576">
+                                    Remove..
+                                  </Tooltip>
+                                }
                               >
-                                <i className="fas fa-times"></i>
-                              </Button>
-                            </OverlayTrigger>
-                          </td>
-                        </tr>
-                      );
+                                <Button
+                                  className="btn-link btn-xs"
+                                  onClick={() => {
+                                    setServiceUndo(e.Id);
+                                    setStatus(e.Status);
+                                    setServiceModalUndo(true);
+                                  }}
+                                  variant="danger"
+                                >
+                                  <i className="fas fa-times"></i>
+                                </Button>
+                              </OverlayTrigger>
+                            </td>
+                          </tr>
+                        );
                       }
                     })}
                   </tbody>
@@ -602,7 +611,6 @@ function ServiceTables() {
                             <i className="fas fa-times"></i>
                           </Button>
                         </OverlayTrigger>
-
                       </td>
                     </tr>
                     <tr>
@@ -882,6 +890,31 @@ function ServiceTables() {
           </Col>
         </Row>
       </Container>
+      <Modal isOpen={modalServiceUndo} toggle={toggleServiceUndo}>
+        <ModalHeader
+          style={{ color: "#B22222" }}
+          close={closeBtn(toggleServiceUndo)}
+          toggle={toggleServiceUndo}
+        >
+          Are you sure?
+        </ModalHeader>
+        <ModalBody>Do you want to reverse this Service</ModalBody>
+        <ModalFooter>
+          <Button
+            color="danger"
+            onClick={() => {
+              ReverseByID();
+              setServiceModalUndo(false);
+            }}
+          >
+            Reverse
+          </Button>{" "}
+          <Button color="secondary" onClick={toggleServiceUndo}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
+
       <Modal isOpen={modalServiceDelete} toggle={toggleServiceDelete}>
         <ModalHeader
           style={{ color: "#B22222" }}
@@ -918,7 +951,11 @@ function ServiceTables() {
           <Form>
             <Form.Group className="mb-2">
               <Form.Label>Service name</Form.Label>
-              <Form.Control type="text" placeholder="Service name" defaultValue={name}/>
+              <Form.Control
+                type="text"
+                placeholder="Service name"
+                defaultValue={name}
+              />
             </Form.Group>
             <Form.Group className="mb-2">
               <Form.Label>Description</Form.Label>
@@ -932,15 +969,17 @@ function ServiceTables() {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Picture</Form.Label>
-              <Form.Control type="file" defaultValue={picture}
-/>
+              <Form.Control type="file" defaultValue={picture} />
             </Form.Group>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" onClick={() => { // handleServiceDetele();
-            setServiceModalEdit(false);
-          }}
+          <Button
+            color="danger"
+            onClick={() => {
+              // handleServiceDetele();
+              setServiceModalEdit(false);
+            }}
           >
             Edit
           </Button>
@@ -958,13 +997,14 @@ function ServiceTables() {
           Detailed Service Information
         </ModalHeader>
         <ModalBody>
-          <Row>
+          {/* <Row>
             <Col></Col>
             <Col md={3}>Field</Col>
             <Col md={8}>
-            {/* {selectService !== undefined } ? {displayFIeldName(selectService.FieldId)} : {""} */}
+              {selectService !== undefined} ?{" "}
+              {displayFIeldName(selectService.FieldId)} : {""}
             </Col>
-          </Row>
+          </Row> */}
           <Row>
             <Col></Col>
             <Col md={3}> Service</Col>
@@ -983,13 +1023,17 @@ function ServiceTables() {
             <Col></Col>
             <Col md={3}>Price</Col>
             <Col md={8}>
-              {selectService !== undefined ? selectService.Price : ""}
+              {selectService !== undefined ? selectService.Price : ""} $
             </Col>
           </Row>
           <Row>
-            <Col></Col>
+            {/* <Col></Col>
             <Col md={3}>Status</Col>
-            {/* <Col md={8}>{ displayStateName(selectService.Status)}</Col> */}
+
+            <Col md={8}>
+              {selectService !== undefined} ?{" "}
+              {displayStateName(selectService.Status)} : {""}
+            </Col> */}
           </Row>
         </ModalBody>
       </Modal>
