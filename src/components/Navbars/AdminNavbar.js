@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-
+import { Link, useHistory } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, db, logout} from '../Login/firebaseConfig'
 // react-bootstrap components
 import {
   Badge,
@@ -9,15 +11,11 @@ import {
   Nav,
   Container,
 } from "react-bootstrap";
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from "reactstrap";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import routes from "routes.js";
 
 function AdminNavbar() {
+ 
   const [modal, setModalLogOut] = useState(false);
   const toggleLogOut = () => setModalLogOut(!modal);
   const [collapseOpen, setCollapseOpen] = React.useState(false);
@@ -199,7 +197,8 @@ function AdminNavbar() {
                     onClick={() => {
                       // Logout(e);
                       setModalLogOut(true);
-                    }}                  >
+                    }}
+                  >
                     <i className="nc-icon nc-button-power"></i>
                     Log out
                   </Dropdown.Item>
@@ -212,8 +211,8 @@ function AdminNavbar() {
       <Modal isOpen={modal} toggle={toggleLogOut}>
         <ModalHeader
           style={{ color: "#B22222" }}
-        // close={closeBtn(toggleLogOut)}
-        // toggle={toggleLogOut}
+          // close={closeBtn(toggleLogOut)}
+          // toggle={toggleLogOut}
         >
           Are you sure?
         </ModalHeader>
@@ -224,14 +223,16 @@ function AdminNavbar() {
           <Button
             color="danger"
             onClick={() => {
-              setModalLogOut(false);
+              logout();
+              setModalLogOut(true);
               window.location.href = "/";
               localStorage.clear();
               sessionStorage.clear();
             }}
-          >
+          >     
             Log out
-          </Button>{" "}
+          </Button>{""}
+
           <Button color="secondary" onClick={toggleLogOut}>
             Cancel
           </Button>

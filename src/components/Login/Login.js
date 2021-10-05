@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, signInWithEmailAndPassword, signInWithGoogle } from "./firebaseConfig"
+import { auth, signInWithGoogle } from "./firebaseConfig"
 import { FaGooglePlusSquare } from 'react-icons/fa';
 // import "firebase/compat/auth";
 import 'firebase/firestore';
@@ -21,8 +21,8 @@ import {
 
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
   useEffect(() => {
@@ -93,23 +93,6 @@ function Login() {
   //             : (window.location.href = "/Staff");
   //       });
   //   }
-  //   return (
-  //     <div className="App">
-  //       <header className="App-header">
-  //         {/* <img src={logo} className="App-logo" alt="logo" /> */}
-  //         {
-  //           user
-  //             ? <p>Hello, {user.displayName}</p>
-  //             : <p>Please sign in.</p>
-  //         }
-  //         {
-  //           user
-  //             ? <button onClick={signOut}>Sign out</button>
-  //             : <button onClick={signInWithGoogle}>Sign in with Google</button>
-  //         }
-  //       </header>
-  //     </div>
-  //   );
 
   return (
     <>
@@ -145,19 +128,11 @@ function Login() {
               <h2>WELCOME TO IREPAIR</h2>
               <button
                 className="login__btn login__google"
-                onClick={signInWithGoogle}
-                color = "pink"
-                
+                onClick={signInWithGoogle}       
               >
                 Login with Google
               </button>
-              {/* </img> */}
-              {/* <div>
-                <Link to="/reset">Forgot Password</Link>
-              </div> */}
-                {/* <div>
-                    Don't have an account? <Link to="/register">Register</Link> now.
-                </div> */}
+
             </div>
           </div>
 

@@ -12,107 +12,49 @@ import {
 import { Link } from "react-router-dom";
 // import { postWithToken } from "../ReadAPI";
 // import moment from "moment";
+import { del, post ,get } from "../../service/ReadAPI";
+
 
 export default function CreateNewRepairMan() {
   const [button, setButton] = useState(true);
-  const [male, setMale] = useState(true);
-  const [female, setFemale] = useState(false);
-  const [dobError, setDobError] = useState("");
-  const [fnerror, setFnError] = useState("");
-  const [lnerror, setLnError] = useState("");
-  const [joinDateError, setJoinDateError] = useState("");
-  const [currentDate, setCurrentDate] = useState();
+
 
   function handleSubmit(e) {
     e.preventDefault();
-    var dateString = moment(e.target.date.value).format("MM/DD/YYYY");
-    var joinDate = moment(e.target.joineddate.value).format("MM/DD/YYYY");
-    console.log(e.target.joineddate.value);
     setButton(true);
-    postWithToken(
-      "/api/users",
+    post(
+      "/api/v1.0/repairman/create",
       {
-        firstName: e.target.firstname.value,
-        lastName: e.target.lastname.value,
-        dayOfBirth: dateString,
-        gender: male === true ? "MALE" : "FEMALE",
-        joinDate: joinDate,
-        role: e.target.role.value,
-        accountId: localStorage.getItem("id"),
+        avatar: e.target.avatar.value,
+        name: e.target.name.value,
+        Phone_Number: e.target.phone_Number.value,
+        email: e.target.email.value,
+        username: e.target.username.value,
+        Is_Online: 0,
+        Company_Id: e.target.company_Id.value,
+        uid: e.target.uid.value,
       },
-      localStorage.getItem("token")
     )
       .then((res) => {
         if (res.status === 200) {
-          window.location = "/admin/manageuser";
+          window.location = "/admin/Company";
         }
       })
       .catch((err) => {
-        if (err.response.status === 400) {
-          if (
-            e.target.firstname.value === "" &&
-            e.target.lastname.value === ""
-          ) {
-            setFnError("firstName must not be blank");
-            setLnError("lastName must not be blank");
-          } else if (e.target.firstname.value === "") {
-            setFnError("firstName must not be blank");
-          } else if (e.target.firstname.value === "")
-            setLnError("lastName must not be blank");
-
-          if (
-            err.response.data.message === "Wrong date! (MM/dd/yyyy)" &&
-            e.target.date.value === ""
-          )
-            setDobError("Wrong date! (MM/dd/yyyy)");
-
-          if (
-            err.response.data.message === "Wrong date! (MM/dd/yyyy)" &&
-            e.target.joineddate.value === ""
-          )
-            setJoinDateError("Wrong date! (MM/dd/yyyy)");
-
-          if (
-            err.response.data.message ===
-            "User is under 18. Please select a different date"
-          )
-            setDobError("User is under 18. Please select a different date");
-
-          if (
-            err.response.data.message ===
-            "Joined date is Saturday or Sunday. Please select a different date"
-          )
-            setJoinDateError(
-              "Joined date is Saturday or Sunday. Please select a different date"
-            );
-
-          if (
-            err.response.data.message ===
-            "Joined date is not later than Date of Birth. Please select a different date"
-          )
-            setJoinDateError(
-              "Joined date is not later than Date of Birth. Please select a different date"
-            );
-        }
+        console.log(err)
       });
-  }
+    }
 
-  useEffect(() => {
-    var curr = new Date();
-    curr.setDate(curr.getDate());
-    var date = curr.toISOString().substr(0, 10);
-    setCurrentDate(date);
-  }, []);
+ 
+  // function onChangeMale(e) {
+  //   setMale(e.target.checked);
+  //   setFemale(!e.target.checked);
+  // }
 
-  function onChangeMale(e) {
-    setMale(e.target.checked);
-    setFemale(!e.target.checked);
-  }
-
-  function onChangeFemale(e) {
-    setFemale(e.target.checked);
-    setMale(!e.target.checked);
-  }
+  // function onChangeFemale(e) {
+  //   setFemale(e.target.checked);
+  //   setMale(!e.target.checked);
+  // }
 
   return (
     <div className="container-createuser-form">
@@ -127,18 +69,36 @@ export default function CreateNewRepairMan() {
             <FormGroup>
               <Row>
                 <Col>
+                  <Label>Avatar</Label>
+                </Col>
+
+                <Col md={8}>
+                  <Input
+                    type="text"
+                    name="avatar"
+                    id="avatar"
+                    placeholder="Avatar"
+                    // onChange={fnerror}
+                  />
+                  {/* <h6>{fnerror}</h6> */}
+                </Col>
+              </Row>
+            </FormGroup>
+            <FormGroup>
+              <Row>
+                <Col>
                   <Label>NAME</Label>
                 </Col>
 
                 <Col md={8}>
                   <Input
                     type="text"
-                    name="firstname"
-                    id="firstname"
-                    placeholder=""
-                    onChange={fnerror}
+                    name="name"
+                    id="name"
+                    placeholder="name"
+                    // onChange={fnerror}
                   />
-                  <h6>{fnerror}</h6>
+                  {/* <h6>{fnerror}</h6> */}
                 </Col>
               </Row>
             </FormGroup>
@@ -146,18 +106,18 @@ export default function CreateNewRepairMan() {
             <FormGroup>
               <Row>
                 <Col>
-                  <Label>CATEGORY</Label>
+                  <Label>Phone Number</Label>
                 </Col>
 
                 <Col md={8}>
                   <Input
                     type="text"
-                    name="lastname"
-                    id="lastname"
-                    placeholder=""
-                    onChange={lnerror}
+                    name="Phone_Number"
+                    id="Phone_Number"
+                    placeholder="Phone"
+                    // onChange={lnerror}
                   />
-                  <h6>{lnerror}</h6>
+                  {/* <h6>{lnerror}</h6> */}
                 </Col>
               </Row>
             </FormGroup>
@@ -165,18 +125,56 @@ export default function CreateNewRepairMan() {
             <FormGroup>
               <Row>
                 <Col>
-                  <Label>DESCRIPTION</Label>
+                  <Label>Email</Label>
                 </Col>
 
                 <Col md={8}>
                   <Input
                     type="text"
-                    name="lastname"
-                    id="lastname"
-                    placeholder=""
-                    onChange={lnerror}
+                    name="email"
+                    id="email"
+                    placeholder="email"
+                    // onChange={lnerror}
                   />
-                  <h6>{lnerror}</h6>
+                  {/* <h6>{lnerror}</h6> */}
+                </Col>
+              </Row>
+            </FormGroup>
+
+            <FormGroup>
+              <Row>
+                <Col>
+                  <Label>Username</Label>
+                </Col>
+
+                <Col md={8}>
+                  <Input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="username"
+                    // onChange={lnerror}
+                  />
+                  {/* <h6>{lnerror}</h6> */}
+                </Col>
+              </Row>
+            </FormGroup>
+
+            <FormGroup>
+              <Row>
+                <Col>
+                  <Label>Company</Label>
+                </Col>
+
+                <Col md={8}>
+                  <Input
+                    type="text"
+                    name="company_Id"
+                    id="company_Id"
+                    placeholder="company"
+                    // onChange={lnerror}
+                  />
+                  {/* <h6>{lnerror}</h6> */}
                 </Col>
               </Row>
             </FormGroup>
@@ -186,18 +184,18 @@ export default function CreateNewRepairMan() {
             <FormGroup>
               <Row>
                 <Col>
-                  <Label>PRICE</Label>
+                  <Label>uid</Label>
                 </Col>
 
                 <Col md={8}>
                 <Input
-                    type="number"
-                    name="lastname"
-                    id="lastname"
-                    placeholder=""
-                    onChange={lnerror}
+                    type="text"
+                    name="uid"
+                    id="uid"
+                    placeholder="uid"
+                    // onChange={lnerror}
                   />
-                  <h6>{joinDateError}</h6>
+                  {/* <h6>{joinDateError}</h6> */}
                 </Col>
               </Row>
             </FormGroup>

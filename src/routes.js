@@ -7,7 +7,7 @@
 // import Typography from "views/Components/Typography.js";
 
 
-import RegularForms from "views/Forms/RegularForms.js";
+import EditService from "views/Forms/EditService.js";
 import ServiceTables from "views/Forms/ServiceTables.js";
 import ValidationForms from "views/Forms/ValidationForms.js";
 // import ManageMajor from "views/Major/ManageMajor.js";
@@ -101,13 +101,13 @@ var routes = [
     state: "openForms",
     icon: "nc-icon nc-notes",
     views: [
-      // {
-      //   path: "/regular-forms",
-      //   layout: "/admin",
-      //   name: "Regular Forms",
-      //   mini: "RF",
-      //   component: RegularForms,
-      // },
+      {
+        path: "/update",
+        layout: "/admin",
+        name: "Update Service",
+        mini: "US",
+        component: EditService,
+      },
       {
         path: "/service",
         layout: "/admin",
