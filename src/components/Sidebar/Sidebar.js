@@ -175,7 +175,7 @@ function Sidebar({ routes, image, background }) {
                       <Link
                         className="profile-dropdown"
                         onClick={() => {
-                          window.location.href = "https://main.d2ogi9l2y3fj48.amplifyapp.com/admin/user-page";
+                          window.location.href = "https://main.del5k887sexz4.amplifyapp.com/admin/user-page";
                         }}
                       >
                         <span className="sidebar-mini">MP</span>
@@ -186,7 +186,7 @@ function Sidebar({ routes, image, background }) {
                       <Link
                         className="profile-dropdown"
                         onClick={() => {
-                          window.location.href = "https://main.d2ogi9l2y3fj48.amplifyapp.com/admin/user-page";
+                          window.location.href = "https://main.del5k887sexz4.amplifyapp.com/admin/user-page";
                         }}
                       >
                         <span className="sidebar-mini">EP</span>
@@ -197,7 +197,7 @@ function Sidebar({ routes, image, background }) {
                       <Link
                         className="profile-dropdown"
                         onClick={() => {
-                          window.location.href = "https://main.d2ogi9l2y3fj48.amplifyapp.com/admin/user-page";
+                          window.location.href = "https://main.del5k887sexz4.amplifyapp.com/admin/user-page";
                         }}
                       >
                         <span className="sidebar-mini">S</span>
