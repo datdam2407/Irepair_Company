@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, signInWithGoogle } from "./firebaseConfig"
-import { FaGooglePlusSquare } from 'react-icons/fa';
-// import "firebase/compat/auth";
-import 'firebase/firestore';
+import { auth, signInWithGoogle } from "../../Firebase/firebaseConfig";
+import { FcGoogle } from "react-icons/fc";
+
+import "firebase/firestore";
 import "./login.css";
 
 // react-bootstrap components
@@ -19,7 +19,6 @@ import {
   Col,
 } from "react-bootstrap";
 
-
 function Login() {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
@@ -27,7 +26,6 @@ function Login() {
   const history = useHistory();
   useEffect(() => {
     if (loading) {
-      
       return;
     }
     if (user) history.replace("/admin");
@@ -50,7 +48,7 @@ function Login() {
   React.useEffect(() => {
     setTimeout(function () {
       setCardClasses("");
-    }, );
+    });
   });
   //   function handleSubmit(e) {
   //     e.preventDefault();
@@ -124,15 +122,29 @@ function Login() {
               >
                 Login
               </button> */}
-              
-              <h2>WELCOME TO IREPAIR</h2>
-              <button
-                className="login__btn login__google"
-                onClick={signInWithGoogle}       
+              {/* <button
+                className="login__btn login__google "
+                onClick={signInWithGoogle}
               >
-                Login with Google
-              </button>
+                <div className="login__btn_container">
+                  <div className="login_icon_container">
+                    <FcGoogle className="login_icon" />
+                  </div>
+                  <div className="login_text_container">
+                    <p className="login_text">Login with Google </p>
+                  </div>
+                </div>
+              </button> */}
 
+              <h2>WELCOME TO IREPAIR</h2>
+              <div className="google-btn" onClick={signInWithGoogle}>
+                <div className="google-icon-wrapper">
+                  <FcGoogle className="google-icon" />
+                </div>
+                <p className="btn-text">
+                  <b>Sign in with google</b>
+                </p>
+              </div>
             </div>
           </div>
 

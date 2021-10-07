@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db, logout} from '../Login/firebaseConfig'
+import {logout} from '../../Firebase/firebaseConfig';
 // react-bootstrap components
 import {
   Badge,

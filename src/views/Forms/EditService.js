@@ -1,4 +1,6 @@
 import { React, useState, useEffect } from "react";
+import { storage } from "../../Firebase/firebaseConfig";
+import "firebase/storage";
 import {
   Col,
   Row,
@@ -12,7 +14,8 @@ import {
 import { Link } from "react-router-dom";
 // import { postWithToken } from "../ReadAPI";
 // import moment from "moment";
-import { put , get } from "service/ReadAPI";
+import { put, get } from "service/ReadAPI";
+import { createLogicalAnd } from "typescript";
 
 export default function EditService() {
   const [button, setButton] = useState(true);
@@ -23,49 +26,69 @@ export default function EditService() {
   const [companyId, setCompanyID] = useState("");
   const [fieldId, setFieldId] = useState("");
   const [statusService, setStatusService] = useState("");
+  const [file, setFile] = useState(null);
+  const [urll, setURL] = useState("");
+
+  function handleChange(e) {
+    setFile(e.target.files[0]);
+  }
+
+  function handleUpload() {
+    const ref = storage.ref(`/images/${file.name}`);
+    const uploadTask = ref.put(file);
+    uploadTask.on("state_changed", console.log, console.error, () => {
+      ref
+        .getDownloadURL()
+        .then((url) => {
+          setFile(null);
+          setURL(url);
+        });
+    });
+  }
   // load resdata
   useEffect(() => {
     let params = {};
-    console.log(params);
-    get(`/api/v1.0/service/${localStorage.getItem("serviceID")}`).then((res) => {
-      setServiceName(res.data.serviceName);
+    get(`/api/v1.0/service/${localStorage.getItem("serviceID")}`).then(
+      (res) => {
+        setServiceName(res.data.serviceName);
 
-      setDescription(res.data.description);
+        setDescription(res.data.description);
 
-      setPrice(res.data.price);
+        setPrice(res.data.price);
 
-      setImage(res.data.imageUrl);
+        setImage(res.data.imageUrl);
 
-      setStatusService(3);
+        setStatusService(3);
 
-      setCompanyID(res.data.companyId);
+        setCompanyID(res.data.companyId);
 
-      // setCheckState(res.data.state.stateName)
+        // setCheckState(res.data.state.stateName)
 
-      setFieldId(res.data.fieldId);
-    });
+        setFieldId(res.data.fieldId);
+      }
+    );
   }, []);
-
+  console.log(urll);
   function handleSubmit(e) {
     e.preventDefault();
+    // handleUpload();
     setButton(true);
+    // setURL(url);
     var Name = e.target.serviceName.value;
     var description = e.target.description.value;
     var newPrice = e.target.price.value;
-    var newImageUrl = e.target.imageUrl.value;
     var companyId = e.target.companyId.value;
     var newFieldId = e.target.fieldId.value;
-
-    put(`/api/v1.0/service/${localStorage.getItem("serviceID")}`, {
+    var ID = localStorage.getItem("serviceID");
+    put(`/api/v1.0/service`, {
+      id: ID,
       serviceName: Name,
       description: description,
-      price:  newPrice,
-      imageUrl: newImageUrl,
+      price: newPrice,
+      imageUrl: urll,
       status: 3,
-      companyId: companyId, 
-      fieldId: newFieldId
-      
-
+      companyId: companyId,
+      fieldId: newFieldId,
     })
       .then((res) => {
         if (res.status === 200) {
@@ -137,7 +160,6 @@ export default function EditService() {
                     name="price"
                     id="price"
                     defaultValue={price}
-
                     placeholder="price"
                     // onChange={lnerror}
                   />
@@ -154,15 +176,15 @@ export default function EditService() {
 
                 <Col md={8}>
                   <Input
-                    type="text"
+                    type = "file"
+                    onChange = {handleChange}
                     name="imageUrl"
                     id="imageUrl"
-                    defaultValue={imageUrl}
-
+                    defaultValue = {imageUrl} 
                     placeholder="imageUrl"
                     // onChange={lnerror}
-                  />
-                  {/* <h6>{lnerror}</h6> */}
+                  /> 
+       
                 </Col>
               </Row>
             </FormGroup>
@@ -175,12 +197,11 @@ export default function EditService() {
 
                 <Col md={8}>
                   <Input
-                   disabled
+                    disabled
                     type="text"
                     name="companyId"
                     id="companyId"
                     defaultValue={companyId}
-
                     placeholder="companyId"
                     // onChange={lnerror}
                   />
@@ -200,7 +221,6 @@ export default function EditService() {
                     name="fieldId"
                     id="fieldId"
                     defaultValue={fieldId}
-
                     placeholder="fieldId"
                     // onChange={lnerror}
                   />
@@ -209,7 +229,7 @@ export default function EditService() {
               </Row>
             </FormGroup>
             <div className="btn-container">
-              <Button color="danger">Updating</Button>
+              <button color = "danger" >Update</button>
               <Link to="/admin/service">
                 <button className="btn-cancel">Cancel</button>
               </Link>

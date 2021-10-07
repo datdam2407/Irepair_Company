@@ -1,4 +1,7 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect} from "react";
+// import firebase from "../../Firebase/firebaseConfig";
+import { storage } from "../../Firebase/firebaseConfig";
+import "firebase/storage";
 import {
   Col,
   Row,
@@ -15,17 +18,33 @@ import { Link } from "react-router-dom";
 import { post } from "service/ReadAPI";
 
 export default function CreateNewService() {
-  const [button, setButton] = useState(true);
-  const [male, setMale] = useState(true);
-  const [female, setFemale] = useState(false);
-  const [dobError, setDobError] = useState("");
-  const [fnerror, setFnError] = useState("");
-  const [lnerror, setLnError] = useState("");
-  const [joinDateError, setJoinDateError] = useState("");
-  const [currentDate, setCurrentDate] = useState();
 
+  const [button, setButton] = useState(true);
+  const [image, setImg] = useState(null);
+  const [file, setFile] = useState(null);
+  const [urll, setURL] = useState("");
+
+  function handleChange(e) {
+    setFile(e.target.files[0]);
+  }
+
+  function handleUpload() {
+    const ref = storage.ref(`/images/${file.name}`);
+    const uploadTask = ref.put(file);
+    uploadTask.on("state_changed", console.log, console.error, () => {
+      ref
+        .getDownloadURL()
+        .then((url) => {
+          setFile(null);
+          setURL(url);
+          console.log(url);
+        });
+    });
+  }
+  console.log(urll);
   function handleSubmit(e) {
     e.preventDefault();
+    handleUpload();
     setButton(true);
     post(
       "/api/v1.0/service",
@@ -33,7 +52,7 @@ export default function CreateNewService() {
         serviceName: e.target.serviceName.value,
         description: e.target.description.value,
         price: e.target.price.value,
-        imageUrl: e.target.imageUrl.value,
+        imageUrl: urll,
         status: 0,
         companyId: e.target.companyId.value,
         fieldId: e.target.fieldId.value,
@@ -122,13 +141,10 @@ export default function CreateNewService() {
 
                 <Col md={8}>
                   <Input
-                    type="text"
-                    name="imageUrl"
-                    id="imageUrl"
-                    placeholder="imageUrl"
-                    // onChange={lnerror}
+                    type="file"
+                    onChange= {handleChange}  
                   />
-                  {/* <h6>{lnerror}</h6> */}
+                         
                 </Col>
               </Row>
             </FormGroup>
