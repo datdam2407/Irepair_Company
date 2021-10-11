@@ -26,24 +26,24 @@ import RegisterPage from "views/Pages/RegisterPage.js";
 // import LockScreenPage from "views/Pages/LockScreenPage.js";
 
 var routes = [
-  
+
 
   //Dashboard
   // {
   //   path: "/dashboard",
-  //   layout: "/admin",
+  //   layout: "/company",
   //   name: "Dashboard",
   //   icon: "nc-icon nc-chart-pie-35",
   //   component: Dashboard,
   // },
   // {
   //   path: "/Sidebar",
-  //   layout: "/admin",
+  //   layout: "/company",
   //   name: "Sidebar",
   //   icon: "nc-icon nc-chart-pie-35",
   //   component: Sidebar,
   // },
-////////////////////////////////////////////////
+  ////////////////////////////////////////////////
 
   //Company
   // {
@@ -55,82 +55,93 @@ var routes = [
   //   views: [
   //     {
   //       path: "/company",
-  //       layout: "/admin",
+  //       layout: "/company",
   //       name: "Manage Company",
   //       mini: "GS",
   //       component: ManageCompany,
   //     },
   //     // {
   //     //   path: "/create/company",
-  //     //   layout: "/admin",
+  //     //   layout: "/company",
   //     //   name: "Create Company",
   //     //   mini: "CC",
   //     //   component: CreateNewCompany,
   //     // },
-   
+
   //     // {
   //     //   path: "/notifications",
-  //     //   layout: "/admin",
+  //     //   layout: "/company",
   //     //   name: "Notifications",
   //     //   mini: "N",
   //     //   component: Notifications,
   //     // },
   //     // {
   //     //   path: "/icons",
-  //     //   layout: "/admin",
+  //     //   layout: "/company",
   //     //   name: "Icons",
   //     //   mini: "I",
   //     //   component: Icons,
   //     // },
   //     // {
   //     //   path: "/typography",
-  //     //   layout: "/admin",
+  //     //   layout: "/company",
   //     //   name: "Typography",
   //     //   mini: "T",
   //     //   component: Typography,
   //     // },
   //   ],
   // },
-/////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////
 
   //Service
   {
-    collapse: true,
-    path: "/service",
     name: "Service",
-    state: "openForms",
-    icon: "nc-icon nc-notes",
-    views: [
-      {
-        path: "/update",
-        layout: "/admin",
-        name: "Update Service",
-        mini: "US",
-        component: EditService,
-      },
-      {
-        path: "/service",
-        layout: "/admin",
-        name: "Service Table",
-        mini: "St",
-        component: ServiceTables,
-      },
-      // {
-      //   path: "/validation-forms",
-      //   layout: "/admin",
-      //   name: "Validation Forms",
-      //   mini: "VF",
-      //   component: ValidationForms,
-      // },
-      {
-        path: "/create/service",
-        layout: "/admin",
-        name: "Create Service",
-        mini: "Cs",
-        component: CreateNewService,
-      },
-    ],
+    mini: "St: ",
+
   },
+  {
+    path: "/service",
+    layout: "/company",
+    name: "Service Table",
+    icon: "nc-icon nc-notes",
+    component: ServiceTables,
+  },
+  // {
+  //   collapse: true,
+  //   path: "/service",
+  //   name: "Service",
+  //   state: "openForms",
+  //   views: [
+  //     {
+  //       path: "/update",
+  //       layout: "/company",
+  //       name: "Update Service",
+  //       mini: "US",
+  //       component: EditService,
+  //     },
+  //     {
+  //       path: "/service",
+  //       layout: "/company",
+  //       name: "Service Table",
+  //       mini: "St",
+  //       component: ServiceTables,
+  //     },
+  // {
+  //   path: "/validation-forms",
+  //   layout: "/company",
+  //   name: "Validation Forms",
+  //   mini: "VF",
+  //   component: ValidationForms,
+  // },
+  //     {
+  //       path: "/create/service",
+  //       layout: "/company",
+  //       name: "Create Service",
+  //       mini: "Cs",
+  //       component: CreateNewService,
+  //     },
+  //   ],
+  // },
   ///////////////////////////////////////////////
 
   //major
@@ -143,70 +154,74 @@ var routes = [
   //   views: [
   //     {
   //       path: "/major",
-  //       layout: "/admin",
+  //       layout: "/company",
   //       name: "Manage Major",
   //       mini: "GS",
   //       component: ManageMajor,
   //     },
   //     {
   //       path: "/create/major",
-  //       layout: "/admin",
+  //       layout: "/company",
   //       name: "Create Major",
   //       mini: "CC",
   //       component: CreateNewMajor,
   //     },
-   
+
   //     // {
   //     //   path: "/notifications",
-  //     //   layout: "/admin",
+  //     //   layout: "/company",
   //     //   name: "Notifications",
   //     //   mini: "N",
   //     //   component: Notifications,
   //     // },
   //     // {
   //     //   path: "/icons",
-  //     //   layout: "/admin",
+  //     //   layout: "/company",
   //     //   name: "Icons",
   //     //   mini: "I",
   //     //   component: Icons,
   //     // },
   //     // {
   //     //   path: "/typography",
-  //     //   layout: "/admin",
+  //     //   layout: "/company",
   //     //   name: "Typography",
   //     //   mini: "T",
   //     //   component: Typography,
   //     // },
   //   ],
   // },
-///////////////////////////////////////////////
+  ///////////////////////////////////////////////
 
 
   //Repairman
   {
-    collapse: true,
-    path: "/repairman",
-    name: "RepairMan",
-    state: "openTables",
-    icon: "nc-icon nc-settings-tool-66",
-    views: [
-      {
-        path: "/create/repairman",
-        layout: "/admin",
-        name: "Create Repairman",
-        mini: "CR",
-        component: CreateNewRepairMan,
-      },
-    
-      {
-        path: "/repairman",
-        layout: "/admin",
-        name: "Repairman Table",
-        mini: "ST",
-        component: RepairmanTable,
-      },
-    ],
+    name: "Repairman",
+    mini: "RP: ",
   },
+  {
+    path: "/repairman",
+    layout: "/company",
+    name: "Repairman Table",
+    icon: "nc-icon nc-settings-tool-66",
+    component: RepairmanTable,
+  },
+  // {
+  //   collapse: true,
+  //   path: "/repairman",
+  //   name: "RepairMan",
+  //   state: "openTables",
+  //   views: [
+  //     {
+  //       path: "/create/repairman",
+  //       layout: "/company",
+  //       name: "Create Repairman",
+  //       mini: "CR",
+  //       component: CreateNewRepairMan,
+  //     },
+
+
+  //   ],
+  // },
 
 
 
@@ -219,21 +234,21 @@ var routes = [
   //   views: [
   //     {
   //       path: "/google-maps",
-  //       layout: "/admin",
+  //       layout: "/company",
   //       name: "Google Maps",
   //       mini: "GM",
   //       component: GoogleMaps,
   //     },
   //     {
   //       path: "/full-screen-maps",
-  //       layout: "/admin",
+  //       layout: "/company",
   //       name: "Full Screen Map",
   //       mini: "FSM",
   //       component: FullScreenMap,
   //     },
   //     {
   //       path: "/vector-maps",
-  //       layout: "/admin",
+  //       layout: "/company",
   //       name: "Vector Map",
   //       mini: "VM",
   //       component: VectorMap,
@@ -242,7 +257,7 @@ var routes = [
   // },
   // {
   //   path: "/charts",
-  //   layout: "/admin",
+  //   layout: "/company",
   //   name: "Charts",
   //   icon: "nc-icon nc-chart-bar-32",
   //   component: Charts,
@@ -252,7 +267,7 @@ var routes = [
 
   {
     path: "/calendar",
-    layout: "/admin",
+    layout: "/company",
     name: "Calendar",
     icon: "nc-icon nc-single-copy-04",
     component: Calendar,
@@ -269,7 +284,7 @@ var routes = [
     views: [
       {
         path: "/user-page",
-        layout: "/admin",
+        layout: "/company",
         name: "User Page",
         mini: "UP",
         component: UserPage,

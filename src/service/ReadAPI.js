@@ -1,4 +1,6 @@
 import axios from "axios";
+require('dotenv').config()
+// const endpoint = process.env.REACT_APP_API_URL;
 // const endpoint = process.env.REACT_APP_API_URL;
 const endpoint = "https://ec2-3-1-222-201.ap-southeast-1.compute.amazonaws.com";
 
@@ -80,8 +82,10 @@ export async function putWithToken(url, body, token) {
 //     headers: { Authorization: `Bearer ${token}` },
 //   });
 // }
-export async function del(url) {
-  return await axios.delete(endpoint + url, {
-    headers: { "Content-type": "application/json" },
+export async function del(url , token) {
+  return await axios.delete(endpoint + url,{
+    headers: { Authorization: `Bearer ${token}`,
+    "Content-type": "application/json",
+    },
   });
 }

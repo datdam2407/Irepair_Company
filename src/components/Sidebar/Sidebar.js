@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
-
+import "../../assets/css/customSizeCompany.css"
 // react-bootstrap components
 import {
   Badge,
@@ -126,7 +126,12 @@ function Sidebar({ routes, image, background }) {
   return (
     <>
       <div className="sidebar" data-color={background} data-image={image}>
+        
         <div className="sidebar-wrapper">
+        <div  className="label-company-size">
+          {localStorage.getItem("NAME")}
+          </div>
+
           <div className="logo">
             <a
               className="simple-text logo-mini"
@@ -140,21 +145,22 @@ function Sidebar({ routes, image, background }) {
               </div>
             </a>
             <a
+              // className="label-company-size"
               className="simple-text logo-normal"
-              href=""
             >
-              Irepair
+              Company
             </a>
           </div>
-          <div className="user">
-            <div className="photo">
+         
+          {/* <div className="user"> */}
+            {/* <div className="photo">
               <img
                 alt="..."
                 src={require("assets/img/new_logo.png").default}
               ></img>
-            </div>
+            </div> */}
             <div className="info">
-              <a
+              {/* <a
                 className={userCollapseState ? "collapsed" : ""}
                 data-toggle="collapse"
                 href="#pablo"
@@ -167,11 +173,11 @@ function Sidebar({ routes, image, background }) {
                 <span>
                   Nguyen Khanh <b className="caret"></b>
                 </span>
-              </a>
+              </a> */}
               <Collapse id="collapseExample" in={userCollapseState}>
                 <div>
                   <Nav as="ul">
-                  <li>
+                  {/* <li>
                       <Link
                         className="profile-dropdown"
                         onClick={() => {
@@ -203,11 +209,11 @@ function Sidebar({ routes, image, background }) {
                         <span className="sidebar-mini">S</span>
                         <span className="sidebar-normal">Settings</span>
                       </Link>
-                    </li>
+                    </li> */}
                   </Nav>
                 </div>
               </Collapse>
-            </div>
+            {/* </div> */}
           </div>
           <Nav as="ul">{createLinks(routes)}</Nav>
         </div>

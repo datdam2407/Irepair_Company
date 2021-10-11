@@ -355,7 +355,8 @@ input:focus {
     margin: 0;
     position: relative;
     z-index: 4;
-    display: block; }
+    display: block; 
+  }
     .sidebar .logo a.logo-mini {
       float: left;
       width: 30px;

@@ -15,11 +15,11 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+      <Route path="/company" render={(props) => <AdminLayout {...props} />} />
       <Route exact path="/login" component={Login}/>
       {/* <Route path="/admin/profile" component={UserProfile} /> */}
       <Redirect from="/" to="/login" />
-      <Redirect from="/admin/dashboard" to="/admin/dashboard" />
+      <Redirect from="/company/dashboard" to="/admin/dashboard" />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

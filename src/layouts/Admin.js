@@ -1,20 +1,7 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+
 // react-bootstrap components
-import {
-  Badge,
-  Button,
-  ButtonGroup,
-  Card,
-  Form,
-  InputGroup,
-  Navbar,
-  Nav,
-  Pagination,
-  Container,
-  Row,
-  Col,
-} from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Switch, Route, useHistory  } from "react-router-dom";
 
 // core components
 import Sidebar from "components/Sidebar/Sidebar.js";
@@ -31,6 +18,13 @@ import image3 from "assets/img/full-screen-image-3.jpg";
 import image4 from "assets/img/full-screen-image-4.jpg";
 
 function Admin() {
+  
+  // let history = useHistory();
+  // useEffect(() => {
+  //     if (localStorage.getItem("token") === null) {
+  //       history.push("/");
+  //     }
+  // }, []);
   const [sidebarImage, setSidebarImage] = React.useState(image3);
   const [sidebarBackground, setSidebarBackground] = React.useState("black");
   const getRoutes = (routes) => {
@@ -38,7 +32,7 @@ function Admin() {
       if (prop.collapse) {
         return getRoutes(prop.views);
       }
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/company") {
         return (
           <Route
             path={prop.layout + prop.path}

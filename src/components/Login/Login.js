@@ -7,17 +7,6 @@ import { FcGoogle } from "react-icons/fc";
 import "firebase/firestore";
 import "./login.css";
 
-// react-bootstrap components
-import {
-  Badge,
-  Button,
-  Card,
-  Form,
-  Navbar,
-  Nav,
-  Container,
-  Col,
-} from "react-bootstrap";
 
 function Login() {
   // const [email, setEmail] = useState("");
@@ -28,7 +17,7 @@ function Login() {
     if (loading) {
       return;
     }
-    if (user) history.replace("/admin");
+    if (user) history.push("/company");
   }, [user, loading]);
 
   //   const auth = getAuth();

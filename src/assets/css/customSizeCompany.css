@@ -1,0 +1,25 @@
+div .label-company-size{
+    font-size: large;
+    margin-left: 11px;
+    margin-top: 10px;
+}
+label{ margin-left: 10px;
+    font-size: larger;}
+    .MuiAvatar{
+        overflow: unset;
+    }
+    .div-service{
+        margin-left: 50px;
+    }.header-form{
+        padding-top: 10px;
+    }.header-body-filter{
+        margin-left: 40px;
+    }
+     .photoCustomer img{
+        width: 40px;
+        margin-left: 7px;
+    }
+    .info-customer{
+        margin-top: 13px;
+        /* margin-right: 20px; */
+    }

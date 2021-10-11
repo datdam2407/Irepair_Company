@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {logout} from '../../Firebase/firebaseConfig';
+import { logout } from "Firebase/firebaseConfig";
+import "../../assets/css/customSizeCompany.css"
 // react-bootstrap components
 import {
   Badge,
@@ -8,12 +9,18 @@ import {
   Navbar,
   Nav,
   Container,
+  Row,
+  Col,
 } from "react-bootstrap";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
 import routes from "routes.js";
 
 function AdminNavbar() {
- 
   const [modal, setModalLogOut] = useState(false);
   const toggleLogOut = () => setModalLogOut(!modal);
   const [collapseOpen, setCollapseOpen] = React.useState(false);
@@ -72,91 +79,6 @@ function AdminNavbar() {
               <Dropdown as={Nav.Item}>
                 <Dropdown.Toggle
                   as={Nav.Link}
-                  id="dropdown-165516306"
-                  variant="default"
-                >
-                  <i className="nc-icon nc-planet"></i>
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Create New Post
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Manage Something
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Do Nothing
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Submit to live
-                  </Dropdown.Item>
-                  <li className="divider"></li>
-                  <Dropdown.Item
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Another action
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              <Dropdown as={Nav.Item}>
-                <Dropdown.Toggle
-                  as={Nav.Link}
-                  id="dropdown-414718872"
-                  variant="default"
-                >
-                  <i className="nc-icon nc-bell-55 mr-1"></i>
-                  <span className="notification">5</span>
-                  <span className="d-lg-none">Notification</span>
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Notification 1
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Notification 2
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Notification 3
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Notification 4
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Notification 5
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              <Dropdown as={Nav.Item}>
-                <Dropdown.Toggle
-                  as={Nav.Link}
                   id="dropdown-41471887333"
                   variant="default"
                 >
@@ -166,26 +88,50 @@ function AdminNavbar() {
                   alignRight
                   aria-labelledby="navbarDropdownMenuLink"
                 >
-                  <Dropdown.Item
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
+                  <Row>
+                    <Col md={4}>
+                  <div className="photoCustomer">
+                    <img
+                      alt="..."
+                      src={require("assets/img/new_logo.png").default}
+                    ></img>
+                  </div>
+                  </Col>
+                  <Col>
+                  <div className="info-customer">
+                    <a
+                      data-toggle="collapse"
+                      href="#pablo"
+                    >
+                      <span>
+              {localStorage.getItem("NAME")}
+                         <b className="caret"></b>
+                      </span>
+                    </a>
+                  </div>
+                  </Col>
+                  </Row>
+                  <Dropdown.Item>
+                  
                     <i className="nc-icon nc-email-85"></i>
                     Messages
                   </Dropdown.Item>
-                  <Dropdown.Item
+                  {/* <Dropdown.Item
                     href="#pablo"
                     onClick={(e) => e.preventDefault()}
                   >
                     <i className="nc-icon nc-umbrella-13"></i>
                     Help Center
-                  </Dropdown.Item>
+                  </Dropdown.Item> */}
                   <Dropdown.Item
                     href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                    
+                    onClick={(e) => 
+                      // window.location.href = "https://main.d2ogi9l2y3fj48.amplifyapp.com/admin/user-page"}
+                      window.location.href = "http://localhost:3000/admin/user-page"}
                   >
                     <i className="nc-icon nc-settings-90"></i>
-                    Settings
+                    Setting
                   </Dropdown.Item>
                   <div className="divider"></div>
 
@@ -195,8 +141,7 @@ function AdminNavbar() {
                     onClick={() => {
                       // Logout(e);
                       setModalLogOut(true);
-                    }}
-                  >
+                    }}                  >
                     <i className="nc-icon nc-button-power"></i>
                     Log out
                   </Dropdown.Item>
@@ -209,8 +154,8 @@ function AdminNavbar() {
       <Modal isOpen={modal} toggle={toggleLogOut}>
         <ModalHeader
           style={{ color: "#B22222" }}
-          // close={closeBtn(toggleLogOut)}
-          // toggle={toggleLogOut}
+        // close={closeBtn(toggleLogOut)}
+        // toggle={toggleLogOut}
         >
           Are you sure?
         </ModalHeader>
@@ -221,16 +166,15 @@ function AdminNavbar() {
           <Button
             color="danger"
             onClick={() => {
+              setModalLogOut(false);
               logout();
-              setModalLogOut(true);
               window.location.href = "/";
               localStorage.clear();
               sessionStorage.clear();
             }}
-          >     
+          >
             Log out
-          </Button>{""}
-
+          </Button>{" "}
           <Button color="secondary" onClick={toggleLogOut}>
             Cancel
           </Button>
