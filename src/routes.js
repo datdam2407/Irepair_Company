@@ -1,4 +1,4 @@
-// import Dashboard from "views/Dashboard.js";
+import Dashboard from "views/Dashboard.js";
 // import ManageCompany from "views/Components/ManageCompany";
 // import CreateNewCompany from "views/Components/CreateNewCompany.js";
 // import SweetAlert from "views/Components/SweetAlertPage.js";
@@ -29,13 +29,13 @@ var routes = [
 
 
   //Dashboard
-  // {
-  //   path: "/dashboard",
-  //   layout: "/company",
-  //   name: "Dashboard",
-  //   icon: "nc-icon nc-chart-pie-35",
-  //   component: Dashboard,
-  // },
+  {
+    path: "/dashboard",
+    layout: "/company",
+    name: "Dashboard",
+    icon: "nc-icon nc-chart-pie-35",
+    component: Dashboard,
+  },
   // {
   //   path: "/Sidebar",
   //   layout: "/company",
@@ -60,45 +60,10 @@ var routes = [
   //       mini: "GS",
   //       component: ManageCompany,
   //     },
-  //     // {
-  //     //   path: "/create/company",
-  //     //   layout: "/company",
-  //     //   name: "Create Company",
-  //     //   mini: "CC",
-  //     //   component: CreateNewCompany,
-  //     // },
-
-  //     // {
-  //     //   path: "/notifications",
-  //     //   layout: "/company",
-  //     //   name: "Notifications",
-  //     //   mini: "N",
-  //     //   component: Notifications,
-  //     // },
-  //     // {
-  //     //   path: "/icons",
-  //     //   layout: "/company",
-  //     //   name: "Icons",
-  //     //   mini: "I",
-  //     //   component: Icons,
-  //     // },
-  //     // {
-  //     //   path: "/typography",
-  //     //   layout: "/company",
-  //     //   name: "Typography",
-  //     //   mini: "T",
-  //     //   component: Typography,
-  //     // },
-  //   ],
-  // },
-  /////////////////////////////////////////////////////////////
+  
 
   //Service
-  {
-    name: "Service",
-    mini: "St: ",
-
-  },
+ 
   {
     path: "/service",
     layout: "/company",
@@ -194,10 +159,7 @@ var routes = [
 
 
   //Repairman
-  {
-    name: "Repairman",
-    mini: "RP: ",
-  },
+
   {
     path: "/repairman",
     layout: "/company",

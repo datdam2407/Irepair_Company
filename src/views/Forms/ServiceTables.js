@@ -271,7 +271,7 @@ console.log("field", FieldSelectID)
         FieldId: FieldSelectID,
         companyId: companyId,
         Price: price,
-        ImageUrl: picture,
+        ImageUrl: "none",
         status: 1,
       },
       localStorage.getItem("token")
@@ -295,8 +295,8 @@ console.log("field", FieldSelectID)
         FieldId: FieldSelectID,
         companyId: localStorage.getItem("IDCompany"),
         Price: price,
-        ImageUrl: picture,
-        status: 1,
+        ImageUrl: "none",
+        status: 0,
       },
       localStorage.getItem("token")
     )
@@ -391,8 +391,8 @@ console.log("field", FieldSelectID)
     const stateValue = {
       1: "Approved",
       0: "New",
-      2: "Blocked",
-      3: "Deleted"
+      2: "Deleted",
+      3: "Updating"
     };
     return stateValue[type] ? stateValue[type] : "";
   }
@@ -458,10 +458,9 @@ console.log("field", FieldSelectID)
                       {/* <th className="text-left-topic">FieldId</th> */}
                       <th className="description" >Service Name</th>
                       <th className="description">Description</th>
-                      <th className="description">Company</th>
                       <th className="description">Price</th>
                       <th className="description">Status</th>
-                      <th className="viewAll">Actions</th>
+                      <th className="description">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -486,9 +485,7 @@ console.log("field", FieldSelectID)
                           <td>
                             {e.Description}
                           </td>
-                          <td>
-                            {displayCompanyName(e.CompanyId)}
-                          </td>
+                     
                           <td>
                             {e.Price}
                           </td>
@@ -751,12 +748,12 @@ console.log("field", FieldSelectID)
                 onChange={e => setPrice(e.target.value)}
               />
             </FormGroup>
-            <FormGroup className="mb-3">
+            {/* <FormGroup className="mb-3">
               <Form.Label>Picture</Form.Label>
               <Form.Control type="text" value={picture}
                 onChange={e => setImage(e.target.value)}
               />
-            </FormGroup>
+            </FormGroup> */}
           </Form>
         </ModalBody>
         <ModalFooter>
@@ -824,12 +821,12 @@ console.log("field", FieldSelectID)
                 onChange={e => setPrice(e.target.value)}
               />
             </FormGroup>
-            <FormGroup className="mb-3">
+            {/* <FormGroup className="mb-3">
               <Form.Label>Picture</Form.Label>
               <Form.Control type="text" value={picture}
                 onChange={e => setImage(e.target.value)}
               />
-            </FormGroup>
+            </FormGroup> */}
           </Form>
         </ModalBody>
         <ModalFooter>

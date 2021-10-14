@@ -82,7 +82,18 @@
     }
     .description{
         font-size: $font-size-base;
-        color: #333;
+        color: #c51162;
+        text-align: left;
+        font-size: medium;
+        font-weight: 700;
+    }
+    .viewAll{
+        font-size: $font-size-base;
+        color: #c51162;
+        text-align: end;
+        font-size: medium;
+        font-weight: 700;
+
     }
     .card-footer{
         padding: 15px 15px 10px 15px;

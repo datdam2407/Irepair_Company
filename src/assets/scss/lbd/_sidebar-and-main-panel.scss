@@ -51,8 +51,9 @@
     }
 
     .logo{
-        padding: 12px 0px 9px;
+        padding: 19px 0px 19px;
         margin: 0;
+        margin-bottom: 35px;
         position: relative;
         z-index: 4;
         display: block;
@@ -119,8 +120,9 @@
                             padding-left: 55px;
                             text-transform: capitalize;
                             padding: 5px 15px 5px 15px;
-                            font-weight: 400;
+                            // font-weight: 400;
                             font-size: 14px;
+                            padding-left: 14px;
                         }
 
                         &:hover,
@@ -128,6 +130,7 @@
                         &.active{
                             .nav-link{
                                 background: rgba(255, 255, 255, 0.13);
+
                             }
                         }
                     }
@@ -141,14 +144,14 @@
         .nav .nav-link{
             p{
                 margin: 0;
-                line-height: 30px;
-                font-size: 12px;
+                line-height: 40px;
+                font-size: 13px;
                 font-weight: 600;
                 text-transform: uppercase;
                 white-space: nowrap;
                 position: relative;
-                color: #FFFFFF;
-                @include transform-translate-x(0px);
+                // color: #cfc4c4;
+                @include transform-translate-x(10px);
                 display: block;
                 height: auto;
                 opacity: 1;
@@ -179,7 +182,7 @@
     }
 
     .user{
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgba(235, 148, 10, 0.23);;
         padding-bottom: 20px;
         margin-top: 20px;
 
@@ -229,6 +232,7 @@
             .sidebar-normal{
                 margin-right: 0;
                 font-size: 14px;
+                
             }
             .sidebar-normal{
                 left: 15px;
@@ -266,19 +270,20 @@
 
         .nav-item{
             .nav-link{
-                color: $white-color;
+                color: rgb(9, 4, 31);
                 margin: 5px 15px 0px 10px;
                 opacity: .86;
                 border-radius: 4px;
                 text-transform: uppercase;
                 line-height: 30px;
                 font-size: 12px;
-                font-weight: 600;
+                font-weight: 900;
                 padding: 10px 15px;
                 white-space: nowrap;
+                padding-bottom: 15px;
 
                 &:hover{
-                    background: rgba(255, 255, 255, 0.13);
+                    background: rgba(251, 115, 3, 0.301);
                     opacity: 1;
                 }
 
@@ -300,7 +305,7 @@
             &.active .nav-link{
                 color: $white-color;
                 opacity: 1;
-                background: rgba(255,255,255,0.23);
+                background: rgba(10, 10, 10, 0);
 
             }
 
@@ -317,7 +322,9 @@
 
     }
 
-    &:after,
+    &:after {
+        color: rgb(0, 0, 0);
+    }
     &:before{
         display: block;
         content: "";
@@ -391,7 +398,7 @@
             right: 15px;
             width: calc(100% - 30px);
             height: 1px;
-            background-color: rgba($white-color, 0.3);
+            background-color: rgba($white-color, 2.3);
         }
 
     }
@@ -439,7 +446,7 @@
 
 
 .main-panel{
-    background: rgba(203,203,210,.15);
+    background: rgba(102, 51, 241, 0.15);
     position: relative;
     float: right;
     width: $sidebar-width;
@@ -698,11 +705,11 @@
 
         .nav-item.active{
             .nav-link{
-                background-color: rgba(255, 255, 255, 0.2) !important;
+                background-color: rgba(185, 110, 41, 0.2) !important;
             }
         }
         .nav-link:not(.btn):hover{
-            background-color: rgba(255, 255, 255, 0.2) !important;
+            background-color: rgba(224, 120, 34, 0.2) !important;
             border-radius: 0.1875rem;
             @include transition (300ms, linear);
         }
@@ -734,9 +741,9 @@
         width: 100%;
         display: block;
         top: 0;
-        left: 1000;
+        left: 0;
         background-size: cover;
-        background-position: value;
+        background-position: center center;
     }
 
     &:before,

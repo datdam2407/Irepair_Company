@@ -2,523 +2,520 @@ import React, { useState, useEffect } from "react";
 
 // react-bootstrap components
 import {
-  Button,
-  Card,
-  Form,
-  Container,
-  Row,
-  Col,
-  ModalTitle,
-  Table,
+    Button,
+    Card,
+    Form,
+    Container,
+    Row,
+    Col,
+    ModalTitle,
+    Table,
+    OverlayTrigger,
+    Tooltip,
 } from "react-bootstrap";
 import {
-  Modal,
-  ModalHeader,
-  Media,
-  ModalBody,
-  ModalFooter,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
+    Modal,
+    ModalHeader,
+    Media,
+    ModalBody,
+    ModalFooter,
+    Pagination,
+    PaginationItem,
+    PaginationLink,
 } from "reactstrap";
+import moment from "moment";
+import {
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Avatar,
+    Grid,
+    Typography,
+} from '@material-ui/core';
 import deleteIcon from "assets/img/remove.png";
 import editIcon from "assets/img/edit.png";
 import { Link } from "react-router-dom";
-import { del, post ,get } from "../../service/ReadAPI";
+import { del, post, get, getWithToken } from "../../service/ReadAPI";
+import { makeStyles } from '@material-ui/core/styles';
+
+export default function Repairman() {
+
+    const [CustomerDelete, setCustomerDelete] = useState(null);
+    const [modalDelete, setCustomerModalDelete] = useState(false);
+    const toggleDelete = () => setCustomerModalDelete(!modalDelete);
+    //edit
+    const [CustomerEdit, setCustomerEdit] = useState(null);
+    const [modalEdit, setCustomerModalEdit] = useState(false);
+    const toggleEdit = () => setCustomerModalEdit(!modalEdit)
+
+    const [modalCreate, setCustomerModalCreate] = useState(false);
+    const toggleCreate = () => setCustomerModalCreate(!modalCreate)
+
+    //view modal
+    const [modalStatus, setModalStatus] = useState(false);
+    const toggleDetails = () => setModalStatus(!modalStatus);
+    const [Selectservice, setSelectservice] = useState();
 
 
-function RepairmanTable() {
-  const [RepairmanDelete, setRepairmanDelete] = useState(null);
-  const [modalDelete, setRepairmanModalDelete] = useState(false);
-  const toggleDelete = () => setRepairmanModalDelete(!modalDelete);
-//edit
-  const [RepairmanEdit, setRepairmanEdit] = useState(null);
-  const [modalEdit, setRepairmanModalEdit] = useState(false);
-  const toggleEdit = () => setRepairmanModalEdit(!modalEdit)
+    const [customer_Name, setcustomer_Name] = useState("");
+    const [address, setaddress] = useState("");
 
-  const [modalCreate, setRepairmanModalCreate] = useState(false);
-  const toggleCreate = () => setRepairmanModalCreate(!modalCreate)
-  
+    const [AvatarCus, setAvatarCus] = useState("");
+    const [CreateDate, setCreateDate] = useState("");
+    const [Email, setEmail] = useState("");
+    const [FullName, setFullName] = useState("");
+    const [PhoneNumber, setPhoneNumber] = useState("");
+    const [Username, setUsername] = useState("");
 
-  const [useListRepairmanShow, setUseListRepairmanShow] = useState([]);
-  const [useListRepairmanShowPage, setUseListRepairmanShowPage] = useState([]);
-  const [RepairmanList, setRepairmanList] = useState([]);
-  const [RepairmanListID, setRepairmanListID] = useState([]);
-  const [numberPage, setNumberPage] = useState(1);
-  const [totalNumberPage, setTotalNumberPage] = useState(1);
-  
-  useEffect(() => {
-    getRepairmanList();
-    get("/api/v1.0/repairman/get-all").then(
-      (res) => {
-        if (res && res.status === 200) {
-          setRepairmanList(res.data);
-          // res.data;
-          console.log(res.data);
-        }});}, []);
-  function getRepairmanList(){
-    get("/api/v1.0/repairman").then((res)=>{
-      var temp = res.data;
-      setRepairmanList(temp);
-      setUseListRepairmanShow(temp);
-      setUseListRepairmanShowPage(temp.slice(numberPage * 5 - 5, numberPage * 5));
-      setTotalNumberPage(Math.ceil(temp.length / 5));
-    }).catch((err)=>{
-      console.log(err);
-    });
-  }
-  function getRepairmanListID(){
-    get("​/api​/v1.0​/repairman​/get-by-id" + RepairmanEdit).then((res)=>{
-      var temp = res.data;
-      setRepairmanListID(temp);
-    }).catch((err)=>{
-      console.log(err);
-    });
-  }
 
-  //Paging
-  function onClickPage(number) {
-    setNumberPage(number);
-    setUseListRepairmanShowPage(useListRepairmanShow.slice(number * 5 - 5, number * 5));
-    setTotalNumberPage(Math.ceil(useListRepairmanShow.length / 5));
-  }
-  // custom state
-  function displayStateName(type) {
-    const stateValue = {
-      1: "Active",
-      0: "Not Alaviable",
-    };
-    return stateValue[type] ? stateValue[type] : "";
-  }
+    const [useListCustomerShow, setUseListCustomerShow] = useState([]);
+    const [useListCustomerShowPage, setUseListCustomerShowPage] = useState([]);
+    const [customerList, setCustomerList] = useState([]);
+    const [customerListID, setCustomerListID] = useState([]);
+    const [numberPage, setNumberPage] = useState(1);
+    const [totalNumberPage, setTotalNumberPage] = useState(1);
+    const [companyList, setCompanyList] = useState([]);
+    const [companyListName, setCompanyListName] = useState([]);
 
-  function handleRepairmanDetele() {
-    // console.log("abc" , RepairmanDelete);
-    post("/Repairman/" + RepairmanDelete ,
-      {
-        is_Online: 0,
-        is_Delete: 1,
-      },
-    )
-      .then((res) => {
-        if (res.status === 200) {
-          console.log(res.data)
-          // window.location = "/admin/Repairman";
+    // useEffect(() => {
+    //     getWithToken("/api/v1.0/companies", localStorage.getItem("token")).then(
+    //         (res) => {
+    //             if (res && res.status === 200) {
+    //                 setCompanyListName(res.CompanyName);
+    //                 // res.data;
+    //             }
+    //         });
+    // }, []);
+    // console.log("aaaaaa", companyListName);
+
+    function displayCompanyName(type) {
+        const stateValue = {
+            "234be13b-421b-40d9-8226-0f162dee7ac8": "Công ty điện lạnh Thành Công",
+            "7e179e62-21da-45c1-afe4-114a580f0a12": "Công ty điện lạnh Long Châu",
+            "404f25c6-4f40-4f83-acfd-16a0d7c2f8e9": "Công ty điện lạnh, điện gia dụng Thủy Tiên",
+            "4bb0a83e-e9d9-47b5-8019-20c19e953181": "Công ty điện lạnh Hòa Hưng",
+            "dd0b937a-8e90-4af3-bfe8-0a8cc0722f6a": "IrepairX",
+            "17ab8695-daec-4ceb-9f78-07c9528c0009": "CompanyX",
+        };
+        return stateValue[type] ? stateValue[type] : "";
+    }
+
+    console.log("lisstID", companyList)
+    useEffect(() => {
+        getWithToken("/api/v1.0/repairmans", localStorage.getItem("token")).then(
+            (res) => {
+                if (res && res.status === 200) {
+                    var temp = res.data;
+                    setCompanyList(res.data.CompanyId)
+                    setCustomerList(temp);
+                    setUseListCustomerShow(temp);
+                    setUseListCustomerShowPage(temp.slice(numberPage * 10 - 10, numberPage * 10));
+                    setTotalNumberPage(Math.ceil(temp.length / 10));
+                }
+            });
+    }, []);
+
+
+    const useStyles = makeStyles((theme) => ({
+        table: {
+            minWidth: 650,
+        },
+        tableContainer: {
+            borderRadius: 15,
+            margin: '10px 10px',
+            maxWidth: ' 100%'
+        },
+        tableHeaderCell: {
+            color: 'burlywood',
+            fontWeight: 'bold',
+            backgroundColor: theme.palette.primary.dark,
+            color: theme.palette.getContrastText(theme.palette.primary.dark),
+            backgroundColor: 'gray',
+            fontWeight: '700',
+
+        },
+        thmajorheaderform: {
+            fontWeight: 'bold',
+            fontWeight: '700',
+            color: theme.palette.getContrastText(theme.palette.primary.dark),
+        },
+
+        avatar: {
+            backgroundColor: theme.palette.primary.light,
+            color: theme.palette.getContrastText(theme.palette.primary.light),
+            fontSize: '200px',
+            right: '10px',
+            overflow: 'unset',
+            borderRadius: '32%',
+            // img: 'string',
+
+        },
+        name: {
+            fontWeight: 'bold',
+            color: theme.palette.secondary.dark,
+
+        },
+        Status: {
+            fontWeight: '700',
+            width: '71px',
+            fontSize: '0.76rem',
+            color: 'white',
+            backgroundColor: 'green',
+            borderRadius: 8,
+            padding: '3px 10px',
+            display: 'inline-block'
         }
-      })
-      .catch((err) => {
-        // setErrorMessage(err.response.data.message);
-        // setModalConfirm(true);
-        console.log(err)
-      });
-  }
-  const closeBtn = (x) => (
-    <button
-      className="btn border border-danger"
-      style={{ color: "#B22222" }}
-      onClick={x}
-    >
-      X
-    </button>
-  );
-  return (
-    <>
-      <Container fluid>
-        <Row>
-          <Col md="12">
-            <Card className="strpied-tabled-with-hover">
-              <Card.Header>
-                <Card.Title as="h4">Manage Repairman</Card.Title>
-                {/* <Link to="/admin/create/Repairman">
-                  
-                  
-                </Link> */}
-                <Button
-                       
-                          onClick={() => {
-                            // setRepairmanEdit(e.Id);
-                            // getRepairmanListID();
-                            setRepairmanModalCreate(true);
-                          }}>
-                        Create new Repairman
-                      </Button>
-              </Card.Header>
-              <Card.Body className="table-full-width table-responsive px-0">
-                <Table className="table-hover table-striped">
-                  <thead>
-                    <tr>
-                      <th className="border-0">ID</th>
-                      <th className="border-0">Avatar</th>
-                      <th className="border-0">Name</th>
-                      <th className="border-0">PhoneNumber</th>
-                      <th className="border-0">Email</th>
-                      <th className="border-0">Username</th>
-                      <th className="border-0">Status</th>
-                      <th className="border-0">CompanyId</th>
-                      <th className="border-0">Uid</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {useListRepairmanShowPage.map((e,index)=>{
-                    return(
-                      <tr key={index}>
-                        <td>
-                          {e.Id}
-                        </td>
-                        <td>
-                          {e.Name}
-                        </td>
-                        <td>
-                          {e.Avatar}
-                        </td>
-                        <td>
-                          {e.PhoneNumber}
-                        </td>
-                        <td>
-                          {e.Email}
-                        </td>
-                        <td>
-                          {e.Username}
-                        </td>
-                        <td>
-                          {displayStateName(e.Status)}
-                        </td>
-                        <td>
-                          {e.CompanyId}
-                        </td>
-                        <td>
-                          {e.Uid}
-                        </td>
-                        <td>
-                        <Media
-                          src={editIcon}
-                          onClick={() => {
-                            setRepairmanEdit(e.Id);
-                            getRepairmanListID();
-                            setRepairmanModalEdit(true);
-                          }}
-                        />
-                      </td>
-                      <td>
-                        <Media
-                          src={deleteIcon}
-                          onClick={() => {
-                            setRepairmanDelete(e.Id);
-                            setRepairmanModalDelete(true);
-                          }}
-                        />
-                      </td>
-                      </tr>  
-                   );
-                  })}
-                  </tbody>
-                </Table>
-                <Row>
-        <Col md={6}></Col>
-        <Col md={6}>
-          <Pagination
-            aria-label="Page navigation example"
-            className="page-right"
-          >
-            <PaginationItem disabled={numberPage === 1}>
-              <PaginationLink
-                className="page"
-                previous
-                //disable={numberPage === 1 ? "true" : "false"}
+    }));
+    const classes = useStyles();
 
-                onClick={() => {
-                  if (numberPage - 1 > 0) {
-                    onClickPage(numberPage - 1);
-                  }
-                }}
-              >
-                Previous
-              </PaginationLink>
-            </PaginationItem>
-            {numberPage - 1 > 0 ? (
-              <PaginationItem>
-                <PaginationLink
-                  className="page"
-                  onClick={() => {
-                    onClickPage(numberPage - 1);
-                  }}
-                >
-                  {numberPage - 1}
-                </PaginationLink>
-              </PaginationItem>
-            ) : (
-              ""
-            )}
-            <PaginationItem active>
-              <PaginationLink className="page-active">
-                {numberPage}
-              </PaginationLink>
-            </PaginationItem>
-            {numberPage + 1 <= totalNumberPage ? (
-              <PaginationItem>
-                <PaginationLink
-                  className="page"
-                  onClick={() => {
-                    onClickPage(numberPage + 1);
-                  }}
-                >
-                  {numberPage + 1}
-                </PaginationLink>
-              </PaginationItem>
-            ) : (
-              ""
-            )}
-            {numberPage + 2 <= totalNumberPage ? (
-              <PaginationItem>
-                <PaginationLink
-                  className="page"
-                  onClick={() => {
-                    onClickPage(numberPage + 2);
-                  }}
-                >
-                  {numberPage + 2}
-                </PaginationLink>
-              </PaginationItem>
-            ) : (
-              ""
-            )}
+    //Paging
+    function onClickPage(number) {
+        setNumberPage(number);
+        setUseListCustomerShowPage(useListCustomerShow.slice(number * 10 - 10, number * 10));
+        setTotalNumberPage(Math.ceil(useListCustomerShow.length / 10));
+    }
+    // custom state
+    function displayStateName(type) {
+        const stateValue = {
+            2: "Deleted",
+            1: "Approved",
+            0: "New",
+        };
+        return stateValue[type] ? stateValue[type] : "";
+    }
 
-            <PaginationItem disabled={numberPage === totalNumberPage}>
-              <PaginationLink
-                className="page"
-                next
-                //disable={numberPage === totalNumberPage ? true : false}
-                onClick={() => {
-                  if (numberPage + 1 <= totalNumberPage) {
-                    onClickPage(numberPage + 1);
-                  }
-                }}
-              >
-                Next
-              </PaginationLink>
-            </PaginationItem>
-          </Pagination>
-        </Col>
-      </Row>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md="12">
-            <Card className="card-plain table-plain-bg">
-              <Card.Header>
-                <Card.Title as="h4">Hot Service </Card.Title>
-                <p className="card-category">
-                  This is a text
-                </p>
-              </Card.Header>
-              <Card.Body className="table-full-width table-responsive px-0">
-                <Table className="table-hover">
-                  <thead>
-                    <tr>
-                      <th className="border-0">ID</th>
-                      <th className="border-0">Image</th>
-                      <th className="border-0">Service Name</th>
-                      <th className="border-0">Category</th>
-                      <th className="border-0">Description</th>
-                      <th className="border-0">Price</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Dakota Rice</td>
-                      <td>$36,738</td>
-                      <td>Niger</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Minerva Hooper</td>
-                      <td>$23,789</td>
-                      <td>$23,789</td>
-                      <td>Curaçao</td>
-                      <td>Sinaai-Waas</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Sage Rodriguez</td>
-                      <td>$56,142</td>
-                      <td>$56,142</td>
-                      <td>Netherlands</td>
-                      <td>Baileux</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Philip Chaney</td>
-                      <td>$38,735</td>
-                      <td>Korea, South</td>
-                      <td>Overland Park</td>
-                      <td>Overland Park</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Doris Greene</td>
-                      <td>$63,542</td>
-                      <td>Malawi</td>
-                      <td>Malawi</td>
-                      <td>Feldkirchen in Kärnten</td>
-                    </tr>
-
-                    <tr>
-                      <td>6</td>
-                      <td>Mason Porter</td>
-                      <td>$78,615</td>
-                      <td>Chile</td>
-                      <td>Gloucester</td>
-                      <td>Gloucester</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-
-      <Modal isOpen={modalCreate} toggle={toggleCreate} centered>
-        <ModalHeader
-          style={{ color: "#B22222" }}
-          close={closeBtn(toggleCreate)}
-          toggle={toggleCreate}
+    const closeBtn = (x) => (
+        <button
+            className="btn border border-danger"
+            style={{ color: "#B22222" }}
+            onClick={x}
         >
-          <ModalTitle>Do you want to create new Repairman</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
-          <Form>
-            <Form.Group className="mb-2">
-              <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="Name" />
-            </Form.Group>
-            <Form.Group className="mb-2">
-              <Form.Label>Address</Form.Label>
-              <Form.Control type="text" placeholder="Address" />
-            </Form.Group>
-            <Form.Group className="mb-2">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Description"
-                as="textarea"
-                rows={3}
-              />
-            </Form.Group>
-            <Form.Group className="mb-2">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="text" placeholder="Email" />
-            </Form.Group>
+            X
+        </button>
+    );
+    return (
+        <>
+            <Col md="12">
+                <Card className="strpied-tabled-with-hover">
 
-            <Form.Group className="mb-2">
-              <Form.Label>HOTLINE</Form.Label>
-              <Form.Control type="text" placeholder="HOTLINE" />
-            </Form.Group>
+                    <Card.Body className="table-full-width table-responsive px-0">
+                        <Table className="table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th className="description">Image</th>
+                                    <th className="description">Worker</th>
+                                    <th className="description">Phone </th>
+                                    <th className="description">Email</th>
+                                    {/* <th className="description">Username</th> */}
+                                    <th className="description">Create Date</th>
+                                    <th className="description">FullName</th>
+                                    <th className="description">Company</th>
+                                    <th className="description">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {useListCustomerShowPage.map((e, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td onClick={() => {
+                                                setModalStatus(true);
+                                                setSelectservice(e);
+                                            }}>
+                                                <img src={e.Avatar} />
+                                            </td>
+                                            <TableCell>
+                                                <Grid container>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Picture</Form.Label>
-              <Form.Control type="file" />
-            </Form.Group>
-           
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="danger" onClick={() => { // handleRepairmanDetele();
-            
-            setRepairmanModalCreate(false);
-          }}
-          >
-            Create
-          </Button>
-          <Button color="secondary" onClick={toggleCreate}>
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
-      
-      <Modal isOpen={modalEdit} toggle={toggleEdit} centered>
-        <ModalHeader
-          style={{ color: "#B22222" }}
-          close={closeBtn(toggleEdit)}
-          toggle={toggleEdit}
-        >
-          <ModalTitle>Do you want to edit Repairman</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
-          <Form>
-            <Form.Group className="mb-2">
-              <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="Service name" />
-            </Form.Group>
+                                                    <Grid item lg={10}>
+                                                        <Typography className={classes.name}>{e.Username}</Typography>
+                                                        <Typography color="textSecondary" variant="body2">{e.Id}
+                                                        </Typography>
+                                                    </Grid>
+                                                </Grid>
+                                            </TableCell>
 
-            <Form.Group className="mb-2">
-              <Form.Label>Country</Form.Label>
-              <Form.Control type="text" placeholder="Category" />
-            </Form.Group>
+                                            <td onClick={() => {
+                                                setModalStatus(true);
+                                                setSelectservice(e);
+                                            }}>
+                                                {e.PhoneNumber}
+                                            </td>
+                                            <td onClick={() => {
+                                                setModalStatus(true);
+                                                setSelectservice(e);
+                                            }}>
+                                                {e.Email}
+                                            </td>
 
-            <Form.Group className="mb-2">
-              <Form.Label>City</Form.Label>
-              <Form.Control type="text" placeholder="Price" step="10000" />
-            </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Image</Form.Label>
-              <Form.Control type="file" />
-            </Form.Group>
+                                            <td onClick={() => {
+                                                setModalStatus(true);
+                                                setSelectservice(e);
+                                            }}>{moment(e.CreateDate).format("MM-DD-YYYY")}
+                                            </td>
+                                            <td onClick={() => {
+                                                setModalStatus(true);
+                                                setSelectservice(e);
+                                            }}>
+                                                {e.Name}
+                                            </td>
+                                            <td onClick={() => {
+                                                setModalStatus(true);
+                                                setSelectservice(e);
+                                            }}>
+                                                {displayCompanyName(e.CompanyId)}
+                                            </td>
 
-            <Form.Group className="mb-2">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Description"
-                as="textarea"
-                rows={3}
-              />
-            </Form.Group>
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="danger" onClick={() => { // handleRepairmanDetele();
-            
-            setRepairmanModalEdit(false);
-          }}
-          >
-            Edit
-          </Button>
-          <Button color="secondary" onClick={toggleEdit}>
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
+                                            <td>
+                                                <TableCell>
+                                                    <Typography
+                                                        className={classes.Status}
+                                                        style={{
+                                                            backgroundColor:
+                                                                ((e.Status === 1 && 'rgb(34, 176, 34)')
+                                                                    ||
+                                                                    (e.Status === 2 && 'red')||
+                                                                    (e.Status === 0 && 'rgb(50, 102, 100)'))
 
-      <Modal isOpen={modalDelete} toggle={toggleDelete}>
-        <ModalHeader
-          style={{ color: "#B22222" }}
-          close={closeBtn(toggleDelete)}
-          toggle={toggleDelete}
-        >
-          Are you sure?
-        </ModalHeader>
-        <ModalBody>Do you want to delete this Repairman</ModalBody>
-        <ModalFooter>
-          <Button
-            color="danger"
-            onClick={() => {
-              handleRepairmanDetele();
-              setRepairmanModalDelete(false);
-            }}
-          >
-            Delete
-          </Button>{" "}
-          <Button color="secondary" onClick={toggleDelete}>
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
-    </>
-  );
+                                                        }}
+                                                    >{displayStateName(e.Status)}</Typography>
+                                                </TableCell>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </Table>
+                        <Row>
+                            <Col md={6}></Col>
+
+                            <Pagination
+                                aria-label="Page navigation example"
+                                className="page-right"
+                            >
+                                <PaginationItem disabled={numberPage === 1}>
+                                    <PaginationLink
+                                        className="page"
+                                        previous
+                                        //disable={numberPage === 1 ? "true" : "false"}
+
+                                        onClick={() => {
+                                            if (numberPage - 1 > 0) {
+                                                onClickPage(numberPage - 1);
+                                            }
+                                        }}
+                                    >
+                                        Previous
+                                    </PaginationLink>
+                                </PaginationItem>
+                                {numberPage - 1 > 0 ? (
+                                    <PaginationItem>
+                                        <PaginationLink
+                                            className="page"
+                                            onClick={() => {
+                                                onClickPage(numberPage - 1);
+                                            }}
+                                        >
+                                            {numberPage - 1}
+                                        </PaginationLink>
+                                    </PaginationItem>
+                                ) : (
+                                    ""
+                                )}
+                                <PaginationItem active>
+                                    <PaginationLink className="page-active">
+                                        {numberPage}
+                                    </PaginationLink>
+                                </PaginationItem>
+                                {numberPage + 1 <= totalNumberPage ? (
+                                    <PaginationItem>
+                                        <PaginationLink
+                                            className="page"
+                                            onClick={() => {
+                                                onClickPage(numberPage + 1);
+                                            }}
+                                        >
+                                            {numberPage + 1}
+                                        </PaginationLink>
+                                    </PaginationItem>
+                                ) : (
+                                    ""
+                                )}
+                                {numberPage + 2 <= totalNumberPage ? (
+                                    <PaginationItem>
+                                        <PaginationLink
+                                            className="page"
+                                            onClick={() => {
+                                                onClickPage(numberPage + 2);
+                                            }}
+                                        >
+                                            {numberPage + 2}
+                                        </PaginationLink>
+                                    </PaginationItem>
+                                ) : (
+                                    ""
+                                )}
+
+                                <PaginationItem disabled={numberPage === totalNumberPage}>
+                                    <PaginationLink
+                                        className="page"
+                                        next
+                                        //disable={numberPage === totalNumberPage ? true : false}
+                                        onClick={() => {
+                                            if (numberPage + 1 <= totalNumberPage) {
+                                                onClickPage(numberPage + 1);
+                                            }
+                                        }}
+                                    >
+                                        Next
+                                    </PaginationLink>
+                                </PaginationItem>
+                            </Pagination>
+                        </Row>
+                    </Card.Body>
+                </Card>
+            </Col>
+            <Modal isOpen={modalEdit} toggle={toggleEdit} centered>
+                <ModalHeader
+                    style={{ color: "#B22222" }}
+                    close={closeBtn(toggleEdit)}
+                    toggle={toggleEdit}
+                >
+                    <ModalTitle>Do you want to edit Customer</ModalTitle>
+                </ModalHeader>
+                <ModalBody>
+                    <Form>
+                        <Form.Group className="mb-2">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control type="text"
+                                name="customer_Name"
+                                id="customer_Name"
+                                placeholder="Name"
+                                onChange={customer_Name}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-2">
+                            <Form.Label>Country</Form.Label>
+                            <Form.Control type="text"
+                                type="text"
+                                name="Country"
+                                id="Country"
+                                placeholder="Country"
+                                onChange={address}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-2">
+                            <Form.Label>City</Form.Label>
+                            <Form.Control type="text" placeholder="Price" step="10000" />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Image</Form.Label>
+                            <Form.Control type="file" />
+                        </Form.Group>
+
+                        <Form.Group className="mb-2">
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Description"
+                                name="description"
+                                id="lastname"
+                                onChange={address}
+                                as="textarea"
+                                rows={3}
+                            />
+                        </Form.Group>
+                    </Form>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="danger" onClick={() => { // handleCustomerDetele();
+
+                        setCustomerModalEdit(false);
+                    }}
+                    >
+                        Edit
+                    </Button>
+                    <Button color="secondary" onClick={toggleEdit}>
+                        Cancel
+                    </Button>
+                </ModalFooter>
+            </Modal>
+
+            <Modal isOpen={modalDelete} toggle={toggleDelete}>
+                <ModalHeader
+                    style={{ color: "#B22222" }}
+                    close={closeBtn(toggleDelete)}
+                    toggle={toggleDelete}
+                >
+                    Are you sure?
+                </ModalHeader>
+                <ModalBody>Do you want to delete this customer</ModalBody>
+                <ModalFooter>
+                    <Button
+                        color="danger"
+                        onClick={() => {
+                            handleCustomerDetele();
+                            setCustomerModalDelete(false);
+                        }}
+                    >
+                        Delete
+                    </Button>{" "}
+                    <Button color="secondary" onClick={toggleDelete}>
+                        Cancel
+                    </Button>
+                </ModalFooter>
+            </Modal>
+
+
+            <Modal isOpen={modalStatus} toggle={toggleDetails}>
+                <ModalHeader
+                    toggle={toggleDetails}
+                    style={{ color: "#B22222" }}
+                    close={closeBtn(toggleDetails)}
+                >
+                    <h3> INFORMATION </h3>
+                </ModalHeader>
+                <ModalBody>
+
+                    <Row>
+                        <Col></Col>
+                        <Col className="view-item-size-main" md={3}>  FullName:</Col>
+                        <Col className="view-item-size" md={8}>
+                            {Selectservice !== undefined ? Selectservice.Name : ""}
+                            {/* {setSelectservice !== undefined ? displayMajorName(Selectservice.MajorId) : ""} */}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col></Col>
+                        <Col className="view-item-size-main" md={3}> Email:</Col>
+                        <Col className="view-item-size" md={8}>
+                            {Selectservice !== undefined ? Selectservice.Email : ""}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col></Col>
+                        <Col className="view-item-size-main" md={4}> Created Date:</Col>
+                        <Col className="view-item-size" md={7}>
+                            {Selectservice !== undefined ? Selectservice.CreateDate : ""}
+
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col></Col>
+                        <Col className="view-item-size-main" md={3}> Phone:</Col>
+                        <Col className="view-item-size" md={8}>{Selectservice !== undefined ? Selectservice.PhoneNumber : ""}</Col>
+                    </Row>
+                </ModalBody>
+            </Modal>
+        </>
+    );
 }
 
-export default RepairmanTable;

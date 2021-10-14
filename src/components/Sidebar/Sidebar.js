@@ -129,7 +129,6 @@ function Sidebar({ routes, image, background }) {
         
         <div className="sidebar-wrapper">
         <div  className="label-company-size">
-          {localStorage.getItem("NAME")}
           </div>
 
           <div className="logo">
@@ -148,7 +147,8 @@ function Sidebar({ routes, image, background }) {
               // className="label-company-size"
               className="simple-text logo-normal"
             >
-              Company
+                        {localStorage.getItem("NAME")}
+
             </a>
           </div>
          
