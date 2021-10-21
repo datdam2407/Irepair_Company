@@ -51,7 +51,7 @@ function Sidebar({ routes, image, background }) {
   // while on the src/views/forms/EditService.jsx - route /admin/regular-forms
   const getCollapseInitialState = (routes) => {
     for (let i = 0; i < routes.length; i++) {
-      if (routes[i].collapse && getCollapseInitialState(routes[i].views)) {
+      if (routes[i].collapse && getCollapseInitialState(routes[i].views) ) {
         return true;
       } else if (location.pathname === routes[i].layout + routes[i].path) {
         return true;
@@ -98,7 +98,7 @@ function Sidebar({ routes, image, background }) {
       }
       return (
         <Nav.Item
-          className={activeRoute(prop.layout + prop.path)}
+          className={activeRoute( prop.layout + prop.path)}
           key={key}
           as="li"
         >
@@ -138,7 +138,7 @@ function Sidebar({ routes, image, background }) {
             >
               <div className="logo-img">
                 <img
-                  src={require("assets/img/logoazai.png").default}
+                  src={require("assets/img/logoIX.png").default}
                   alt="react-logo"
                 />
               </div>
@@ -147,8 +147,7 @@ function Sidebar({ routes, image, background }) {
               // className="label-company-size"
               className="simple-text logo-normal"
             >
-                        {localStorage.getItem("NAME")}
-
+              COMPANY
             </a>
           </div>
          

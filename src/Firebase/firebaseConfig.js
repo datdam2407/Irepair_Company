@@ -32,9 +32,10 @@ const signInWithGoogle = async () => {
     localStorage.setItem("token", t.data.token);// token Api
     localStorage.setItem("email", t.data.email);// token Api
     localStorage.setItem("IDCompany", t.data.id);// token Api
-    localStorage.setItem("NAME", t.data.name);// token Api
     localStorage.setItem("ADDRESS", t.data.addressDetail);// token Api
     localStorage.setItem("PHONE", t.data.phoneNumber);// token Api
+    localStorage.setItem("NAME", res.user.displayName);// token Api
+    localStorage.setItem("photo", res.user.photoURL);// token Api
     console.log("responedata", res);
  console.log("email ne", t.data.email)
     // localStorage.setItem("name", res.name);

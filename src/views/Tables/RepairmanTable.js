@@ -180,8 +180,9 @@ export default function Repairman() {
     // custom state
     function displayStateName(type) {
         const stateValue = {
-            2: "Deleted",
+            3: "Deleted",
             1: "Approved",
+            2: "Updating",
             0: "New",
         };
         return stateValue[type] ? stateValue[type] : "";
@@ -277,7 +278,7 @@ export default function Repairman() {
                                                             backgroundColor:
                                                                 ((e.Status === 1 && 'rgb(34, 176, 34)')
                                                                     ||
-                                                                    (e.Status === 2 && 'red')||
+                                                                    (e.Status === 3 && 'red')||
                                                                     (e.Status === 0 && 'rgb(50, 102, 100)'))
 
                                                         }}

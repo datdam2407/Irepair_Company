@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Dropdown } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSearch,
+  faCaretDown,
+  faCaretUp,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   Modal,
   ModalHeader,
@@ -222,6 +228,7 @@ function ManageSevice() {
 
 
   const initialValue = { name: "", description: "", imageUrl: "", status: "1" }
+  const [searchName, setSearchName] = useState("");
 
   const [gridApi, setGridApi] = useState(null)
   const [tableData, setTableData] = useState(null)
@@ -317,6 +324,33 @@ console.log("field", FieldSelectID)
     handleClickOpen()
   }
  
+  function onSubmitSearch(e) {
+    e.preventDefault();
+    if (searchName !== "") {
+      getWithToken(
+        `/api/v1.0/services?Name=` + searchName,
+        
+        localStorage.getItem("token")
+      ).then((res) => {
+        var temp = res.data;
+        setserviceList(temp);
+        setNumberPage(1);
+        setUseListserviceShow(temp);
+      setUseListserviceShowPage(temp.slice(0, 8));
+      setTotalNumberPage(Math.ceil(temp.length / 8));
+      
+      });
+    } else if(searchName == "") {
+      getWithToken("/api/v1.0/services", localStorage.getItem("token")).then(
+        (res) => {
+          if (res && res.status === 200) {
+            var temp2 = res.data;
+            setserviceList(temp2);
+            setUseListserviceShow(temp2);
+            setUseListserviceShowPage(temp2.slice(numberPage * 8 - 8, numberPage * 8));
+            setTotalNumberPage(Math.ceil(temp2.length / 8));
+    }})}
+  }
 
   function handleOnchangeSelectedAsset(e, value) {
     //console.log(e.target,value);
@@ -414,42 +448,55 @@ console.log("field", FieldSelectID)
         <Row>
           <Col md="12">
             <Card className="table">
-            <div className= "header-form">
-              <Row>
-                <div className="header-body-filter">
-                  <Col md={7}>
-                <Row className="fixed">
-                  <InputGroup>
-                    <Input placeholder="State" disabled />
-                    <InputGroupButtonDropdown
-                      addonType="append"
-                      isOpen={dropdownOpen}
-                      toggle={toggleDropDown}
-                      className="border border-gray"
+            <div className="header-form">
+                <Row>
+                  <div className="header-body-filter">
+                    <Col md={7}>
+                      <Row className="fixed">
+                        <InputGroup>
+                          <InputGroupButtonDropdown
+                            addonType="append"
+                            isOpen={dropdownOpen}
+                            toggle={toggleDropDown}
+                            className="border border-gray-css"
+                          >
+                            <DropdownToggle className="dropdown-filter-css" caret> Filter&nbsp;</DropdownToggle>                      <DropdownMenu >
+                              <div className="fixed" >
+                                <FilterState
+                                  list={filterState}
+                                  onChangeCheckBox={(e, id) => {
+                                    handleChooseState(e, id);
+                                  }}
+                                  key={filterState}
+                                />
+                              </div>
+                            </DropdownMenu>
+                          </InputGroupButtonDropdown>
+                        </InputGroup>
+
+                      </Row>
+                    </Col>
+                  </div>
+                  <Col md={2}>
+                    <Form
+                      onClick={(e) => {
+                        onSubmitSearch(e);
+                      }}
                     >
-                      <DropdownToggle caret>&nbsp;</DropdownToggle>
-                      <DropdownMenu >
-                        <div className="fixed" >
-                          <FilterState
-                            list={filterState}
-                            onChangeCheckBox={(e, id) => {
-                              handleChooseState(e, id);
-                            }}
-                            key={filterState}
-                          />
-                        </div>
-                      </DropdownMenu>
-                    </InputGroupButtonDropdown>
-                  </InputGroup>
-                  
-                </Row>
-              </Col>
-              </div>
-              <Col md={10} align="right">
+                      <InputGroup className="fixed">
+                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Search name..."></Input>
+                        <Button className="dropdown-filter-css" >
+                          <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+                        </Button>
+                      </InputGroup>
+                    </Form>
+                  </Col>
+                  <Col md={9} align="right">
                 <Button variant="contained" className="add-major-custom" color="primary" onClick={ ()=> {setserviceModalCreate(true);}}>Add service</Button>
               </Col>
-                  </Row>
-                  </div>
+                </Row>
+              </div>
+                 
               <Card.Body className="table">
                 <Table className="table">
                   <thead>

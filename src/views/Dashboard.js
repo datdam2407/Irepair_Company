@@ -1,6 +1,5 @@
 import React from "react";
 // react component used to create charts
-import ChartistGraph from "react-chartist";
 // react components used to create a SVG / Vector map
 import { VectorMap } from "react-jvectormap";
 import {

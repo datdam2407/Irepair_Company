@@ -1,25 +1,201 @@
-div .label-company-size{
+.th-descriptionSize{
+    width: 11%;
+}
+.td-img-size{
+    width: 25%;
+}
+.th-name-major{
+    text-align: left;
+}
+.text-left-topic{
+    width: 100%;
+    position: relative;
+    top: 12px;
+}
+
+/* .row{
+    display: block;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+} */
+.form-check-input {
+    position: inherit;
+    margin-top: 0;
+    margin-left: 0;
+}
+.add-major-custom{
+    background-color: #447DF7;
+    font-size: small;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+.add-major-custom:hover {
+    /* color: #922301; */
+    background-color: rgb(71, 49, 199);
+} 
+.td-status-active-major{
+    color: darkgreen;
     font-size: large;
-    margin-left: 11px;
-    margin-top: 10px;
+}
+.td-status-inactive-major{
+    color: darkred;
+    font-size: large;
+
+}.th-major-header-form{
+    width: 15px;
+    color :rgb(116, 60, 7)
+}
+.view-major{
+    text-align: end;
+    font-size: larger;
+    font-weight: 700;
+}
+.fa-image:before{
+font-size: large;
+
+}
+.fa, .fas {
+    font-weight: 900;
+    font-size: large;
+
+}
+.fa, .fas, .far, .fal, .fad, .fab {
+    width: 15px;
+}
+.text-left-topic-toolpi{
+    width: 100%;
+}
+.fixed{
+    background-color: rgb(238, 238, 245);
+    margin-bottom: 0px;
+}
+.Col-filter .dropdown {
+    float: left;
+    width: 240px;
+    
+  }
+  .Col-filter {
+    padding-bottom: 0px;
+    width: 100%;
+  }
+
+  .Col-filter .nav-links-create {
+    float: right;
+  }
+  
+  /*Resize the wrap to see the search bar change!*/
+  .wrap{
+    width: 350px;
+    /* margin: 10% auto; */
+    /* margin-top: 30px; */
+    /* margin-right: 80px; */
+  }
+  .checkbox-type{
+    position: absolute;
+    will-change: transform;
+    padding: 10px;
+    background-color: #f1f0f3;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    transform: translate3d(0px, -166px, 0px);
+  }
+ 
+ 
+.dropdown-filter-css{
+    margin-bottom: 0px;
+    background-color: #447DF7 !important;
+}
+  /* .dropdown-toggle{
+    margin-bottom: 0px;
+    background-color: darkblue !important;
+  } */
+
+.form-check-input{
+    margin-left: 30px;
+}
+div.border border-gray-css{
+    background-color: darkblue;
 }
 label{ margin-left: 10px;
-    font-size: larger;}
-    .MuiAvatar{
-        overflow: unset;
-    }
-    .div-service{
-        margin-left: 50px;
-    }.header-form{
-        padding-top: 10px;
-    }.header-body-filter{
-        margin-left: 40px;
-    }
-     .photoCustomer img{
-        width: 40px;
-        margin-left: 7px;
-    }
-    .info-customer{
-        margin-top: 13px;
-        /* margin-right: 20px; */
+    font-weight: 900;
+font-size: larger;}
+.MuiAvatar{
+    overflow: unset;
+}
+.div-service{
+    margin-left: 50px;
+}.header-form{
+    padding-top: 10px;
+}.header-body-filter{
+    margin-left: 40px;
+}
+ .photoCustomer img{
+    width: 40px;
+    margin-left: 7px;
+    padding-top: 9px;
+    border-radius: 4px;
+}
+.info-customer{
+    margin-top: 13px;
+    padding: 3px;
+    margin-left: 10px;
+}
+.sidebar-mini-css{
+    padding-left: 35px;
+    font-weight: 700 ;
+}
+.sidebar-mini-css{
+    padding-left: 42px;
+    font-size: 12px;
+
+}
+.mr-2-css{
+    font-size: x-large;
+    font-weight: 700;
+}
+ /* modal size*/
+.Modal-body-view-all{
+    height: 200px;
+}
+.Modal-body-view-all-service{
+    height: 250px;
+
+}
+.Modal-body-view-all-major-field{
+    height: 270px;
+}
+.view-item-size{
+    font-size: 17px;
+} 
+.point-customer{
+    font-size: 15px;
+    font-weight: 900;
+    color: rgb(145 105 11);
+}
+.view-item-size-main{
+    font-size: 17px;
+    font-weight: bold;
+    color: #c51162;
+} 
+.sidebar-normal-css{
+    font-weight: 700 ;
+    font-size: 12px;
+}
+.sidebar .logo .simple-text {
+    text-transform: uppercase;
+    padding: 5px 0px;
+    display: inline-block;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 30px;
+    padding-left: 22px;   
+    padding-top: 11px;   
+     white-space: nowrap;
+    color: #FFFFFF;
+    overflow: hidden; }
+
+    .image-css-col{
+        width: 100px;
     }
