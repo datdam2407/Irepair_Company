@@ -67,13 +67,17 @@ font-size: large;
     width: 100%;
 }
 .fixed{
-    background-color: rgb(238, 238, 245);
+    background-color: #FFFFFF;
     margin-bottom: 0px;
+    width: 200px;
 }
 .Col-filter .dropdown {
     float: left;
     width: 240px;
     
+  }
+  .modalCreatene{
+      width: 500px;
   }
   .Col-filter {
     padding-bottom: 0px;
@@ -114,6 +118,7 @@ font-size: large;
 
 .form-check-input{
     margin-left: 30px;
+    
 }
 div.border border-gray-css{
     background-color: darkblue;

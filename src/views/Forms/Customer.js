@@ -58,7 +58,7 @@ import {
   Typography,
 } from '@material-ui/core';
 // import FormDialog from './DialogService';
-function ManageSevice() {
+function Customer() {
   //delete modal  
   const [ServiceDelete, setServiceDelete] = useState(null);
   const [modalDelete, setServiceModalDelete] = useState(false);
@@ -113,10 +113,8 @@ function ManageSevice() {
   const [listField, setListField] = useState([]);
   //filter 
   const listStates = [
-    "New",
-    "Approved",
-    "Blocked",
-    "Deleted",
+    "Đang hoạt động",
+    "Ngưng hoạt động",
   ];
   const [filterState, setListFilterState] = useState(listStates);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -199,7 +197,7 @@ function ManageSevice() {
     setOpen(true);
   };
 
- 
+
   console.log("field", FieldSelectID)
   // update
 
@@ -324,9 +322,7 @@ function ManageSevice() {
                       </InputGroup>
                     </Form>
                   </Col>
-                  <Col md={9} align="right">
-                    <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Add service</Button>
-                  </Col>
+                
                 </Row>
               </div>
 
@@ -334,38 +330,433 @@ function ManageSevice() {
                 <Table className="table">
                   <thead>
                     <tr>
-                      <th className="description" >Service Name</th>
-                      <th className="description">Description</th>
-                      <th className="description">Price</th>
-                      <th className="description">Status</th>
-                      <th className="description">Actions</th>
+                      <th className="description" >Tên khách hàng</th>
+                      <th className="description">Điện Thoại</th>
+                      <th className="description">Địa Chỉ</th>
+                      <th className="description">Ngày Đăng Ký</th>
+                      <th className="description">Trạng Thái</th>
+                      <th className="description">Hành Động</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr >
                       <TableCell>
                         <Grid container>
-                          
+
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Name</Typography>
-                            <Typography color="textSecondary" variant="body2">1</Typography>
+                            <Typography className={classes.name}>Nguyễn Lê Thuần</Typography>
+                            <Typography color="textSecondary" variant="body2">Cus 001</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
-
+                      <td>0123456791</td>
                       <td>
+                        43 Đ.160, Tăng Nhơn Phú A
                       </td>
-
                       <td>
+                        20-01-2020
                       </td>
                       <TableCell>
                         <Typography
                           className={classes.Status}
                           style={{
                             backgroundColor:
-                              'rgb(34, 176, 34)'
+                              'rgb(34, 176, 34)',
+                            width: '120px'
                           }}
-                        >Alive</Typography>
+                        >Đang Hoạt Động</Typography>
+                      </TableCell>
+                      <td className="td-actions">
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-960683717">
+                              View Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setModalStatus(true);
+                              setSelectservice(e);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="info"
+                          >
+                            <i className="far fa-image"></i>
+                          </Button>
+                        </OverlayTrigger>
+
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+
+                      </td>
+
+                    </tr>
+                    <tr >
+                      <TableCell>
+                        <Grid container>
+
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Đàm Tiến Đạt</Typography>
+                            <Typography color="textSecondary" variant="body2">Cus 002</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                      <td>0988924312</td>
+                      <td>
+                        43 Đ.100, Tăng Nhơn Phú B
+                      </td>
+                      <td>
+                        02-02-2019
+                      </td>
+                      <TableCell>
+                        <Typography
+                          className={classes.Status}
+                          style={{
+                            backgroundColor:
+                              'rgb(34, 176, 34)',
+                            width: '120px'
+                          }}
+                        >Đang Hoạt Động</Typography>
+                      </TableCell>
+                      <td className="td-actions">
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-960683717">
+                              View Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setModalStatus(true);
+                              setSelectservice(e);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="info"
+                          >
+                            <i className="far fa-image"></i>
+                          </Button>
+                        </OverlayTrigger>
+
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+
+                      </td>
+                    </tr>
+
+                    <tr >
+                      <TableCell>
+                        <Grid container>
+
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Nguyễn Hoàng Quốc Khánh</Typography>
+                            <Typography color="textSecondary" variant="body2">Cus 003</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                      <td>0909132173</td>
+                      <td>
+                        Quận 3, Lê Văn Sỹ
+                      </td>
+                      <td>
+                        02-02-2019
+                      </td>
+                      <TableCell>
+                        <Typography
+                          className={classes.Status}
+                          style={{
+                            backgroundColor:
+                              'rgb(34, 176, 34)',
+                            width: '120px'
+                          }}
+                        >Đang Hoạt Động</Typography>
+                      </TableCell>
+                      <td className="td-actions">
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-960683717">
+                              View Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setModalStatus(true);
+                              setSelectservice(e);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="info"
+                          >
+                            <i className="far fa-image"></i>
+                          </Button>
+                        </OverlayTrigger>
+
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+
+                      </td>
+                    </tr>
+
+                    <tr >
+                      <TableCell>
+                        <Grid container>
+
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Đỗ Dương Tâm Đăng</Typography>
+                            <Typography color="textSecondary" variant="body2">Cus 004</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                      <td>0982321324</td>
+                      <td>
+                        Lê Văn Việt, Quận 9
+                      </td>
+                      <td>
+                        02-02-2019
+                      </td>
+                      <TableCell>
+                        <Typography
+                          className={classes.Status}
+                          style={{
+                            backgroundColor:
+                              'rgb(34, 176, 34)',
+                            width: '120px'
+                          }}
+                        >Đang Hoạt Động</Typography>
+                      </TableCell>
+                      <td className="td-actions">
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-960683717">
+                              View Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setModalStatus(true);
+                              setSelectservice(e);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="info"
+                          >
+                            <i className="far fa-image"></i>
+                          </Button>
+                        </OverlayTrigger>
+
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+
+                      </td>
+                    </tr>
+
+                    <tr >
+                      <TableCell>
+                        <Grid container>
+
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Phạm Tấn Phát</Typography>
+                            <Typography color="textSecondary" variant="body2">Cus 005</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                      <td>0987654321</td>
+                      <td>
+                        Gò Vấp
+                      </td>
+                      <td>
+                        02-02-2019
+                      </td>
+                      <TableCell>
+                        <Typography
+                          className={classes.Status}
+                          style={{
+                            backgroundColor:
+                              'rgb(34, 176, 34)',
+                            width: '120px'
+                          }}
+                        >Đang Hoạt Động</Typography>
                       </TableCell>
                       <td className="td-actions">
                         <OverlayTrigger
@@ -761,4 +1152,4 @@ function ManageSevice() {
   );
 }
 
-export default ManageSevice;
+export default Customer;

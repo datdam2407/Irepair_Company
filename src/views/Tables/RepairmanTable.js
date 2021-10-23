@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faSearch,
+    faCaretDown,
+    faCaretUp,
+  } from "@fortawesome/free-solid-svg-icons";
+  
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 // react-bootstrap components
 import {
     Button,
@@ -14,14 +22,23 @@ import {
     Tooltip,
 } from "react-bootstrap";
 import {
+   
+
+   
     Modal,
     ModalHeader,
-    Media,
     ModalBody,
     ModalFooter,
     Pagination,
     PaginationItem,
     PaginationLink,
+    InputGroup,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+    InputGroupButtonDropdown,
+    Input,
+    FormGroup,
 } from "reactstrap";
 import moment from "moment";
 import {
@@ -42,7 +59,23 @@ import { del, post, get, getWithToken } from "../../service/ReadAPI";
 import { makeStyles } from '@material-ui/core/styles';
 
 export default function Repairman() {
-
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [picture, setImage] = useState("");
+    const [price, setPrice] = useState("");
+    const [companyId, setCompanyID] = useState("");
+    const [fieldID, setFieldID] = useState("");
+    const [serviceID, setserviceID] = useState("");
+    const [fieldSelect, setfieldSelect] = useState("")
+    const [data1, setData1] = useState({ array: [] });
+    const [FieldSelectID, setFieldSelectID] = useState(-1)
+    const [filterState, setListFilterState] = useState(listStates);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [dropdownOpen1, setDropdownOpen1] = useState(false);
+    const [stateListFilter, setstateListFilter] = useState([]);
+    const toggleDropDown = () => setDropdownOpen(!dropdownOpen);
+    const toggleDropDown1 = () => setDropdownOpen1(!dropdownOpen1);
+  
     const [CustomerDelete, setCustomerDelete] = useState(null);
     const [modalDelete, setCustomerModalDelete] = useState(false);
     const toggleDelete = () => setCustomerModalDelete(!modalDelete);
@@ -51,14 +84,19 @@ export default function Repairman() {
     const [modalEdit, setCustomerModalEdit] = useState(false);
     const toggleEdit = () => setCustomerModalEdit(!modalEdit)
 
-    const [modalCreate, setCustomerModalCreate] = useState(false);
-    const toggleCreate = () => setCustomerModalCreate(!modalCreate)
-
+    const myOptions = ['Thợ sửa tivi', 'Thợ Sửa máy tính', 'Thợ điện lạnh', 'Thợ Điện', 'Thợ Sửa ô tô','Thợ Sửa xe máy','Thợ Sửa đồng hồ']
+  
+    //modal create
+  const [modalCreate, setserviceModalCreate] = useState(false);
+  const toggleCreate = () => setserviceModalCreate(!modalCreate)
     //view modal
     const [modalStatus, setModalStatus] = useState(false);
     const toggleDetails = () => setModalStatus(!modalStatus);
     const [Selectservice, setSelectservice] = useState();
-
+    const listStates = [
+        "Đang Hoạt Động",
+        "Ngưng hoạt động",
+      ];
 
     const [customer_Name, setcustomer_Name] = useState("");
     const [address, setaddress] = useState("");
@@ -80,16 +118,7 @@ export default function Repairman() {
     const [companyList, setCompanyList] = useState([]);
     const [companyListName, setCompanyListName] = useState([]);
 
-    // useEffect(() => {
-    //     getWithToken("/api/v1.0/companies", localStorage.getItem("token")).then(
-    //         (res) => {
-    //             if (res && res.status === 200) {
-    //                 setCompanyListName(res.CompanyName);
-    //                 // res.data;
-    //             }
-    //         });
-    // }, []);
-    // console.log("aaaaaa", companyListName);
+
 
     function displayCompanyName(type) {
         const stateValue = {
@@ -180,7 +209,7 @@ export default function Repairman() {
     // custom state
     function displayStateName(type) {
         const stateValue = {
-            3: "Deleted",
+            3: "Đã hủy",
             1: "Approved",
             2: "Updating",
             0: "New",
@@ -201,94 +230,193 @@ export default function Repairman() {
         <>
             <Col md="12">
                 <Card className="strpied-tabled-with-hover">
+                <div className="header-form">
+                <Row>
+                  <div className="header-body-filter">
+                    <Col md={7}>
+                      <Row className="fixed">
+                        <InputGroup>
+                          <InputGroupButtonDropdown
+                            addonType="append"
+                            isOpen={dropdownOpen}
+                            toggle={toggleDropDown}
+                            className="border border-gray-css"
+                          >
+                            <DropdownToggle className="dropdown-filter-css" caret> Filter&nbsp;</DropdownToggle>                      <DropdownMenu >
+                              <div className="fixed" >
+                             
+                              </div>
+                            </DropdownMenu>
+                          </InputGroupButtonDropdown>
+                        </InputGroup>
 
+                      </Row>
+                    </Col>
+                  </div>
+                  <Col md={2}>
+                    <Form
+                      onClick={(e) => {
+                        // onSubmitSearch(e);
+                      }}
+                    >
+                      <InputGroup className="fixed">
+                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Search name..."></Input>
+                        <Button className="dropdown-filter-css" >
+                          <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+                        </Button>
+                      </InputGroup>
+                    </Form>
+                  </Col>
+                  <Col md={8} align="right">
+                    <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Thêm thợ mới</Button>
+                  </Col>
+                </Row>
+              </div>
                     <Card.Body className="table-full-width table-responsive px-0">
                         <Table className="table-hover table-striped">
                             <thead>
                                 <tr>
-                                    <th className="description">Image</th>
-                                    <th className="description">Worker</th>
-                                    <th className="description">Phone </th>
+                                    <th className="description">Ảnh</th>
+                                    <th className="description">Thợ sửa chữa</th>
+                                    <th className="description">Số điện thoại </th>
                                     <th className="description">Email</th>
-                                    {/* <th className="description">Username</th> */}
-                                    <th className="description">Create Date</th>
-                                    <th className="description">FullName</th>
-                                    <th className="description">Company</th>
-                                    <th className="description">Status</th>
+                                    <th className="description">Chuyên Môn</th>
+                                    <th className="description">Ngày tạo</th>
+                                    <th className="description">Trạng Thái</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {useListCustomerShowPage.map((e, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td onClick={() => {
-                                                setModalStatus(true);
-                                                setSelectservice(e);
-                                            }}>
-                                                <img src={e.Avatar} />
-                                            </td>
-                                            <TableCell>
-                                                <Grid container>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        Đỗ Thành Thái
+                                    </td>
+                                    <td>
+                                        0123456789
+                                    </td>
+                                    <td>
+                                        ThaiDTIrepair@gmail.com
+                                    </td>
+                                    <td>
+                                        Sửa Xe Ô tô
+                                    </td>
+                                    <td >
+                                        20-12-2021
+                                    </td >
 
-                                                    <Grid item lg={10}>
-                                                        <Typography className={classes.name}>{e.Username}</Typography>
-                                                        <Typography color="textSecondary" variant="body2">{e.Id}
-                                                        </Typography>
-                                                    </Grid>
-                                                </Grid>
-                                            </TableCell>
+                                        <TableCell>
+                                            <Typography
+                                                className={classes.Status}
+                                                style={{
+                                                    backgroundColor:
+                                                        'rgb(34, 176, 34)',
+                                                        textAlign: 'center',
+                                                        width:'133px'
 
-                                            <td onClick={() => {
-                                                setModalStatus(true);
-                                                setSelectservice(e);
-                                            }}>
-                                                {e.PhoneNumber}
-                                            </td>
-                                            <td onClick={() => {
-                                                setModalStatus(true);
-                                                setSelectservice(e);
-                                            }}>
-                                                {e.Email}
-                                            </td>
+                                                }}
+                                            >Đang hoạt động</Typography>
+                                        </TableCell>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        Trần Văn Thái
+                                    </td>
+                                    <td>
+                                        0989070145
+                                    </td>
+                                    <td>
+                                        ThaiTVIrepair@gmail.com
+                                    </td>
+                                    <td>
+                                        Sửa Máy Tính
+                                    </td>
+                                    <td >
+                                        20-12-2021
 
+                                    </td >
+                                        <TableCell>
+                                            <Typography
+                                                className={classes.Status}
+                                                style={{
+                                                    backgroundColor:
+                                                        'rgb(34, 176, 34)',
+                                                    textAlign: 'center',
+                                                    width:'133px'
 
-                                            <td onClick={() => {
-                                                setModalStatus(true);
-                                                setSelectservice(e);
-                                            }}>{moment(e.CreateDate).format("MM-DD-YYYY")}
-                                            </td>
-                                            <td onClick={() => {
-                                                setModalStatus(true);
-                                                setSelectservice(e);
-                                            }}>
-                                                {e.Name}
-                                            </td>
-                                            <td onClick={() => {
-                                                setModalStatus(true);
-                                                setSelectservice(e);
-                                            }}>
-                                                {displayCompanyName(e.CompanyId)}
-                                            </td>
+                                                }}
+                                            >Đang hoạt động</Typography>
+                                        </TableCell>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        Phạm Hữu Nghĩa
+                                    </td>
+                                    <td>
+                                        0123456789
+                                    </td>
+                                    <td>
+                                        NghiaPHIrepair@gmail.com
+                                    </td>
+                                    <td>
+                                        Sửa Điện
+                                    </td>
+                                    <td >
+                                        20-12-2021
 
-                                            <td>
-                                                <TableCell>
-                                                    <Typography
-                                                        className={classes.Status}
-                                                        style={{
-                                                            backgroundColor:
-                                                                ((e.Status === 1 && 'rgb(34, 176, 34)')
-                                                                    ||
-                                                                    (e.Status === 3 && 'red')||
-                                                                    (e.Status === 0 && 'rgb(50, 102, 100)'))
+                                    </td >
 
-                                                        }}
-                                                    >{displayStateName(e.Status)}</Typography>
-                                                </TableCell>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                    );
-                                })}
+                                        <TableCell>
+                                            <Typography
+                                                className={classes.Status}
+                                                style={{
+                                                    backgroundColor:
+                                                        'rgb(34, 176, 34)',
+                                                        textAlign: 'center',
+                                                        width:'133px'
+
+                                                }}
+                                            >Đang hoạt động</Typography>
+                                        </TableCell>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        Phạm Tấn Phát
+                                    </td>
+                                    <td>
+                                        0123456789
+                                    </td>
+                                    <td>
+                                        PhatPTIrepair@gmail.com
+                                    </td>
+                                    <td>
+                                        Sửa Điện Lạnh
+                                    </td>
+                                    <td >
+                                        20-12-2021
+
+                                    </td >
+
+                                        <TableCell>
+                                            <Typography
+                                                className={classes.Status}
+                                                style={{
+                                                    backgroundColor:
+                                                        'rgb(34, 176, 34)',
+                                                        textAlign: 'center',
+                                                        width:'133px'
+
+                                                }}
+                                            >Đang hoạt động</Typography>
+                                        </TableCell>
+                                </tr>
+                                {/* })} */}
                             </tbody>
                         </Table>
                         <Row>
@@ -327,8 +455,8 @@ export default function Repairman() {
                                 ) : (
                                     ""
                                 )}
-                                <PaginationItem active>
-                                    <PaginationLink className="page-active">
+                                <PaginationItem Đang hoạt động>
+                                    <PaginationLink className="page-Đang hoạt động">
                                         {numberPage}
                                     </PaginationLink>
                                 </PaginationItem>
@@ -473,6 +601,85 @@ export default function Repairman() {
                     </Button>
                 </ModalFooter>
             </Modal>
+            <Modal className="modalCreatene" isOpen={modalCreate} toggle={toggleCreate} centered>
+        <ModalHeader
+          style={{ color: "#B22222" }}
+          close={closeBtn(toggleCreate)}
+          toggle={toggleCreate}
+        >
+          <ModalTitle>Tạo mới thợ sữa chữa</ModalTitle>
+        </ModalHeader>
+        <ModalBody>
+          <Form>
+          <FormGroup className="mb-2">
+              <Form.Label>Tên thợ</Form.Label>
+              <Form.Control type="text" value={name}
+                onChange={e => setName(e.target.value)}
+              />
+            </FormGroup>
+            <Form.Label>Chuyên Môn </Form.Label>
+            <FormGroup className="mb-2">
+              <Autocomplete
+                options={myOptions}
+                multiple
+                style={{ width: 500 }}
+                getOptionLabel={(option) => option}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Lựa chọn lĩnh vực"
+                    variant="standard"
+               
+                  />
+                )}
+              />
+            </FormGroup>
+            <FormGroup className="mb-2">
+              <Form.Label>Số điện thoại</Form.Label>
+              <Form.Control
+                type="text"
+                as="textarea"
+                onChange={e => setDescription(e.target.value)}
+                rows={3}
+              />
+            </FormGroup>
+            <FormGroup className="mb-2">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="text"
+                onChange={e => setDescription(e.target.value)}
+                rows={3}
+              />
+            </FormGroup>
+        
+            
+           
+            {/* <FormGroup className="mb-2">
+              <Form.Label></Form.Label>
+              <Form.Control type="number" placeholder="service name" value={price}
+                onChange={e => setPrice(e.target.value)}
+              />
+            </FormGroup> */}
+            {/* <FormGroup className="mb-3">
+              <Form.Label>Picture</Form.Label>
+              <Form.Control type="text" value={picture}
+                onChange={e => setImage(e.target.value)}
+              />
+            </FormGroup> */}
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="danger" onClick={() => { // handleServiceDetele();
+            setserviceModalCreate(false);
+          }}
+          >
+            Lưu sản phẩm
+          </Button>
+          <Button color="secondary" onClick={toggleCreate}>
+            Hủy tạo
+          </Button>
+        </ModalFooter>
+      </Modal>
 
 
             <Modal isOpen={modalStatus} toggle={toggleDetails}>
@@ -516,6 +723,7 @@ export default function Repairman() {
                     </Row>
                 </ModalBody>
             </Modal>
+            
         </>
     );
 }

@@ -138,7 +138,7 @@ function Sidebar({ routes, image, background }) {
             >
               <div className="logo-img">
                 <img
-                  src={require("assets/img/logoIX.png").default}
+                  src={require("assets/img/worker-picture.png").default}
                   alt="react-logo"
                 />
               </div>
@@ -147,7 +147,7 @@ function Sidebar({ routes, image, background }) {
               // className="label-company-size"
               className="simple-text logo-normal"
             >
-              COMPANY
+              Irepair
             </a>
           </div>
          

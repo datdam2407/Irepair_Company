@@ -7,20 +7,15 @@ import Dashboard from "views/Dashboard.js";
 // import Typography from "views/Components/Typography.js";
 
 
-import EditService from "views/Forms/EditService.js";
+import MajorTables from "views/Forms/MajorTables.js";
 import ServiceTables from "views/Forms/ServiceTables.js";
-import ValidationForms from "views/Forms/ValidationForms.js";
+import Customer from "views/Forms/Customer.js";
 // import ManageMajor from "views/Major/ManageMajor.js";
 import CreateNewService from "views/Forms/CreateNewService.js";
 // import CreateNewMajor from "views/Major/CreateNewMajor.js";
 import CreateNewRepairMan from "views/Tables/CreateNewRepairMan.js";
 import RepairmanTable from "views/Tables/RepairmanTable.js";
-import GoogleMaps from "views/Maps/GoogleMaps.js";
-import FullScreenMap from "views/Maps/FullScreenMap.js";
-import VectorMap from "views/Maps/VectorMap.js";
-import Charts from "views/Charts.js";
-import Calendar from "views/Calendar.js";
-import UserPage from "views/Pages/UserPage.js";
+
 // import Sidebar from "views/Sidebar.js";
 import RegisterPage from "views/Pages/RegisterPage.js";
 // import LockScreenPage from "views/Pages/LockScreenPage.js";
@@ -32,7 +27,7 @@ var routes = [
   {
     path: "/dashboard",
     layout: "/company",
-    name: "Dashboard",
+    name: "Trang chủ",
     icon: "nc-icon nc-chart-pie-35",
     component: Dashboard,
   },
@@ -60,16 +55,45 @@ var routes = [
   //       mini: "GS",
   //       component: ManageCompany,
   //     },
-  
+
 
   //Service
- 
+
   {
     path: "/service",
     layout: "/company",
-    name: "Service Table",
+    name: "Service",
     icon: "nc-icon nc-notes",
     component: ServiceTables,
+  },
+  {
+    path: "/customer",
+    layout: "/company",
+    name: "Khách Hàng",
+    icon: "nc-icon nc-badge",
+    component: Customer,
+  },
+  {
+    path: "/history",
+    layout: "/company",
+    name: "Lịch Sử Yêu Cầu",
+    icon: "nc-icon nc-tv-2",
+    component: CreateNewService,
+  },
+  {
+    path: "/major",
+    layout: "/company",
+    name: "Sản Phẩm",
+    icon: "nc-icon nc-single-copy-04",
+    component: MajorTables,
+  },
+ 
+  {
+    path: "/repairman",
+    layout: "/company",
+    name: "Thợ Sửa Chữa",
+    icon: "nc-icon nc-settings-tool-66",
+    component: RepairmanTable,
   },
   // {
   //   collapse: true,
@@ -77,13 +101,7 @@ var routes = [
   //   name: "Service",
   //   state: "openForms",
   //   views: [
-  //     {
-  //       path: "/update",
-  //       layout: "/company",
-  //       name: "Update Service",
-  //       mini: "US",
-  //       component: EditService,
-  //     },
+  //    
   //     {
   //       path: "/service",
   //       layout: "/company",
@@ -98,13 +116,7 @@ var routes = [
   //   mini: "VF",
   //   component: ValidationForms,
   // },
-  //     {
-  //       path: "/create/service",
-  //       layout: "/company",
-  //       name: "Create Service",
-  //       mini: "Cs",
-  //       component: CreateNewService,
-  //     },
+  // 
   //   ],
   // },
   ///////////////////////////////////////////////
@@ -115,7 +127,6 @@ var routes = [
   //   path: "/major",
   //   name: "Major",
   //   state: "openMajor",
-  //   icon: "nc-icon nc-bank",
   //   views: [
   //     {
   //       path: "/major",
@@ -160,13 +171,7 @@ var routes = [
 
   //Repairman
 
-  {
-    path: "/repairman",
-    layout: "/company",
-    name: "Repairman Table",
-    icon: "nc-icon nc-settings-tool-66",
-    component: RepairmanTable,
-  },
+  
   // {
   //   collapse: true,
   //   path: "/repairman",
@@ -227,45 +232,45 @@ var routes = [
 
 
 
-  {
-    path: "/calendar",
-    layout: "/company",
-    name: "Calendar",
-    icon: "nc-icon nc-single-copy-04",
-    component: Calendar,
-  },
+  // {
+  //   path: "/calendar",
+  //   layout: "/company",
+  //   name: "Calendar",
+  //   icon: "nc-icon nc-single-copy-04",
+  //   component: Calendar,
+  // },
 
 
 
-  {
-    collapse: true,
-    path: "/pages",
-    name: "Pages",
-    state: "openPages",
-    icon: "nc-icon nc-puzzle-10",
-    views: [
-      {
-        path: "/user-page",
-        layout: "/company",
-        name: "User Page",
-        mini: "UP",
-        component: UserPage,
-      },
-      {
-        path: "/register-page",
-        layout: "/auth",
-        name: "Register",
-        mini: "RP",
-        component: RegisterPage,
-      },
-      // {
-      //   path: "/lock-screen-page",
-      //   layout: "/auth",
-      //   name: "Lock Screen Page",
-      //   mini: "LSP",
-      //   component: LockScreenPage,
-      // },
-    ],
-  },
+  // {
+  //   collapse: true,
+  //   path: "/pages",
+  //   name: "Pages",
+  //   state: "openPages",
+  //   icon: "nc-icon nc-puzzle-10",
+  //   views: [
+  //     {
+  //       path: "/user-page",
+  //       layout: "/company",
+  //       name: "User Page",
+  //       mini: "UP",
+  //       component: UserPage,
+  //     },
+  //     {
+  //       path: "/register-page",
+  //       layout: "/auth",
+  //       name: "Register",
+  //       mini: "RP",
+  //       component: RegisterPage,
+  //     },
+  //     // {
+  //     //   path: "/lock-screen-page",
+  //     //   layout: "/auth",
+  //     //   name: "Lock Screen Page",
+  //     //   mini: "LSP",
+  //     //   component: LockScreenPage,
+  //     // },
+  //   ],
+  // },
 ];
 export default routes;
