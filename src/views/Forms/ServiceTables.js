@@ -101,6 +101,9 @@ function ManageSevice() {
   const [data1, setData1] = useState({ array: [] });
   const [FieldSelectID, setFieldSelectID] = useState(-1)
 
+  const [sortedField, setSortedField] = useState("Id");
+  const [ascending, setAscending] = useState(true);
+
 
 
   const [listField, setListField] = useState([]);
@@ -151,7 +154,7 @@ function ManageSevice() {
       fontSize: '200px',
       right: '10px',
       overflow: 'unset',
-      borderRadius :'32%',
+      borderRadius: '32%',
 
     },
     name: {
@@ -160,7 +163,7 @@ function ManageSevice() {
     },
     Status: {
       fontWeight: '700',
-      width:'71px',
+      width: '71px',
       fontSize: '0.76rem',
       color: 'white',
       backgroundColor: 'green',
@@ -169,7 +172,7 @@ function ManageSevice() {
       display: 'inline-block'
     }
   }));
-  
+
   const classes = useStyles();
   //filter
   async function handleChooseState(e, id) {
@@ -188,6 +191,7 @@ function ManageSevice() {
     setstateListFilter(newListState);
     getserviceList(newListState);
   }
+  //load service
   useEffect(() => {
     getserviceList();
   }, []);
@@ -195,16 +199,18 @@ function ManageSevice() {
     let params = {};
     if (stateList && stateList.length > 0)
       params["Status"] = stateList.reduce((f, s) => `${f},${s}`);
-    getWithTokenParams(`/api/v1.0/services`, params,localStorage.getItem("token")).then((res) => {
-      var temp = res.data.filter((x) => x.state !== "Completed");
-      setserviceList(temp);
-      setUseListserviceShow(temp);
-      setUseListserviceShowPage(temp.slice(numberPage * 8 - 8, numberPage * 8));
-      setTotalNumberPage(Math.ceil(temp.length / 8));
-      setCount(count);
-    }).catch((err) => {
-      console.log(err);
-    });
+    if (sortedField !== null) {
+      getWithTokenParams(`/api/v1.0/services`, params, localStorage.getItem("token")).then((res) => {
+        var temp = res.data.filter((x) => x.state !== "Completed");
+        setserviceList(temp);
+        setUseListserviceShow(temp);
+        setUseListserviceShowPage(temp.slice(numberPage * 8 - 8, numberPage * 8));
+        setTotalNumberPage(Math.ceil(temp.length / 8));
+        setCount(count);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
   }
 
   //major fields
@@ -213,7 +219,7 @@ function ManageSevice() {
     let currentField = {};
     let FieldId = "";
     getWithToken(
-      `/api/v1.0/major-fields`,localStorage.getItem("token")
+      `/api/v1.0/major-fields`, localStorage.getItem("token")
     ).then((res) => {
       FieldId = res.data.FieldId
       console.log(res.data)
@@ -226,7 +232,7 @@ function ManageSevice() {
     });
 
     params['Status'] = [1].reduce((f, s) => `${f},${s}`);
-    getWithTokenParams("/api/v1.0/major-fields", params,localStorage.getItem("token")
+    getWithTokenParams("/api/v1.0/major-fields", params, localStorage.getItem("token")
     ).then(res => {
       setData1(res.data);
       const newlistField = res.data.reduce((list, item) => [...list,
@@ -241,14 +247,8 @@ function ManageSevice() {
     })
   }, []);
 
-
-
-
-
- 
- 
-console.log("field", FieldSelectID)
-  // update
+  console.log("field", FieldSelectID)
+  // update fc
   async function handleEditSubmit(e) {
     await putWithToken(
       `/api/v1.0/services`,
@@ -259,7 +259,7 @@ console.log("field", FieldSelectID)
         FieldId: FieldSelectID,
         companyId: companyId,
         Price: price,
-        ImageUrl: "none",
+        ImageUrl: picture,
         status: 1,
       },
       localStorage.getItem("token")
@@ -268,11 +268,13 @@ console.log("field", FieldSelectID)
         if (res.status === 200) {
           window.location = "/company/service";
         }
+
       })
       .catch((err) => {
         console.log(err);
       });
   }
+  // create fc
   async function handleSubmitCreate(e) {
     await postWithToken(
       `/api/v1.0/services`,
@@ -283,7 +285,7 @@ console.log("field", FieldSelectID)
         FieldId: FieldSelectID,
         companyId: localStorage.getItem("IDCompany"),
         Price: price,
-        ImageUrl: "none",
+        ImageUrl: picture,
         status: 0,
       },
       localStorage.getItem("token")
@@ -303,18 +305,19 @@ console.log("field", FieldSelectID)
     if (searchName !== "") {
       getWithToken(
         `/api/v1.0/services?Name=` + searchName,
-        
+
         localStorage.getItem("token")
       ).then((res) => {
         var temp = res.data;
         setserviceList(temp);
+        sort(sortedField, ascending, temp);
         setNumberPage(1);
         setUseListserviceShow(temp);
-      setUseListserviceShowPage(temp.slice(0, 8));
-      setTotalNumberPage(Math.ceil(temp.length / 8));
-      
+        setUseListserviceShowPage(temp.slice(0, 8));
+        setTotalNumberPage(Math.ceil(temp.length / 8));
+
       });
-    } else if(searchName == "") {
+    } else if (searchName == "") {
       getWithToken("/api/v1.0/services", localStorage.getItem("token")).then(
         (res) => {
           if (res && res.status === 200) {
@@ -323,15 +326,38 @@ console.log("field", FieldSelectID)
             setUseListserviceShow(temp2);
             setUseListserviceShowPage(temp2.slice(numberPage * 8 - 8, numberPage * 8));
             setTotalNumberPage(Math.ceil(temp2.length / 8));
-    }})}
+          }
+        })
+    }
   }
+
+  const [loading, setLoading] = useState(false)
+
+  const uploadImage = async e => {
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'reactSWD')
+    setLoading(true)
+    const res = await fetch(
+      ' https://api.cloudinary.com/v1_1/fpt-claudary/image/upload',
+      {
+        method: 'POST',
+        body: data
+      }
+    )
+    const file = await res.json()
+    setImage(file.secure_url)
+    setLoading(false)
+  }
+
 
   function handleOnchangeSelectedAsset(e, value) {
     setfieldSelect(e.target.fieldId);
     setFieldSelectID(value.value);
   }
   function getserviceByID(Id) {
-    getWithToken(`/api/v1.0/services/${Id}`,localStorage.getItem("token")).then((res) => {
+    getWithToken(`/api/v1.0/services/${Id}`, localStorage.getItem("token")).then((res) => {
       setserviceID(Id);
       setName(res.data.serviceName);
       setDescription(res.data.description);
@@ -345,16 +371,26 @@ console.log("field", FieldSelectID)
   }
   //delete fc
   function deleteserviceByID() {
-    del(`/api/v1.0/services/${serviceDelete}`,localStorage.getItem("token")
+    del(`/api/v1.0/services/${serviceDelete}`, localStorage.getItem("token")
     )
       .then((res) => {
         if (res.status === 200) {
           window.location = "/company/service";
-
         }
       }).catch((err) => {
         console.log(err);
       });
+  }
+  function cancelServiceByID() {
+    setName("");
+    setDescription("");
+    setImage("");
+    setPrice("");
+    setCompanyID("");
+    setFieldID("");
+    setserviceID("");
+    setFieldSelectID(-1);
+    toggleEdit();
   }
   //Load service
 
@@ -363,6 +399,26 @@ console.log("field", FieldSelectID)
     setNumberPage(number);
     setUseListserviceShowPage(useListserviceShow.slice(number * 8 - 8, number * 8));
     setTotalNumberPage(Math.ceil(useListserviceShow.length / 8));
+  }
+  //sort
+  function sort(field, status, items) {
+    items.sort((a, b) => {
+      if (a[field] < b[field]) {
+        if (status) {
+          return -1;
+        } else {
+          return 1;
+        }
+      }
+      if (a[field] > b[field]) {
+        if (status) {
+          return 1;
+        } else {
+          return -1;
+        }
+      }
+      return 0;
+    });
   }
 
   const closeBtn = (x) => (
@@ -402,7 +458,7 @@ console.log("field", FieldSelectID)
         <Row>
           <Col md="12">
             <Card className="table">
-            <div className="header-form">
+              <div className="header-form">
                 <Row>
                   <div className="header-body-filter">
                     <Col md={7}>
@@ -446,19 +502,115 @@ console.log("field", FieldSelectID)
                     </Form>
                   </Col>
                   <Col md={9} align="right">
-                <Button variant="contained" className="add-major-custom" color="primary" onClick={ ()=> {setserviceModalCreate(true);}}>Add service</Button>
-              </Col>
+                    <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Add service</Button>
+                  </Col>
                 </Row>
               </div>
-                 
+
               <Card.Body className="table">
                 <Table className="table">
                   <thead>
                     <tr>
-                      <th className="description" >Service Name</th>
-                      <th className="description">Description</th>
-                      <th className="description">Price</th>
-                      <th className="description">Status</th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Id" && ascending) {
+                            setSortedField("Id");
+                            setAscending(false);
+                            sort("Id", false, useListserviceShowPage);
+                          } else {
+                            setSortedField("Id");
+                            setAscending(true);
+                            sort("Id", true, useListserviceShowPage);
+                          }
+                        }}
+                      >
+                        Service Name{" "}
+                        {sortedField === "Id" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Description" && ascending) {
+                            setSortedField("Description");
+                            setAscending(false);
+                            sort("Description", false, useListserviceShowPage);
+                          } else {
+                            setSortedField("Description");
+                            setAscending(true);
+                            sort("Description", true, useListserviceShowPage);
+                          }
+                        }}
+                      >
+                        Description{" "}
+                        {sortedField === "Description" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Price" && ascending) {
+                            setSortedField("Price");
+                            setAscending(false);
+                            sort("Price", false, useListserviceShowPage);
+                          } else {
+                            setSortedField("Price");
+                            setAscending(true);
+                            sort("Price", true, useListserviceShowPage);
+                          }
+                        }}
+                      >
+                        Price{" "}
+                        {sortedField === "Price" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Status" && ascending) {
+                            setSortedField("Status");
+                            setAscending(false);
+                            sort("Status", false, useListserviceShowPage);
+                          } else {
+                            setSortedField("Status");
+                            setAscending(true);
+                            sort("Status", true, useListserviceShowPage);
+                          }
+                        }}
+                      >
+                        Status{" "}
+                        {sortedField === "Status" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
                       <th className="description">Actions</th>
                     </tr>
                   </thead>
@@ -466,7 +618,7 @@ console.log("field", FieldSelectID)
                     {useListserviceShowPage.map((e, index) => {
                       return (
                         <tr key={index}>
-                         <TableCell>
+                          <TableCell>
                             <Grid container>
                               <Grid item lg={10}>
                                 <Typography className={classes.name}>{e.ServiceName}</Typography>
@@ -474,11 +626,11 @@ console.log("field", FieldSelectID)
                               </Grid>
                             </Grid>
                           </TableCell>
-                        
+
                           <td>
                             {e.Description}
                           </td>
-                     
+
                           <td>
                             {e.Price}
                           </td>
@@ -487,12 +639,12 @@ console.log("field", FieldSelectID)
                               className={classes.Status}
                               style={{
                                 backgroundColor:
-                                  ((e.Status === 1 && 'rgb(34, 176, 34)') 
-                                  ||
+                                  ((e.Status === 1 && 'rgb(34, 176, 34)')
+                                    ||
                                     (e.Status === 0 && 'rgb(50, 102, 100)')
-                                    || 
+                                    ||
                                     (e.Status === 2 && 'red')
-                                    || 
+                                    ||
                                     (e.Status === 3 && '#1f0202'))
                               }}
                             >{displayStateName(e.Status)}</Typography>
@@ -666,8 +818,6 @@ console.log("field", FieldSelectID)
       <Modal isOpen={modalserviceDelete} toggle={toggleserviceDelete}>
         <ModalHeader
           style={{ color: "#B22222" }}
-          close={closeBtn(toggleserviceDelete)}
-          toggle={toggleserviceDelete}
         >
           Are you sure?
         </ModalHeader>
@@ -682,144 +832,216 @@ console.log("field", FieldSelectID)
           >
             Delete
           </Button>{" "}
-          <Button color="secondary" onClick={toggleserviceDelete}>
+          <Button className="cancel-button" onClick={() => { toggleserviceDelete(); }}>
             Cancel
           </Button>
         </ModalFooter>
       </Modal>
-
-      <Modal isOpen={modalCreate} toggle={toggleCreate} centered>
+          
+      <Modal isOpen={modalCreate} toggle={toggleCreate} centered size="lg" >
         <ModalHeader
           style={{ color: "#B22222" }}
-          close={closeBtn(toggleCreate)}
-          toggle={toggleCreate}
         >
-          <ModalTitle>Do you want to create new service ?</ModalTitle>
+          <ModalTitle><h3>Do you want to create new service ?</h3></ModalTitle>
         </ModalHeader>
+
         <ModalBody>
           <Form>
-            <FormGroup className="mb-2">
-              <Form.Label>Company </Form.Label>
-              <Form.Control disabled type="text" placeholder="name" value={companyId}
-                onChange={e => setCompanyID(e.target.value)}
-              />
-            </FormGroup>
-            <Form.Label>Field </Form.Label>
-            <FormGroup className="mb-2">
-              <Dropdown
-                fluid
-                search
-                selection
-                value={fieldSelect}
-                onChange={handleOnchangeSelectedAsset}
-                options={listField}/>
-            </FormGroup>
+            <Grid
+              container
+              rowSpacing={4}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            >
+              <Grid item xs={6}>
+                <FormGroup className="mb-2">
+                  <Form.Label>Company </Form.Label>
+                  <Form.Control
+                    disabled
+                    type="text"
+                    placeholder="Name"
+                    value={companyId}
+                    onChange={(e) => setCompanyID(e.target.value)}
+                  />
+                </FormGroup>
 
-            <FormGroup className="mb-2">
-              <Form.Label>service name</Form.Label>
-              <Form.Control type="text" placeholder="Service name" value={name}
-                onChange={e => setName(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup className="mb-2">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Description"
-                as="textarea"
-                value={description}
-                onChange={e => setDescription(e.target.value)}
-                rows={3}
-              />
-            </FormGroup>
-            <FormGroup className="mb-2">
-              <Form.Label>Price</Form.Label>
-              <Form.Control type="number" placeholder="service name" value={price}
-                onChange={e => setPrice(e.target.value)}
-              />
-            </FormGroup>
+                <Form.Label>Field </Form.Label>
+                <FormGroup className="mb-2">
+                  <Dropdown
+                    fluid
+                    search
+                    selection
+                    value={fieldSelect}
+                    onChange={handleOnchangeSelectedAsset}
+                    options={listField}
+                  />
+                </FormGroup>
+
+                <FormGroup className="mb-2">
+                  <Form.Label>Service name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Service name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </FormGroup>
+
+                <FormGroup className="mb-2">
+                  <Form.Label>Price</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Price"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                  />
+                </FormGroup>
+
+                <FormGroup className="mb-2">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Description"
+                    as="textarea"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    rows={3}
+                  />
+                </FormGroup>
+              </Grid>
+
+              <Grid item xs={6}>
+                <Form.Group className="mb-2 ml-5">
+                  <Form.Label>Picture</Form.Label>
+                  <Form.Control type="file" onFileChange={picture}
+                    onChange={uploadImage}
+                  />
+                  {loading ? (
+                    <h3>Loading...</h3>
+                  ) : (
+                    <img src={picture} style={{ width: '220px' }} />
+                  )}
+                </Form.Group>
+              </Grid>
+            </Grid>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" onClick={() => { // handleServiceDetele();
-            handleSubmitCreate();
-            setserviceModalCreate(false);
-          }}
+          <Button
+            color="danger"
+            onClick={() => {
+              // handleServiceDetele();
+              handleSubmitCreate();
+              setserviceModalCreate(false);
+            }}
           >
             Save
           </Button>
-          <Button color="secondary" onClick={toggleCreate}>
+          <Button className="cancel-button" onClick={toggleCreate}>
             Cancel
           </Button>
         </ModalFooter>
       </Modal>
 
-
-      <Modal isOpen={modalEdit} toggle={toggleEdit} centered>
+      <Modal isOpen={modalEdit} toggle={toggleEdit} centered size="lg" >
         <ModalHeader
           style={{ color: "#B22222" }}
-          close={closeBtn(toggleEdit)}
-          toggle={toggleEdit}
         >
-          <ModalTitle>Do you want to edit service ?</ModalTitle>
+          <ModalTitle><h3>Do you want to edit service ?</h3></ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
-            <FormGroup className="mb-2">
-              <Form.Label>Company </Form.Label>
-              <Form.Control disabled type="text" placeholder="name" value={companyId}
-                onChange={e => setCompanyID(e.target.value)}
-              />
-            </FormGroup>
-            <Form.Label>Field </Form.Label>
-            <FormGroup className="mb-2">
-              <Dropdown
-                fluid
-                search
-                selection
-                value={fieldSelect}
-                onChange={handleOnchangeSelectedAsset}
-                options={listField}/>
-            </FormGroup>
-
-            <FormGroup className="mb-2">
-              <Form.Label>service name</Form.Label>
-              <Form.Control type="text" placeholder="Service name" value={name}
-                onChange={e => setName(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup className="mb-2">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Description"
-                as="textarea"
-                value={description}
-                onChange={e => setDescription(e.target.value)}
-                rows={3}
-              />
-            </FormGroup>
-            <FormGroup className="mb-2">
-              <Form.Label>Price</Form.Label>
-              <Form.Control type="number" placeholder="service name" value={price}
-                onChange={e => setPrice(e.target.value)}
-              />
-            </FormGroup>
+            <Grid
+              container
+              rowSpacing={4}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            >
+              <Grid item xs={6}>
+                <FormGroup className="mb-2">
+                  <Form.Label>Company </Form.Label>
+                  <Form.Control
+                    disabled
+                    type="text"
+                    placeholder="Name"
+                    value={companyId}
+                    onChange={(e) => setCompanyID(e.target.value)}
+                  />
+                </FormGroup>
+                <Form.Label>Field </Form.Label>
+                <FormGroup className="mb-2">
+                  <Dropdown
+                    fluid
+                    search
+                    selection
+                    value={fieldSelect}
+                    onChange={handleOnchangeSelectedAsset}
+                    options={listField}
+                  />
+                </FormGroup>
+                <FormGroup className="mb-2">
+                  <Form.Label>Service name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Service name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </FormGroup>
+                <FormGroup className="mb-2">
+                  <Form.Label>Price</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Price"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                  />
+                </FormGroup>
+                <FormGroup className="mb-2">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Description"
+                    as="textarea"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    rows={3}
+                  />
+                </FormGroup>
+              </Grid>
+              <Grid item xs={6}>
+                <Form.Group className="mb-2 ml-5">
+                  <Form.Label>Picture</Form.Label>
+                  <Form.Control type="file" onFileChange={picture}
+                    onChange={uploadImage}
+                  />
+                  {loading ? (
+                    <h3>Loading...</h3>
+                  ) : (
+                    <img src={picture} style={{ width: '220px' }} />
+                  )}
+                </Form.Group>
+              </Grid>
+            </Grid>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" onClick={() => { // handleServiceDetele();
-            handleEditSubmit();
-            setserviceModalEdit(false);
-          }}
+          <Button
+            color="danger"
+            onClick={() => {
+              // handleServiceDetele();
+              handleEditSubmit();
+              setserviceModalEdit(false);
+            }}
           >
-            Edit
+            Update
           </Button>
-          <Button color="secondary" onClick={toggleEdit}>
+          <Button className="cancel-button" onClick={() => { cancelServiceByID(); }}>
             Cancel
           </Button>
         </ModalFooter>
       </Modal>
+
+
+
       <Modal isOpen={modalStatus} toggle={toggleDetails}>
         <ModalHeader
           toggle={toggleDetails}
@@ -872,7 +1094,7 @@ console.log("field", FieldSelectID)
         </ModalBody>
       </Modal>
 
-     
+
 
     </>
   );

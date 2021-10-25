@@ -35,13 +35,15 @@ import {
     Grid,
     Typography,
 } from '@material-ui/core';
-import { del, put, get, getWithParams, getWithToken, getWithTokenParams, putWithToken, postWithToken } from "../../service/ReadAPI";
+import { del, put, get, getWithParams, getWithToken, getWithTokenParams, putWithToken, postWithToken, postWithTokenParams } from "../../service/ReadAPI";
 import { makeStyles } from '@material-ui/core/styles';
 import FilterState from "../Forms/FilterState"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faSearch,
+    faCaretDown,
+    faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
 export default function Repairman() {
 
@@ -56,11 +58,20 @@ export default function Repairman() {
     const [modalCreate, setRepairmanModalCreate] = useState(false);
     const toggleCreate = () => setRepairmanModalCreate(!modalCreate)
     //field edit
+
     const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [picture, setImage] = useState("");
-    const [price, setPrice] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [username, setUsername] = useState("");
+    const [avatar, setAvatar] = useState("");
+    const [status, setStatus] = useState("");
+    const [email, setEmail] = useState("");
     const [companyId, setCompanyID] = useState("");
+    const [repairmanID, setRepairmanID] = useState("");
+    //sort
+
+    const [sortedField, setSortedField] = useState("Id");
+    const [ascending, setAscending] = useState(true);
+
     //view modal
     const [modalStatus, setModalStatus] = useState(false);
     const toggleDetails = () => setModalStatus(!modalStatus);
@@ -94,16 +105,25 @@ export default function Repairman() {
 
     const [searchName, setSearchName] = useState("");
 
-    useEffect(() => {
-        getWithToken("/api/v1.0/companies", localStorage.getItem("token")).then(
-            (res) => {
-                if (res && res.status === 200) {
-                    setRepairmanListName(res.RepairmanName);
-                    // res.data;
-                }
-            });
-    }, []);
-    console.log("aaaaaa", RepairmanListName);
+    const [loading, setLoading] = useState(false)
+
+    const uploadImage = async e => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'reactSWD')
+        setLoading(true)
+        const res = await fetch(
+            ' https://api.cloudinary.com/v1_1/fpt-claudary/image/upload',
+            {
+                method: 'POST',
+                body: data
+            }
+        )
+        const file = await res.json()
+        setAvatar(file.secure_url)
+        setLoading(false)
+    }
 
     function displayRepairmanName(type) {
         const stateValue = {
@@ -127,25 +147,68 @@ export default function Repairman() {
                 }
             })
     }
-    async function handleEditSubmit2() {
-        await putWithToken(
-            `/api/v1.0/repairmans?repairmanId=${RepairmanApprove}`,
+    async function handleSubmitCreate(e) {
+        await postWithToken(
+            `/api/v1.0/repairmans`,
             {
-                id: "String",
-                RepairmanName: "String",
-                description: "String",
-                FieldId: "String",
-                RepairmanId: "String",
-                Price: 0,
-                ImageUrl: "String",
+                id: null,
+                avatar: avatar,
+                name: name,
+                phoneNumber: phoneNumber,
+                email: email,
+                username: username,
                 status: 0,
-            }, localStorage.getItem("token")
+                companyId: localStorage.getItem("IDCompany"),
+                uid: "string"
+            },
+            localStorage.getItem("token")
         )
             .then((res) => {
                 if (res.status === 200) {
-                    alert("Approved Successfully")
+                    window.location = "/company/repairman";
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+    function getRepairmanID(Id) {
+        getWithToken(`/api/v1.0/repairmans/${Id}`, localStorage.getItem("token")).then((res) => {
+            setRepairmanID(Id);
+            //   setCompanyID(CompanyId);
+            setName(res.data.name);
+            setEmail(res.data.email);
+            setUsername(res.data.username);
+            setPhoneNumber(res.data.phoneNumber);
+            setAvatar(res.data.avatar);
+            setStatus(res.data.status);
 
-                    window.location = "/admin/repairman";
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+    console.log(status)
+    console.log(name)
+
+    async function handleEditSubmit2(e) {
+        await putWithToken(
+            `/api/v1.0/repairmans`,
+            {
+                id: repairmanID,
+                avatar: avatar,
+                name: name,
+                phoneNumber: phoneNumber,
+                email: email,
+                username: username,
+                status: 0,
+                companyId: localStorage.getItem("IDCompany"),
+                uid: "string"
+            },
+            localStorage.getItem("token")
+        )
+            .then((res) => {
+                if (res.status === 200) {
+                    window.location = "/company/repairman";
                 }
             })
             .catch((err) => {
@@ -153,6 +216,7 @@ export default function Repairman() {
             });
     }
     console.log("lisstID", RepairmanList)
+    //load repairman
     useEffect(() => {
         getWithToken("/api/v1.0/repairmans", localStorage.getItem("token")).then(
             (res) => {
@@ -166,6 +230,7 @@ export default function Repairman() {
                 }
             });
     }, []);
+    // filter
     async function handleChooseState(e, id) {
         let newListState = [];
         if (id === -1) {
@@ -183,21 +248,23 @@ export default function Repairman() {
         setstateListFilter(newListState);
         getRepairmanList(newListState);
     }
-
     function getRepairmanList(stateList) {
         let params = {};
         if (stateList && stateList.length > 0)
             params["Status"] = stateList.reduce((f, s) => `${f},${s}`);
-        getWithTokenParams(`/api/v1.0/repairmans`, params, localStorage.getItem("token")).then((res) => {
-            var temp2 = res.data.filter((x) => x.state !== "Completed");
-            setRepairmanList(temp2);
-            setUseListRepairmanShow(temp2);
-            setUseListRepairmanShowPage(temp2.slice(numberPage * 8 - 8, numberPage * 8));
-            setTotalNumberPage(Math.ceil(temp2.length / 8));
-            setCount(count);
-        }).catch((err) => {
-            console.log(err);
-        });
+        if (sortedField !== null) {
+
+            getWithTokenParams(`/api/v1.0/repairmans`, params, localStorage.getItem("token")).then((res) => {
+                var temp2 = res.data.filter((x) => x.state !== "Completed");
+                setRepairmanList(temp2);
+                setUseListRepairmanShow(temp2);
+                setUseListRepairmanShowPage(temp2.slice(numberPage * 8 - 8, numberPage * 8));
+                setTotalNumberPage(Math.ceil(temp2.length / 8));
+                setCount(count);
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
     }
     const useStyles = makeStyles((theme) => ({
         table: {
@@ -242,7 +309,7 @@ export default function Repairman() {
             fontWeight: '700',
             width: '71px',
             fontSize: '0.76rem',
-            textAlign :'center',
+            textAlign: 'center',
             color: 'white',
             backgroundColor: 'green',
             borderRadius: 8,
@@ -277,6 +344,7 @@ export default function Repairman() {
             ).then((res) => {
                 var temp = res.data;
                 setRepairmanList(temp);
+                sort(sortedField, ascending, temp);
                 setNumberPage(1);
                 setUseListRepairmanShow(temp);
                 setUseListRepairmanShowPage(temp.slice(0, 8));
@@ -304,317 +372,419 @@ export default function Repairman() {
             X
         </button>
     );
+    //sort
+    function sort(field, status, items) {
+        items.sort((a, b) => {
+            if (a[field] < b[field]) {
+                if (status) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+            if (a[field] > b[field]) {
+                if (status) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+            return 0;
+        });
+    }
+    //cancel
+    function cancelRepairmanByID() {
+        setName("");
+        setPhoneNumber("");
+        setUsername("");
+        setAvatar("");
+        setCompanyID("");
+        setEmail("");
+        setStatus("");
+        setRepairmanID("");
+        toggleApprove();
+    }
+
     return (
         <>
-            
             <Container fluid>
-        <Row>
-          <Col md="12">
-            <Card className="table">
-              <div className="header-form">
                 <Row>
-                  <div className="header-body-filter">
-                    <Col md={7}>
-                      <Row className="fixed">
-                        <InputGroup>
-                          <InputGroupButtonDropdown
-                            addonType="append"
-                            isOpen={dropdownOpen}
-                            toggle={toggleDropDown}
-                            className="border border-gray-css"
-                          >
-                            <DropdownToggle className="dropdown-filter-css" caret> Filter&nbsp;</DropdownToggle>                        <DropdownMenu>
-                              <div className="fixed">
-                                <FilterState
-                                  list={filterState}
-                                  onChangeCheckBox={(e, id) => {
-                                    handleChooseState(e, id);
-                                  }}
-                                  key={filterState}
-                                />
-                              </div>
-                            </DropdownMenu>
-                          </InputGroupButtonDropdown>
-                        </InputGroup>
-                      </Row>
-                    </Col>
-                  </div>
-                  <Col md={2}>
-                    <Form
-                      onClick={(e) => {
-                        onSubmitSearch(e);
-                      }}
-                    >
-                      <InputGroup className="fixed">
-                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Search name..."></Input>
-                        <Button className="dropdown-filter-css" >
-                          <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
-                        </Button>
-                      </InputGroup>
-                    </Form>
-                  </Col>
-                  <Col md={9} align="right">
-                <Button variant="contained" className="add-major-custom" color="primary" onClick={ ()=> {setRepairmanModalCreate(true);}}>Add Repaiman</Button>
-              </Col>
-                </Row>
-              </div>
-                    <Card.Body className="table-full-width table-responsive px-0">
-                        <Table className="table-hover table-striped">
-                            <thead>
-                                <tr>
-                                    <th className="description">Image</th>
-                                    <th className="description">Worker</th>
-                                    <th className="description">Phone </th>
-                                    <th className="description">Email</th>
-                                    {/* <th className="description">Username</th> */}
-                                    <th className="description">Create Date</th>
-                                    <th className="description">FullName</th>
-                                    <th className="description">Company</th>
-                                    <th className="description">Status</th>
-                                    <th className="viewAll">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {useListRepairmanShowPage.map((e, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td onClick={() => {
-                                                setModalStatus(true);
-                                                setSelectRepairman(e);
-                                            }}>
-                                                <img src={e.Avatar} />
-                                            </td>
-                                            <TableCell>
-                                                <Grid container>
-
-                                                    <Grid item lg={10}>
-                                                        <Typography className={classes.name}>{e.Username}</Typography>
-                                                        <Typography color="textSecondary" variant="body2">{e.Id}
-                                                        </Typography>
-                                                    </Grid>
-                                                </Grid>
-                                            </TableCell>
-
-                                            <td onClick={() => {
-                                                setModalStatus(true);
-                                                setSelectRepairman(e);
-                                            }}>
-                                                {e.PhoneNumber}
-                                            </td>
-                                            <td onClick={() => {
-                                                setModalStatus(true);
-                                                setSelectRepairman(e);
-                                            }}>
-                                                {e.Email}
-                                            </td>
-                                            <td onClick={() => {
-                                                setModalStatus(true);
-                                                setSelectRepairman(e);
-                                            }}>{moment(e.CreateDate).format("MM-DD-YYYY")}
-                                            </td>
-                                            <td onClick={() => {
-                                                setModalStatus(true);
-                                                setSelectRepairman(e);
-                                            }}>
-                                                {e.Name}
-                                            </td>
-                                            <td onClick={() => {
-                                                setModalStatus(true);
-                                                setSelectRepairman(e);
-                                            }}>
-                                                {displayRepairmanName(e.CompanyId)}
-                                            </td>
-
-                                            <TableCell>
-                                                <Typography
-                                                    className={classes.Status}
-                                                    style={{
-                                                        backgroundColor:
-                                                            ((e.Status === 1 && 'rgb(34, 176, 34)')
-                                                                ||
-                                                                (e.Status === 3 && 'red') ||
-                                                                (e.Status === 0 && 'rgb(50, 102, 100)' ))
-
-                                                    }}
-                                                >{displayStateName(e.Status)}</Typography>
-                                            </TableCell>
-                                            <td>
-                                                <td className="td-actions">
-                                                    <OverlayTrigger
-                                                        onClick={(e) => e.preventDefault()}
-                                                        overlay={
-                                                            <Tooltip id="tooltip-960683717">
-                                                                Approved Repairman..
-                                                            </Tooltip>
-                                                        }
-                                                        placement="right"
+                    <Col md="12">
+                        <Card className="table">
+                            <div className="header-form">
+                                <Row>
+                                    <div className="header-body-filter">
+                                        <Col md={7}>
+                                            <Row className="fixed">
+                                                <InputGroup>
+                                                    <InputGroupButtonDropdown
+                                                        addonType="append"
+                                                        isOpen={dropdownOpen}
+                                                        toggle={toggleDropDown}
+                                                        className="border border-gray-css"
                                                     >
-                                                        <Button
-                                                            onClick={() => {
-                                                                setModalApprove(true);
-                                                                setRepairmanApprove(e.Id);
-                                                                // setSelectRepairman(e);
-                                                            }}
-                                                            className="btn-link btn-icon"
-                                                            type="button"
-                                                            variant="success"
-                                                        >
-                                                            <i className="fas fa-check"></i>
-                                                        </Button>
-                                                    </OverlayTrigger>
-                                                    <OverlayTrigger
-                                                        onClick={(e) => e.preventDefault()}
-                                                        overlay={
-                                                            <Tooltip id="tooltip-960683717">
-                                                                Delete Repairman..
-                                                            </Tooltip>
-                                                        }
-                                                        placement="right"
-                                                    >
-                                                        <Button
-                                                            onClick={() => {
-                                                                setRepairmanDelete(e.Id);
-                                                                setRepairmanModalDelete(true);
-                                                                // setSelectRepairman(e);
-                                                            }}
-                                                            className="btn-link btn-icon"
-                                                            type="button"
-                                                            variant="danger"
-                                                        >
-                                                            <i className="fas fa-times"></i>
-                                                        </Button>
-                                                    </OverlayTrigger>
-                                                </td>
-                                            </td>
+                                                        <DropdownToggle className="dropdown-filter-css" caret> Filter&nbsp;</DropdownToggle>                        <DropdownMenu>
+                                                            <div className="fixed">
+                                                                <FilterState
+                                                                    list={filterState}
+                                                                    onChangeCheckBox={(e, id) => {
+                                                                        handleChooseState(e, id);
+                                                                    }}
+                                                                    key={filterState}
+                                                                />
+                                                            </div>
+                                                        </DropdownMenu>
+                                                    </InputGroupButtonDropdown>
+                                                </InputGroup>
+                                            </Row>
+                                        </Col>
+                                    </div>
+                                    <Col md={2}>
+                                        <Form
+                                            onClick={(e) => {
+                                                onSubmitSearch(e);
+                                            }}
+                                        >
+                                            <InputGroup className="fixed">
+                                                <Input onChange={e => setSearchName(e.target.value)} placeholder="Search name..."></Input>
+                                                <Button className="dropdown-filter-css" >
+                                                    <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+                                                </Button>
+                                            </InputGroup>
+                                        </Form>
+                                    </Col>
+                                    <Col md={9} align="right">
+                                        <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setRepairmanModalCreate(true); }}>Add Repaiman</Button>
+                                    </Col>
+                                </Row>
+                            </div>
+                            <Card.Body className="table-full-width table-responsive px-0">
+                                <Table className="table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                className="description"
+                                                onClick={() => {
+                                                    if (sortedField === "Username" && ascending) {
+                                                        setSortedField("Username");
+                                                        setAscending(false);
+                                                        sort("Username", false, useListRepairmanShowPage);
+                                                    } else {
+                                                        setSortedField("Username");
+                                                        setAscending(true);
+                                                        sort("Username", true, useListRepairmanShowPage);
+                                                    }
+                                                }}
+                                            >
+                                                Image{" "}
+                                                {sortedField === "Username" ? (
+                                                    ascending === true ? (
+                                                        <FontAwesomeIcon icon={faCaretUp} />
+                                                    ) : (
+                                                        <FontAwesomeIcon icon={faCaretDown} />
+                                                    )
+                                                ) : (
+                                                    <FontAwesomeIcon icon={faCaretDown} />
+                                                )}
+                                            </th>
+                                            <th
+                                                className="description"
+                                                onClick={() => {
+                                                    if (sortedField === "Id" && ascending) {
+                                                        setSortedField("Id");
+                                                        setAscending(false);
+                                                        sort("Id", false, useListRepairmanShowPage);
+                                                    } else {
+                                                        setSortedField("Id");
+                                                        setAscending(true);
+                                                        sort("Id", true, useListRepairmanShowPage);
+                                                    }
+                                                }}
+                                            >
+                                                Repairman{" "}
+                                                {sortedField === "Id" ? (
+                                                    ascending === true ? (
+                                                        <FontAwesomeIcon icon={faCaretUp} />
+                                                    ) : (
+                                                        <FontAwesomeIcon icon={faCaretDown} />
+                                                    )
+                                                ) : (
+                                                    <FontAwesomeIcon icon={faCaretDown} />
+                                                )}
+                                            </th>
+                                            <th className="description">Phone </th>
+                                            <th
+                                                className="description"
+                                                onClick={() => {
+                                                    if (sortedField === "Email" && ascending) {
+                                                        setSortedField("Email");
+                                                        setAscending(false);
+                                                        sort("Email", false, useListRepairmanShowPage);
+                                                    } else {
+                                                        setSortedField("Email");
+                                                        setAscending(true);
+                                                        sort("Email", true, useListRepairmanShowPage);
+                                                    }
+                                                }}
+                                            >
+                                                Email{" "}
+                                                {sortedField === "Email" ? (
+                                                    ascending === true ? (
+                                                        <FontAwesomeIcon icon={faCaretUp} />
+                                                    ) : (
+                                                        <FontAwesomeIcon icon={faCaretDown} />
+                                                    )
+                                                ) : (
+                                                    <FontAwesomeIcon icon={faCaretDown} />
+                                                )}
+                                            </th>
+
+                                            {/* <th className="description">Username</th> */}
+                                            <th className="description">Create Date</th>
+                                            <th
+                                                className="description"
+                                                onClick={() => {
+                                                    if (sortedField === "Name" && ascending) {
+                                                        setSortedField("Name");
+                                                        setAscending(false);
+                                                        sort("Name", false, useListRepairmanShowPage);
+                                                    } else {
+                                                        setSortedField("Name");
+                                                        setAscending(true);
+                                                        sort("Name", true, useListRepairmanShowPage);
+                                                    }
+                                                }}
+                                            >
+                                                Full Name{" "}
+                                                {sortedField === "Name" ? (
+                                                    ascending === true ? (
+                                                        <FontAwesomeIcon icon={faCaretUp} />
+                                                    ) : (
+                                                        <FontAwesomeIcon icon={faCaretDown} />
+                                                    )
+                                                ) : (
+                                                    <FontAwesomeIcon icon={faCaretDown} />
+                                                )}
+                                            </th>
+                                            <th className="description">Company</th>
+                                            <th className="description">Status</th>
+                                            <th className="viewAll">Actions</th>
                                         </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </Table>
-                        <Row>
-                            <Col md={6}></Col>
+                                    </thead>
+                                    <tbody>
+                                        {useListRepairmanShowPage.map((e, index) => {
+                                            return (
+                                                <tr key={index}>
+                                                    <td onClick={() => {
+                                                        setModalStatus(true);
+                                                        setSelectRepairman(e);
+                                                    }}>
+                                                        <img className="avatar-repairman" src={e.Avatar} />
+                                                    </td>
+                                                    <TableCell>
+                                                        <Grid container>
 
-                            <Pagination
-                                aria-label="Page navigation example"
-                                className="page-right"
-                            >
-                                <PaginationItem disabled={numberPage === 1}>
-                                    <PaginationLink
-                                        className="page"
-                                        previous
-                                        //disable={numberPage === 1 ? "true" : "false"}
+                                                            <Grid item lg={10}>
+                                                                <Typography className={classes.name}>{e.Username}</Typography>
+                                                                <Typography color="textSecondary" variant="body2">{e.Id}
+                                                                </Typography>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </TableCell>
 
-                                        onClick={() => {
-                                            if (numberPage - 1 > 0) {
-                                                onClickPage(numberPage - 1);
-                                            }
-                                        }}
+                                                    <td onClick={() => {
+                                                        setModalStatus(true);
+                                                        setSelectRepairman(e);
+                                                    }}>
+                                                        {e.PhoneNumber}
+                                                    </td>
+                                                    <td onClick={() => {
+                                                        setModalStatus(true);
+                                                        setSelectRepairman(e);
+                                                    }}>
+                                                        {e.Email}
+                                                    </td>
+                                                    <td onClick={() => {
+                                                        setModalStatus(true);
+                                                        setSelectRepairman(e);
+                                                    }}>{moment(e.CreateDate).format("MM-DD-YYYY")}
+                                                    </td>
+                                                    <td onClick={() => {
+                                                        setModalStatus(true);
+                                                        setSelectRepairman(e);
+                                                    }}>
+                                                        {e.Name}
+                                                    </td>
+                                                    <td onClick={() => {
+                                                        setModalStatus(true);
+                                                        setSelectRepairman(e);
+                                                    }}>
+                                                        {displayRepairmanName(e.CompanyId)}
+                                                    </td>
+
+                                                    <TableCell>
+                                                        <Typography
+                                                            className={classes.Status}
+                                                            style={{
+                                                                backgroundColor:
+                                                                    ((e.Status === 1 && 'rgb(34, 176, 34)')
+                                                                        ||
+                                                                        (e.Status === 3 && 'red') ||
+                                                                        (e.Status === 0 && 'rgb(50, 102, 100)'))
+
+                                                            }}
+                                                        >{displayStateName(e.Status)}</Typography>
+                                                    </TableCell>
+                                                    <td>
+                                                        <td className="td-actions">
+                                                            <OverlayTrigger
+                                                                onClick={(e) => e.preventDefault()}
+                                                                overlay={
+                                                                    <Tooltip id="tooltip-960683717">
+                                                                        Approved Repairman..
+                                                                    </Tooltip>
+                                                                }
+                                                                placement="right"
+                                                            >
+                                                                <Button
+                                                                    onClick={() => {
+                                                                        setModalApprove(true);
+                                                                        getRepairmanID(e.Id)                                                                // setSelectRepairman(e);
+                                                                    }}
+                                                                    className="btn-link btn-icon"
+                                                                    type="button"
+                                                                    variant="success"
+                                                                >
+                                                                    <i className="fas fa-check"></i>
+                                                                </Button>
+                                                            </OverlayTrigger>
+                                                            <OverlayTrigger
+                                                                onClick={(e) => e.preventDefault()}
+                                                                overlay={
+                                                                    <Tooltip id="tooltip-960683717">
+                                                                        Delete Repairman..
+                                                                    </Tooltip>
+                                                                }
+                                                                placement="right"
+                                                            >
+                                                                <Button
+                                                                    onClick={() => {
+                                                                        setRepairmanDelete(e.Id);
+                                                                        setRepairmanModalDelete(true);
+                                                                        // setSelectRepairman(e);
+                                                                    }}
+                                                                    className="btn-link btn-icon"
+                                                                    type="button"
+                                                                    variant="danger"
+                                                                >
+                                                                    <i className="fas fa-times"></i>
+                                                                </Button>
+                                                            </OverlayTrigger>
+                                                        </td>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </Table>
+                                <Row>
+                                    <Col md={6}></Col>
+
+                                    <Pagination
+                                        aria-label="Page navigation example"
+                                        className="page-right"
                                     >
-                                        Previous
-                                    </PaginationLink>
-                                </PaginationItem>
-                                {numberPage - 1 > 0 ? (
-                                    <PaginationItem>
-                                        <PaginationLink
-                                            className="page"
-                                            onClick={() => {
-                                                onClickPage(numberPage - 1);
-                                            }}
-                                        >
-                                            {numberPage - 1}
-                                        </PaginationLink>
-                                    </PaginationItem>
-                                ) : (
-                                    ""
-                                )}
-                                <PaginationItem active>
-                                    <PaginationLink className="page-active">
-                                        {numberPage}
-                                    </PaginationLink>
-                                </PaginationItem>
-                                {numberPage + 1 <= totalNumberPage ? (
-                                    <PaginationItem>
-                                        <PaginationLink
-                                            className="page"
-                                            onClick={() => {
-                                                onClickPage(numberPage + 1);
-                                            }}
-                                        >
-                                            {numberPage + 1}
-                                        </PaginationLink>
-                                    </PaginationItem>
-                                ) : (
-                                    ""
-                                )}
-                                {numberPage + 2 <= totalNumberPage ? (
-                                    <PaginationItem>
-                                        <PaginationLink
-                                            className="page"
-                                            onClick={() => {
-                                                onClickPage(numberPage + 2);
-                                            }}
-                                        >
-                                            {numberPage + 2}
-                                        </PaginationLink>
-                                    </PaginationItem>
-                                ) : (
-                                    ""
-                                )}
+                                        <PaginationItem disabled={numberPage === 1}>
+                                            <PaginationLink
+                                                className="page"
+                                                previous
+                                                //disable={numberPage === 1 ? "true" : "false"}
 
-                                <PaginationItem disabled={numberPage === totalNumberPage}>
-                                    <PaginationLink
-                                        className="page"
-                                        next
-                                        //disable={numberPage === totalNumberPage ? true : false}
-                                        onClick={() => {
-                                            if (numberPage + 1 <= totalNumberPage) {
-                                                onClickPage(numberPage + 1);
-                                            }
-                                        }}
-                                    >
-                                        Next
-                                    </PaginationLink>
-                                </PaginationItem>
-                            </Pagination>
+                                                onClick={() => {
+                                                    if (numberPage - 1 > 0) {
+                                                        onClickPage(numberPage - 1);
+                                                    }
+                                                }}
+                                            >
+                                                Previous
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                        {numberPage - 1 > 0 ? (
+                                            <PaginationItem>
+                                                <PaginationLink
+                                                    className="page"
+                                                    onClick={() => {
+                                                        onClickPage(numberPage - 1);
+                                                    }}
+                                                >
+                                                    {numberPage - 1}
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                        ) : (
+                                            ""
+                                        )}
+                                        <PaginationItem active>
+                                            <PaginationLink className="page-active">
+                                                {numberPage}
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                        {numberPage + 1 <= totalNumberPage ? (
+                                            <PaginationItem>
+                                                <PaginationLink
+                                                    className="page"
+                                                    onClick={() => {
+                                                        onClickPage(numberPage + 1);
+                                                    }}
+                                                >
+                                                    {numberPage + 1}
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                        ) : (
+                                            ""
+                                        )}
+                                        {numberPage + 2 <= totalNumberPage ? (
+                                            <PaginationItem>
+                                                <PaginationLink
+                                                    className="page"
+                                                    onClick={() => {
+                                                        onClickPage(numberPage + 2);
+                                                    }}
+                                                >
+                                                    {numberPage + 2}
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                        ) : (
+                                            ""
+                                        )}
+
+                                        <PaginationItem disabled={numberPage === totalNumberPage}>
+                                            <PaginationLink
+                                                className="page"
+                                                next
+                                                //disable={numberPage === totalNumberPage ? true : false}
+                                                onClick={() => {
+                                                    if (numberPage + 1 <= totalNumberPage) {
+                                                        onClickPage(numberPage + 1);
+                                                    }
+                                                }}
+                                            >
+                                                Next
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                    </Pagination>
+                                </Row>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+
                 </Row>
-              </Card.Body>
-            </Card>
-          </Col>
+            </Container>
 
-        </Row>
-      </Container>
 
-            <Modal isOpen={modalApprove} toggle={toggleApprove}>
-                <ModalHeader
-                    style={{ color: "#B22222" }}
-                    close={closeBtn(toggleApprove)}
-                    toggle={toggleApprove}
-                >
-                    Are you sure?
-                </ModalHeader>
-                <ModalBody>Do you want to Appprove this repairman</ModalBody>
-                <ModalFooter>
-                    <Button
-                        color="danger"
-                        onClick={() => {
-                            // deleteMajorFieldsByID();
-                            handleEditSubmit2();
-                            setModalApprove(false);
-                        }}
-                    >
-                        Approved
-                    </Button>{" "}
-                    <Button color="secondary" onClick={toggleApprove}>
-                        Cancel
-                    </Button>
-                </ModalFooter>
-            </Modal>
 
             <Modal isOpen={modalDelete} toggle={toggleDelete}>
                 <ModalHeader
                     style={{ color: "#B22222" }}
-                    close={closeBtn(toggleDelete)}
-                    toggle={toggleDelete}
                 >
                     Are you sure?
                 </ModalHeader>
@@ -629,7 +799,7 @@ export default function Repairman() {
                     >
                         Delete
                     </Button>{" "}
-                    <Button color="secondary" onClick={toggleDelete}>
+                    <Button className="cancel-button" onClick={toggleDelete}>
                         Cancel
                     </Button>
                 </ModalFooter>
@@ -648,7 +818,7 @@ export default function Repairman() {
 
                     <Row>
                         <Col></Col>
-                        <Col className="view-item-size-main" md={3}>  FullName:</Col>
+                        <Col className="view-item-size-main" md={3}>  Name:</Col>
                         <Col className="view-item-size" md={8}>
                             {SelectRepairman !== undefined ? SelectRepairman.Name : ""}
                             {/* {setSelectRepairman !== undefined ? displayMajorName(SelectRepairman.MajorId) : ""} */}
@@ -666,12 +836,8 @@ export default function Repairman() {
                         <Col className="view-item-size-main" md={4}> Created Date:</Col>
                         <Col className="view-item-size" md={7}>
                             {SelectRepairman !== undefined ? SelectRepairman.CreateDate : ""}
-
-
-
                         </Col>
                     </Row>
-
                     <Row>
                         <Col></Col>
                         <Col className="view-item-size-main" md={3}> Phone:</Col>
@@ -679,72 +845,147 @@ export default function Repairman() {
                     </Row>
                 </ModalBody>
             </Modal>
-            <Modal isOpen={modalCreate} toggle={toggleCreate} centered>
-        <ModalHeader
-          style={{ color: "#B22222" }}
-          close={closeBtn(toggleCreate)}
-          toggle={toggleCreate}
-        >
-          <ModalTitle>Do you want to create new service ?</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
-          <Form>
-            <FormGroup className="mb-2">
-              <Form.Label>Company </Form.Label>
-              <Form.Control disabled type="text" placeholder="name" value={companyId}
-                onChange={e => setCompanyID(e.target.value)}
-              />
-            </FormGroup>
-            <Form.Label>Field </Form.Label>
-            <FormGroup className="mb-2">
-              <Dropdown
-                fluid
-                search
-                selection
-                // value={fieldSelect}
-                // onChange={handleOnchangeSelectedAsset}
-                // options={listField}/>
-                />
-            </FormGroup>
 
-            <FormGroup className="mb-2">
-              <Form.Label>service name</Form.Label>
-              <Form.Control type="text" placeholder="Service name" value={name}
-                onChange={e => setName(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup className="mb-2">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Description"
-                as="textarea"
-                value={description}
-                onChange={e => setDescription(e.target.value)}
-                rows={3}
-              />
-            </FormGroup>
-            <FormGroup className="mb-2">
-              <Form.Label>Price</Form.Label>
-              <Form.Control type="number" placeholder="service name" value={price}
-                onChange={e => setPrice(e.target.value)}
-              />
-            </FormGroup>
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="danger" onClick={() => { // handleServiceDetele();
-            handleSubmitCreate();
-            setRepairmanModalCreate(false);
-          }}
-          >
-            Save
-          </Button>
-          <Button color="secondary" onClick={toggleCreate}>
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
+
+            <Modal isOpen={modalApprove} toggle={toggleApprove} centered size="lg" >
+                <ModalHeader
+                    style={{ color: "#B22222" }}>
+                    <ModalTitle>Do you want to update repairman ?</ModalTitle>
+                </ModalHeader>
+                <ModalBody>
+                    <Form>
+                        <Grid
+                            container
+                            rowSpacing={4}
+                            columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                            <Grid item xs={6}>
+                                <FormGroup className="mb-2">
+                                    <Form.Label>Repairman name</Form.Label>
+                                    <Form.Control type="text" placeholder="Repairman name" value={name}
+                                        onChange={e => setName(e.target.value)}
+                                    />
+                                </FormGroup>
+                                <FormGroup className="mb-2">
+                                    <Form.Label>Phone number</Form.Label>
+                                    <Form.Control type="text" placeholder="Phone" value={phoneNumber}
+                                        onChange={e => setPhoneNumber(e.target.value)}
+                                    />
+                                </FormGroup>
+                                <FormGroup className="mb-2">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control type="text" placeholder="Service name" value={email}
+                                        onChange={e => setEmail(e.target.value)}
+                                    />
+                                </FormGroup>
+                                <FormGroup className="mb-2">
+                                    <Form.Label>Username</Form.Label>
+                                    <Form.Control type="text" placeholder="Username" value={username}
+                                        onChange={e => setUsername(e.target.value)}
+                                    />
+                                </FormGroup>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Form.Group className="mb-2 ml-5">
+                                    <Form.Label>Avatar</Form.Label>
+                                    <Form.Control type="file" onFileChange={avatar}
+                                        onChange={uploadImage}
+                                    />
+                                    {loading ? (
+                                        <h3>Loading...</h3>
+                                    ) : (
+                                        <img src={avatar} style={{ width: '220px' }} />
+                                    )}
+                                </Form.Group>
+                            </Grid>
+                        </Grid>
+                    </Form>
+                </ModalBody>
+                <ModalFooter>
+                    <Button
+                        color="danger"
+                        onClick={() => {
+                            // handleServiceDetele();
+                            handleEditSubmit2();
+                            setModalApprove(false);
+                        }}
+                    >
+                        Update
+                    </Button>
+                    <Button className="cancel-button" onClick={() => { cancelRepairmanByID(); }}>
+                        Cancel
+                    </Button>
+                </ModalFooter>
+            </Modal>
+            <Modal isOpen={modalCreate} toggle={toggleCreate} centered size="lg" >
+                <ModalHeader
+                    style={{ color: "#B22222" }}>
+                    <ModalTitle>Do you want to create new repairman ?</ModalTitle>
+                </ModalHeader>
+                <ModalBody>
+                    <Form>
+                        <Grid
+                            container
+                            rowSpacing={4}
+                            columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                            <Grid item xs={6}>
+                                <FormGroup className="mb-2">
+                                    <Form.Label>Repairman name</Form.Label>
+                                    <Form.Control type="text" placeholder="Repairman name" value={name}
+                                        onChange={e => setName(e.target.value)}
+                                    />
+                                </FormGroup>
+                                <FormGroup className="mb-2">
+                                    <Form.Label>Phone number</Form.Label>
+                                    <Form.Control type="text" placeholder="Phone" value={phoneNumber}
+                                        onChange={e => setPhoneNumber(e.target.value)}
+                                    />
+                                </FormGroup>
+                                <FormGroup className="mb-2">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control type="text" placeholder="Service name" value={email}
+                                        onChange={e => setEmail(e.target.value)}
+                                    />
+                                </FormGroup>
+                                <FormGroup className="mb-2">
+                                    <Form.Label>Username</Form.Label>
+                                    <Form.Control type="text" placeholder="Username" value={username}
+                                        onChange={e => setUsername(e.target.value)}
+                                    />
+                                </FormGroup>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Form.Group className="mb-2 ml-5">
+                                    <Form.Label>Avatar</Form.Label>
+                                    <Form.Control type="file" onFileChange={avatar}
+                                        onChange={uploadImage}
+                                    />
+                                    {loading ? (
+                                        <h3>Loading...</h3>
+                                    ) : (
+                                        <img src={avatar} style={{ width: '300px' }} />
+                                    )}
+                                </Form.Group>
+                            </Grid>
+                        </Grid>
+                    </Form>
+                </ModalBody>
+                <ModalFooter>
+                    <Button
+                        color="danger"
+                        onClick={() => {
+                            // handleServiceDetele();
+                            handleSubmitCreate();
+                            setRepairmanModalCreate(false);
+                        }}
+                    >
+                        Save
+                    </Button>
+                    <Button className="cancel-button" onClick={() => { toggleCreate(); }}>
+                        Cancel
+                    </Button>
+                </ModalFooter>
+            </Modal>
+
         </>
     );
 }
