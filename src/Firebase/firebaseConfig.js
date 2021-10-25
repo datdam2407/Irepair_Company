@@ -38,6 +38,7 @@ const signInWithGoogle = async () => {
     localStorage.setItem("photo", res.user.photoURL);// token Api
     console.log("responedata", res);
  console.log("email ne", t.data.email)
+ console.log("IDCompany", t.data.id)
     // localStorage.setItem("name", res.name);
     // localStorage.setItem("email", t.data.email);
   } catch (err) {

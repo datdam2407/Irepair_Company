@@ -57,16 +57,10 @@ import {
   Grid,
   Typography,
 } from '@material-ui/core';
-// import FormDialog from './DialogService';
 function ManageSevice() {
   //delete modal  
-  const [ServiceDelete, setServiceDelete] = useState(null);
   const [modalDelete, setServiceModalDelete] = useState(false);
   const toggleDelete = () => setServiceModalDelete(!modalDelete);
-  //edit modal  
-  const [ServiceEdit, setServiceEdit] = useState(null);
-  // const [modalEdit, setServiceModalEdit] = useState(false);
-  // const toggleEdit = () => setServiceModalEdit(!modalEdit);
 
   //modal create
   const [modalCreate, setserviceModalCreate] = useState(false);
@@ -91,7 +85,6 @@ function ManageSevice() {
   const [useListserviceShow, setUseListserviceShow] = useState([]);
   const [useListserviceShowPage, setUseListserviceShowPage] = useState([]);
   const [serviceList, setserviceList] = useState([]);
-  const [serviceListID, setserviceListID] = useState([]);
   const [numberPage, setNumberPage] = useState(1);
   const [totalNumberPage, setTotalNumberPage] = useState(1);
   const [count, setCount] = useState(1);
@@ -124,6 +117,9 @@ function ManageSevice() {
   const [stateListFilter, setstateListFilter] = useState([]);
   const toggleDropDown = () => setDropdownOpen(!dropdownOpen);
   const toggleDropDown1 = () => setDropdownOpen1(!dropdownOpen1);
+
+  //search name
+  const [searchName, setSearchName] = useState("");
 
   const useStyles = makeStyles((theme) => ({
     table: {
@@ -175,6 +171,7 @@ function ManageSevice() {
   }));
   
   const classes = useStyles();
+  //filter
   async function handleChooseState(e, id) {
     let newListState = [];
     if (id === -1) {
@@ -188,11 +185,29 @@ function ManageSevice() {
       if (e.target.checked) newListState = [...stateListFilter, id];
       else newListState = stateListFilter.filter((item) => item !== id);
     }
-    //console.log(newListState);
     setstateListFilter(newListState);
     getserviceList(newListState);
   }
+  useEffect(() => {
+    getserviceList();
+  }, []);
+  function getserviceList(stateList) {
+    let params = {};
+    if (stateList && stateList.length > 0)
+      params["Status"] = stateList.reduce((f, s) => `${f},${s}`);
+    getWithTokenParams(`/api/v1.0/services`, params,localStorage.getItem("token")).then((res) => {
+      var temp = res.data.filter((x) => x.state !== "Completed");
+      setserviceList(temp);
+      setUseListserviceShow(temp);
+      setUseListserviceShowPage(temp.slice(numberPage * 8 - 8, numberPage * 8));
+      setTotalNumberPage(Math.ceil(temp.length / 8));
+      setCount(count);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
 
+  //major fields
   useEffect(() => {
     let params = {};
     let currentField = {};
@@ -227,45 +242,11 @@ function ManageSevice() {
   }, []);
 
 
-  const initialValue = { name: "", description: "", imageUrl: "", status: "1" }
-  const [searchName, setSearchName] = useState("");
 
-  const [gridApi, setGridApi] = useState(null)
-  const [tableData, setTableData] = useState(null)
-  const [open, setOpen] = React.useState(false);
-  const [formData, setFormData] = useState(initialValue)
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
-  const handleClose = () => {
-    setOpen(false);
-    setFormData(initialValue)
-  };
-  const url = "https://ec2-3-1-222-201.ap-southeast-1.compute.amazonaws.com/api/v1.0/services"
-  const columnDefs = [
-    { headerName: "ID", field: "Id", },
-    { headerName: "ServiceName", field: "servicename", },
-    { headerName: "Description", field: "description", },
-    { headerName: "Price", field: "price", },
-    { headerName: "FieldId", field: "fieldid", },
-    { headerName: "CompanyId", field: "companyid", },
-    { headerName: "ImageUrl", field: "imageUrl" },
-    {
-      headerName: "Actions", field: "Id", cellRendererFramework: (params) => <div>
-        <Button variant="outlined" color="primary" onClick={() => handleUpdate(params.data)}>Update</Button>
-        <Button variant="outlined" color="secondary" onClick={() => handleDelete(params.value)}>Delete</Button>
-      </div>
-    }
-  ]
-  const onChange = (e) => {
-    const { value, id } = e.target
-    // console.log(value,id)
-    setFormData({ ...formData, [id]: value })
-  }
-  const onGridReady = (params) => {
-    setGridApi(params)
-  }
+
+ 
+ 
 console.log("field", FieldSelectID)
   // update
   async function handleEditSubmit(e) {
@@ -317,13 +298,6 @@ console.log("field", FieldSelectID)
       });
   }
 
-  // setting update row data to form data and opening pop up window
-  const handleUpdate = (oldData) => {
-    setFormData(oldData)
-    console.log(oldData)
-    handleClickOpen()
-  }
- 
   function onSubmitSearch(e) {
     e.preventDefault();
     if (searchName !== "") {
@@ -353,7 +327,6 @@ console.log("field", FieldSelectID)
   }
 
   function handleOnchangeSelectedAsset(e, value) {
-    //console.log(e.target,value);
     setfieldSelect(e.target.fieldId);
     setFieldSelectID(value.value);
   }
@@ -370,8 +343,6 @@ console.log("field", FieldSelectID)
       console.log(err);
     });
   }
-
-  // /api/v1.0/service/{id}
   //delete fc
   function deleteserviceByID() {
     del(`/api/v1.0/services/${serviceDelete}`,localStorage.getItem("token")
@@ -386,24 +357,7 @@ console.log("field", FieldSelectID)
       });
   }
   //Load service
-  useEffect(() => {
-    getserviceList();
-  }, []);
-  function getserviceList(stateList) {
-    let params = {};
-    if (stateList && stateList.length > 0)
-      params["Status"] = stateList.reduce((f, s) => `${f},${s}`);
-    getWithTokenParams(`/api/v1.0/services`, params,localStorage.getItem("token")).then((res) => {
-      var temp = res.data.filter((x) => x.state !== "Completed");
-      setserviceList(temp);
-      setUseListserviceShow(temp);
-      setUseListserviceShowPage(temp.slice(numberPage * 8 - 8, numberPage * 8));
-      setTotalNumberPage(Math.ceil(temp.length / 8));
-      setCount(count);
-    }).catch((err) => {
-      console.log(err);
-    });
-  }
+
   //Paging
   function onClickPage(number) {
     setNumberPage(number);
@@ -501,8 +455,6 @@ console.log("field", FieldSelectID)
                 <Table className="table">
                   <thead>
                     <tr>
-                      {/* <th className="text-left-topic">Topic</th> */}
-                      {/* <th className="text-left-topic">FieldId</th> */}
                       <th className="description" >Service Name</th>
                       <th className="description">Description</th>
                       <th className="description">Price</th>
@@ -516,15 +468,9 @@ console.log("field", FieldSelectID)
                         <tr key={index}>
                          <TableCell>
                             <Grid container>
-                              {/* <Grid item lg={2}>
-                                <Avatar src={e.ImageUrl} className={classes.avatar}>
-                                <img src="string"/>
-                                </Avatar>
-                              </Grid> */}
                               <Grid item lg={10}>
                                 <Typography className={classes.name}>{e.ServiceName}</Typography>
                                 <Typography color="textSecondary" variant="body2">{e.Id}</Typography>
-                                {/* <Typography color="textSecondary" variant="body2">{e.Id}</Typography> */}
                               </Grid>
                             </Grid>
                           </TableCell>
@@ -715,11 +661,8 @@ console.log("field", FieldSelectID)
               </Card.Body>
             </Card>
           </Col>
-
         </Row>
       </Container>
-
-
       <Modal isOpen={modalserviceDelete} toggle={toggleserviceDelete}>
         <ModalHeader
           style={{ color: "#B22222" }}
@@ -795,12 +738,6 @@ console.log("field", FieldSelectID)
                 onChange={e => setPrice(e.target.value)}
               />
             </FormGroup>
-            {/* <FormGroup className="mb-3">
-              <Form.Label>Picture</Form.Label>
-              <Form.Control type="text" value={picture}
-                onChange={e => setImage(e.target.value)}
-              />
-            </FormGroup> */}
           </Form>
         </ModalBody>
         <ModalFooter>
@@ -868,12 +805,6 @@ console.log("field", FieldSelectID)
                 onChange={e => setPrice(e.target.value)}
               />
             </FormGroup>
-            {/* <FormGroup className="mb-3">
-              <Form.Label>Picture</Form.Label>
-              <Form.Control type="text" value={picture}
-                onChange={e => setImage(e.target.value)}
-              />
-            </FormGroup> */}
           </Form>
         </ModalBody>
         <ModalFooter>
