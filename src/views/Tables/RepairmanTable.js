@@ -141,8 +141,8 @@ export default function Repairman() {
                     setCompanyList(res.data.CompanyId)
                     setCustomerList(temp);
                     setUseListCustomerShow(temp);
-                    setUseListCustomerShowPage(temp.slice(numberPage * 10 - 10, numberPage * 10));
-                    setTotalNumberPage(Math.ceil(temp.length / 10));
+                    setUseListCustomerShowPage(temp.slice(numberPage * 100 - 100, numberPage * 100));
+                    setTotalNumberPage(Math.ceil(temp.length / 100));
                 }
             });
     }, []);
@@ -203,8 +203,8 @@ export default function Repairman() {
     //Paging
     function onClickPage(number) {
         setNumberPage(number);
-        setUseListCustomerShowPage(useListCustomerShow.slice(number * 10 - 10, number * 10));
-        setTotalNumberPage(Math.ceil(useListCustomerShow.length / 10));
+        setUseListCustomerShowPage(useListCustomerShow.slice(number * 100 - 100, number * 100));
+        setTotalNumberPage(Math.ceil(useListCustomerShow.length / 100));
     }
     // custom state
     function displayStateName(type) {
@@ -276,7 +276,7 @@ export default function Repairman() {
                         <Table className="table-hover table-striped">
                             <thead>
                                 <tr>
-                                    <th className="description">Ảnh</th>
+                                    {/* <th className="description">Ảnh</th> */}
                                     <th className="description">Thợ sửa chữa</th>
                                     <th className="description">Số điện thoại </th>
                                     <th className="description">Email</th>
@@ -287,8 +287,7 @@ export default function Repairman() {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
-                                    </td>
+                               
                                     <td>
                                         Đỗ Thành Thái
                                     </td>
@@ -319,8 +318,7 @@ export default function Repairman() {
                                         </TableCell>
                                 </tr>
                                 <tr>
-                                    <td>
-                                    </td>
+                               
                                     <td>
                                         Trần Văn Thái
                                     </td>
@@ -351,8 +349,7 @@ export default function Repairman() {
                                         </TableCell>
                                 </tr>
                                 <tr>
-                                    <td>
-                                    </td>
+                               
                                     <td>
                                         Phạm Hữu Nghĩa
                                     </td>
@@ -384,8 +381,7 @@ export default function Repairman() {
                                         </TableCell>
                                 </tr>
                                 <tr>
-                                    <td>
-                                    </td>
+                               
                                     <td>
                                         Phạm Tấn Phát
                                     </td>

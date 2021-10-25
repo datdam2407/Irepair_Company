@@ -59,13 +59,13 @@ var routes = [
 
   //Service
 
-  {
-    path: "/service",
-    layout: "/company",
-    name: "Service",
-    icon: "nc-icon nc-notes",
-    component: ServiceTables,
-  },
+  // {
+  //   path: "/service",
+  //   layout: "/company",
+  //   name: "Service",
+  //   icon: "nc-icon nc-notes",
+  //   component: ServiceTables,
+  // },
   {
     path: "/customer",
     layout: "/company",

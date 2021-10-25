@@ -129,7 +129,7 @@ function AdminNavbar() {
                   <Dropdown.Item>
                   
                     <i className="nc-icon nc-email-85"></i>
-                    Messages
+                    Tin nhắn
                   </Dropdown.Item>
                   {/* <Dropdown.Item
                     href="#pablo"
@@ -146,7 +146,7 @@ function AdminNavbar() {
                       // window.location.href = "http://localhost:3000/admin/user-page"}
                   >
                     <i className="nc-icon nc-settings-90"></i>
-                    Setting
+                    Cài Đặt
                   </Dropdown.Item>
                   <div className="divider"></div>
 
@@ -158,7 +158,7 @@ function AdminNavbar() {
                       setModalLogOut(true);
                     }}                  >
                     <i className="nc-icon nc-button-power"></i>
-                    Log out
+                    Đăng xuất
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
@@ -175,7 +175,7 @@ function AdminNavbar() {
           Are you sure?
         </ModalHeader>
         <ModalBody>
-          <h5>Do you want to log out?</h5>
+          <h5>Bạn có muốn đăng xuất?</h5>
         </ModalBody>
         <ModalFooter>
           <Button
@@ -186,7 +186,7 @@ function AdminNavbar() {
               window.location.href = "/";
             }}
           >
-            Log out
+            Đăng Xuất
           </Button>{" "}
           <Button color="secondary" onClick={toggleLogOut}>
             Cancel

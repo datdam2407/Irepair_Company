@@ -352,7 +352,6 @@ export default function Repairman() {
                 <Table className="table-hover table-striped">
                   <thead>
                     <tr>
-                      <th className="description">Ảnh</th>
                       <th className="description">Thợ Sửa Chữa</th>
                       <th className="description">Số Điện Thoại </th>
                       <th className="description">Ngày Tạo</th>
@@ -366,10 +365,7 @@ export default function Repairman() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td onClick={() => {
-                        setModalStatus(true);
-                      }}>
-                      </td>
+                      
                       <TableCell>
                         <Grid container>
 
@@ -437,7 +433,7 @@ export default function Repairman() {
                             onClick={(e) => e.preventDefault()}
                             overlay={
                               <Tooltip id="tooltip-960683717">
-                                Approved Repairman..
+                                Approved..
                               </Tooltip>
                             }
                             placement="right"
@@ -458,7 +454,7 @@ export default function Repairman() {
                             onClick={(e) => e.preventDefault()}
                             overlay={
                               <Tooltip id="tooltip-960683717">
-                                Delete Repairman..
+                                Delete ..
                               </Tooltip>
                             }
                             placement="right"
@@ -480,10 +476,7 @@ export default function Repairman() {
                     </tr>
 
                     <tr>
-                      <td onClick={() => {
-                        setModalStatus(true);
-                      }}>
-                      </td>
+                      
                       <TableCell>
                         <Grid container>
 
@@ -593,10 +586,7 @@ export default function Repairman() {
                       </td>
                     </tr>
                     <tr>
-                      <td onClick={() => {
-                        setModalStatus(true);
-                      }}>
-                      </td>
+                      
                       <TableCell>
                         <Grid container>
 
@@ -692,10 +682,7 @@ Bị Chảy Nước                      </td>
                     </tr>
 
                     <tr>
-                      <td onClick={() => {
-                        setModalStatus(true);
-                      }}>
-                      </td>
+                      
                       <TableCell>
                         <Grid container>
 
@@ -791,10 +778,7 @@ Bị Chảy Nước                      </td>
                       </td>
                     </tr>
                     <tr>
-                      <td onClick={() => {
-                        setModalStatus(true);
-                      }}>
-                      </td>
+                      
                       <TableCell>
                         <Grid container>
 
@@ -891,16 +875,13 @@ Bị Chảy Nước                      </td>
                       </td>
                     </tr>
                     <tr>
-                      <td onClick={() => {
-                        setModalStatus(true);
-                      }}>
-                      </td>
+                      
                       <TableCell>
                         <Grid container>
 
                           <Grid item lg={10}>
                             <Typography className={classes.name}>Nguyễn Văn Phát</Typography>
-                            <Typography color="textSecondary" variant="body2">Irepair 001
+                            <Typography color="textSecondary" variant="body2">Irepair 002
                             </Typography>
                           </Grid>
                         </Grid>

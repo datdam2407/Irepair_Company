@@ -234,8 +234,8 @@ function ManageSevice() {
       var temp = res.data.filter((x) => x.state !== "Completed");
       setserviceList(temp);
       setUseListserviceShow(temp);
-      setUseListserviceShowPage(temp.slice(numberPage * 8 - 8, numberPage * 8));
-      setTotalNumberPage(Math.ceil(temp.length / 8));
+      setUseListserviceShowPage(temp.slice(numberPage * 80 - 80, numberPage * 80));
+      setTotalNumberPage(Math.ceil(temp.length / 80));
       setCount(count);
     }).catch((err) => {
       console.log(err);
@@ -244,8 +244,8 @@ function ManageSevice() {
   //Paging
   function onClickPage(number) {
     setNumberPage(number);
-    setUseListserviceShowPage(useListserviceShow.slice(number * 8 - 8, number * 8));
-    setTotalNumberPage(Math.ceil(useListserviceShow.length / 8));
+    setUseListserviceShowPage(useListserviceShow.slice(number * 80 - 80, number * 80));
+    setTotalNumberPage(Math.ceil(useListserviceShow.length / 80));
   }
 
   const closeBtn = (x) => (
@@ -371,28 +371,7 @@ function ManageSevice() {
                         >Đang Hoạt Động</Typography>
                       </TableCell>
                       <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
+                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -464,28 +443,7 @@ function ManageSevice() {
                           }}>Đang Hoạt Động</Typography>
                       </TableCell>
                       <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
+                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -556,28 +514,7 @@ function ManageSevice() {
                           }}>Đang Hoạt Động</Typography>
                       </TableCell>
                       <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
+                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -649,28 +586,7 @@ function ManageSevice() {
                           }}>Sắp ra mắt</Typography>
                       </TableCell>
                       <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
+                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -741,28 +657,7 @@ function ManageSevice() {
                           }}>Đang Hoạt Động</Typography>
                       </TableCell>
                       <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
+                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -833,28 +728,7 @@ function ManageSevice() {
                           }}>Đang Hoạt Động</Typography>
                       </TableCell>
                       <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
+                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -925,28 +799,7 @@ function ManageSevice() {
                           }}>Đang Hoạt Động</Typography>
                       </TableCell>
                       <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
+                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -1017,28 +870,7 @@ function ManageSevice() {
                           }}>Đang Hoạt Động</Typography>
                       </TableCell>
                       <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
+                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -1108,28 +940,7 @@ function ManageSevice() {
                           }}>Ngưng Hoạt Động</Typography>
                       </TableCell>
                       <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
+                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">

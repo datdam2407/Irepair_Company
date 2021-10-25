@@ -228,8 +228,8 @@ function Customer() {
       var temp = res.data.filter((x) => x.state !== "Completed");
       setserviceList(temp);
       setUseListserviceShow(temp);
-      setUseListserviceShowPage(temp.slice(numberPage * 8 - 8, numberPage * 8));
-      setTotalNumberPage(Math.ceil(temp.length / 8));
+      setUseListserviceShowPage(temp.slice(numberPage * 80 - 80, numberPage * 80));
+      setTotalNumberPage(Math.ceil(temp.length / 80));
       setCount(count);
     }).catch((err) => {
       console.log(err);
@@ -238,8 +238,8 @@ function Customer() {
   //Paging
   function onClickPage(number) {
     setNumberPage(number);
-    setUseListserviceShowPage(useListserviceShow.slice(number * 8 - 8, number * 8));
-    setTotalNumberPage(Math.ceil(useListserviceShow.length / 8));
+    setUseListserviceShowPage(useListserviceShow.slice(number * 80 - 80, number * 80));
+    setTotalNumberPage(Math.ceil(useListserviceShow.length / 80));
   }
 
   const closeBtn = (x) => (
@@ -335,7 +335,6 @@ function Customer() {
                       <th className="description">Địa Chỉ</th>
                       <th className="description">Ngày Đăng Ký</th>
                       <th className="description">Trạng Thái</th>
-                      <th className="description">Hành Động</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -366,76 +365,7 @@ function Customer() {
                           }}
                         >Đang Hoạt Động</Typography>
                       </TableCell>
-                      <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
-                        <OverlayTrigger
-                          overlay={
-                            <Tooltip id="tooltip-436082023">
-                              Edit Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            // onClick={() => handleUpdate(e.data)}
-                            // onGridReady={onGridReady}
-                            onClick={() => {
-                              // setserviceEdit(e.Id);
-                              // getserviceByID(e.Id);
-                              setserviceModalEdit(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="success"
-                          >
-                            <i className="fas fa-edit"></i>
-                          </Button>
-                        </OverlayTrigger>
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-334669391">
-                              Remove Post..
-                            </Tooltip>
-                          }
-                          placement="right\"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setserviceDelete(e.Id);
-                              setserviceModalDelete(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="danger"
-                          >
-                            <i className="fas fa-times"></i>
-                          </Button>
-                        </OverlayTrigger>
-
-                      </td>
-
+            
                     </tr>
                     <tr >
                       <TableCell>
@@ -452,7 +382,7 @@ function Customer() {
                         43 Đ.100, Tăng Nhơn Phú B
                       </td>
                       <td>
-                        02-02-2019
+                        02-02-2010
                       </td>
                       <TableCell>
                         <Typography
@@ -464,76 +394,7 @@ function Customer() {
                           }}
                         >Đang Hoạt Động</Typography>
                       </TableCell>
-                      <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
-                        <OverlayTrigger
-                          overlay={
-                            <Tooltip id="tooltip-436082023">
-                              Edit Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            // onClick={() => handleUpdate(e.data)}
-                            // onGridReady={onGridReady}
-                            onClick={() => {
-                              // setserviceEdit(e.Id);
-                              // getserviceByID(e.Id);
-                              setserviceModalEdit(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="success"
-                          >
-                            <i className="fas fa-edit"></i>
-                          </Button>
-                        </OverlayTrigger>
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-334669391">
-                              Remove Post..
-                            </Tooltip>
-                          }
-                          placement="right\"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setserviceDelete(e.Id);
-                              setserviceModalDelete(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="danger"
-                          >
-                            <i className="fas fa-times"></i>
-                          </Button>
-                        </OverlayTrigger>
-
-                      </td>
-                    </tr>
+                                </tr>
 
                     <tr >
                       <TableCell>
@@ -550,7 +411,7 @@ function Customer() {
                         Quận 3, Lê Văn Sỹ
                       </td>
                       <td>
-                        02-02-2019
+                        12-12-2019
                       </td>
                       <TableCell>
                         <Typography
@@ -562,76 +423,7 @@ function Customer() {
                           }}
                         >Đang Hoạt Động</Typography>
                       </TableCell>
-                      <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
-                        <OverlayTrigger
-                          overlay={
-                            <Tooltip id="tooltip-436082023">
-                              Edit Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            // onClick={() => handleUpdate(e.data)}
-                            // onGridReady={onGridReady}
-                            onClick={() => {
-                              // setserviceEdit(e.Id);
-                              // getserviceByID(e.Id);
-                              setserviceModalEdit(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="success"
-                          >
-                            <i className="fas fa-edit"></i>
-                          </Button>
-                        </OverlayTrigger>
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-334669391">
-                              Remove Post..
-                            </Tooltip>
-                          }
-                          placement="right\"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setserviceDelete(e.Id);
-                              setserviceModalDelete(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="danger"
-                          >
-                            <i className="fas fa-times"></i>
-                          </Button>
-                        </OverlayTrigger>
-
-                      </td>
-                    </tr>
+                                </tr>
 
                     <tr >
                       <TableCell>
@@ -648,7 +440,7 @@ function Customer() {
                         Lê Văn Việt, Quận 9
                       </td>
                       <td>
-                        02-02-2019
+                        12-02-2021
                       </td>
                       <TableCell>
                         <Typography
@@ -660,76 +452,7 @@ function Customer() {
                           }}
                         >Đang Hoạt Động</Typography>
                       </TableCell>
-                      <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
-                        <OverlayTrigger
-                          overlay={
-                            <Tooltip id="tooltip-436082023">
-                              Edit Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            // onClick={() => handleUpdate(e.data)}
-                            // onGridReady={onGridReady}
-                            onClick={() => {
-                              // setserviceEdit(e.Id);
-                              // getserviceByID(e.Id);
-                              setserviceModalEdit(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="success"
-                          >
-                            <i className="fas fa-edit"></i>
-                          </Button>
-                        </OverlayTrigger>
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-334669391">
-                              Remove Post..
-                            </Tooltip>
-                          }
-                          placement="right\"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setserviceDelete(e.Id);
-                              setserviceModalDelete(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="danger"
-                          >
-                            <i className="fas fa-times"></i>
-                          </Button>
-                        </OverlayTrigger>
-
-                      </td>
-                    </tr>
+                                </tr>
 
                     <tr >
                       <TableCell>
@@ -758,76 +481,7 @@ function Customer() {
                           }}
                         >Đang Hoạt Động</Typography>
                       </TableCell>
-                      <td className="td-actions">
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-960683717">
-                              View Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setModalStatus(true);
-                              setSelectservice(e);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="info"
-                          >
-                            <i className="far fa-image"></i>
-                          </Button>
-                        </OverlayTrigger>
-
-                        <OverlayTrigger
-                          overlay={
-                            <Tooltip id="tooltip-436082023">
-                              Edit Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            // onClick={() => handleUpdate(e.data)}
-                            // onGridReady={onGridReady}
-                            onClick={() => {
-                              // setserviceEdit(e.Id);
-                              // getserviceByID(e.Id);
-                              setserviceModalEdit(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="success"
-                          >
-                            <i className="fas fa-edit"></i>
-                          </Button>
-                        </OverlayTrigger>
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-334669391">
-                              Remove Post..
-                            </Tooltip>
-                          }
-                          placement="right\"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setserviceDelete(e.Id);
-                              setserviceModalDelete(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="danger"
-                          >
-                            <i className="fas fa-times"></i>
-                          </Button>
-                        </OverlayTrigger>
-
-                      </td>
-                    </tr>
+                                </tr>
                   </tbody>
                 </Table>
                 <Row>
