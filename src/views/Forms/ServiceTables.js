@@ -192,8 +192,6 @@ function ManageSevice() {
     setstateListFilter(newListState);
     getserviceList(newListState);
   }
-
-  const initialValue = { name: "", description: "", imageUrl: "", status: "1" }
   const [searchName, setSearchName] = useState("");
   const handleClickOpen = () => {
     setOpen(true);
@@ -201,14 +199,6 @@ function ManageSevice() {
 
  
   console.log("field", FieldSelectID)
-  // update
-
-  // setting update row data to form data and opening pop up window
-  const handleUpdate = (oldData) => {
-    setFormData(oldData)
-    console.log(oldData)
-    handleClickOpen()
-  }
 
   function handleOnchangeSelectedAsset(e, value) {
     //console.log(e.target,value);
