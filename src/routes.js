@@ -19,7 +19,7 @@ import GoogleMaps from "views/Maps/GoogleMaps.js";
 import FullScreenMap from "views/Maps/FullScreenMap.js";
 import VectorMap from "views/Maps/VectorMap.js";
 import Charts from "views/Charts.js";
-import Calendar from "views/Calendar.js";
+import Workon from "views/Workon.js";
 import UserPage from "views/Pages/UserPage.js";
 // import Sidebar from "views/Sidebar.js";
 import RegisterPage from "views/Pages/RegisterPage.js";
@@ -67,7 +67,7 @@ var routes = [
   {
     path: "/service",
     layout: "/company",
-    name: "Service Table",
+    name: "Service",
     icon: "nc-icon nc-notes",
     component: ServiceTables,
   },
@@ -163,7 +163,7 @@ var routes = [
   {
     path: "/repairman",
     layout: "/company",
-    name: "Repairman Table",
+    name: "Repairman",
     icon: "nc-icon nc-settings-tool-66",
     component: RepairmanTable,
   },
@@ -228,36 +228,36 @@ var routes = [
 
 
   {
-    path: "/calendar",
+    path: "/Workon",
     layout: "/company",
-    name: "Calendar",
+    name: "Workon",
     icon: "nc-icon nc-single-copy-04",
-    component: Calendar,
+    component: Workon,
   },
 
 
 
-  {
-    collapse: true,
-    path: "/pages",
-    name: "Pages",
-    state: "openPages",
-    icon: "nc-icon nc-puzzle-10",
-    views: [
-      {
-        path: "/user-page",
-        layout: "/company",
-        name: "User Page",
-        mini: "UP",
-        component: UserPage,
-      },
-      {
-        path: "/register-page",
-        layout: "/auth",
-        name: "Register",
-        mini: "RP",
-        component: RegisterPage,
-      },
+  // {
+  //   collapse: true,
+  //   path: "/pages",
+  //   name: "Pages",
+  //   state: "openPages",
+  //   icon: "nc-icon nc-puzzle-10",
+  //   views: [
+  //     {
+  //       path: "/user-page",
+  //       layout: "/company",
+  //       name: "User Page",
+  //       mini: "UP",
+  //       component: UserPage,
+  //     },
+  //     {
+  //       path: "/register-page",
+  //       layout: "/auth",
+  //       name: "Register",
+  //       mini: "RP",
+  //       component: RegisterPage,
+  //     },
       // {
       //   path: "/lock-screen-page",
       //   layout: "/auth",
@@ -265,7 +265,7 @@ var routes = [
       //   mini: "LSP",
       //   component: LockScreenPage,
       // },
-    ],
-  },
+//     ],
+//   },
 ];
 export default routes;
