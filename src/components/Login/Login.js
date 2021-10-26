@@ -119,7 +119,7 @@ function Login() {
 
               {/* <div className="google-btn" onClick={signInWithGoogle} > */}
               <div className="google-btn" onClick={(e) => 
-                      window.location.href = "/Company/history"}
+                      window.location.href = "/company/dashboard"}
                       // window.location.href = "http://localhost:3000/admin/user-page"}
                   >
                 {/* <div className="google-icon-wrapper">

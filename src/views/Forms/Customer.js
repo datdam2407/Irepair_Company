@@ -38,7 +38,13 @@ import {
   ModalTitle,
 } from "react-bootstrap";
 // import "../../assets/css/customSize.css"
-
+import logo from "../../assets/img/thuanne.jpg"
+import logo1 from "../../assets/img/cus1.jpg"
+import logo2 from "../../assets/img/cus2.jpg"
+import logo3 from "../../assets/img/cus3.jpg"
+import logo4 from "../../assets/img/khanhne2.jpg"
+import logo5 from "../../assets/img/cus44.jpg"
+import logo6 from "../../assets/img/Phatne.jpg"
 import { del, put, get, getWithParams, getWithToken, getWithTokenParams, putWithToken, postWithToken } from "../../service/ReadAPI";
 import FilterState from "./FilterState";
 
@@ -59,7 +65,10 @@ import {
 } from '@material-ui/core';
 // import FormDialog from './DialogService';
 function Customer() {
-  //delete modal  
+  //delete modal    
+  const [ascending, setAscending] = useState(true);
+
+  const [sortedField, setSortedField] = useState("Id");
   const [ServiceDelete, setServiceDelete] = useState(null);
   const [modalDelete, setServiceModalDelete] = useState(false);
   const toggleDelete = () => setServiceModalDelete(!modalDelete);
@@ -113,8 +122,11 @@ function Customer() {
   const [listField, setListField] = useState([]);
   //filter 
   const listStates = [
-    "Đang hoạt động",
-    "Ngưng hoạt động",
+    "✩",
+    "✩✩",
+    "✩✩✩",
+    "✩✩✩✩",
+    "✩✩✩✩✩",
   ];
   const [filterState, setListFilterState] = useState(listStates);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -315,7 +327,7 @@ function Customer() {
                       }}
                     >
                       <InputGroup className="fixed">
-                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Search name..."></Input>
+                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Tìm kiếm..."></Input>
                         <Button className="dropdown-filter-css" >
                           <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
                         </Button>
@@ -330,15 +342,86 @@ function Customer() {
                 <Table className="table">
                   <thead>
                     <tr>
-                      <th className="description" >Tên khách hàng</th>
+                      <th className="description">Ảnh</th>
+                    <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Tên khách hàng{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
                       <th className="description">Điện Thoại</th>
                       <th className="description">Địa Chỉ</th>
-                      <th className="description">Ngày Đăng Ký</th>
-                      <th className="description">Đánh giá</th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Ngày đăng ký{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Đánh giá{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
+                  
                     <tr >
+                    <td>
+                                    <img className="avatar-repairman" src={logo} />
+                                    </td> 
                       <TableCell>
                         <Grid container>
 
@@ -380,11 +463,14 @@ function Customer() {
                      
                     </tr>
                     <tr >
+                    <td>
+                                    <img className="avatar-repairman" src={logo1} />
+                                    </td>
                       <TableCell>
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Nguyễn Quốc Vinh</Typography>
+                            <Typography className={classes.name}>Nguyễn Quốc Thịnh</Typography>
                             <Typography color="textSecondary" variant="body2">Cus 011</Typography>
                           </Grid>
                         </Grid>
@@ -421,6 +507,9 @@ function Customer() {
 
                     </tr>
                     <tr >
+                    <td>
+                                    <img className="avatar-repairman" src={logo2} />
+                                    </td>
                       <TableCell>
                         <Grid container>
 
@@ -462,11 +551,14 @@ function Customer() {
 
                     </tr>
                     <tr >
+                    <td>
+                                    <img className="avatar-repairman" src={logo3} />
+                                    </td>
                       <TableCell>
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Đàm Tiến Đạt</Typography>
+                            <Typography className={classes.name}>Nguyễn Thái Bảo</Typography>
                             <Typography color="textSecondary" variant="body2">Cus 002</Typography>
                           </Grid>
                         </Grid>
@@ -504,11 +596,14 @@ function Customer() {
                     </tr>
 
                     <tr >
+                    <td>
+                                    <img className="avatar-repairman" src={logo4} />
+                                    </td>
                       <TableCell>
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Nguyễn Hoàng Quốc Khánh</Typography>
+                            <Typography className={classes.name}>Nguyễn Hoàng</Typography>
                             <Typography color="textSecondary" variant="body2">Cus 003</Typography>
                           </Grid>
                         </Grid>
@@ -545,11 +640,14 @@ function Customer() {
                     </tr>
 
                     <tr >
+                    <td>
+                                    <img className="avatar-repairman" src={logo5} />
+                                    </td>
                       <TableCell>
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Đỗ Dương Tâm Đăng</Typography>
+                            <Typography className={classes.name}>Nguyễn Minh Hoàng</Typography>
                             <Typography color="textSecondary" variant="body2">Cus 004</Typography>
                           </Grid>
                         </Grid>
@@ -586,6 +684,9 @@ function Customer() {
                     </tr>
 
                     <tr >
+                    <td>
+                                    <img className="avatar-repairman" src={logo6} />
+                                    </td>
                       <TableCell>
                         <Grid container>
 

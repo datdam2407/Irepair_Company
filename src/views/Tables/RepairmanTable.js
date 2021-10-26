@@ -5,7 +5,12 @@ import {
     faCaretDown,
     faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
-
+import logo from "../../assets/img/dangne2.jpg"
+import logo1 from "../../assets/img/khanhne2.jpg"
+import logo2 from "../../assets/img/avatar.jpg"
+import logo3 from "../../assets/img/datne2.jpg"
+import logo4 from "../../assets/img/Phatne2.jpg"
+import logo5 from "../../assets/img/thuanne.jpg"
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 // react-bootstrap components
@@ -22,9 +27,6 @@ import {
     Tooltip,
 } from "react-bootstrap";
 import {
-
-
-
     Modal,
     ModalHeader,
     ModalBody,
@@ -60,6 +62,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default function Repairman() {
     const [name, setName] = useState("");
+
+    const [sortedField, setSortedField] = useState("Id");
+    const [ascending, setAscending] = useState(true);
     const [description, setDescription] = useState("");
     const [picture, setImage] = useState("");
     const [price, setPrice] = useState("");
@@ -93,11 +98,11 @@ export default function Repairman() {
     const [modalStatus, setModalStatus] = useState(false);
     const toggleDetails = () => setModalStatus(!modalStatus);
     const [Selectservice, setSelectservice] = useState();
+  
     const listStates = [
         "Đang Hoạt Động",
         "Ngưng hoạt động",
-    ];
-
+      ];
     const [customer_Name, setcustomer_Name] = useState("");
     const [address, setaddress] = useState("");
 
@@ -232,42 +237,21 @@ export default function Repairman() {
                 <Card className="strpied-tabled-with-hover">
                     <div className="header-form">
                         <Row>
-                            <div className="header-body-filter">
-                                <Col md={7}>
-                                    <Row className="fixed">
-                                        <InputGroup>
-                                            <InputGroupButtonDropdown
-                                                addonType="append"
-                                                isOpen={dropdownOpen}
-                                                toggle={toggleDropDown}
-                                                className="border border-gray-css"
-                                            >
-                                                <DropdownToggle className="dropdown-filter-css" caret> Filter&nbsp;</DropdownToggle>                      <DropdownMenu >
-                                                    <div className="fixed" >
-
-                                                    </div>
-                                                </DropdownMenu>
-                                            </InputGroupButtonDropdown>
-                                        </InputGroup>
-
-                                    </Row>
-                                </Col>
-                            </div>
-                            <Col md={2}>
+                            <Col  md={1}>
                                 <Form
                                     onClick={(e) => {
                                         // onSubmitSearch(e);
                                     }}
                                 >
                                     <InputGroup className="fixed">
-                                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Search name..."></Input>
+                                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Tìm kiếm..."></Input>
                                         <Button className="dropdown-filter-css" >
                                             <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
                                         </Button>
                                     </InputGroup>
                                 </Form>
                             </Col>
-                            <Col md={8} align="right">
+                            <Col md={11} align="right">
                                 <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Thêm thợ mới</Button>
                             </Col>
                         </Row>
@@ -276,12 +260,57 @@ export default function Repairman() {
                         <Table className="table-hover table-striped">
                             <thead>
                                 <tr>
-                                    {/* <th className="description">Ảnh</th> */}
-                                    <th className="description">Thợ sửa chữa</th>
+                                    <th className="description">Ảnh</th>
+                                    <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Thợ sửa chữa{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                                    
                                     <th className="description">Số điện thoại </th>
                                     <th className="description">Email</th>
                                     <th className="description">Chuyên Môn</th>
-                                    <th className="description">Đánh giá</th>
+                                    <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Đánh giá{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
                                     <th className="description">Ngày tạo</th>
                                     <th className="description">Trạng Thái</th>
                                     <th className="description">Thao tác</th>
@@ -289,10 +318,11 @@ export default function Repairman() {
                             </thead>
                             <tbody>
                                 <tr>
-
+                                    <td>
+                                    <img className="avatar-repairman" src={logo} />
+                                    </td>
                                     <TableCell>
                                         <Grid container>
-
                                             <Grid item lg={10}>
                                                 <Typography className={classes.name}>Đỗ Thành Thái</Typography>
                                             </Grid>
@@ -382,7 +412,9 @@ export default function Repairman() {
                                     </td>
                                 </tr>
                                 <tr>
-
+                                <td>
+                                    <img className="avatar-repairman" src={logo1} />
+                                    </td>
                                     <TableCell>
                                         <Grid container>
 
@@ -476,6 +508,9 @@ export default function Repairman() {
                                 </tr>
                                 <tr>
 
+                                <td>
+                                    <img className="avatar-repairman" src={logo2} />
+                                    </td>
                                     <TableCell>
                                         <Grid container>
 
@@ -569,7 +604,9 @@ export default function Repairman() {
                                     </td>
                                 </tr>
                                 <tr>
-
+                                <td>
+                                    <img className="avatar-repairman" src={logo3} />
+                                    </td>
                                     <TableCell>
                                         <Grid container>
 
@@ -662,12 +699,14 @@ export default function Repairman() {
                                     </td>
                                 </tr>
                                 <tr>
-
+                                <td>
+                                    <img className="avatar-repairman" src={logo4} />
+                                    </td>
                                     <TableCell>
                                         <Grid container>
 
                                             <Grid item lg={10}>
-                                                <Typography className={classes.name}>Phạm Tấn Phát</Typography>
+                                                <Typography className={classes.name}>Nguyễn Tấn Phát</Typography>
                                             </Grid>
                                         </Grid>
                                     </TableCell>
@@ -756,6 +795,9 @@ export default function Repairman() {
                                     </td>
                                 </tr>
                                 <tr>
+                                <td>
+                                    <img className="avatar-repairman" src={logo5} />
+                                    </td>
                                     <TableCell>
                                         <Grid container>
 

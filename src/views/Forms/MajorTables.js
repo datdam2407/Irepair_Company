@@ -71,6 +71,8 @@ function ManageSevice() {
   // const [modalEdit, setServiceModalEdit] = useState(false);
   // const toggleEdit = () => setServiceModalEdit(!modalEdit);
 
+  const [sortedField, setSortedField] = useState("Id");
+  const [ascending, setAscending] = useState(true);
   //modal create
   const [modalCreate, setserviceModalCreate] = useState(false);
   const toggleCreate = () => setserviceModalCreate(!modalCreate)
@@ -195,7 +197,10 @@ function ManageSevice() {
     getserviceList(newListState);
   }
   const myOptions = ['SamSung', 'Panasonic', 'Daikin', 'Electrolux', 'LG','Tosiba','Sharp',
-  'Mishubíhi','Electric','Aqua','Honda','Yamaha','Piggio','Suzuki','SYM','Davidson','Triump','Harley','Ducati','','','','','',''];
+  'Mishubíhi','Electric','Aqua','Honda','Yamaha','Piggio','Suzuki',
+  'SYM','Davidson','Triump','Harley','Ducati',	'Rinnai','Giovani',
+  'Faber','Teka','Taka','Binova','Paloma','Sunhouse','Apple', 'Samsung',
+   'Xiaomi', 'Oppo', 'Huawei', 'Pixel', 'Nokia',	'Samsung','Apple','Dell','Asus','HP','Lenovo','MSI','Acer'];
 
   const initialValue = { name: "", description: "", imageUrl: "", status: "1" }
   const [searchName, setSearchName] = useState("");
@@ -321,7 +326,7 @@ function ManageSevice() {
                       }}
                     >
                       <InputGroup className="fixed">
-                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Search name..."></Input>
+                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Tìm kiếm..."></Input>
                         <Button className="dropdown-filter-css" >
                           <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
                         </Button>
@@ -338,10 +343,54 @@ function ManageSevice() {
                 <Table className="table">
                   <thead>
                     <tr>
-                      <th className="description" >Đồ dùng</th>
+                    <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Đồ dùng{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
                       <th className="description">Mô Tả</th>
                       <th className="description">Hãng Sản Xuất</th>
-                      <th className="description">Giá Tiền</th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Giá tiền{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
                       <th className="description">Trạng Thái</th>
                       <th className="description">Thao tác</th>
                     </tr>
@@ -1158,7 +1207,6 @@ function ManageSevice() {
                     {...params}
                     label="Lựa chọn hãng"
                     variant="standard"
-                    placeholder="hãng sản phẩm"
                   />
                 )}
               />
@@ -1175,18 +1223,6 @@ function ManageSevice() {
                 rows={3}
               />
             </FormGroup>
-            {/* <FormGroup className="mb-2">
-              <Form.Label></Form.Label>
-              <Form.Control type="number" placeholder="service name" value={price}
-                onChange={e => setPrice(e.target.value)}
-              />
-            </FormGroup> */}
-            {/* <FormGroup className="mb-3">
-              <Form.Label>Picture</Form.Label>
-              <Form.Control type="text" value={picture}
-                onChange={e => setImage(e.target.value)}
-              />
-            </FormGroup> */}
           </Form>
         </ModalBody>
         <ModalFooter>

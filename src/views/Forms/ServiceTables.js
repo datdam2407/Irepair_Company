@@ -307,7 +307,7 @@ function ManageSevice() {
                       }}
                     >
                       <InputGroup className="fixed">
-                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Search name..."></Input>
+                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Tìm kiếm..."></Input>
                         <Button className="dropdown-filter-css" >
                           <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
                         </Button>

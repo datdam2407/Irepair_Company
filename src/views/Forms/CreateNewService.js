@@ -38,10 +38,15 @@ import FilterState from "./FilterState";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faSearch,
+    faSearch,
+    faCaretDown,
+    faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
 export default function Repairman() {
 
+  const [sortedField, setSortedField] = useState("Id");
+
+  const [ascending, setAscending] = useState(true);
   const [modalDelete, setRepairmanModalDelete] = useState(false);
   const toggleDelete = () => setRepairmanModalDelete(!modalDelete);
   const [RepairmanDelete, setRepairmanDelete] = useState(null);
@@ -71,8 +76,8 @@ export default function Repairman() {
 
 
   const listStates = [
-    "Đã hoàn thành",
-    "Thợ đang đến",
+    "Đã thanh toán",
+    "Đang đợi",
     "Đã hủy",
   ];
 
@@ -337,7 +342,7 @@ export default function Repairman() {
                       }}
                     >
                       <InputGroup className="fixed">
-                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Search name..."></Input>
+                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Tìm kiếm..."></Input>
                         <Button className="dropdown-filter-css" >
                           <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
                         </Button>
@@ -350,14 +355,102 @@ export default function Repairman() {
                 <Table className="table-hover table-striped">
                   <thead>
                     <tr>
-                      <th className="description">Thợ Sửa Chữa</th>
+                    <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Thợ sửa chữa{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
                       <th className="description">Số Điện Thoại </th>
                       <th className="description">Ngày Tạo</th>
-                      <th className="description">Khách hàng</th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Khách hàng{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
                       <th className="description">Đồ Cần Sửa</th>
                       <th className="description">Hãng</th>
-                      <th className="description">Vấn Đề</th>
-                      <th className="description">Giá sửa chữa</th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                       Vấn đề{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Giá sữa chữa{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
                       <th className="description">Đánh Giá Yêu Cầu</th>
                       <th className="description">Trạng Thái</th>
                       <th className="description"></th>
@@ -436,7 +529,7 @@ export default function Repairman() {
                             color: 'black',
                             fontSize: '12px'
                           }}
-                        >Đã Hoàn Thành</Typography>
+                        >Đã thanh toán</Typography>
                       </TableCell>
                       <td>
                        
@@ -512,7 +605,7 @@ export default function Repairman() {
                             color: 'black',
                             fontSize: '12px'
                           }}
-                        >Đã Hoàn Thành</Typography>
+                        >Đã thanh toán</Typography>
                       </TableCell>
                       <td>
                         
@@ -590,7 +683,7 @@ export default function Repairman() {
                             color: 'black',
                             fontSize: '12px'
                           }}
-                        >Đã Hoàn Thành</Typography>
+                        >Đã thanh toán</Typography>
                       </TableCell>
                       <td>
                         
@@ -922,7 +1015,7 @@ export default function Repairman() {
                             color: 'black',
                             fontSize: '12px'
                           }}
-                        >Đã Hoàn Thành</Typography>
+                        >Đã thanh toán</Typography>
                       </TableCell>
                       <td>
                         

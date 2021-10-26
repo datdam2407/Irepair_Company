@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // react component used to create charts
 // react components used to create a SVG / Vector map
 import { VectorMap } from "react-jvectormap";
 import {
   UncontrolledCarousel,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
 } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSearch,
+  faCaretDown,
+  faCaretUp,
+} from "@fortawesome/free-solid-svg-icons";
 // react-bootstrap components
 import {
   Badge,
@@ -23,6 +32,11 @@ import {
 } from "react-bootstrap";
 
 function Dashboard() {
+  const [numberPage, setNumberPage] = useState(1);
+
+  const [sortedField, setSortedField] = useState("Id");
+  const [ascending, setAscending] = useState(true);
+  const [totalNumberPage, setTotalNumberPage] = useState(1);
   const carouselItems = [
     {
       src: require("assets/img/abc.jpeg").default,
@@ -40,6 +54,11 @@ function Dashboard() {
       caption: "",
     },
   ];
+  function onClickPage(number) {
+    setNumberPage(number);
+    setUseListCustomerShowPage(useListCustomerShow.slice(number * 1 - 1, number * 1));
+    setTotalNumberPage(Math.ceil(useListCustomerShow.length / 1));
+  }
   const covid19Items = [
     {
       src: require("assets/img/covid1.jpg").default,
@@ -78,8 +97,8 @@ function Dashboard() {
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Number</p>
-                      <Card.Title as="h4">150GB</Card.Title>
+                      <p className="card-category">Tổng đơn đã nhận</p>
+                      <Card.Title as="h4">104</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -104,8 +123,8 @@ function Dashboard() {
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Revenue</p>
-                      <Card.Title as="h4">$ 1,345</Card.Title>
+                      <p className="card-category">Doanh thu</p>
+                      <Card.Title as="h4">17,750,000 đ</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -130,7 +149,7 @@ function Dashboard() {
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Errors</p>
+                      <p className="card-category">Tổng đơn đã hủy</p>
                       <Card.Title as="h4">23</Card.Title>
                     </div>
                   </Col>
@@ -156,8 +175,8 @@ function Dashboard() {
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Followers</p>
-                      <Card.Title as="h4">+45K</Card.Title>
+                      <p className="card-category">Số người đăng ký app</p>
+                      <Card.Title as="h4">45</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -176,189 +195,575 @@ function Dashboard() {
           <Col md="12">
             <Card>
               <Card.Header>
-                <Card.Title as="h4">Top Company</Card.Title>
-                <p className="card-category">All products that were repaired</p>
+                <Card.Title as="h2" style={{
+                  color:
+                    'rgb(27 129 255)',
+                  fontWeight: '700'
+                }}>Đơn hàng gần đây</Card.Title>
               </Card.Header>
               <Card.Body>
                 <Row>
                   <Col md="6">
                     <Table responsive>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Thợ sửa chữa{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Khách hàng{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Vấn đề cần sửa{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Giá tiền{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <th  className="description">Trạng thái</th>
                       <tbody>
                         <tr>
                           <td>
-                            <div className="flag">
-                              <img
-                                alt="..."
-                                src={require("assets/img/flags/US.png").default}
-                              ></img>
-                            </div>
+                            Phạm Hữu Nghĩa
                           </td>
-                          <td>USA</td>
-                          <td className="text-right">50</td>
-                          <td className="text-right">53.23%</td>
+                          <td >
+                            Nguyễn Quốc Thịnh
+                          </td>
+                          <td>
+                            Nghẹt ống cống nhà tắm
+                          </td>
+                          <td>
+                            400,000 đ
+                          </td>
+                          <td style={{
+                            color:
+                              'green',
+                            fontWeight: '700'
+                          }}>
+                            Đã thanh toán
+                          </td>
                         </tr>
                         <tr>
                           <td>
-                            <div className="flag">
-                              <img
-                                alt="..."
-                                src={require("assets/img/flags/DE.png").default}
-                              ></img>
-                            </div>
+                            Trần Văn Thái
                           </td>
-                          <td>Germany</td>
-                          <td className="text-right">1.300</td>
-                          <td className="text-right">20.43%</td>
+                          <td >
+                          Nguyễn Minh Hoàng
+                          </td>
+                          <td>
+                            Hư loa máy tính
+                          </td>
+                          <td>
+                            750,000 đ
+                          </td>
+                          <td style={{
+                            color:
+                              'green',
+                            fontWeight: '700'
+                          }}>
+                            Đã thanh toán
+                          </td>
                         </tr>
                         <tr>
                           <td>
-                            <div className="flag">
-                              <img
-                                alt="..."
-                                src={require("assets/img/flags/AU.png").default}
-                              ></img>
-                            </div>
+                            Phạm Hữu Nghĩa
                           </td>
-                          <td>Australia</td>
-                          <td className="text-right">760</td>
-                          <td className="text-right">10.35%</td>
+                          <td >
+                          Nguyễn Quốc Thịnh
+                          </td>
+                          <td>
+                            Thay mới bóng đèn(2 cái)
+                          </td>
+                          <td>
+                            240,000 đ
+                          </td>
+                          <td style={{
+                            color:
+                              'green',
+                            fontWeight: '700'
+                          }}>
+                            Đã thanh toán
+                          </td>
                         </tr>
                         <tr>
                           <td>
-                            <div className="flag">
-                              <img
-                                alt="..."
-                                src={require("assets/img/flags/GB.png").default}
-                              ></img>
-                            </div>
+                            Phạm Tấn Phát
                           </td>
-                          <td>United Kingdom</td>
-                          <td className="text-right">690</td>
-                          <td className="text-right">7.87%</td>
+                          <td >
+                          Nguyễn Hoàng
+                          </td>
+                          <td>
+                            Tủ lạnh không lạnh, lạnh yếu
+                          </td>
+                          <td>
+                            350,000 đ
+                          </td>
+                          <td style={{
+                            color:
+                              'green',
+                            fontWeight: '700'
+                          }}>
+                            Đã thanh toán
+                          </td>
                         </tr>
                         <tr>
                           <td>
-                            <div className="flag">
-                              <img
-                                alt="..."
-                                src={require("assets/img/flags/RO.png").default}
-                              ></img>
-                            </div>
+                            Nguyễn Tấn Phát
                           </td>
-                          <td>Romania</td>
-                          <td className="text-right">600</td>
-                          <td className="text-right">5.94%</td>
-                        </tr>
-                        <tr>
+                          <td >
+                          Nguyễn Hoàng
+                          </td>
                           <td>
-                            <div className="flag">
-                              <img
-                                alt="..."
-                                src={require("assets/img/flags/BR.png").default}
-                              ></img>
-                            </div>
+                            Máy lạnh không lạnh
                           </td>
-                          <td>Brasil</td>
-                          <td className="text-right">550</td>
-                          <td className="text-right">4.34%</td>
+                          <td>
+                            550,000 đ
+                          </td>
+                          <td style={{
+                            color:
+                              'green',
+                            fontWeight: '700'
+                          }}>
+                            Đã thanh toán
+                          </td>
                         </tr>
                       </tbody>
                     </Table>
+                    <Pagination
+                      aria-label="Page navigation example"
+                      className="page-right"
+                      style={{
+                        paddingLeft: '250px'
+                      }}
+                    >
+                      <PaginationItem disabled={numberPage === 1}>
+                        <PaginationLink
+                          className="page"
+                          previous
+                          //disable={numberPage === 1 ? "true" : "false"}
+
+                          onClick={() => {
+                            if (numberPage - 1 > 0) {
+                              onClickPage(numberPage - 1);
+                            }
+                          }}
+                        >
+                          Previous
+                        </PaginationLink>
+                      </PaginationItem>
+                      {numberPage - 1 > 0 ? (
+                        <PaginationItem>
+                          <PaginationLink
+                            className="page"
+                            onClick={() => {
+                              onClickPage(numberPage - 1);
+                            }}
+                          >
+                            {numberPage - 1}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ) : (
+                        ""
+                      )}
+                      <PaginationItem active>
+                        <PaginationLink className="page-active">
+                          {numberPage}
+                        </PaginationLink>
+                      </PaginationItem>
+                      {numberPage + 1 <= totalNumberPage ? (
+                        <PaginationItem>
+                          <PaginationLink
+                            className="page"
+                            onClick={() => {
+                              onClickPage(numberPage + 1);
+                            }}
+                          >
+                            {numberPage + 1}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ) : (
+                        ""
+                      )}
+                      {numberPage + 2 <= totalNumberPage ? (
+                        <PaginationItem>
+                          <PaginationLink
+                            className="page"
+                            onClick={() => {
+                              onClickPage(numberPage + 2);
+                            }}
+                          >
+                            {numberPage + 2}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ) : (
+                        ""
+                      )}
+
+                      <PaginationItem disabled={numberPage === totalNumberPage}>
+                        <PaginationLink
+                          className="page"
+                          next
+                          //disable={numberPage === totalNumberPage ? true : false}
+                          onClick={() => {
+                            if (numberPage + 1 <= totalNumberPage) {
+                              onClickPage(numberPage + 1);
+                            }
+                          }}
+                        >
+                          Next
+                        </PaginationLink>
+                      </PaginationItem>
+                    </Pagination>
                   </Col>
                   <Col className="ml-auto mr-auto" md="6">
-                    <VectorMap
-                      map={"world_mill"}
-                      backgroundColor="transparent"
-                      zoomOnScroll={false}
-                      containerStyle={{
-                        width: "100%",
-                        height: "300px",
+                    <Card.Title as="h2" style={{
+                      marginLeft: '15px',
+                      color:
+                        'rgb(27 129 255)',
+                      fontWeight: '700'
+                    }}>Khách hàng thân thiết</Card.Title>
+                    <Table responsive>
+                    <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Khách hàng{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Số lần đặt đơn{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                       Ngày đặt gần đây{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <tbody>
+                        <tr>
+                          <td >
+                          Nguyễn Quốc Thịnh
+                          </td>
+                          <td>
+                            40 lần
+                          </td>
+                          <td style={{
+                            color:
+                              'green',
+                            fontWeight: '700'
+                          }}>
+                            15-10-2021
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            	
+Nguyễn Tiến Long
+                          </td>
+                          <td>
+                            23 lần
+                          </td>
+
+                          <td style={{
+                            color:
+                              'green',
+                            fontWeight: '700'
+                          }}>
+                            25-10-2021
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                          Nguyễn Minh Hoàng
+                          </td>
+
+                          <td>
+                            12 lần
+                          </td>
+
+                          <td style={{
+                            color:
+                              'green',
+                            fontWeight: '700'
+                          }}>
+                            11-09-2021
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                          Nguyễn Lê Thuần
+                          </td>
+                          <td >
+                            11 lần
+                          </td>
+                          <td style={{
+                            color:
+                              'green',
+                            fontWeight: '700'
+                          }}>
+                            11-10-2021
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                          Nguyễn Thái Bảo
+                          </td>
+                          <td >
+                            7 lần
+                          </td>
+                          <td style={{
+                            color:
+                              'green',
+                            fontWeight: '700'
+                          }}>
+                            11-10-2021
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                          Nguyễn Hoàng
+                          </td>
+                          <td >
+                            5 lần
+                          </td>
+                          <td style={{
+                            color:
+                              'green',
+                            fontWeight: '700'
+                          }}>
+                            15-9-2021
+                          </td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                    <Pagination
+                      style={{
+                        paddingLeft: '250px'
                       }}
-                      containerClassName="map"
-                      regionStyle={{
-                        initial: {
-                          fill: "#e4e4e4",
-                          "fill-opacity": 0.9,
-                          stroke: "none",
-                          "stroke-width": 0,
-                          "stroke-opacity": 0,
-                        },
-                      }}
-                      series={{
-                        regions: [
-                          {
-                            values: {
-                              VN: 1300,
-                              BR: 550,
-                              CA: 120,
-                              DE: 1300,
-                              FR: 540,
-                              GB: 690,
-                              GE: 200,
-                              IN: 200,
-                              RO: 600,
-                              RU: 2,
-                              US: 1,
-                            },
-                            scale: ["#AAAAAA", "#444444"],
-                            normalizeFunction: "polynomial",
-                          },
-                        ],
-                      }}
-                    />
+                      aria-label="Page navigation example"
+                      className="page-right"
+
+                    >
+                      <PaginationItem disabled={numberPage === 1}>
+                        <PaginationLink
+
+                          className="page"
+                          previous
+                          //disable={numberPage === 1 ? "true" : "false"}
+
+                          onClick={() => {
+                            if (numberPage - 1 > 0) {
+                              onClickPage(numberPage - 1);
+                            }
+                          }}
+                        >
+                          Previous
+                        </PaginationLink>
+                      </PaginationItem>
+                      {numberPage - 1 > 0 ? (
+                        <PaginationItem>
+                          <PaginationLink
+                            className="page"
+                            onClick={() => {
+                              onClickPage(numberPage - 1);
+                            }}
+                          >
+                            {numberPage - 1}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ) : (
+                        ""
+                      )}
+                      <PaginationItem active>
+                        <PaginationLink className="page-active">
+                          {numberPage}
+                        </PaginationLink>
+                      </PaginationItem>
+                      {numberPage + 1 <= totalNumberPage ? (
+                        <PaginationItem>
+                          <PaginationLink
+                            className="page"
+                            onClick={() => {
+                              onClickPage(numberPage + 1);
+                            }}
+                          >
+                            {numberPage + 1}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ) : (
+                        ""
+                      )}
+                      {numberPage + 2 <= totalNumberPage ? (
+                        <PaginationItem>
+                          <PaginationLink
+                            className="page"
+                            onClick={() => {
+                              onClickPage(numberPage + 2);
+                            }}
+                          >
+                            {numberPage + 2}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ) : (
+                        ""
+                      )}
+
+                      <PaginationItem
+
+                        disabled={numberPage === totalNumberPage}>
+                        <PaginationLink
+                          className="page"
+                          next
+                          //disable={numberPage === totalNumberPage ? true : false}
+                          onClick={() => {
+                            if (numberPage + 1 <= totalNumberPage) {
+                              onClickPage(numberPage + 1);
+                            }
+                          }}
+                        >
+                          Next
+                        </PaginationLink>
+                      </PaginationItem>
+                    </Pagination>
                   </Col>
                 </Row>
+
               </Card.Body>
             </Card>
           </Col>
         </Row>
-        <Row>
-        <Col md="5">
-            <Card>
-              <Card.Header>
-                <Card.Title as="h4">Hot Service</Card.Title>
-                <p className="card-category">All products including Taxes</p>
-                <Card.Body>
-              <UncontrolledCarousel
-                items={carouselItems}
-                indicators={false}
-                autoPlay={false}
-              />
-              </Card.Body>
-              </Card.Header>               
-              <Card.Footer>
-                <hr></hr>
-                <div className="stats">
-                  <i className="fas fa-check"></i>
-                  Data information certified
-                </div>
-              </Card.Footer>
-            </Card>
-          </Col>
-          <Col md="7">
-            <Card>
-              <Card.Header>
-                <Card.Title as="h4">Covid News</Card.Title>
-                <p className="card-category">24 Hours performance</p>
-              </Card.Header>
-              <Card.Body>
-              <UncontrolledCarousel
-                items={covid19Items}
-                indicators={false}
-                autoPlay={false}
-              />
-              </Card.Body>
-              <Card.Footer>
-                <hr></hr>
-                <div className="stats">
-                  <i className="fas fa-check"></i>
-                  Data information certified
-                </div>
-              </Card.Footer>
-            </Card>
-          </Col>
-        </Row>
-        
+
+
       </Container>
     </>
   );
