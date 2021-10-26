@@ -26,9 +26,7 @@ import {
   DropdownMenu,
   InputGroupButtonDropdown,
   Input,
-
 } from "reactstrap";
-import moment from "moment";
 import {
   TableCell,
   Grid,
@@ -634,7 +632,6 @@ export default function Repairman() {
                         Bị Chảy Nước                    
                         </td>
                       <td>
-                        480,000 đ                   
                         </td>
                       <TableCell>
                         <Typography
@@ -659,18 +656,16 @@ export default function Repairman() {
                         >Đã Hủy</Typography>
                       </TableCell>
                       <td>
-                        
                       </td>
                     </tr>
-
                     <tr>
 
                       <TableCell>
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Đỗ Thành Thái</Typography>
-                            <Typography color="textSecondary" variant="body2">Irepair 004
+                            <Typography className={classes.name}>Nguyễn Lê Thuần</Typography>
+                            <Typography color="textSecondary" variant="body2">Irepair 005
                             </Typography>
                           </Grid>
                         </Grid>
@@ -698,7 +693,7 @@ export default function Repairman() {
                         Bể Ống Nước
                       </td>
                       <td>
-                        670,000 đ
+                        
                       </td>
                       <TableCell>
                         <Typography
