@@ -530,9 +530,9 @@ function ManageSevice() {
           close={closeBtn(toggleserviceDelete)}
           toggle={toggleserviceDelete}
         >
-          Are you sure?
+          Xóa đồ dùng cần sửa
         </ModalHeader>
-        <ModalBody>Do you want to delete this service</ModalBody>
+        <ModalBody>Bạn có muốn xóa đồ dùng này?</ModalBody>
         <ModalFooter>
           <Button
             color="danger"
@@ -541,10 +541,10 @@ function ManageSevice() {
               setserviceModalDelete(false);
             }}
           >
-            Delete
+            Xóa
           </Button>{" "}
           <Button color="secondary" onClick={toggleserviceDelete}>
-            Cancel
+            Hủy
           </Button>
         </ModalFooter>
       </Modal>

@@ -83,7 +83,7 @@ var routes = [
   {
     path: "/major",
     layout: "/company",
-    name: "Sản Phẩm",
+    name: "Đồ dùng",
     icon: "nc-icon nc-single-copy-04",
     component: MajorTables,
   },

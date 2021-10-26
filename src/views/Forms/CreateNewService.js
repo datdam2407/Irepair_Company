@@ -355,17 +355,18 @@ export default function Repairman() {
                       <th className="description">Thợ Sửa Chữa</th>
                       <th className="description">Số Điện Thoại </th>
                       <th className="description">Ngày Tạo</th>
+                      <th className="description">Khách hàng</th>
                       <th className="description">Đồ Cần Sửa</th>
                       <th className="description">Hãng</th>
                       <th className="description">Vấn Đề</th>
                       <th className="description">Đánh Giá Yêu Cầu</th>
                       <th className="description">Trạng Thái</th>
-                      <th className="description">Hành Động</th>
+                      <th className="description"></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      
+
                       <TableCell>
                         <Grid container>
 
@@ -382,6 +383,14 @@ export default function Repairman() {
                       <td >
                         12-04-2021
                       </td>
+                      <TableCell>
+                        <Grid container>
+
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Nguyễn Lê Thuần</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
                       <td>
                         Ống Nước
                       </td>
@@ -391,15 +400,15 @@ export default function Repairman() {
                       <td>
                         Nghẹt ống cống nhà tắm
                       </td>
-                         
+
                       <td>
-                      <Typography
+                        <Typography
                           style={{
                             color:
                               'green',
                             width: '133px',
-                          fontWeight: '700',
-                          paddingRight :'15px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
                           }}
                         > Hài Lòng
                         </Typography>
@@ -409,12 +418,12 @@ export default function Repairman() {
                             color:
                               '#e2930b',
                             width: '90px',
-                          fontWeight: '700',
-                          paddingRight :'15px',
-                          fontSize:'20px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                            fontSize: '20px',
                           }}
                         >✩✩✩✩</Typography>
-                  </td>
+                      </td>
                       <TableCell>
                         <Typography
                           className={classes.Status}
@@ -422,34 +431,110 @@ export default function Repairman() {
                             backgroundColor:
                               'rgb(34, 176, 34)',
                             width: '126px',
-                            color:'black',
-                            fontSize:'12px'
+                            color: 'black',
+                            fontSize: '12px'
                           }}
                         >Đã Hoàn Thành</Typography>
                       </TableCell>
                       <td>
                         <td className="td-actions">
+                         
                           <OverlayTrigger
                             onClick={(e) => e.preventDefault()}
                             overlay={
                               <Tooltip id="tooltip-960683717">
-                                Approved..
+                                Delete ..
                               </Tooltip>
                             }
                             placement="right"
                           >
                             <Button
                               onClick={() => {
-                                setModalApprove(true);
+                                setRepairmanModalDelete(true);
                                 // setSelectRepairman(e);
                               }}
                               className="btn-link btn-icon"
                               type="button"
-                              variant="success"
+                              variant="danger"
                             >
-                              <i className="fas fa-check"></i>
+                              <i className="fas fa-times"></i>
                             </Button>
                           </OverlayTrigger>
+                        </td>
+                      </td>
+                    </tr>
+                    <tr>
+
+                      <TableCell>
+                        <Grid container>
+
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Nguyễn Khánh</Typography>
+                            <Typography color="textSecondary" variant="body2">Irepair 011
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                      <td>
+                        0823901392
+                      </td>
+                      <td >
+                        12-10-2020
+                      </td>
+                      <TableCell>
+                        <Grid container>
+
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Tâm Đăng</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                      <td>
+                        Xe Ô tô
+                      </td>
+                      <td>
+                        BMW 99
+                      </td>
+                      <td>
+                        Nghẹt ống bô
+                      </td>
+                      <td>
+                        <Typography
+                          style={{
+                            color:
+                              'green',
+                            width: '133px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                          }}
+                        > Rất hài Lòng
+                        </Typography>
+                        <Typography
+                          style={{
+                            color:
+                              '#e2930b',
+                            width: '110px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                            fontSize: '20px',
+                          }}
+                        >✩✩✩✩✩</Typography>
+                      </td>
+                      <TableCell>
+                        <Typography
+                          className={classes.Status}
+                          style={{
+                            backgroundColor:
+                              'rgb(34, 176, 34)',
+                            width: '126px',
+                            color: 'black',
+                            fontSize: '12px'
+                          }}
+                        >Đã Hoàn Thành</Typography>
+                      </TableCell>
+                      <td>
+                        <td className="td-actions">
+                         
                           <OverlayTrigger
                             onClick={(e) => e.preventDefault()}
                             overlay={
@@ -476,7 +561,7 @@ export default function Repairman() {
                     </tr>
 
                     <tr>
-                      
+
                       <TableCell>
                         <Grid container>
 
@@ -493,6 +578,14 @@ export default function Repairman() {
                       <td >
                         12-04-2021
                       </td>
+                      <TableCell>
+                        <Grid container>
+
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Nguyễn Quốc Vinh</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
                       <td>
                         Ống Nước
                       </td>
@@ -502,15 +595,15 @@ export default function Repairman() {
                       <td>
                         Nghẹt ống cống nhà tắm
                       </td>
-                     
+
                       <td>
-                      <Typography
+                        <Typography
                           style={{
                             color:
                               'green',
                             width: '133px',
-                          fontWeight: '700',
-                          paddingRight :'15px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
                           }}
                         > Hài Lòng
                         </Typography>
@@ -520,12 +613,12 @@ export default function Repairman() {
                             color:
                               '#e2930b',
                             width: '90px',
-                          fontWeight: '700',
-                          paddingRight :'15px',
-                          fontSize:'20px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                            fontSize: '20px',
                           }}
                         >✩✩✩✩</Typography>
-                  </td>
+                      </td>
                       <TableCell>
                         <Typography
                           className={classes.Status}
@@ -533,39 +626,19 @@ export default function Repairman() {
                             backgroundColor:
                               'rgb(34, 176, 34)',
                             width: '126px',
-                            color:'black',
-                            fontSize:'12px'
+                            color: 'black',
+                            fontSize: '12px'
                           }}
                         >Đã Hoàn Thành</Typography>
                       </TableCell>
                       <td>
                         <td className="td-actions">
+                         
                           <OverlayTrigger
                             onClick={(e) => e.preventDefault()}
                             overlay={
                               <Tooltip id="tooltip-960683717">
-                                Approved Repairman..
-                              </Tooltip>
-                            }
-                            placement="right"
-                          >
-                            <Button
-                              onClick={() => {
-                                setModalApprove(true);
-                                // setSelectRepairman(e);
-                              }}
-                              className="btn-link btn-icon"
-                              type="button"
-                              variant="success"
-                            >
-                              <i className="fas fa-check"></i>
-                            </Button>
-                          </OverlayTrigger>
-                          <OverlayTrigger
-                            onClick={(e) => e.preventDefault()}
-                            overlay={
-                              <Tooltip id="tooltip-960683717">
-                                Delete Repairman..
+                                Xóa lịch sử
                               </Tooltip>
                             }
                             placement="right"
@@ -586,7 +659,7 @@ export default function Repairman() {
                       </td>
                     </tr>
                     <tr>
-                      
+
                       <TableCell>
                         <Grid container>
 
@@ -603,6 +676,14 @@ export default function Repairman() {
                       <td >
                         13-02-2021
                       </td>
+                      <TableCell>
+                        <Grid container>
+
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Nguyễn Tiến Phát</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
                       <td>
                         Máy Lạnh
                       </td>
@@ -610,17 +691,17 @@ export default function Repairman() {
                         SamSung
                       </td>
                       <td>
-Bị Chảy Nước                      </td>
+                        Bị Chảy Nước                      </td>
                       <TableCell>
                         <Typography
                           style={{
                             color:
                               'red',
-                              fontWeight:'700'
+                            fontWeight: '700'
                           }}
                         > Không Liên Hệ Được Thợ</Typography>
                       </TableCell>
-                       
+
                       <TableCell>
                         <Typography
                           className={classes.Status}
@@ -628,39 +709,19 @@ Bị Chảy Nước                      </td>
                             backgroundColor:
                               'red',
                             width: '126px',
-                            color:'black',
-                            fontSize:'12px'
+                            color: 'black',
+                            fontSize: '12px'
                           }}
                         >Đã Hủy</Typography>
                       </TableCell>
                       <td>
                         <td className="td-actions">
+                         
                           <OverlayTrigger
                             onClick={(e) => e.preventDefault()}
                             overlay={
                               <Tooltip id="tooltip-960683717">
-                                Approved Repairman..
-                              </Tooltip>
-                            }
-                            placement="right"
-                          >
-                            <Button
-                              onClick={() => {
-                                setModalApprove(true);
-                                // setSelectRepairman(e);
-                              }}
-                              className="btn-link btn-icon"
-                              type="button"
-                              variant="success"
-                            >
-                              <i className="fas fa-check"></i>
-                            </Button>
-                          </OverlayTrigger>
-                          <OverlayTrigger
-                            onClick={(e) => e.preventDefault()}
-                            overlay={
-                              <Tooltip id="tooltip-960683717">
-                                Delete Repairman..
+                                Xóa lịch sử
                               </Tooltip>
                             }
                             placement="right"
@@ -682,7 +743,7 @@ Bị Chảy Nước                      </td>
                     </tr>
 
                     <tr>
-                      
+
                       <TableCell>
                         <Grid container>
 
@@ -694,11 +755,18 @@ Bị Chảy Nước                      </td>
                         </Grid>
                       </TableCell>
                       <td>
-                        0123456789
+                        0980921232
                       </td>
                       <td >
                         19-08-2020
                       </td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Nguyễn Tiến Long</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
                       <td>
                         Ống Nước
                       </td>
@@ -706,18 +774,18 @@ Bị Chảy Nước                      </td>
                         Khác
                       </td>
                       <td>
-                      Bể Ống Nước
+                        Bể Ống Nước
                       </td>
                       <TableCell>
                         <Typography
                           style={{
                             color:
                               'red',
-                              fontWeight:'700'
+                            fontWeight: '700'
                           }}
                         >Thời Gian Chờ Thợ đến quá lâu</Typography>
                       </TableCell>
-                       
+
                       <TableCell>
                         <Typography
                           className={classes.Status}
@@ -725,39 +793,19 @@ Bị Chảy Nước                      </td>
                             backgroundColor:
                               'red',
                             width: '126px',
-                            color:'black',
-                            fontSize:'12px'
+                            color: 'black',
+                            fontSize: '12px'
                           }}
                         >Đã Hủy</Typography>
                       </TableCell>
                       <td>
                         <td className="td-actions">
+                         
                           <OverlayTrigger
                             onClick={(e) => e.preventDefault()}
                             overlay={
                               <Tooltip id="tooltip-960683717">
-                                Approved Repairman..
-                              </Tooltip>
-                            }
-                            placement="right"
-                          >
-                            <Button
-                              onClick={() => {
-                                setModalApprove(true);
-                                // setSelectRepairman(e);
-                              }}
-                              className="btn-link btn-icon"
-                              type="button"
-                              variant="success"
-                            >
-                              <i className="fas fa-check"></i>
-                            </Button>
-                          </OverlayTrigger>
-                          <OverlayTrigger
-                            onClick={(e) => e.preventDefault()}
-                            overlay={
-                              <Tooltip id="tooltip-960683717">
-                                Delete Repairman..
+                                Xóa lịch sử
                               </Tooltip>
                             }
                             placement="right"
@@ -778,7 +826,7 @@ Bị Chảy Nước                      </td>
                       </td>
                     </tr>
                     <tr>
-                      
+
                       <TableCell>
                         <Grid container>
 
@@ -790,11 +838,18 @@ Bị Chảy Nước                      </td>
                         </Grid>
                       </TableCell>
                       <td>
-                        0123456789
+                      0980921232
                       </td>
                       <td >
                         19-08-2020
                       </td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Phạm Tấn Phát</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
                       <td>
                         Ống Nước
                       </td>
@@ -802,19 +857,19 @@ Bị Chảy Nước                      </td>
                         Khác
                       </td>
                       <td>
-                      Bể Ống Nước
+                        Bể Ống Nước
                       </td>
-                     
+
                       <TableCell>
                         <Typography
                           style={{
                             color:
                               '#195ea0',
-                              fontWeight:'700'
+                            fontWeight: '700'
                           }}
                         ></Typography>
                       </TableCell>
-                       
+
                       <TableCell>
                         <Typography
                           className={classes.Status}
@@ -822,39 +877,104 @@ Bị Chảy Nước                      </td>
                             backgroundColor:
                               'orange',
                             width: '126px',
-                            color:'black',
-                            fontSize:'12px'
+                            color: 'black',
+                            fontSize: '12px'
                           }}
                         >Thợ đang đến</Typography>
                       </TableCell>
                       <td>
                         <td className="td-actions">
+                         
                           <OverlayTrigger
                             onClick={(e) => e.preventDefault()}
                             overlay={
                               <Tooltip id="tooltip-960683717">
-                                Approved Repairman..
+                                Xóa lịch sử
                               </Tooltip>
                             }
                             placement="right"
                           >
                             <Button
                               onClick={() => {
-                                setModalApprove(true);
+                                setRepairmanModalDelete(true);
                                 // setSelectRepairman(e);
                               }}
                               className="btn-link btn-icon"
                               type="button"
-                              variant="success"
+                              variant="danger"
                             >
-                              <i className="fas fa-check"></i>
+                              <i className="fas fa-times"></i>
                             </Button>
                           </OverlayTrigger>
+                        </td>
+                      </td>
+                    </tr>
+
+                    <tr>
+
+                      <TableCell>
+                        <Grid container>
+
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Trần Văn Thái</Typography>
+                            <Typography color="textSecondary" variant="body2">Irepair 003
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                      <td>
+                        0123456789
+                      </td>
+                      <td >
+                        25-10-2021
+                      </td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Đàm Đạt</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                      <td>
+                        Laptop
+                      </td>
+                      <td>
+                        Asus
+                      </td>
+                      <td>
+                        Không vô được mạng (Hư card mạng)
+                      </td>
+
+                      <TableCell>
+                        <Typography
+                          style={{
+                            color:
+                              '#ff8e02e0',
+                            fontWeight: '800'
+                          }}
+                        >Đang đợi vật tư</Typography>
+                      </TableCell>
+
+                      <TableCell>
+                        <Typography
+                          className={classes.Status}
+                          style={{
+                            backgroundColor:
+                              'orange',
+                            width: '126px',
+                            color: 'black',
+                            fontSize: '12px'
+                          }}
+                        >Đang đợi</Typography>
+                      </TableCell>
+                      <td>
+                        <td className="td-actions">
+                         
                           <OverlayTrigger
                             onClick={(e) => e.preventDefault()}
                             overlay={
                               <Tooltip id="tooltip-960683717">
-                                Delete Repairman..
+                                Xóa lịch sử
                               </Tooltip>
                             }
                             placement="right"
@@ -875,7 +995,7 @@ Bị Chảy Nước                      </td>
                       </td>
                     </tr>
                     <tr>
-                      
+
                       <TableCell>
                         <Grid container>
 
@@ -892,6 +1012,13 @@ Bị Chảy Nước                      </td>
                       <td >
                         12-04-2021
                       </td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Phạm Tấn Phát</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
                       <td>
                         Máy tính
                       </td>
@@ -901,17 +1028,17 @@ Bị Chảy Nước                      </td>
                       <td>
                         Hư màn hình
                       </td>
-                         
+
                       <td>
-                      <Typography
+                        <Typography
                           style={{
                             color:
                               'green',
                             width: '133px',
-                          fontWeight: '700',
-                          paddingRight :'15px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
                           }}
-                        > Hài Lòng
+                        >Rất hài Lòng
                         </Typography>
 
                         <Typography
@@ -919,12 +1046,12 @@ Bị Chảy Nước                      </td>
                             color:
                               '#e2930b',
                             width: '133px',
-                          fontWeight: '700',
-                          paddingRight :'15px',
-                          fontSize:'20px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                            fontSize: '20px',
                           }}
                         >✩✩✩✩✩</Typography>
-                  </td>
+                      </td>
                       <TableCell>
                         <Typography
                           className={classes.Status}
@@ -932,39 +1059,19 @@ Bị Chảy Nước                      </td>
                             backgroundColor:
                               'rgb(34, 176, 34)',
                             width: '133px',
-                            color:'black',
-                            fontSize:'12px'
+                            color: 'black',
+                            fontSize: '12px'
                           }}
                         >Đã Hoàn Thành</Typography>
                       </TableCell>
                       <td>
                         <td className="td-actions">
+                         
                           <OverlayTrigger
                             onClick={(e) => e.preventDefault()}
                             overlay={
                               <Tooltip id="tooltip-960683717">
-                                Approved Repairman..
-                              </Tooltip>
-                            }
-                            placement="right"
-                          >
-                            <Button
-                              onClick={() => {
-                                setModalApprove(true);
-                                // setSelectRepairman(e);
-                              }}
-                              className="btn-link btn-icon"
-                              type="button"
-                              variant="success"
-                            >
-                              <i className="fas fa-check"></i>
-                            </Button>
-                          </OverlayTrigger>
-                          <OverlayTrigger
-                            onClick={(e) => e.preventDefault()}
-                            overlay={
-                              <Tooltip id="tooltip-960683717">
-                                Delete Repairman..
+                                Xóa lịch sử
                               </Tooltip>
                             }
                             placement="right"
@@ -1108,12 +1215,11 @@ Bị Chảy Nước                      </td>
       <Modal isOpen={modalDelete} toggle={toggleDelete}>
         <ModalHeader
           style={{ color: "#B22222" }}
-          close={closeBtn(toggleDelete)}
-          toggle={toggleDelete}
+        
         >
-          Are you sure?
+          Xóa lịch sử
         </ModalHeader>
-        <ModalBody>Do you want to delete this repairman</ModalBody>
+        <ModalBody>Bạn có muốn xóa lịch sử yêu cầu này</ModalBody>
         <ModalFooter>
           <Button
             color="danger"
@@ -1122,10 +1228,10 @@ Bị Chảy Nước                      </td>
               setRepairmanModalDelete(false);
             }}
           >
-            Delete
+            Xóa
           </Button>{" "}
           <Button color="secondary" onClick={toggleDelete}>
-            Cancel
+            Hủy
           </Button>
         </ModalFooter>
       </Modal>

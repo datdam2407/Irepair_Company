@@ -329,7 +329,7 @@ function ManageSevice() {
                     </Form>
                   </Col>
                   <Col md={8} align="right">
-                    <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Thêm Sản Phẩm</Button>
+                    <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Thêm đồ dùng cần sửa</Button>
                   </Col>
                 </Row>
               </div>
@@ -338,11 +338,11 @@ function ManageSevice() {
                 <Table className="table">
                   <thead>
                     <tr>
-                      <th className="description" >Tên Sản Phẩm</th>
+                      <th className="description" >Đồ dùng</th>
                       <th className="description">Mô Tả</th>
                       <th className="description">Hãng Sản Xuất</th>
                       <th className="description">Trạng Thái</th>
-                      <th className="description">Hành Động</th>
+                      <th className="description">Thao tác</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1087,12 +1087,10 @@ function ManageSevice() {
       <Modal isOpen={modalserviceDelete} toggle={toggleserviceDelete}>
         <ModalHeader
           style={{ color: "#B22222" }}
-          close={closeBtn(toggleserviceDelete)}
-          toggle={toggleserviceDelete}
         >
-          Are you sure?
+          Xóa đồ dùng
         </ModalHeader>
-        <ModalBody>Do you want to delete this service</ModalBody>
+        <ModalBody>Bạn có muốn xóa đồ dùng này?</ModalBody>
         <ModalFooter>
           <Button
             color="danger"
@@ -1101,10 +1099,10 @@ function ManageSevice() {
               setserviceModalDelete(false);
             }}
           >
-            Delete
+            Xóa
           </Button>{" "}
           <Button color="secondary" onClick={toggleserviceDelete}>
-            Cancel
+            Hủy xóa
           </Button>
         </ModalFooter>
       </Modal>
@@ -1115,13 +1113,13 @@ function ManageSevice() {
           close={closeBtn(toggleCreate)}
           toggle={toggleCreate}
         >
-          <ModalTitle>Tạo mới một sản phẩm</ModalTitle>
+          <ModalTitle>Tạo mới một đồ dùng</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
           <FormGroup className="mb-2">
-              <Form.Label>Tên Sản Phẩm</Form.Label>
-              <Form.Control type="text" placeholder="Tên sản phẩm" value={name}
+              <Form.Label>Tên đồ dùng</Form.Label>
+              <Form.Control type="text" placeholder="Tên đồ dùng" value={name}
                 onChange={e => setName(e.target.value)}
               />
             </FormGroup>
@@ -1181,64 +1179,52 @@ function ManageSevice() {
           </Button>
         </ModalFooter>
       </Modal>
-
-
       <Modal isOpen={modalEdit} toggle={toggleEdit} centered>
         <ModalHeader
           style={{ color: "#B22222" }}
           close={closeBtn(toggleEdit)}
           toggle={toggleEdit}
         >
-          <ModalTitle>Do you want to edit service ?</ModalTitle>
+          <ModalTitle>Bạn muốn cập nhật?</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup className="mb-2">
-              <Form.Label>Company </Form.Label>
-              <Form.Control disabled type="text" placeholder="name" value={companyId}
+              <Form.Label>Tên đồ dùng </Form.Label>
+              <Form.Control type="text" placeholder="name" value="Tủ Lạnh"
                 onChange={e => setCompanyID(e.target.value)}
               />
             </FormGroup>
-            <Form.Label>Field </Form.Label>
+            <Form.Label>Hãng Sản Xuất </Form.Label>
             <FormGroup className="mb-2">
-              <Dropdown
-                fluid
-                search
-                selection
-                value={fieldSelect}
-                onChange={handleOnchangeSelectedAsset}
-                options={listField} />
+              <Autocomplete
+                options={myOptions}
+                multiple
+                style={{ width: 500 }}
+                value={["SamSung", "Panasonic", "Daikin", "Electrolux", "LG", "Tosiba", "Sharp", "Mishubishi","Electric","Aqua"]}
+                getOptionLabel={(option) => option}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Lựa chọn hãng"
+                    variant="standard"
+                    placeholder="hãng sản phẩm"
+                  />
+                )}
+              />
             </FormGroup>
 
             <FormGroup className="mb-2">
-              <Form.Label>service name</Form.Label>
-              <Form.Control type="text" placeholder="Service name" value={name}
-                onChange={e => setName(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup className="mb-2">
-              <Form.Label>Description</Form.Label>
+              <Form.Label>Mô tả</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Description"
                 as="textarea"
-                value={description}
+                value="Chuyên Sửa Các Vấn đề liên quan tới tủ lạnh"
                 onChange={e => setDescription(e.target.value)}
                 rows={3}
               />
             </FormGroup>
-            {/* <FormGroup className="mb-2">
-              <Form.Label>Price</Form.Label>
-              <Form.Control type="number" placeholder="service name" value={price}
-                onChange={e => setPrice(e.target.value)}
-              />
-            </FormGroup> */}
-            {/* <FormGroup className="mb-3">
-              <Form.Label>Picture</Form.Label>
-              <Form.Control type="text" value={picture}
-                onChange={e => setImage(e.target.value)}
-              />
-            </FormGroup> */}
           </Form>
         </ModalBody>
         <ModalFooter>

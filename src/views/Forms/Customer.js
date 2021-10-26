@@ -322,7 +322,7 @@ function Customer() {
                       </InputGroup>
                     </Form>
                   </Col>
-                
+
                 </Row>
               </div>
 
@@ -334,7 +334,7 @@ function Customer() {
                       <th className="description">Điện Thoại</th>
                       <th className="description">Địa Chỉ</th>
                       <th className="description">Ngày Đăng Ký</th>
-                      <th className="description">Trạng Thái</th>
+                      <th className="description">Đánh giá</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -355,17 +355,111 @@ function Customer() {
                       <td>
                         20-01-2020
                       </td>
-                      <TableCell>
-                        <Typography
-                          className={classes.Status}
+                      <td>
+                      <Typography
                           style={{
-                            backgroundColor:
-                              'rgb(34, 176, 34)',
-                            width: '120px'
+                            color:
+                              '#e2930b',
+                            width: '120px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                            fontSize: '20px',
                           }}
-                        >Đang Hoạt Động</Typography>
+                        >✩✩✩✩</Typography>
+                        <Typography
+                          style={{
+                            color:
+                              'green',
+                            width: '253px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                          }}
+                        > Gọi thợ nhanh, sửa chữa tận tình
+                        </Typography>
+                      </td>
+                     
+                    </tr>
+                    <tr >
+                      <TableCell>
+                        <Grid container>
+
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Nguyễn Quốc Vinh</Typography>
+                            <Typography color="textSecondary" variant="body2">Cus 011</Typography>
+                          </Grid>
+                        </Grid>
                       </TableCell>
-            
+                      <td>0213972832</td>
+                      <td>
+                        89 Lê Văn Việt, Q9 , TP Thủ Đức
+                      </td>
+                      <td>
+                        20-01-2021
+                      </td>
+                      <td>
+                      <Typography
+                          style={{
+                            color:
+                              '#e2930b',
+                            width: '120px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                            fontSize: '20px',
+                          }}
+                        >✩✩✩✩✩</Typography>
+                        <Typography
+                          style={{
+                            color:
+                              'green',
+                            width: '253px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                          }}
+                        > Thợ sửa ok! Thở sửa tủ lạnh với TV đúng giá
+                        </Typography>
+                      </td>
+
+                    </tr>
+                    <tr >
+                      <TableCell>
+                        <Grid container>
+
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Nguyễn Tiến Long</Typography>
+                            <Typography color="textSecondary" variant="body2">Cus 012</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                      <td>0213912323</td>
+                      <td>
+                        550 Quang Trung, Q Gò Vấp , Phường 8, TP Hồ Chí Minh
+                      </td>
+                      <td>
+                        11-01-2021
+                      </td>
+                      <td>
+                      <Typography
+                          style={{
+                            color:
+                              '#e2930b',
+                            width: '120px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                            fontSize: '20px',
+                          }}
+                        >✩✩✩✩</Typography>
+                        <Typography
+                          style={{
+                            color:
+                              'green',
+                            width: '253px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                          }}
+                        > Thợ sửa ok! Rất nhanh chóng
+                        </Typography>
+                      </td>
+
                     </tr>
                     <tr >
                       <TableCell>
@@ -384,17 +478,30 @@ function Customer() {
                       <td>
                         02-02-2010
                       </td>
-                      <TableCell>
-                        <Typography
-                          className={classes.Status}
+                      <td>
+                      <Typography
                           style={{
-                            backgroundColor:
-                              'rgb(34, 176, 34)',
-                            width: '120px'
+                            color:
+                              '#e2930b',
+                            width: '120px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                            fontSize: '20px',
                           }}
-                        >Đang Hoạt Động</Typography>
-                      </TableCell>
-                                </tr>
+                        >✩✩✩✩</Typography>
+                        <Typography
+                          style={{
+                            color:
+                              'green',
+                            width: '253px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                          }}
+                        > Rất nhanh chóng thợ đã tới
+                        </Typography>
+                      </td>
+
+                    </tr>
 
                     <tr >
                       <TableCell>
@@ -413,17 +520,29 @@ function Customer() {
                       <td>
                         12-12-2019
                       </td>
-                      <TableCell>
-                        <Typography
-                          className={classes.Status}
+                      <td>
+                      <Typography
                           style={{
-                            backgroundColor:
-                              'rgb(34, 176, 34)',
-                            width: '120px'
+                            color:
+                              '#e2930b',
+                            width: '120px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                            fontSize: '20px',
                           }}
-                        >Đang Hoạt Động</Typography>
-                      </TableCell>
-                                </tr>
+                        >✩✩✩✩✩</Typography>
+                        <Typography
+                          style={{
+                            color:
+                              'green',
+                            width: '253px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                          }}
+                        > Mọi vấn đề giải quyết rất nhanh chóng
+                        </Typography>
+                      </td>
+                    </tr>
 
                     <tr >
                       <TableCell>
@@ -442,17 +561,29 @@ function Customer() {
                       <td>
                         12-02-2021
                       </td>
-                      <TableCell>
-                        <Typography
-                          className={classes.Status}
+                      <td>
+                      <Typography
                           style={{
-                            backgroundColor:
-                              'rgb(34, 176, 34)',
-                            width: '120px'
+                            color:
+                              '#e2930b',
+                            width: '120px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                            fontSize: '20px',
                           }}
-                        >Đang Hoạt Động</Typography>
-                      </TableCell>
-                                </tr>
+                        >✩✩✩</Typography>
+                        <Typography
+                          style={{
+                            color:
+                              'green',
+                            width: '253px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                          }}
+                        > Cần cải tiến thêm một số tính năng 
+                        </Typography>
+                      </td>
+                    </tr>
 
                     <tr >
                       <TableCell>
@@ -471,17 +602,29 @@ function Customer() {
                       <td>
                         02-02-2019
                       </td>
-                      <TableCell>
-                        <Typography
-                          className={classes.Status}
+                      <td>
+                      <Typography
                           style={{
-                            backgroundColor:
-                              'rgb(34, 176, 34)',
-                            width: '120px'
+                            color:
+                              '#e2930b',
+                            width: '120px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                            fontSize: '20px',
                           }}
-                        >Đang Hoạt Động</Typography>
-                      </TableCell>
-                                </tr>
+                        >✩✩✩✩✩</Typography>
+                        <Typography
+                          style={{
+                            color:
+                              'green',
+                            width: '253px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                          }}
+                        > Dịch vụ uy tín , ứng dụng hữu ích không cần phải đi ra bên ngoài sửa chữa
+                        </Typography>
+                      </td>
+                    </tr>
                   </tbody>
                 </Table>
                 <Row>

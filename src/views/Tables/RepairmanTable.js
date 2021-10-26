@@ -4,8 +4,8 @@ import {
     faSearch,
     faCaretDown,
     faCaretUp,
-  } from "@fortawesome/free-solid-svg-icons";
-  
+} from "@fortawesome/free-solid-svg-icons";
+
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 // react-bootstrap components
@@ -22,9 +22,9 @@ import {
     Tooltip,
 } from "react-bootstrap";
 import {
-   
 
-   
+
+
     Modal,
     ModalHeader,
     ModalBody,
@@ -75,7 +75,7 @@ export default function Repairman() {
     const [stateListFilter, setstateListFilter] = useState([]);
     const toggleDropDown = () => setDropdownOpen(!dropdownOpen);
     const toggleDropDown1 = () => setDropdownOpen1(!dropdownOpen1);
-  
+
     const [CustomerDelete, setCustomerDelete] = useState(null);
     const [modalDelete, setCustomerModalDelete] = useState(false);
     const toggleDelete = () => setCustomerModalDelete(!modalDelete);
@@ -84,11 +84,11 @@ export default function Repairman() {
     const [modalEdit, setCustomerModalEdit] = useState(false);
     const toggleEdit = () => setCustomerModalEdit(!modalEdit)
 
-    const myOptions = ['Thợ sửa tivi', 'Thợ Sửa máy tính', 'Thợ điện lạnh', 'Thợ Điện', 'Thợ Sửa ô tô','Thợ Sửa xe máy','Thợ Sửa đồng hồ']
-  
+    const myOptions = ['Thợ sửa tivi', 'Thợ Sửa máy tính', 'Thợ điện lạnh', 'Thợ Điện', 'Thợ Sửa ô tô', 'Thợ Sửa xe máy', 'Thợ Sửa đồng hồ']
+
     //modal create
-  const [modalCreate, setserviceModalCreate] = useState(false);
-  const toggleCreate = () => setserviceModalCreate(!modalCreate)
+    const [modalCreate, setserviceModalCreate] = useState(false);
+    const toggleCreate = () => setserviceModalCreate(!modalCreate)
     //view modal
     const [modalStatus, setModalStatus] = useState(false);
     const toggleDetails = () => setModalStatus(!modalStatus);
@@ -96,7 +96,7 @@ export default function Repairman() {
     const listStates = [
         "Đang Hoạt Động",
         "Ngưng hoạt động",
-      ];
+    ];
 
     const [customer_Name, setcustomer_Name] = useState("");
     const [address, setaddress] = useState("");
@@ -230,48 +230,48 @@ export default function Repairman() {
         <>
             <Col md="12">
                 <Card className="strpied-tabled-with-hover">
-                <div className="header-form">
-                <Row>
-                  <div className="header-body-filter">
-                    <Col md={7}>
-                      <Row className="fixed">
-                        <InputGroup>
-                          <InputGroupButtonDropdown
-                            addonType="append"
-                            isOpen={dropdownOpen}
-                            toggle={toggleDropDown}
-                            className="border border-gray-css"
-                          >
-                            <DropdownToggle className="dropdown-filter-css" caret> Filter&nbsp;</DropdownToggle>                      <DropdownMenu >
-                              <div className="fixed" >
-                             
-                              </div>
-                            </DropdownMenu>
-                          </InputGroupButtonDropdown>
-                        </InputGroup>
+                    <div className="header-form">
+                        <Row>
+                            <div className="header-body-filter">
+                                <Col md={7}>
+                                    <Row className="fixed">
+                                        <InputGroup>
+                                            <InputGroupButtonDropdown
+                                                addonType="append"
+                                                isOpen={dropdownOpen}
+                                                toggle={toggleDropDown}
+                                                className="border border-gray-css"
+                                            >
+                                                <DropdownToggle className="dropdown-filter-css" caret> Filter&nbsp;</DropdownToggle>                      <DropdownMenu >
+                                                    <div className="fixed" >
 
-                      </Row>
-                    </Col>
-                  </div>
-                  <Col md={2}>
-                    <Form
-                      onClick={(e) => {
-                        // onSubmitSearch(e);
-                      }}
-                    >
-                      <InputGroup className="fixed">
-                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Search name..."></Input>
-                        <Button className="dropdown-filter-css" >
-                          <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
-                        </Button>
-                      </InputGroup>
-                    </Form>
-                  </Col>
-                  <Col md={8} align="right">
-                    <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Thêm thợ mới</Button>
-                  </Col>
-                </Row>
-              </div>
+                                                    </div>
+                                                </DropdownMenu>
+                                            </InputGroupButtonDropdown>
+                                        </InputGroup>
+
+                                    </Row>
+                                </Col>
+                            </div>
+                            <Col md={2}>
+                                <Form
+                                    onClick={(e) => {
+                                        // onSubmitSearch(e);
+                                    }}
+                                >
+                                    <InputGroup className="fixed">
+                                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Search name..."></Input>
+                                        <Button className="dropdown-filter-css" >
+                                            <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+                                        </Button>
+                                    </InputGroup>
+                                </Form>
+                            </Col>
+                            <Col md={8} align="right">
+                                <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Thêm thợ mới</Button>
+                            </Col>
+                        </Row>
+                    </div>
                     <Card.Body className="table-full-width table-responsive px-0">
                         <Table className="table-hover table-striped">
                             <thead>
@@ -281,16 +281,23 @@ export default function Repairman() {
                                     <th className="description">Số điện thoại </th>
                                     <th className="description">Email</th>
                                     <th className="description">Chuyên Môn</th>
+                                    <th className="description">Đánh giá</th>
                                     <th className="description">Ngày tạo</th>
                                     <th className="description">Trạng Thái</th>
+                                    <th className="description">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                               
-                                    <td>
-                                        Đỗ Thành Thái
-                                    </td>
+
+                                    <TableCell>
+                                        <Grid container>
+
+                                            <Grid item lg={10}>
+                                                <Typography className={classes.name}>Đỗ Thành Thái</Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </TableCell>
                                     <td>
                                         0123456789
                                     </td>
@@ -298,30 +305,92 @@ export default function Repairman() {
                                         ThaiDTIrepair@gmail.com
                                     </td>
                                     <td>
-                                        Sửa Xe Ô tô
+                                        Thợ sửa ô tô, thợ sửa xe máy
                                     </td>
+                                    <Typography
+                                        style={{
+                                            color:
+                                                '#e2930b',
+                                            width: '90px',
+                                            fontWeight: '700',
+                                            paddingRight: '15px',
+                                            fontSize: '20px',
+                                        }}
+                                    >✩✩✩✩</Typography>
                                     <td >
-                                        20-12-2021
+                                        20-12-2020
                                     </td >
 
-                                        <TableCell>
-                                            <Typography
-                                                className={classes.Status}
-                                                style={{
-                                                    backgroundColor:
-                                                        'rgb(34, 176, 34)',
-                                                        textAlign: 'center',
-                                                        width:'133px'
+                                    <TableCell>
+                                        <Typography
+                                            className={classes.Status}
+                                            style={{
+                                                backgroundColor:
+                                                    'rgb(34, 176, 34)',
+                                                textAlign: 'center',
+                                                width: '133px'
 
+                                            }}
+                                        >Đang hoạt động</Typography>
+                                    </TableCell>
+                                    <td className="td-actions">
+
+                                        <OverlayTrigger
+                                            overlay={
+                                                <Tooltip id="tooltip-436082023">
+                                                    Cập nhật..
+                                                </Tooltip>
+                                            }
+                                            placement="right"
+                                        >
+                                            <Button
+                                                // onClick={() => handleUpdate(e.data)}
+                                                // onGridReady={onGridReady}
+                                                onClick={() => {
+                                                    // setserviceEdit(e.Id);
+                                                    // getserviceByID(e.Id);
+                                                    setCustomerModalEdit(true);
                                                 }}
-                                            >Đang hoạt động</Typography>
-                                        </TableCell>
+                                                className="btn-link btn-icon"
+                                                type="button"
+                                                variant="success"
+                                            >
+                                                <i className="fas fa-edit"></i>
+                                            </Button>
+                                        </OverlayTrigger>
+                                        <OverlayTrigger
+                                            onClick={(e) => e.preventDefault()}
+                                            overlay={
+                                                <Tooltip id="tooltip-334669391">
+                                                    Remove Post..
+                                                </Tooltip>
+                                            }
+                                            placement="right\"
+                                        >
+                                            <Button
+                                                onClick={() => {
+                                                    // setserviceDelete(e.Id);
+                                                    setCustomerModalDelete(true);
+                                                }}
+                                                className="btn-link btn-icon"
+                                                type="button"
+                                                variant="danger"
+                                            >
+                                                <i className="fas fa-times"></i>
+                                            </Button>
+                                        </OverlayTrigger>
+                                    </td>
                                 </tr>
                                 <tr>
-                               
-                                    <td>
-                                        Trần Văn Thái
-                                    </td>
+
+                                    <TableCell>
+                                        <Grid container>
+
+                                            <Grid item lg={10}>
+                                                <Typography className={classes.name}>Trần Văn Thái</Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </TableCell>
                                     <td>
                                         0989070145
                                     </td>
@@ -329,30 +398,92 @@ export default function Repairman() {
                                         ThaiTVIrepair@gmail.com
                                     </td>
                                     <td>
-                                        Sửa Máy Tính
+                                        Thợ sửa Máy Tính , thợ sửa ti vi
                                     </td>
+                                    <Typography
+                                        style={{
+                                            color:
+                                                '#e2930b',
+                                            width: '90px',
+                                            fontWeight: '700',
+                                            paddingRight: '15px',
+                                            fontSize: '20px',
+                                        }}
+                                    >✩✩✩</Typography>
                                     <td >
-                                        20-12-2021
+                                        20-10-2021
 
                                     </td >
-                                        <TableCell>
-                                            <Typography
-                                                className={classes.Status}
-                                                style={{
-                                                    backgroundColor:
-                                                        'rgb(34, 176, 34)',
-                                                    textAlign: 'center',
-                                                    width:'133px'
+                                    <TableCell>
+                                        <Typography
+                                            className={classes.Status}
+                                            style={{
+                                                backgroundColor:
+                                                    'rgb(34, 176, 34)',
+                                                textAlign: 'center',
+                                                width: '133px'
 
+                                            }}
+                                        >Đang hoạt động</Typography>
+                                    </TableCell>
+                                    <td className="td-actions">
+
+                                        <OverlayTrigger
+                                            overlay={
+                                                <Tooltip id="tooltip-436082023">
+                                                    Cập nhật..
+                                                </Tooltip>
+                                            }
+                                            placement="right"
+                                        >
+                                            <Button
+                                                // onClick={() => handleUpdate(e.data)}
+                                                // onGridReady={onGridReady}
+                                                onClick={() => {
+                                                    // setserviceEdit(e.Id);
+                                                    // getserviceByID(e.Id);
+                                                    setCustomerModalEdit(true);
                                                 }}
-                                            >Đang hoạt động</Typography>
-                                        </TableCell>
+                                                className="btn-link btn-icon"
+                                                type="button"
+                                                variant="success"
+                                            >
+                                                <i className="fas fa-edit"></i>
+                                            </Button>
+                                        </OverlayTrigger>
+                                        <OverlayTrigger
+                                            onClick={(e) => e.preventDefault()}
+                                            overlay={
+                                                <Tooltip id="tooltip-334669391">
+                                                    Remove Post..
+                                                </Tooltip>
+                                            }
+                                            placement="right\"
+                                        >
+                                            <Button
+                                                onClick={() => {
+                                                    // setserviceDelete(e.Id);
+                                                    setCustomerModalDelete(true);
+                                                }}
+                                                className="btn-link btn-icon"
+                                                type="button"
+                                                variant="danger"
+                                            >
+                                                <i className="fas fa-times"></i>
+                                            </Button>
+                                        </OverlayTrigger>
+                                    </td>
                                 </tr>
                                 <tr>
-                               
-                                    <td>
-                                        Phạm Hữu Nghĩa
-                                    </td>
+
+                                    <TableCell>
+                                        <Grid container>
+
+                                            <Grid item lg={10}>
+                                                <Typography className={classes.name}>Phạm Hữu Nghĩa</Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </TableCell>
                                     <td>
                                         0123456789
                                     </td>
@@ -360,31 +491,186 @@ export default function Repairman() {
                                         NghiaPHIrepair@gmail.com
                                     </td>
                                     <td>
-                                        Sửa Điện
+                                        Thợ Điện
                                     </td>
+                                    <Typography
+                                        style={{
+                                            color:
+                                                '#e2930b',
+                                            width: '90px',
+                                            fontWeight: '700',
+                                            paddingRight: '15px',
+                                            fontSize: '20px',
+                                        }}
+                                    >✩✩✩✩</Typography>
                                     <td >
-                                        20-12-2021
+                                        20-08-2020
 
                                     </td >
 
-                                        <TableCell>
-                                            <Typography
-                                                className={classes.Status}
-                                                style={{
-                                                    backgroundColor:
-                                                        'rgb(34, 176, 34)',
-                                                        textAlign: 'center',
-                                                        width:'133px'
+                                    <TableCell>
+                                        <Typography
+                                            className={classes.Status}
+                                            style={{
+                                                backgroundColor:
+                                                    'rgb(34, 176, 34)',
+                                                textAlign: 'center',
+                                                width: '133px'
 
+                                            }}
+                                        >Đang hoạt động</Typography>
+                                    </TableCell>
+                                    <td className="td-actions">
+
+                                        <OverlayTrigger
+                                            overlay={
+                                                <Tooltip id="tooltip-436082023">
+                                                    Cập nhật..
+                                                </Tooltip>
+                                            }
+                                            placement="right"
+                                        >
+                                            <Button
+                                                // onClick={() => handleUpdate(e.data)}
+                                                // onGridReady={onGridReady}
+                                                onClick={() => {
+                                                    // setserviceEdit(e.Id);
+                                                    // getserviceByID(e.Id);
+                                                    setCustomerModalEdit(true);
                                                 }}
-                                            >Đang hoạt động</Typography>
-                                        </TableCell>
+                                                className="btn-link btn-icon"
+                                                type="button"
+                                                variant="success"
+                                            >
+                                                <i className="fas fa-edit"></i>
+                                            </Button>
+                                        </OverlayTrigger>
+                                        <OverlayTrigger
+                                            onClick={(e) => e.preventDefault()}
+                                            overlay={
+                                                <Tooltip id="tooltip-334669391">
+                                                    Remove Post..
+                                                </Tooltip>
+                                            }
+                                            placement="right\"
+                                        >
+                                            <Button
+                                                onClick={() => {
+                                                    // setserviceDelete(e.Id);
+                                                    setCustomerModalDelete(true);
+                                                }}
+                                                className="btn-link btn-icon"
+                                                type="button"
+                                                variant="danger"
+                                            >
+                                                <i className="fas fa-times"></i>
+                                            </Button>
+                                        </OverlayTrigger>
+                                    </td>
                                 </tr>
                                 <tr>
-                               
+
+                                    <TableCell>
+                                        <Grid container>
+
+                                            <Grid item lg={10}>
+                                                <Typography className={classes.name}>Nguyễn Khánh</Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </TableCell>
                                     <td>
-                                        Phạm Tấn Phát
+                                        0823901392
                                     </td>
+                                    <td>
+                                        KhanhNIrepair@gmail.com
+                                    </td>
+                                    <td>
+                                        Thợ sửa ô tô
+                                    </td>
+                                    <Typography
+                                        style={{
+                                            color:
+                                                '#e2930b',
+                                            width: '100px',
+                                            fontWeight: '700',
+                                            paddingRight: '15px',
+                                            fontSize: '20px',
+                                        }}
+                                    >✩✩✩✩✩</Typography>
+                                    <td >
+                                        15-09-2020
+                                    </td >
+
+                                    <TableCell>
+                                        <Typography
+                                            className={classes.Status}
+                                            style={{
+                                                backgroundColor:
+                                                    'rgb(34, 176, 34)',
+                                                textAlign: 'center',
+                                                width: '133px'
+
+                                            }}
+                                        >Đang hoạt động</Typography>
+                                    </TableCell>
+                                    <td className="td-actions">
+
+                                        <OverlayTrigger
+                                            overlay={
+                                                <Tooltip id="tooltip-436082023">
+                                                    Cập nhật..
+                                                </Tooltip>
+                                            }
+                                            placement="right"
+                                        >
+                                            <Button
+                                                // onClick={() => handleUpdate(e.data)}
+                                                // onGridReady={onGridReady}
+                                                onClick={() => {
+                                                    // setserviceEdit(e.Id);
+                                                    // getserviceByID(e.Id);
+                                                    setCustomerModalEdit(true);
+                                                }}
+                                                className="btn-link btn-icon"
+                                                type="button"
+                                                variant="success"
+                                            >
+                                                <i className="fas fa-edit"></i>
+                                            </Button>
+                                        </OverlayTrigger>
+                                        <OverlayTrigger
+                                            onClick={(e) => e.preventDefault()}
+                                            overlay={
+                                                <Tooltip id="tooltip-334669391">
+                                                    Remove Post..
+                                                </Tooltip>
+                                            }
+                                            placement="right\"
+                                        >
+                                            <Button
+                                                onClick={() => {
+                                                    // setserviceDelete(e.Id);
+                                                    setCustomerModalDelete(true);
+                                                }}
+                                                className="btn-link btn-icon"
+                                                type="button"
+                                                variant="danger"
+                                            >
+                                                <i className="fas fa-times"></i>
+                                            </Button>
+                                        </OverlayTrigger>
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <TableCell>
+                                        <Grid container>
+
+                                            <Grid item lg={10}>
+                                                <Typography className={classes.name}>Phạm Tấn Phát</Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </TableCell>
                                     <td>
                                         0123456789
                                     </td>
@@ -392,25 +678,174 @@ export default function Repairman() {
                                         PhatPTIrepair@gmail.com
                                     </td>
                                     <td>
-                                        Sửa Điện Lạnh
+                                        Thợ điện Lạnh
                                     </td>
+                                    <Typography
+                                        style={{
+                                            color:
+                                                '#e2930b',
+                                            width: '90px',
+                                            fontWeight: '700',
+                                            paddingRight: '15px',
+                                            fontSize: '20px',
+                                        }}
+                                    >✩✩✩✩</Typography>
                                     <td >
                                         20-12-2021
 
                                     </td >
 
-                                        <TableCell>
-                                            <Typography
-                                                className={classes.Status}
-                                                style={{
-                                                    backgroundColor:
-                                                        'rgb(34, 176, 34)',
-                                                        textAlign: 'center',
-                                                        width:'133px'
+                                    <TableCell>
+                                        <Typography
+                                            className={classes.Status}
+                                            style={{
+                                                backgroundColor:
+                                                    'rgb(34, 176, 34)',
+                                                textAlign: 'center',
+                                                width: '133px'
 
+                                            }}
+                                        >Đang hoạt động</Typography>
+                                    </TableCell>
+                                    <td className="td-actions">
+
+                                        <OverlayTrigger
+                                            overlay={
+                                                <Tooltip id="tooltip-436082023">
+                                                    Cập nhật..
+                                                </Tooltip>
+                                            }
+                                            placement="right"
+                                        >
+                                            <Button
+                                                // onClick={() => handleUpdate(e.data)}
+                                                // onGridReady={onGridReady}
+                                                onClick={() => {
+                                                    // setserviceEdit(e.Id);
+                                                    // getserviceByID(e.Id);
+                                                    setCustomerModalEdit(true);
                                                 }}
-                                            >Đang hoạt động</Typography>
-                                        </TableCell>
+                                                className="btn-link btn-icon"
+                                                type="button"
+                                                variant="success"
+                                            >
+                                                <i className="fas fa-edit"></i>
+                                            </Button>
+                                        </OverlayTrigger>
+                                        <OverlayTrigger
+                                            onClick={(e) => e.preventDefault()}
+                                            overlay={
+                                                <Tooltip id="tooltip-334669391">
+                                                    Remove Post..
+                                                </Tooltip>
+                                            }
+                                            placement="right\"
+                                        >
+                                            <Button
+                                                onClick={() => {
+                                                    // setserviceDelete(e.Id);
+                                                    setCustomerModalDelete(true);
+                                                }}
+                                                className="btn-link btn-icon"
+                                                type="button"
+                                                variant="danger"
+                                            >
+                                                <i className="fas fa-times"></i>
+                                            </Button>
+                                        </OverlayTrigger>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <TableCell>
+                                        <Grid container>
+
+                                            <Grid item lg={10}>
+                                                <Typography className={classes.name}>Nguyễn Lê Thuần</Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </TableCell>
+                                    <td>
+                                        0921382131
+                                    </td>
+                                    <td>
+                                        ThuanNTIrepair@gmail.com
+                                    </td>
+                                    <td>
+                                        Thợ điện Lạnh
+                                    </td>
+                                    <Typography
+                                        style={{
+                                            color:
+                                                '#e2930b',
+                                            width: '90px',
+                                            fontWeight: '700',
+                                            paddingRight: '15px',
+                                            fontSize: '20px',
+                                        }}
+                                    >✩</Typography>
+                                    <td >
+                                        10-10-2021
+                                    </td >
+
+                                    <TableCell>
+                                        <Typography
+                                            className={classes.Status}
+                                            style={{
+                                                backgroundColor:
+                                                    'red',
+                                                textAlign: 'center',
+                                                width: '143px'
+
+                                            }}
+                                        >Tạm Ngưng hoạt động</Typography>
+                                    </TableCell>
+                                    <td className="td-actions">
+
+                                        <OverlayTrigger
+                                            overlay={
+                                                <Tooltip id="tooltip-436082023">
+                                                    Cập nhật..
+                                                </Tooltip>
+                                            }
+                                            placement="right"
+                                        >
+                                            <Button
+                                                // onClick={() => handleUpdate(e.data)}
+                                                // onGridReady={onGridReady}
+                                                onClick={() => {
+                                                    // setserviceEdit(e.Id);
+                                                    // getserviceByID(e.Id);
+                                                    setCustomerModalEdit(true);
+                                                }}
+                                                className="btn-link btn-icon"
+                                                type="button"
+                                                variant="success"
+                                            >
+                                                <i className="fas fa-edit"></i>
+                                            </Button>
+                                        </OverlayTrigger>
+                                        <OverlayTrigger
+                                            onClick={(e) => e.preventDefault()}
+                                            overlay={
+                                                <Tooltip id="tooltip-334669391">
+                                                    Remove Post..
+                                                </Tooltip>
+                                            }
+                                            placement="right\"
+                                        >
+                                            <Button
+                                                onClick={() => {
+                                                    // setserviceDelete(e.Id);
+                                                    setCustomerModalDelete(true);
+                                                }}
+                                                className="btn-link btn-icon"
+                                                type="button"
+                                                variant="danger"
+                                            >
+                                                <i className="fas fa-times"></i>
+                                            </Button>
+                                        </OverlayTrigger>
+                                    </td>
                                 </tr>
                                 {/* })} */}
                             </tbody>
@@ -504,84 +939,15 @@ export default function Repairman() {
                     </Card.Body>
                 </Card>
             </Col>
-            <Modal isOpen={modalEdit} toggle={toggleEdit} centered>
-                <ModalHeader
-                    style={{ color: "#B22222" }}
-                    close={closeBtn(toggleEdit)}
-                    toggle={toggleEdit}
-                >
-                    <ModalTitle>Do you want to edit Customer</ModalTitle>
-                </ModalHeader>
-                <ModalBody>
-                    <Form>
-                        <Form.Group className="mb-2">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control type="text"
-                                name="customer_Name"
-                                id="customer_Name"
-                                placeholder="Name"
-                                onChange={customer_Name}
-                            />
-                        </Form.Group>
-
-                        <Form.Group className="mb-2">
-                            <Form.Label>Country</Form.Label>
-                            <Form.Control type="text"
-                                type="text"
-                                name="Country"
-                                id="Country"
-                                placeholder="Country"
-                                onChange={address}
-                            />
-                        </Form.Group>
-
-                        <Form.Group className="mb-2">
-                            <Form.Label>City</Form.Label>
-                            <Form.Control type="text" placeholder="Price" step="10000" />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Image</Form.Label>
-                            <Form.Control type="file" />
-                        </Form.Group>
-
-                        <Form.Group className="mb-2">
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Description"
-                                name="description"
-                                id="lastname"
-                                onChange={address}
-                                as="textarea"
-                                rows={3}
-                            />
-                        </Form.Group>
-                    </Form>
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="danger" onClick={() => { // handleCustomerDetele();
-
-                        setCustomerModalEdit(false);
-                    }}
-                    >
-                        Edit
-                    </Button>
-                    <Button color="secondary" onClick={toggleEdit}>
-                        Cancel
-                    </Button>
-                </ModalFooter>
-            </Modal>
+            
 
             <Modal isOpen={modalDelete} toggle={toggleDelete}>
                 <ModalHeader
                     style={{ color: "#B22222" }}
-                    close={closeBtn(toggleDelete)}
-                    toggle={toggleDelete}
                 >
-                    Are you sure?
+                   <h3> Ngưng hoạt động nhân viên </h3>
                 </ModalHeader>
-                <ModalBody>Do you want to delete this customer</ModalBody>
+                <ModalBody><h3>Bạn có muốn ngưng hoạt động nhân viên này</h3></ModalBody>
                 <ModalFooter>
                     <Button
                         color="danger"
@@ -590,92 +956,139 @@ export default function Repairman() {
                             setCustomerModalDelete(false);
                         }}
                     >
-                        Delete
+                        Xác nhận
                     </Button>{" "}
                     <Button color="secondary" onClick={toggleDelete}>
-                        Cancel
+                        Hủy
                     </Button>
                 </ModalFooter>
             </Modal>
             <Modal className="modalCreatene" isOpen={modalCreate} toggle={toggleCreate} centered>
-        <ModalHeader
-          style={{ color: "#B22222" }}
-          close={closeBtn(toggleCreate)}
-          toggle={toggleCreate}
-        >
-          <ModalTitle>Tạo mới thợ sữa chữa</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
-          <Form>
-          <FormGroup className="mb-2">
-              <Form.Label>Tên thợ</Form.Label>
-              <Form.Control type="text" value={name}
-                onChange={e => setName(e.target.value)}
-              />
-            </FormGroup>
-            <Form.Label>Chuyên Môn </Form.Label>
-            <FormGroup className="mb-2">
-              <Autocomplete
-                options={myOptions}
-                multiple
-                style={{ width: 500 }}
-                getOptionLabel={(option) => option}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Lựa chọn lĩnh vực"
-                    variant="standard"
-               
-                  />
-                )}
-              />
-            </FormGroup>
-            <FormGroup className="mb-2">
-              <Form.Label>Số điện thoại</Form.Label>
-              <Form.Control
-                type="text"
-                as="textarea"
-                onChange={e => setDescription(e.target.value)}
-                rows={3}
-              />
-            </FormGroup>
-            <FormGroup className="mb-2">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={e => setDescription(e.target.value)}
-                rows={3}
-              />
-            </FormGroup>
-        
-            
-           
-            {/* <FormGroup className="mb-2">
-              <Form.Label></Form.Label>
-              <Form.Control type="number" placeholder="service name" value={price}
-                onChange={e => setPrice(e.target.value)}
-              />
-            </FormGroup> */}
-            {/* <FormGroup className="mb-3">
-              <Form.Label>Picture</Form.Label>
-              <Form.Control type="text" value={picture}
-                onChange={e => setImage(e.target.value)}
-              />
-            </FormGroup> */}
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="danger" onClick={() => { // handleServiceDetele();
-            setserviceModalCreate(false);
-          }}
-          >
-            Lưu sản phẩm
-          </Button>
-          <Button color="secondary" onClick={toggleCreate}>
-            Hủy tạo
-          </Button>
-        </ModalFooter>
-      </Modal>
+                <ModalHeader
+                    style={{ color: "#B22222" }}
+                >
+                    <ModalTitle>Tạo mới thợ sữa chữa</ModalTitle>
+                </ModalHeader>
+                <ModalBody>
+                    <Form>
+                        <FormGroup className="mb-2">
+                            <Form.Label>Tên thợ</Form.Label>
+                            <Form.Control type="text" value={name}
+                                onChange={e => setName(e.target.value)}
+                            />
+                        </FormGroup>
+                        <Form.Label>Chuyên Môn </Form.Label>
+                        <FormGroup className="mb-2">
+                            <Autocomplete
+                                options={myOptions}
+                                multiple
+                                style={{ width: 500 }}
+                                getOptionLabel={(option) => option}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label="Lựa chọn lĩnh vực"
+                                        variant="standard"
+
+                                    />
+                                )}
+                            />
+                        </FormGroup>
+                        <FormGroup className="mb-2">
+                            <Form.Label>Số điện thoại</Form.Label>
+                            <Form.Control
+                                type="text"
+                                as="textarea"
+                                onChange={e => setDescription(e.target.value)}
+                                rows={3}
+                            />
+                        </FormGroup>
+                        <FormGroup className="mb-2">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                type="text"
+                                onChange={e => setDescription(e.target.value)}
+                                rows={3}
+                            />
+                        </FormGroup>
+                    </Form>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="danger" onClick={() => { // handleServiceDetele();
+                        setserviceModalCreate(false);
+                    }}
+                    >
+                        Lưu nhân viên
+                    </Button>
+                    <Button color="secondary" onClick={toggleCreate}>
+                        Hủy tạo
+                    </Button>
+                </ModalFooter>
+            </Modal>
+            <Modal className="modalCreatene" isOpen={modalEdit} toggle={toggleEdit} centered>
+                <ModalHeader
+                    style={{ color: "#B22222" }}
+                >
+                    <ModalTitle>Cập nhật thợ sữa chữa</ModalTitle>
+                </ModalHeader>
+                <ModalBody>
+                    <Form>
+                        <FormGroup className="mb-2">
+                            <Form.Label>Tên thợ</Form.Label>
+                            <Form.Control type="text" value="Trần Văn Thái"
+                                onChange={e => setName(e.target.value)}
+                            />
+                        </FormGroup>
+                        <Form.Label>Chuyên Môn </Form.Label>
+                        <FormGroup className="mb-2">
+                            <Autocomplete
+                                options={myOptions}
+                                multiple
+                                value={["Thợ sửa Máy Tính" , "thợ sửa ti vi"]}
+                                style={{ width: 500 }}
+                                getOptionLabel={(option) => option}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label="Lựa chọn lĩnh vực"
+                                        variant="standard"
+
+                                    />
+                                )}
+                            />
+                        </FormGroup>
+                        <FormGroup className="mb-2">
+                            <Form.Label>Số điện thoại</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value="0989070145"
+                                onChange={e => setDescription(e.target.value)}
+                                rows={3}
+                            />
+                        </FormGroup>
+                        <FormGroup className="mb-2">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value="ThaiTVIrepair@gmail.com"
+                                onChange={e => setDescription(e.target.value)}
+                                rows={3}
+                            />
+                        </FormGroup>
+                    </Form>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="danger" onClick={() => { // handleServiceDetele();
+                        setserviceModalCreate(false);
+                    }}
+                    >
+                        Cập nhật
+                    </Button>
+                    <Button color="secondary" onClick={toggleEdit}>
+                        Hủy 
+                    </Button>
+                </ModalFooter>
+            </Modal>
 
 
             <Modal isOpen={modalStatus} toggle={toggleDetails}>
@@ -719,7 +1132,7 @@ export default function Repairman() {
                     </Row>
                 </ModalBody>
             </Modal>
-            
+
         </>
     );
 }
