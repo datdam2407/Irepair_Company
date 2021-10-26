@@ -228,7 +228,7 @@ export default function Repairman() {
     },
     name: {
       fontWeight: 'bold',
-      color: theme.palette.secondary.dark,
+      color: '#1d98e0f7'
 
     },
     Status: {
@@ -359,6 +359,7 @@ export default function Repairman() {
                       <th className="description">Đồ Cần Sửa</th>
                       <th className="description">Hãng</th>
                       <th className="description">Vấn Đề</th>
+                      <th className="description">Giá sửa chữa</th>
                       <th className="description">Đánh Giá Yêu Cầu</th>
                       <th className="description">Trạng Thái</th>
                       <th className="description"></th>
@@ -400,6 +401,9 @@ export default function Repairman() {
                       <td>
                         Nghẹt ống cống nhà tắm
                       </td>
+                      <td>
+                      400,000 đ
+                      </td>
 
                       <td>
                         <Typography
@@ -437,30 +441,7 @@ export default function Repairman() {
                         >Đã Hoàn Thành</Typography>
                       </TableCell>
                       <td>
-                        <td className="td-actions">
-                         
-                          <OverlayTrigger
-                            onClick={(e) => e.preventDefault()}
-                            overlay={
-                              <Tooltip id="tooltip-960683717">
-                                Delete ..
-                              </Tooltip>
-                            }
-                            placement="right"
-                          >
-                            <Button
-                              onClick={() => {
-                                setRepairmanModalDelete(true);
-                                // setSelectRepairman(e);
-                              }}
-                              className="btn-link btn-icon"
-                              type="button"
-                              variant="danger"
-                            >
-                              <i className="fas fa-times"></i>
-                            </Button>
-                          </OverlayTrigger>
-                        </td>
+                       
                       </td>
                     </tr>
                     <tr>
@@ -499,6 +480,9 @@ export default function Repairman() {
                         Nghẹt ống bô
                       </td>
                       <td>
+                          500,000 đ
+                      </td>
+                      <td>
                         <Typography
                           style={{
                             color:
@@ -533,31 +517,8 @@ export default function Repairman() {
                         >Đã Hoàn Thành</Typography>
                       </TableCell>
                       <td>
-                        <td className="td-actions">
-                         
-                          <OverlayTrigger
-                            onClick={(e) => e.preventDefault()}
-                            overlay={
-                              <Tooltip id="tooltip-960683717">
-                                Delete ..
-                              </Tooltip>
-                            }
-                            placement="right"
-                          >
-                            <Button
-                              onClick={() => {
-                                setRepairmanModalDelete(true);
-                                // setSelectRepairman(e);
-                              }}
-                              className="btn-link btn-icon"
-                              type="button"
-                              variant="danger"
-                            >
-                              <i className="fas fa-times"></i>
-                            </Button>
-                          </OverlayTrigger>
+                        
                         </td>
-                      </td>
                     </tr>
 
                     <tr>
@@ -595,6 +556,8 @@ export default function Repairman() {
                       <td>
                         Nghẹt ống cống nhà tắm
                       </td>
+                      <td>370,000 đ	
+</td>
 
                       <td>
                         <Typography
@@ -632,30 +595,7 @@ export default function Repairman() {
                         >Đã Hoàn Thành</Typography>
                       </TableCell>
                       <td>
-                        <td className="td-actions">
-                         
-                          <OverlayTrigger
-                            onClick={(e) => e.preventDefault()}
-                            overlay={
-                              <Tooltip id="tooltip-960683717">
-                                Xóa lịch sử
-                              </Tooltip>
-                            }
-                            placement="right"
-                          >
-                            <Button
-                              onClick={() => {
-                                setRepairmanModalDelete(true);
-                                // setSelectRepairman(e);
-                              }}
-                              className="btn-link btn-icon"
-                              type="button"
-                              variant="danger"
-                            >
-                              <i className="fas fa-times"></i>
-                            </Button>
-                          </OverlayTrigger>
-                        </td>
+                        
                       </td>
                     </tr>
                     <tr>
@@ -691,7 +631,11 @@ export default function Repairman() {
                         SamSung
                       </td>
                       <td>
-                        Bị Chảy Nước                      </td>
+                        Bị Chảy Nước                    
+                        </td>
+                      <td>
+                        480,000 đ                   
+                        </td>
                       <TableCell>
                         <Typography
                           style={{
@@ -715,30 +659,7 @@ export default function Repairman() {
                         >Đã Hủy</Typography>
                       </TableCell>
                       <td>
-                        <td className="td-actions">
-                         
-                          <OverlayTrigger
-                            onClick={(e) => e.preventDefault()}
-                            overlay={
-                              <Tooltip id="tooltip-960683717">
-                                Xóa lịch sử
-                              </Tooltip>
-                            }
-                            placement="right"
-                          >
-                            <Button
-                              onClick={() => {
-                                setRepairmanModalDelete(true);
-                                // setSelectRepairman(e);
-                              }}
-                              className="btn-link btn-icon"
-                              type="button"
-                              variant="danger"
-                            >
-                              <i className="fas fa-times"></i>
-                            </Button>
-                          </OverlayTrigger>
-                        </td>
+                        
                       </td>
                     </tr>
 
@@ -776,6 +697,9 @@ export default function Repairman() {
                       <td>
                         Bể Ống Nước
                       </td>
+                      <td>
+                        670,000 đ
+                      </td>
                       <TableCell>
                         <Typography
                           style={{
@@ -799,30 +723,7 @@ export default function Repairman() {
                         >Đã Hủy</Typography>
                       </TableCell>
                       <td>
-                        <td className="td-actions">
-                         
-                          <OverlayTrigger
-                            onClick={(e) => e.preventDefault()}
-                            overlay={
-                              <Tooltip id="tooltip-960683717">
-                                Xóa lịch sử
-                              </Tooltip>
-                            }
-                            placement="right"
-                          >
-                            <Button
-                              onClick={() => {
-                                setRepairmanModalDelete(true);
-                                // setSelectRepairman(e);
-                              }}
-                              className="btn-link btn-icon"
-                              type="button"
-                              variant="danger"
-                            >
-                              <i className="fas fa-times"></i>
-                            </Button>
-                          </OverlayTrigger>
-                        </td>
+                        
                       </td>
                     </tr>
                     <tr>
@@ -859,15 +760,18 @@ export default function Repairman() {
                       <td>
                         Bể Ống Nước
                       </td>
+                      <td>
+                      </td>
 
                       <TableCell>
                         <Typography
                           style={{
                             color:
-                              '#195ea0',
+                              'rgb(136 70 13)',
                             fontWeight: '700'
                           }}
-                        ></Typography>
+                        >Thợ đang đến
+                        </Typography>
                       </TableCell>
 
                       <TableCell>
@@ -880,33 +784,10 @@ export default function Repairman() {
                             color: 'black',
                             fontSize: '12px'
                           }}
-                        >Thợ đang đến</Typography>
+                        >Đang đợi</Typography>
                       </TableCell>
                       <td>
-                        <td className="td-actions">
-                         
-                          <OverlayTrigger
-                            onClick={(e) => e.preventDefault()}
-                            overlay={
-                              <Tooltip id="tooltip-960683717">
-                                Xóa lịch sử
-                              </Tooltip>
-                            }
-                            placement="right"
-                          >
-                            <Button
-                              onClick={() => {
-                                setRepairmanModalDelete(true);
-                                // setSelectRepairman(e);
-                              }}
-                              className="btn-link btn-icon"
-                              type="button"
-                              variant="danger"
-                            >
-                              <i className="fas fa-times"></i>
-                            </Button>
-                          </OverlayTrigger>
-                        </td>
+                        
                       </td>
                     </tr>
 
@@ -941,16 +822,20 @@ export default function Repairman() {
                       <td>
                         Asus
                       </td>
+                     
                       <td>
-                        Không vô được mạng (Hư card mạng)
+                        Hư card mạng
                       </td>
+                      <td>
+                        Báo giá sau
+                        </td>
 
                       <TableCell>
                         <Typography
                           style={{
                             color:
-                              '#ff8e02e0',
-                            fontWeight: '800'
+                            'rgb(136 70 13)',
+                            fontWeight: '700'
                           }}
                         >Đang đợi vật tư</Typography>
                       </TableCell>
@@ -968,30 +853,7 @@ export default function Repairman() {
                         >Đang đợi</Typography>
                       </TableCell>
                       <td>
-                        <td className="td-actions">
-                         
-                          <OverlayTrigger
-                            onClick={(e) => e.preventDefault()}
-                            overlay={
-                              <Tooltip id="tooltip-960683717">
-                                Xóa lịch sử
-                              </Tooltip>
-                            }
-                            placement="right"
-                          >
-                            <Button
-                              onClick={() => {
-                                setRepairmanModalDelete(true);
-                                // setSelectRepairman(e);
-                              }}
-                              className="btn-link btn-icon"
-                              type="button"
-                              variant="danger"
-                            >
-                              <i className="fas fa-times"></i>
-                            </Button>
-                          </OverlayTrigger>
-                        </td>
+                        
                       </td>
                     </tr>
                     <tr>
@@ -1027,6 +889,9 @@ export default function Repairman() {
                       </td>
                       <td>
                         Hư màn hình
+                      </td>
+                      <td>
+                      1,200,000 đ
                       </td>
 
                       <td>
@@ -1065,30 +930,7 @@ export default function Repairman() {
                         >Đã Hoàn Thành</Typography>
                       </TableCell>
                       <td>
-                        <td className="td-actions">
-                         
-                          <OverlayTrigger
-                            onClick={(e) => e.preventDefault()}
-                            overlay={
-                              <Tooltip id="tooltip-960683717">
-                                Xóa lịch sử
-                              </Tooltip>
-                            }
-                            placement="right"
-                          >
-                            <Button
-                              onClick={() => {
-                                setRepairmanModalDelete(true);
-                                // setSelectRepairman(e);
-                              }}
-                              className="btn-link btn-icon"
-                              type="button"
-                              variant="danger"
-                            >
-                              <i className="fas fa-times"></i>
-                            </Button>
-                          </OverlayTrigger>
-                        </td>
+                        
                       </td>
                     </tr>
                   </tbody>

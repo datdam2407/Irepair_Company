@@ -56,7 +56,7 @@ font-size: large;
 
 }
 .fa, .fas {
-    font-weight: 900;
+    font-weight: 700;
     font-size: large;
 
 }
@@ -124,7 +124,7 @@ div.border border-gray-css{
     background-color: darkblue;
 }
 label{ margin-left: 10px;
-    font-weight: 900;
+    font-weight: 700;
 font-size: larger;}
 .MuiAvatar{
     overflow: unset;
@@ -176,7 +176,7 @@ font-size: larger;}
 } 
 .point-customer{
     font-size: 15px;
-    font-weight: 900;
+    font-weight: 700;
     color: rgb(145 105 11);
 }
 .view-item-size-main{

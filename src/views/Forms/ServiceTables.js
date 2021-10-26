@@ -357,7 +357,7 @@ function ManageSevice() {
                           }}
                         >Alive</Typography>
                       </TableCell>
-                      <td className="td-actions">
+                      <td >
                         <OverlayTrigger
                           onClick={(e) => e.preventDefault()}
                           overlay={
@@ -552,8 +552,7 @@ function ManageSevice() {
       <Modal isOpen={modalCreate} toggle={toggleCreate} centered>
         <ModalHeader
           style={{ color: "#B22222" }}
-          close={closeBtn(toggleCreate)}
-          toggle={toggleCreate}
+      
         >
           <ModalTitle>Do you want to create new service ?</ModalTitle>
         </ModalHeader>
@@ -625,8 +624,7 @@ function ManageSevice() {
       <Modal isOpen={modalEdit} toggle={toggleEdit} centered>
         <ModalHeader
           style={{ color: "#B22222" }}
-          close={closeBtn(toggleEdit)}
-          toggle={toggleEdit}
+      
         >
           <ModalTitle>Do you want to edit service ?</ModalTitle>
         </ModalHeader>

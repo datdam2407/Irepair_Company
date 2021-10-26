@@ -182,11 +182,11 @@ export default function Repairman() {
             // img: 'string',
 
         },
-        name: {
+         name: {
             fontWeight: 'bold',
-            color: theme.palette.secondary.dark,
-
-        },
+            color: '#1d98e0f7'
+          },
+     
         Status: {
             fontWeight: '700',
             width: '71px',
@@ -333,7 +333,7 @@ export default function Repairman() {
                                             }}
                                         >Đang hoạt động</Typography>
                                     </TableCell>
-                                    <td className="td-actions">
+                                    <td >
 
                                         <OverlayTrigger
                                             overlay={
@@ -426,7 +426,7 @@ export default function Repairman() {
                                             }}
                                         >Đang hoạt động</Typography>
                                     </TableCell>
-                                    <td className="td-actions">
+                                    <td >
 
                                         <OverlayTrigger
                                             overlay={
@@ -520,7 +520,7 @@ export default function Repairman() {
                                             }}
                                         >Đang hoạt động</Typography>
                                     </TableCell>
-                                    <td className="td-actions">
+                                    <td >
 
                                         <OverlayTrigger
                                             overlay={
@@ -613,7 +613,7 @@ export default function Repairman() {
                                             }}
                                         >Đang hoạt động</Typography>
                                     </TableCell>
-                                    <td className="td-actions">
+                                    <td >
 
                                         <OverlayTrigger
                                             overlay={
@@ -707,7 +707,7 @@ export default function Repairman() {
                                             }}
                                         >Đang hoạt động</Typography>
                                     </TableCell>
-                                    <td className="td-actions">
+                                    <td >
 
                                         <OverlayTrigger
                                             overlay={
@@ -799,7 +799,7 @@ export default function Repairman() {
                                             }}
                                         >Tạm Ngưng hoạt động</Typography>
                                     </TableCell>
-                                    <td className="td-actions">
+                                    <td >
 
                                         <OverlayTrigger
                                             overlay={

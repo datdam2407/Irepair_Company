@@ -162,7 +162,7 @@ function ManageSevice() {
     },
     name: {
       fontWeight: 'bold',
-      color: theme.palette.secondary.dark
+      color: '#1d98e0f7'
     },
     Status: {
       fontWeight: '700',
@@ -341,6 +341,7 @@ function ManageSevice() {
                       <th className="description" >Đồ dùng</th>
                       <th className="description">Mô Tả</th>
                       <th className="description">Hãng Sản Xuất</th>
+                      <th className="description">Giá Tiền</th>
                       <th className="description">Trạng Thái</th>
                       <th className="description">Thao tác</th>
                     </tr>
@@ -360,6 +361,9 @@ function ManageSevice() {
                       <td>
                         SamSung, Panasonic, Daikin, Electrolux, LG, Tosiba, Sharp, Mishubíhi Electric, Aqua
                       </td>
+                      <td>
+                        250,000 - 1,500,000
+                      </td>
                       <TableCell>
                         <Typography
                           className={classes.Status}
@@ -370,7 +374,7 @@ function ManageSevice() {
                           }}
                         >Đang Hoạt Động</Typography>
                       </TableCell>
-                      <td className="td-actions">
+                      <td >
                        
                         <OverlayTrigger
                           overlay={
@@ -433,6 +437,9 @@ function ManageSevice() {
                       <td>
                         Honda,Yamaha,Piggio,SYM,Suzuki,Triump,Harley Davidson,Ducati
                       </td>
+                      <td>
+                        100,000 - 3,500,000
+                      </td>
 
                       <TableCell>
                         <Typography className={classes.Status}
@@ -442,7 +449,7 @@ function ManageSevice() {
                             width: '120px', textAlign: 'center'
                           }}>Đang Hoạt Động</Typography>
                       </TableCell>
-                      <td className="td-actions">
+                      <td >
                        
                         <OverlayTrigger
                           overlay={
@@ -504,7 +511,9 @@ function ManageSevice() {
                       <td>
                         Samsung,Apple,Dell,Asus,HP,Lenovo,MSI,Acer
                       </td>
-
+                      <td>
+                        140,000 - 5,000,000
+                      </td>
                       <TableCell>
                         <Typography className={classes.Status}
                           style={{
@@ -513,7 +522,7 @@ function ManageSevice() {
                             width: '120px', textAlign: 'center'
                           }}>Đang Hoạt Động</Typography>
                       </TableCell>
-                      <td className="td-actions">
+                      <td >
                        
                         <OverlayTrigger
                           overlay={
@@ -575,6 +584,9 @@ function ManageSevice() {
                       <td>
                         Apple, Samsung,Xiaomi, Huawei
                       </td>
+                      <td>
+                        140,000 - 1,500,000
+                      </td>
 
                       <TableCell>
                         <Typography className={classes.Status}
@@ -585,7 +597,7 @@ function ManageSevice() {
                             textAlign: 'center'
                           }}>Sắp ra mắt</Typography>
                       </TableCell>
-                      <td className="td-actions">
+                      <td >
                        
                         <OverlayTrigger
                           overlay={
@@ -647,6 +659,9 @@ function ManageSevice() {
                       <td>
                         Honda,Suzuki,Toyota,Chevrolet,Ford,Hyunda,Isuzu,Kia
                       </td>
+                      <td>
+                        500,000 - 5,500,000
+                      </td>
 
                       <TableCell>
                         <Typography className={classes.Status}
@@ -656,7 +671,7 @@ function ManageSevice() {
                             width: '120px', textAlign: 'center'
                           }}>Đang Hoạt Động</Typography>
                       </TableCell>
-                      <td className="td-actions">
+                      <td >
                        
                         <OverlayTrigger
                           overlay={
@@ -718,7 +733,9 @@ function ManageSevice() {
                       <td>
                         Samsung,Panasonic,Daikin,Electrolux,LG,Toshiba,Sharp,Sanyo
                       </td>
-
+                      <td>
+                        300,000 - 2,500,000
+                      </td>
                       <TableCell>
                         <Typography className={classes.Status}
                           style={{
@@ -727,7 +744,7 @@ function ManageSevice() {
                             width: '120px', textAlign: 'center'
                           }}>Đang Hoạt Động</Typography>
                       </TableCell>
-                      <td className="td-actions">
+                      <td >
                        
                         <OverlayTrigger
                           overlay={
@@ -785,11 +802,13 @@ function ManageSevice() {
                         </Grid>
 
                       </TableCell>
-                      <td>Chuyên Sửa Các Vấn đề liên quan tới máy lạnh</td>
+                      <td>Chuyên Sửa Các Vấn đề liên quan tới máy giặt</td>
                       <td>
                         Samsung,Panasonic,Daikin,Electrolux,LG,Toshiba,Sharp,Sanyo
                       </td>
-
+                      <td>
+                        300,000 - 1,000,000
+                      </td>
                       <TableCell>
                         <Typography className={classes.Status}
                           style={{
@@ -798,7 +817,7 @@ function ManageSevice() {
                             width: '120px', textAlign: 'center'
                           }}>Đang Hoạt Động</Typography>
                       </TableCell>
-                      <td className="td-actions">
+                      <td >
                        
                         <OverlayTrigger
                           overlay={
@@ -860,7 +879,9 @@ function ManageSevice() {
                       <td>
                         Rinnai,Giovani,Faber,Teka,Taka,Binova,Paloma,Sunhouse
                       </td>
-
+                      <td>
+                        200,000 - 1,700,000
+                      </td>
                       <TableCell>
                         <Typography className={classes.Status}
                           style={{
@@ -869,7 +890,7 @@ function ManageSevice() {
                             width: '120px', textAlign: 'center'
                           }}>Đang Hoạt Động</Typography>
                       </TableCell>
-                      <td className="td-actions">
+                      <td >
                        
                         <OverlayTrigger
                           overlay={
@@ -931,6 +952,9 @@ function ManageSevice() {
                       <td>
                         Apple, Samsung, Xiaomi, Oppo, Huawei, Pixel, Nokia
                       </td>
+                      <td>
+                        200,000 - 2,700,000
+                      </td>
                       <TableCell>
                         <Typography className={classes.Status}
                           style={{
@@ -939,7 +963,7 @@ function ManageSevice() {
                             width: '120px'
                           }}>Ngưng Hoạt Động</Typography>
                       </TableCell>
-                      <td className="td-actions">
+                      <td >
                        
                         <OverlayTrigger
                           overlay={
@@ -1110,8 +1134,7 @@ function ManageSevice() {
       <Modal className="modalCreatene" isOpen={modalCreate} toggle={toggleCreate} centered>
         <ModalHeader
           style={{ color: "#B22222" }}
-          close={closeBtn(toggleCreate)}
-          toggle={toggleCreate}
+      
         >
           <ModalTitle>Tạo mới một đồ dùng</ModalTitle>
         </ModalHeader>
@@ -1182,8 +1205,7 @@ function ManageSevice() {
       <Modal isOpen={modalEdit} toggle={toggleEdit} centered>
         <ModalHeader
           style={{ color: "#B22222" }}
-          close={closeBtn(toggleEdit)}
-          toggle={toggleEdit}
+      
         >
           <ModalTitle>Bạn muốn cập nhật?</ModalTitle>
         </ModalHeader>

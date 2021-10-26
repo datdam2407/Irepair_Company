@@ -158,7 +158,7 @@ function Customer() {
     },
     name: {
       fontWeight: 'bold',
-      color: theme.palette.secondary.dark
+      color: '#1d98e0f7'
     },
     Status: {
       fontWeight: '700',
@@ -750,8 +750,7 @@ function Customer() {
       <Modal isOpen={modalCreate} toggle={toggleCreate} centered>
         <ModalHeader
           style={{ color: "#B22222" }}
-          close={closeBtn(toggleCreate)}
-          toggle={toggleCreate}
+      
         >
           <ModalTitle>Do you want to create new service ?</ModalTitle>
         </ModalHeader>
@@ -823,8 +822,7 @@ function Customer() {
       <Modal isOpen={modalEdit} toggle={toggleEdit} centered>
         <ModalHeader
           style={{ color: "#B22222" }}
-          close={closeBtn(toggleEdit)}
-          toggle={toggleEdit}
+      
         >
           <ModalTitle>Do you want to edit service ?</ModalTitle>
         </ModalHeader>
