@@ -159,7 +159,7 @@ function ManageSevice() {
     },
     name: {
       fontWeight: 'bold',
-      color: theme.palette.secondary.dark
+      color: "#1d98e0f7",
     },
     Status: {
       fontWeight: '700',

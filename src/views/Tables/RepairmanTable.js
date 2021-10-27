@@ -225,8 +225,8 @@ export default function Repairman() {
                     setRepairmanList(res.data.RepairmanId)
                     setRepairmanList(temp);
                     setUseListRepairmanShow(temp);
-                    setUseListRepairmanShowPage(temp.slice(numberPage * 10 - 10, numberPage * 10));
-                    setTotalNumberPage(Math.ceil(temp.length / 10));
+                    setUseListRepairmanShowPage(temp.slice(numberPage * 5 - 5, numberPage * 5));
+                    setTotalNumberPage(Math.ceil(temp.length / 5));
                 }
             });
     }, []);
@@ -258,8 +258,8 @@ export default function Repairman() {
                 var temp2 = res.data.filter((x) => x.state !== "Completed");
                 setRepairmanList(temp2);
                 setUseListRepairmanShow(temp2);
-                setUseListRepairmanShowPage(temp2.slice(numberPage * 8 - 8, numberPage * 8));
-                setTotalNumberPage(Math.ceil(temp2.length / 8));
+                setUseListRepairmanShowPage(temp2.slice(numberPage * 5 - 5, numberPage * 5));
+                setTotalNumberPage(Math.ceil(temp2.length / 5));
                 setCount(count);
             }).catch((err) => {
                 console.log(err);
@@ -322,8 +322,8 @@ export default function Repairman() {
     //Paging
     function onClickPage(number) {
         setNumberPage(number);
-        setUseListRepairmanShowPage(useListRepairmanShow.slice(number * 10 - 10, number * 10));
-        setTotalNumberPage(Math.ceil(useListRepairmanShow.length / 10));
+        setUseListRepairmanShowPage(useListRepairmanShow.slice(number * 5 - 5, number * 5));
+        setTotalNumberPage(Math.ceil(useListRepairmanShow.length / 5));
     }
     // custom state
     function displayStateName(type) {
@@ -357,8 +357,8 @@ export default function Repairman() {
                         var temp2 = res.data;
                         setRepairmanList(temp2);
                         setUseListRepairmanShow(temp2);
-                        setUseListRepairmanShowPage(temp2.slice(numberPage * 8 - 8, numberPage * 8));
-                        setTotalNumberPage(Math.ceil(temp2.length / 8));
+                        setUseListRepairmanShowPage(temp2.slice(numberPage * 5 - 5, numberPage * 5));
+                        setTotalNumberPage(Math.ceil(temp2.length / 5));
                     }
                 })
         }
@@ -630,6 +630,7 @@ export default function Repairman() {
                                                                     ((e.Status === 1 && 'rgb(34, 176, 34)')
                                                                         ||
                                                                         (e.Status === 3 && 'red') ||
+                                                                        (e.Status === 2 && 'black') ||
                                                                         (e.Status === 0 && 'rgb(50, 102, 100)'))
 
                                                             }}

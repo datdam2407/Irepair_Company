@@ -87,23 +87,19 @@ export default function Workon() {
   const [numberPage, setNumberPage] = useState(1);
   const [totalNumberPage, setTotalNumberPage] = useState(1);
   const [RepairmanList, setRepairmanList] = useState([]);
-  const [myOptions, setMyOptions] = useState([]);
+  const [ServiceList, setServiceList] = useState([]);
 
-  const data = [
-    { value: '02d59c6b-8e61-48cc-a01d-2eb7da6350d8', label: 'Đo và cân chỉnh áp suất lốp' },
-    { value: '02d59c6b-8e61-48cc-a01d-2eb7da6350d9', label: 'Đo và cân chỉnh áp suất lốp' },
-    { value: '02d59c6b-8e61-48cc-a01d-2eb7da6350d1', label: 'Đo và cân chỉnh áp suất lốp' },
-    { value: '0533e4c5-68db-43df-833c-557fd3d4dca7', label: 'Thay nhớt' },
-    { value: 'd865633f-de3f-4b16-889d-4285739d6da5', label: 'Thay nhớt' },
-  ]
-  const [options, setSelectOptions] = useState(isNullableTypeAnnotation);
-  const handleChangeService = e => {
-    setSelectOptions(e);
 
+  function handleChangeService(e, value){
+    setSeviceSelect(e.target.ServiceId);
+    setServiceSelectID(value.value);  }
+  //onchange
+
+  function handleOnchangeSelectdmajor(e, value) {
+    //console.log(e.target,value);
+    setMajorSelect(e.target.MajorID);
+    setMajorSelectID(value.value);
   }
-
-console.log("options" , options)
-
   const listStates = [
     "New",
     "Approved",
@@ -120,12 +116,18 @@ console.log("options" , options)
 
 
   const [ID, setMajorID] = useState("");
-  const [majorSelect, setMajorSelect] = useState("")
+  const [IDS, setServiceID] = useState("");
   const [data1, setData1] = useState({ array: [] });
+
+  const [majorSelect, setMajorSelect] = useState("")
   const [MajorSelectID, setMajorSelectID] = useState(ID)
   const [listSelectMajor, setListMajor] = useState([]);
-  const [searchName, setSearchName] = useState("");
 
+  const [seviceSelect, setSeviceSelect] = useState("")
+  const [ServiceSelectID, setServiceSelectID] = useState(IDS)
+  const [listSelectService, setListService] = useState([]);
+
+  const [searchName, setSearchName] = useState("");
   const [loading, setLoading] = useState(false)
 
   const uploadImage = async e => {
@@ -190,13 +192,33 @@ console.log("options" , options)
       );
     })
   }, []);
-
+  //load repairman
+  useEffect(() => {
+    let params = {};
+    let currentField = {};
+    let ServiceId = "";
+    params['Status'] = [1].reduce((f, s) => `${f},${s}`);
+    getWithTokenParams("/api/v1.0/services", params, localStorage.getItem("token")
+    ).then(res => {
+      setData1(res.data);
+      const newlistService = res.data.reduce((list, item) => [...list,
+      {
+        text: `${item.ServiceName}`,
+        value: item.Id,
+        key: item.Id
+      }], [])
+      setListService(
+        [currentField, ...newlistService],
+      );
+    })
+  }, []);
+// console.log("dataSValue", options[0].value)
   //create
   async function handleSubmitCreate(e) {
     await postWithToken(
       `/api/v1.0/workson`,
       {
-        ServiceId: options,
+        listServiceId: ServiceSelectID,
         repairmanID: MajorSelectID,
         status: 0,
       },
@@ -211,14 +233,9 @@ console.log("options" , options)
         console.log(err);
       });
   }
-  //onchange
-  function handleOnchangeSelectdmajor(e, value) {
-    //console.log(e.target,value);
-    setMajorSelect(e.target.MajorID);
-    setMajorSelectID(value.value);
-  }
-
-  console.log("aaaa", MajorSelectID)
+  
+  console.log("aaaaMajor", MajorSelectID)
+  console.log("aaaaService", ServiceSelectID)
   function getRepairmanID(Id) {
     getWithToken(`/api/v1.0/repairmans/${Id}`, localStorage.getItem("token")).then((res) => {
       setRepairmanID(Id);
@@ -263,7 +280,6 @@ console.log("options" , options)
       });
   }
   console.log("lisstID", RepairmanList)
-  console.log("lisstService", myOptions)
   //load repairman
   useEffect(() => {
     getWithToken("/api/v1.0/repairmans", localStorage.getItem("token")).then(
@@ -276,7 +292,8 @@ console.log("options" , options)
     getWithToken("/api/v1.0/services", localStorage.getItem("token")).then(
       (res) => {
         if (res && res.status === 200) {
-          setMyOptions(res.data);
+          var temp = res.data;
+          setServiceList(res.data.Id)
         }
       });
     getWithToken("/api/v1.0/workson", localStorage.getItem("token")).then(
@@ -933,15 +950,20 @@ console.log("options" , options)
                 />
               </FormGroup>
             </Form.Group>
-            <Form.Label>Service</Form.Label>
-            <FormGroup className="mb-2">
-              <Select 
-              isMulti 
-              value={options}
-               options={data}
-                onChange={handleChangeService}
-              />
-            </FormGroup>
+            <Form.Group className="mb-2">
+
+              <Form.Label>Service</Form.Label>
+              <FormGroup className="mb-2">
+                <Dropdown
+                  fluid
+                  search
+                  multiple
+                  value={seviceSelect}
+                  onChange={handleChangeService}
+                  options={listSelectService}
+                />
+              </FormGroup>
+            </Form.Group>
           </Form>
         </ModalBody>
         <ModalFooter>

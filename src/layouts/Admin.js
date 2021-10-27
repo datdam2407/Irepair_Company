@@ -15,7 +15,7 @@ import routes from "routes.js";
 import image1 from "assets/img/full-screen-image-1.jpg";
 import image2 from "assets/img/full-screen-image-2.jpg";
 import image3 from "assets/img/full-screen-image-3.jpg";
-import image4 from "assets/img/full-screen-image-4.jpg";
+import image4 from "assets/img/sidebar-4.jpg";
 
 function Admin() {
   
@@ -25,7 +25,8 @@ function Admin() {
   //       history.push("/");
   //     }
   // }, []);
-  const [sidebarImage, setSidebarImage] = React.useState(image3);
+
+  const [sidebarImage, setSidebarImage] = React.useState(image4);
   const [sidebarBackground, setSidebarBackground] = React.useState("black");
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {

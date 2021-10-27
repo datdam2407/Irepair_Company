@@ -90,6 +90,7 @@
             font-size: 20px;
             margin: 10px 10px;
             line-height: 20px;
+                
         }
 
         &:before{
@@ -145,7 +146,7 @@
             p{
                 margin: 0;
                 line-height: 40px;
-                font-size: 13px;
+                font-size: 17px;
                 font-weight: 600;
                 text-transform: uppercase;
                 white-space: nowrap;
@@ -155,6 +156,7 @@
                 display: block;
                 height: auto;
                 opacity: 1;
+          
             }
         }
 
@@ -283,7 +285,7 @@
                 padding-bottom: 15px;
 
                 &:hover{
-                    background: rgba(251, 115, 3, 0.301);
+                    background: rgba(11, 85, 107, 0.301);
                     opacity: 1;
                 }
 
@@ -446,10 +448,14 @@
 
 
 .main-panel{
-    background: rgba(102, 51, 241, 0.15);
+    // background: rgba(102, 51, 241, 0.15);
     position: relative;
     float: right;
     width: $sidebar-width;
+    // width: 100%;
+    background-image: url("../../img/carousel_1.jpg") ;
+    // background-repeat: no-repeat;
+
 
     .content{
         padding: 30px 15px;
@@ -709,7 +715,7 @@
             }
         }
         .nav-link:not(.btn):hover{
-            background-color: rgba(224, 120, 34, 0.2) !important;
+            background-color: rgba(121, 54, 0, 0.2) !important;
             border-radius: 0.1875rem;
             @include transition (300ms, linear);
         }
