@@ -479,7 +479,7 @@ export default function Repairman() {
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Nguyễn Lê Thuần</Typography>
+                            <Typography className={classes.name}>Lê Thuần</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -526,7 +526,7 @@ export default function Repairman() {
                             backgroundColor:
                               'rgb(34, 176, 34)',
                             width: '126px',
-                            color: 'black',
+                            color: 'white',
                             fontSize: '12px'
                           }}
                         >Đã thanh toán</Typography>
@@ -602,7 +602,7 @@ export default function Repairman() {
                             backgroundColor:
                               'rgb(34, 176, 34)',
                             width: '126px',
-                            color: 'black',
+                            color: 'white',
                             fontSize: '12px'
                           }}
                         >Đã thanh toán</Typography>
@@ -634,7 +634,7 @@ export default function Repairman() {
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Nguyễn Quốc Vinh</Typography>
+                            <Typography className={classes.name}>Quốc Thịnh</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -680,7 +680,7 @@ export default function Repairman() {
                             backgroundColor:
                               'rgb(34, 176, 34)',
                             width: '126px',
-                            color: 'black',
+                            color: 'white',
                             fontSize: '12px'
                           }}
                         >Đã thanh toán</Typography>
@@ -711,7 +711,7 @@ export default function Repairman() {
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Nguyễn Tiến Phát</Typography>
+                            <Typography className={classes.name}>Tiến Phát</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -743,7 +743,7 @@ export default function Repairman() {
                             backgroundColor:
                               'red',
                             width: '126px',
-                            color: 'black',
+                            color: 'white',
                             fontSize: '12px'
                           }}
                         >Đã Hủy</Typography>
@@ -772,7 +772,7 @@ export default function Repairman() {
                       <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Nguyễn Tiến Long</Typography>
+                            <Typography className={classes.name}>Tiến Long</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -805,7 +805,7 @@ export default function Repairman() {
                             backgroundColor:
                               'red',
                             width: '126px',
-                            color: 'black',
+                            color: 'white',
                             fontSize: '12px'
                           }}
                         >Đã Hủy</Typography>
@@ -869,7 +869,7 @@ export default function Repairman() {
                             backgroundColor:
                               'orange',
                             width: '126px',
-                            color: 'black',
+                            color: 'white',
                             fontSize: '12px'
                           }}
                         >Đang đợi</Typography>
@@ -935,7 +935,7 @@ export default function Repairman() {
                             backgroundColor:
                               'orange',
                             width: '126px',
-                            color: 'black',
+                            color: 'white',
                             fontSize: '12px'
                           }}
                         >Đang đợi</Typography>
@@ -1012,7 +1012,7 @@ export default function Repairman() {
                             backgroundColor:
                               'rgb(34, 176, 34)',
                             width: '133px',
-                            color: 'black',
+                            color: 'white',
                             fontSize: '12px'
                           }}
                         >Đã thanh toán</Typography>

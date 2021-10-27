@@ -427,7 +427,6 @@ function Customer() {
 
                           <Grid item lg={10}>
                             <Typography className={classes.name}>Nguyễn Lê Thuần</Typography>
-                            <Typography color="textSecondary" variant="body2">Cus 001</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -471,7 +470,6 @@ function Customer() {
 
                           <Grid item lg={10}>
                             <Typography className={classes.name}>Nguyễn Quốc Thịnh</Typography>
-                            <Typography color="textSecondary" variant="body2">Cus 011</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -515,7 +513,6 @@ function Customer() {
 
                           <Grid item lg={10}>
                             <Typography className={classes.name}>Nguyễn Tiến Long</Typography>
-                            <Typography color="textSecondary" variant="body2">Cus 012</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -559,7 +556,6 @@ function Customer() {
 
                           <Grid item lg={10}>
                             <Typography className={classes.name}>Nguyễn Thái Bảo</Typography>
-                            <Typography color="textSecondary" variant="body2">Cus 002</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -604,7 +600,6 @@ function Customer() {
 
                           <Grid item lg={10}>
                             <Typography className={classes.name}>Nguyễn Hoàng</Typography>
-                            <Typography color="textSecondary" variant="body2">Cus 003</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -648,7 +643,6 @@ function Customer() {
 
                           <Grid item lg={10}>
                             <Typography className={classes.name}>Nguyễn Minh Hoàng</Typography>
-                            <Typography color="textSecondary" variant="body2">Cus 004</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -692,7 +686,6 @@ function Customer() {
 
                           <Grid item lg={10}>
                             <Typography className={classes.name}>Phạm Tấn Phát</Typography>
-                            <Typography color="textSecondary" variant="body2">Cus 005</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>

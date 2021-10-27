@@ -641,7 +641,7 @@ function ManageSevice() {
                         <Typography className={classes.Status}
                           style={{
                             backgroundColor:
-                              'black',
+                              '#d0700d',
                             width: '120px',
                             textAlign: 'center'
                           }}>Sắp ra mắt</Typography>
