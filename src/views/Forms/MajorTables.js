@@ -202,6 +202,8 @@ function ManageSevice() {
   'Faber','Teka','Taka','Binova','Paloma','Sunhouse','Apple', 'Samsung',
    'Xiaomi', 'Oppo', 'Huawei', 'Pixel', 'Nokia',	'Samsung','Apple','Dell','Asus','HP','Lenovo','MSI','Acer'];
 
+  const dataUpdate=["Tủ Lạnh", "Xe máy", "Máy Tính", "Xe ô tô", "Máy Lạnh", "Máy Giặt", "Bếp Gas"];
+
   const initialValue = { name: "", description: "", imageUrl: "", status: "1" }
   const [searchName, setSearchName] = useState("");
   const handleClickOpen = () => {
@@ -334,7 +336,7 @@ function ManageSevice() {
                     </Form>
                   </Col>
                   <Col md={8} align="right">
-                    <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Thêm đồ dùng cần sửa</Button>
+                    <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Thêm Thiết bị</Button>
                   </Col>
                 </Row>
               </div>
@@ -355,7 +357,7 @@ function ManageSevice() {
                           }
                         }}
                       >
-                        Đồ dùng{" "}
+                        Thiết bị{" "}
                         {sortedField === "Username" ? (
                           ascending === true ? (
                             <FontAwesomeIcon icon={faCaretUp} />
@@ -366,7 +368,7 @@ function ManageSevice() {
                           <FontAwesomeIcon icon={faCaretDown} />
                         )}
                       </th>
-                      <th className="description">Mô Tả</th>
+                      <th className="description">Vấn đề</th>
                       <th className="description">Hãng Sản Xuất</th>
                       <th
                         className="description"
@@ -406,7 +408,12 @@ function ManageSevice() {
                           </Grid>
                         </Grid>
                       </TableCell>
-                      <td>Chuyên Sửa Các Vấn đề liên quan tới tủ lạnh</td>
+                      <td>Phát ra tiếng ồn lớn, Đèn sáng nhưng không chạy, Lốc máy nóng hơn bình thường,
+                      Cửa tủ bị chênh, Ngăn đá bám tuyết nhiều,
+                      Bị chảy nước, Bản lề cửa bị lệch,Ron cửa bị hở,
+                      Bị hở các lỗ luồn dây điện, 
+                      Ngăn đông không hoạt động
+                      </td>
                       <td>
                         SamSung, Panasonic, Daikin, Electrolux, LG, Tosiba, Sharp, Mishubíhi Electric, Aqua
                       </td>
@@ -482,7 +489,12 @@ function ManageSevice() {
                         </Grid>
 
                       </TableCell>
-                      <td>Chuyên Sửa Các Vấn đề liên quan tới xe máy</td>
+                       <td>Phát ra tiếng ồn lớn, Đèn sáng nhưng không chạy, Lốc máy nóng hơn bình thường,
+                      Cửa tủ bị chênh, Ngăn đá bám tuyết nhiều,
+                      Bị chảy nước, Bản lề cửa bị lệch,Ron cửa bị hở,
+                      Bị hở các lỗ luồn dây điện, 
+                      Ngăn đông không hoạt động
+                      </td>
                       <td>
                         Honda,Yamaha,Piggio,SYM,Suzuki,Triump,Harley Davidson,Ducati
                       </td>
@@ -619,7 +631,7 @@ function ManageSevice() {
                         </OverlayTrigger>
                       </td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
@@ -693,7 +705,7 @@ function ManageSevice() {
                           </Button>
                         </OverlayTrigger>
                       </td>
-                    </tr>
+                    </tr> */}
                     <tr>
                       <TableCell>
                         <Grid container>
@@ -987,7 +999,7 @@ function ManageSevice() {
                         </OverlayTrigger>
                       </td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
@@ -1059,7 +1071,7 @@ function ManageSevice() {
                           </Button>
                         </OverlayTrigger>
                       </td>
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </Table>
                 <Row>
@@ -1159,39 +1171,34 @@ function ManageSevice() {
 
       <Modal isOpen={modalserviceDelete} toggle={toggleserviceDelete}>
         <ModalHeader
-          style={{ color: "#B22222" }}
-        >
-          Xóa đồ dùng
+            style={{ color: "#1bd1ff" }}
+>
+          Xóa Thiết bị
         </ModalHeader>
-        <ModalBody>Bạn có muốn xóa đồ dùng này?</ModalBody>
+        <ModalBody>Bạn có muốn xóa Thiết bị này?</ModalBody>
         <ModalFooter>
-          <Button
-            color="danger"
-            onClick={() => {
-              deleteserviceByID();
-              setserviceModalDelete(false);
-            }}
-          >
-            Xóa
-          </Button>{" "}
-          <Button color="secondary" onClick={toggleserviceDelete}>
+        <Button style={{ color: "white" ,backgroundColor:"brown" }} onClick={toggleserviceDelete}>
             Hủy xóa
           </Button>
+          <Button onClick={toggleserviceDelete}>
+            Xóa
+          </Button>{" "}
+     
         </ModalFooter>
       </Modal>
 
       <Modal className="modalCreatene" isOpen={modalCreate} toggle={toggleCreate} centered>
         <ModalHeader
-          style={{ color: "#B22222" }}
+          style={{ color: "#1bd1ff" }}
       
         >
-          <ModalTitle>Tạo mới một đồ dùng</ModalTitle>
+          <ModalTitle>Tạo mới một Thiết bị</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
           <FormGroup className="mb-2">
-              <Form.Label>Tên đồ dùng</Form.Label>
-              <Form.Control type="text" placeholder="Tên đồ dùng" value={name}
+              <Form.Label>Tên Thiết bị</Form.Label>
+              <Form.Control type="text" placeholder="Tên Thiết bị" value={name}
                 onChange={e => setName(e.target.value)}
               />
             </FormGroup>
@@ -1213,10 +1220,10 @@ function ManageSevice() {
             </FormGroup>
             
             <FormGroup className="mb-2">
-              <Form.Label>Mô tả</Form.Label>
+              <Form.Label>Vấn đề</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Mô tả chi tiết"
+                placeholder="Vấn đề chi tiết"
                 as="textarea"
                 value={description}
                 onChange={e => setDescription(e.target.value)}
@@ -1226,33 +1233,42 @@ function ManageSevice() {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" onClick={() => { // handleServiceDetele();
-            handleSubmitCreate();
-            setserviceModalCreate(false);
-          }}
-          >
-            Lưu sản phẩm
-          </Button>
-          <Button color="secondary" onClick={toggleCreate}>
+        <Button  style={{ color: "white" ,backgroundColor:"brown" }} onClick={toggleCreate}>
             Hủy tạo
           </Button>
+          <Button  onClick={toggleCreate}>
+            Lưu sản phẩm
+          </Button>
+      
         </ModalFooter>
       </Modal>
       <Modal isOpen={modalEdit} toggle={toggleEdit} centered>
         <ModalHeader
-          style={{ color: "#B22222" }}
-      
+          style={{ color: "#1bd1ff" }}
         >
           <ModalTitle>Bạn muốn cập nhật?</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
+              <Form.Label>Thiết bị </Form.Label>
             <FormGroup className="mb-2">
-              <Form.Label>Tên đồ dùng </Form.Label>
-              <Form.Control type="text" placeholder="name" value="Tủ Lạnh"
-                onChange={e => setCompanyID(e.target.value)}
+              <Autocomplete
+                options={dataUpdate}
+                Selection
+                style={{ width: 500 }}
+                value={'Tủ Lạnh'}
+                getOptionLabel={(option) => option}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    // label="Lựa chọn thiết bị"
+                    variant="standard"
+                    // placeholder="hãng sản phẩm"
+                  />
+                )}
               />
             </FormGroup>
+
             <Form.Label>Hãng Sản Xuất </Form.Label>
             <FormGroup className="mb-2">
               <Autocomplete
@@ -1273,7 +1289,7 @@ function ManageSevice() {
             </FormGroup>
 
             <FormGroup className="mb-2">
-              <Form.Label>Mô tả</Form.Label>
+              <Form.Label>Vấn đề</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Description"
@@ -1286,16 +1302,13 @@ function ManageSevice() {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" onClick={() => { // handleServiceDetele();
-            handleEditSubmit();
-            setserviceModalEdit(false);
-          }}
-          >
-            Edit
+        <Button style={{ color: "white" ,backgroundColor:"brown" }} onClick={toggleEdit}>
+            Hủy cập nhật
           </Button>
-          <Button color="secondary" onClick={toggleEdit}>
-            Cancel
+          <Button onClick={toggleEdit}>
+            Cập nhật
           </Button>
+   
         </ModalFooter>
       </Modal>
       <Modal isOpen={modalStatus} toggle={toggleDetails}>

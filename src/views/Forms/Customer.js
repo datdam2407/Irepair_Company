@@ -403,7 +403,30 @@ function Customer() {
                           }
                         }}
                       >
-                        Đánh giá{" "}
+                        Số đơn đã đặt{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Số đơn đã hủy{" "}
                         {sortedField === "Username" ? (
                           ascending === true ? (
                             <FontAwesomeIcon icon={faCaretUp} />
@@ -437,28 +460,15 @@ function Customer() {
                       <td>
                         20-01-2020
                       </td>
-                      <td>
-                      <Typography
-                          style={{
-                            color:
-                              '#e2930b',
-                            width: '120px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                            fontSize: '20px',
-                          }}
-                        >✩✩✩✩</Typography>
-                        <Typography
-                          style={{
-                            color:
-                              'green',
-                            width: '253px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                          }}
-                        > Gọi thợ nhanh, sửa chữa tận tình
-                        </Typography>
+                      <td style={{color:"green", fontWeight:"700"}}>
+                        45 lần
                       </td>
+                      <td style={{color:"red", fontWeight:"700"}}>
+                        2 lần
+                      </td>
+                      <td>
+                        
+                        </td>
                      
                     </tr>
                     <tr >
@@ -480,29 +490,15 @@ function Customer() {
                       <td>
                         20-01-2021
                       </td>
-                      <td>
-                      <Typography
-                          style={{
-                            color:
-                              '#e2930b',
-                            width: '120px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                            fontSize: '20px',
-                          }}
-                        >✩✩✩✩✩</Typography>
-                        <Typography
-                          style={{
-                            color:
-                              'green',
-                            width: '253px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                          }}
-                        > Thợ sửa ok! Thở sửa tủ lạnh với TV đúng giá
-                        </Typography>
+                      <td style={{color:"green", fontWeight:"700"}}>
+                        35 lần
                       </td>
-
+                      <td style={{color:"red", fontWeight:"700"}}>
+                        5 lần
+                      </td>
+                      <td>
+                        
+                        </td>
                     </tr>
                     <tr >
                     <td>
@@ -523,29 +519,15 @@ function Customer() {
                       <td>
                         11-01-2021
                       </td>
-                      <td>
-                      <Typography
-                          style={{
-                            color:
-                              '#e2930b',
-                            width: '120px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                            fontSize: '20px',
-                          }}
-                        >✩✩✩✩</Typography>
-                        <Typography
-                          style={{
-                            color:
-                              'green',
-                            width: '253px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                          }}
-                        > Thợ sửa ok! Rất nhanh chóng
-                        </Typography>
+                      <td style={{color:"green", fontWeight:"700"}}>
+                        21 lần
                       </td>
-
+                      <td style={{color:"red", fontWeight:"700"}}>
+                        2 lần
+                      </td>
+                      <td>
+                        
+                        </td>
                     </tr>
                     <tr >
                     <td>
@@ -566,29 +548,15 @@ function Customer() {
                       <td>
                         02-02-2010
                       </td>
-                      <td>
-                      <Typography
-                          style={{
-                            color:
-                              '#e2930b',
-                            width: '120px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                            fontSize: '20px',
-                          }}
-                        >✩✩✩✩</Typography>
-                        <Typography
-                          style={{
-                            color:
-                              'green',
-                            width: '253px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                          }}
-                        > Rất nhanh chóng thợ đã tới
-                        </Typography>
+                      <td style={{color:"green", fontWeight:"700"}}>
+                        20 lần
                       </td>
-
+                      <td style={{color:"red", fontWeight:"700"}}>
+                        0 lần
+                      </td>
+                      <td>
+                        
+                        </td>
                     </tr>
 
                     <tr >
@@ -610,28 +578,15 @@ function Customer() {
                       <td>
                         12-12-2019
                       </td>
-                      <td>
-                      <Typography
-                          style={{
-                            color:
-                              '#e2930b',
-                            width: '120px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                            fontSize: '20px',
-                          }}
-                        >✩✩✩✩✩</Typography>
-                        <Typography
-                          style={{
-                            color:
-                              'green',
-                            width: '253px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                          }}
-                        > Mọi vấn đề giải quyết rất nhanh chóng
-                        </Typography>
+                      <td style={{color:"green", fontWeight:"700"}}>
+                        10 lần
                       </td>
+                      <td style={{color:"red", fontWeight:"700"}}>
+                        0 lần
+                      </td>
+                       <td>
+                        
+                        </td>
                     </tr>
 
                     <tr >
@@ -653,28 +608,16 @@ function Customer() {
                       <td>
                         12-02-2021
                       </td>
-                      <td>
-                      <Typography
-                          style={{
-                            color:
-                              '#e2930b',
-                            width: '120px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                            fontSize: '20px',
-                          }}
-                        >✩✩✩</Typography>
-                        <Typography
-                          style={{
-                            color:
-                              'green',
-                            width: '253px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                          }}
-                        > Cần cải tiến thêm một số tính năng 
-                        </Typography>
+                      <td style={{color:"green", fontWeight:"700"}}>
+                        5 lần
                       </td>
+                      <td style={{color:"red", fontWeight:"700"}}>
+                        0 lần
+                      </td>
+                      <td>
+                        
+                      </td>
+                     
                     </tr>
 
                     <tr >
@@ -696,27 +639,14 @@ function Customer() {
                       <td>
                         02-02-2019
                       </td>
+                      <td style={{color:"green", fontWeight:"700"}}>
+                        1 lần
+                      </td>
+                      <td style={{color:"red", fontWeight:"700"}}>
+                        0 lần
+                      </td>
                       <td>
-                      <Typography
-                          style={{
-                            color:
-                              '#e2930b',
-                            width: '120px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                            fontSize: '20px',
-                          }}
-                        >✩✩✩✩✩</Typography>
-                        <Typography
-                          style={{
-                            color:
-                              'green',
-                            width: '253px',
-                            fontWeight: '700',
-                            paddingRight: '15px',
-                          }}
-                        > Dịch vụ uy tín , ứng dụng hữu ích không cần phải đi ra bên ngoài sửa chữa
-                        </Typography>
+                          
                       </td>
                     </tr>
                   </tbody>

@@ -98,11 +98,11 @@ export default function Repairman() {
     const [modalStatus, setModalStatus] = useState(false);
     const toggleDetails = () => setModalStatus(!modalStatus);
     const [Selectservice, setSelectservice] = useState();
-  
+
     const listStates = [
         "Đang Hoạt Động",
         "Ngưng hoạt động",
-      ];
+    ];
     const [customer_Name, setcustomer_Name] = useState("");
     const [address, setaddress] = useState("");
 
@@ -187,11 +187,11 @@ export default function Repairman() {
             // img: 'string',
 
         },
-         name: {
+        name: {
             fontWeight: 'bold',
             color: '#1d98e0f7'
-          },
-     
+        },
+
         Status: {
             fontWeight: '700',
             width: '71px',
@@ -237,7 +237,7 @@ export default function Repairman() {
                 <Card className="strpied-tabled-with-hover">
                     <div className="header-form">
                         <Row>
-                            <Col  md={1}>
+                            <Col md={1}>
                                 <Form
                                     onClick={(e) => {
                                         // onSubmitSearch(e);
@@ -262,32 +262,55 @@ export default function Repairman() {
                                 <tr>
                                     <th className="description">Ảnh</th>
                                     <th
-                        className="description"
-                        onClick={() => {
-                          if (sortedField === "Username" && ascending) {
-                            setSortedField("Username");
-                            setAscending(false);
-                          } else {
-                            setSortedField("Username");
-                            setAscending(true);
-                          }
-                        }}
-                      >
-                        Thợ sửa chữa{" "}
-                        {sortedField === "Username" ? (
-                          ascending === true ? (
-                            <FontAwesomeIcon icon={faCaretUp} />
-                          ) : (
-                            <FontAwesomeIcon icon={faCaretDown} />
-                          )
-                        ) : (
-                          <FontAwesomeIcon icon={faCaretDown} />
-                        )}
-                      </th>
-                                    
+                                        className="description"
+                                        onClick={() => {
+                                            if (sortedField === "Username" && ascending) {
+                                                setSortedField("Username");
+                                                setAscending(false);
+                                            } else {
+                                                setSortedField("Username");
+                                                setAscending(true);
+                                            }
+                                        }}
+                                    >
+                                        Thợ sửa chữa{" "}
+                                        {sortedField === "Username" ? (
+                                            ascending === true ? (
+                                                <FontAwesomeIcon icon={faCaretUp} />
+                                            ) : (
+                                                <FontAwesomeIcon icon={faCaretDown} />
+                                            )
+                                        ) : (
+                                            <FontAwesomeIcon icon={faCaretDown} />
+                                        )}
+                                    </th>
+
                                     <th className="description">Số điện thoại </th>
                                     <th className="description">Email</th>
                                     <th className="description">Chuyên Môn</th>
+                                    <th
+                                        className="description"
+                                        onClick={() => {
+                                            if (sortedField === "Username" && ascending) {
+                                                setSortedField("Username");
+                                                setAscending(false);
+                                            } else {
+                                                setSortedField("Username");
+                                                setAscending(true);
+                                            }
+                                        }}
+                                    >
+                                        Đánh giá{" "}
+                                        {sortedField === "Username" ? (
+                                            ascending === true ? (
+                                                <FontAwesomeIcon icon={faCaretUp} />
+                                            ) : (
+                                                <FontAwesomeIcon icon={faCaretDown} />
+                                            )
+                                        ) : (
+                                            <FontAwesomeIcon icon={faCaretDown} />
+                                        )}
+                                    </th>
                                     <th
                         className="description"
                         onClick={() => {
@@ -300,7 +323,7 @@ export default function Repairman() {
                           }
                         }}
                       >
-                        Đánh giá{" "}
+                        Số đơn đã nhận{" "}
                         {sortedField === "Username" ? (
                           ascending === true ? (
                             <FontAwesomeIcon icon={faCaretUp} />
@@ -311,15 +334,59 @@ export default function Repairman() {
                           <FontAwesomeIcon icon={faCaretDown} />
                         )}
                       </th>
-                                    <th className="description">Ngày tạo</th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Số đơn đã hủy{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
+                      <th
+                        className="description"
+                        onClick={() => {
+                          if (sortedField === "Username" && ascending) {
+                            setSortedField("Username");
+                            setAscending(false);
+                          } else {
+                            setSortedField("Username");
+                            setAscending(true);
+                          }
+                        }}
+                      >
+                        Số đơn đã sửa thành công{" "}
+                        {sortedField === "Username" ? (
+                          ascending === true ? (
+                            <FontAwesomeIcon icon={faCaretUp} />
+                          ) : (
+                            <FontAwesomeIcon icon={faCaretDown} />
+                          )
+                        ) : (
+                          <FontAwesomeIcon icon={faCaretDown} />
+                        )}
+                      </th>
                                     <th className="description">Trạng Thái</th>
-                                    <th className="description">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>
-                                    <img className="avatar-repairman" src={logo} />
+                                        <img className="avatar-repairman" src={logo} />
                                     </td>
                                     <TableCell>
                                         <Grid container>
@@ -336,7 +403,8 @@ export default function Repairman() {
                                     </td>
                                     <td>
                                         Thợ sửa ô tô, thợ sửa xe máy
-                                    </td>
+                                    </td> <br/>
+                                    <br/>
                                     <Typography
                                         style={{
                                             color:
@@ -347,10 +415,15 @@ export default function Repairman() {
                                             fontSize: '20px',
                                         }}
                                     >✩✩✩✩</Typography>
-                                    <td >
-                                        20-12-2020
-                                    </td >
-
+                                 
+                                    <td style={{color:"green", fontWeight:"700"}}>
+                        45 lần
+                      </td>
+                         <td style={{color:"red", fontWeight:"700"}}>
+                        2 lần
+                      </td>  <td style={{color:"green", fontWeight:"700"}}>
+                        45 lần
+                      </td>
                                     <TableCell>
                                         <Typography
                                             className={classes.Status}
@@ -363,31 +436,9 @@ export default function Repairman() {
                                             }}
                                         >Đang hoạt động</Typography>
                                     </TableCell>
+                                    <br/>
                                     <td >
-
-                                        <OverlayTrigger
-                                            overlay={
-                                                <Tooltip id="tooltip-436082023">
-                                                    Cập nhật..
-                                                </Tooltip>
-                                            }
-                                            placement="right"
-                                        >
-                                            <Button
-                                                // onClick={() => handleUpdate(e.data)}
-                                                // onGridReady={onGridReady}
-                                                onClick={() => {
-                                                    // setserviceEdit(e.Id);
-                                                    // getserviceByID(e.Id);
-                                                    setCustomerModalEdit(true);
-                                                }}
-                                                className="btn-link btn-icon"
-                                                type="button"
-                                                variant="success"
-                                            >
-                                                <i className="fas fa-edit"></i>
-                                            </Button>
-                                        </OverlayTrigger>
+                                        
                                         <OverlayTrigger
                                             onClick={(e) => e.preventDefault()}
                                             overlay={
@@ -410,10 +461,11 @@ export default function Repairman() {
                                             </Button>
                                         </OverlayTrigger>
                                     </td>
+
                                 </tr>
                                 <tr>
-                                <td>
-                                    <img className="avatar-repairman" src={logo1} />
+                                    <td>
+                                        <img className="avatar-repairman" src={logo1} />
                                     </td>
                                     <TableCell>
                                         <Grid container>
@@ -431,7 +483,8 @@ export default function Repairman() {
                                     </td>
                                     <td>
                                         Thợ sửa Máy Tính , thợ sửa ti vi
-                                    </td>
+                                    </td> <br/>
+                                    <br/>
                                     <Typography
                                         style={{
                                             color:
@@ -442,10 +495,16 @@ export default function Repairman() {
                                             fontSize: '20px',
                                         }}
                                     >✩✩✩</Typography>
-                                    <td >
-                                        20-10-2021
-
-                                    </td >
+                                 
+                                    
+                                    <td style={{color:"green", fontWeight:"700"}}>
+                        45 lần
+                      </td>
+                         <td style={{color:"red", fontWeight:"700"}}>
+                        2 lần
+                      </td>  <td style={{color:"green", fontWeight:"700"}}>
+                        45 lần
+                      </td>
                                     <TableCell>
                                         <Typography
                                             className={classes.Status}
@@ -458,31 +517,10 @@ export default function Repairman() {
                                             }}
                                         >Đang hoạt động</Typography>
                                     </TableCell>
+                                    <br/>
                                     <td >
 
-                                        <OverlayTrigger
-                                            overlay={
-                                                <Tooltip id="tooltip-436082023">
-                                                    Cập nhật..
-                                                </Tooltip>
-                                            }
-                                            placement="right"
-                                        >
-                                            <Button
-                                                // onClick={() => handleUpdate(e.data)}
-                                                // onGridReady={onGridReady}
-                                                onClick={() => {
-                                                    // setserviceEdit(e.Id);
-                                                    // getserviceByID(e.Id);
-                                                    setCustomerModalEdit(true);
-                                                }}
-                                                className="btn-link btn-icon"
-                                                type="button"
-                                                variant="success"
-                                            >
-                                                <i className="fas fa-edit"></i>
-                                            </Button>
-                                        </OverlayTrigger>
+
                                         <OverlayTrigger
                                             onClick={(e) => e.preventDefault()}
                                             overlay={
@@ -508,8 +546,8 @@ export default function Repairman() {
                                 </tr>
                                 <tr>
 
-                                <td>
-                                    <img className="avatar-repairman" src={logo2} />
+                                    <td>
+                                        <img className="avatar-repairman" src={logo2} />
                                     </td>
                                     <TableCell>
                                         <Grid container>
@@ -528,6 +566,8 @@ export default function Repairman() {
                                     <td>
                                         Thợ Điện
                                     </td>
+                                    <br/>
+                                    <br/>
                                     <Typography
                                         style={{
                                             color:
@@ -538,11 +578,16 @@ export default function Repairman() {
                                             fontSize: '20px',
                                         }}
                                     >✩✩✩✩</Typography>
-                                    <td >
-                                        20-08-2020
+                                 
 
-                                    </td >
-
+                                    <td style={{color:"green", fontWeight:"700"}}>
+                        45 lần
+                      </td>
+                         <td style={{color:"red", fontWeight:"700"}}>
+                        2 lần
+                      </td>  <td style={{color:"green", fontWeight:"700"}}>
+                        45 lần
+                      </td>
                                     <TableCell>
                                         <Typography
                                             className={classes.Status}
@@ -555,31 +600,10 @@ export default function Repairman() {
                                             }}
                                         >Đang hoạt động</Typography>
                                     </TableCell>
+                                    <br/>
                                     <td >
 
-                                        <OverlayTrigger
-                                            overlay={
-                                                <Tooltip id="tooltip-436082023">
-                                                    Cập nhật..
-                                                </Tooltip>
-                                            }
-                                            placement="right"
-                                        >
-                                            <Button
-                                                // onClick={() => handleUpdate(e.data)}
-                                                // onGridReady={onGridReady}
-                                                onClick={() => {
-                                                    // setserviceEdit(e.Id);
-                                                    // getserviceByID(e.Id);
-                                                    setCustomerModalEdit(true);
-                                                }}
-                                                className="btn-link btn-icon"
-                                                type="button"
-                                                variant="success"
-                                            >
-                                                <i className="fas fa-edit"></i>
-                                            </Button>
-                                        </OverlayTrigger>
+
                                         <OverlayTrigger
                                             onClick={(e) => e.preventDefault()}
                                             overlay={
@@ -604,8 +628,8 @@ export default function Repairman() {
                                     </td>
                                 </tr>
                                 <tr>
-                                <td>
-                                    <img className="avatar-repairman" src={logo3} />
+                                    <td>
+                                        <img className="avatar-repairman" src={logo3} />
                                     </td>
                                     <TableCell>
                                         <Grid container>
@@ -623,7 +647,8 @@ export default function Repairman() {
                                     </td>
                                     <td>
                                         Thợ sửa ô tô
-                                    </td>
+                                    </td> <br/>
+                                    <br/>
                                     <Typography
                                         style={{
                                             color:
@@ -634,10 +659,15 @@ export default function Repairman() {
                                             fontSize: '20px',
                                         }}
                                     >✩✩✩✩✩</Typography>
-                                    <td >
-                                        15-09-2020
-                                    </td >
-
+                                 
+                                    <td style={{color:"green", fontWeight:"700"}}>
+                        45 lần
+                      </td>
+                         <td style={{color:"red", fontWeight:"700"}}>
+                        2 lần
+                      </td>  <td style={{color:"green", fontWeight:"700"}}>
+                        45 lần
+                      </td>
                                     <TableCell>
                                         <Typography
                                             className={classes.Status}
@@ -650,31 +680,10 @@ export default function Repairman() {
                                             }}
                                         >Đang hoạt động</Typography>
                                     </TableCell>
+                                    <br/>
                                     <td >
 
-                                        <OverlayTrigger
-                                            overlay={
-                                                <Tooltip id="tooltip-436082023">
-                                                    Cập nhật..
-                                                </Tooltip>
-                                            }
-                                            placement="right"
-                                        >
-                                            <Button
-                                                // onClick={() => handleUpdate(e.data)}
-                                                // onGridReady={onGridReady}
-                                                onClick={() => {
-                                                    // setserviceEdit(e.Id);
-                                                    // getserviceByID(e.Id);
-                                                    setCustomerModalEdit(true);
-                                                }}
-                                                className="btn-link btn-icon"
-                                                type="button"
-                                                variant="success"
-                                            >
-                                                <i className="fas fa-edit"></i>
-                                            </Button>
-                                        </OverlayTrigger>
+
                                         <OverlayTrigger
                                             onClick={(e) => e.preventDefault()}
                                             overlay={
@@ -699,8 +708,8 @@ export default function Repairman() {
                                     </td>
                                 </tr>
                                 <tr>
-                                <td>
-                                    <img className="avatar-repairman" src={logo4} />
+                                    <td>
+                                        <img className="avatar-repairman" src={logo4} />
                                     </td>
                                     <TableCell>
                                         <Grid container>
@@ -718,7 +727,8 @@ export default function Repairman() {
                                     </td>
                                     <td>
                                         Thợ điện Lạnh
-                                    </td>
+                                    </td> <br/>
+                                    <br/>
                                     <Typography
                                         style={{
                                             color:
@@ -729,11 +739,15 @@ export default function Repairman() {
                                             fontSize: '20px',
                                         }}
                                     >✩✩✩✩</Typography>
-                                    <td >
-                                        20-12-2021
-
-                                    </td >
-
+                            
+                                    <td style={{color:"green", fontWeight:"700"}}>
+                        45 lần
+                      </td>
+                         <td style={{color:"red", fontWeight:"700"}}>
+                        2 lần
+                      </td>  <td style={{color:"green", fontWeight:"700"}}>
+                        45 lần
+                      </td>
                                     <TableCell>
                                         <Typography
                                             className={classes.Status}
@@ -746,31 +760,10 @@ export default function Repairman() {
                                             }}
                                         >Đang hoạt động</Typography>
                                     </TableCell>
+                                    <br/>
                                     <td >
 
-                                        <OverlayTrigger
-                                            overlay={
-                                                <Tooltip id="tooltip-436082023">
-                                                    Cập nhật..
-                                                </Tooltip>
-                                            }
-                                            placement="right"
-                                        >
-                                            <Button
-                                                // onClick={() => handleUpdate(e.data)}
-                                                // onGridReady={onGridReady}
-                                                onClick={() => {
-                                                    // setserviceEdit(e.Id);
-                                                    // getserviceByID(e.Id);
-                                                    setCustomerModalEdit(true);
-                                                }}
-                                                className="btn-link btn-icon"
-                                                type="button"
-                                                variant="success"
-                                            >
-                                                <i className="fas fa-edit"></i>
-                                            </Button>
-                                        </OverlayTrigger>
+
                                         <OverlayTrigger
                                             onClick={(e) => e.preventDefault()}
                                             overlay={
@@ -794,7 +787,7 @@ export default function Repairman() {
                                         </OverlayTrigger>
                                     </td>
                                 </tr>
-                                <tr>
+                                {/* <tr>
                                 <td>
                                     <img className="avatar-repairman" src={logo5} />
                                     </td>
@@ -843,29 +836,7 @@ export default function Repairman() {
                                     </TableCell>
                                     <td >
 
-                                        <OverlayTrigger
-                                            overlay={
-                                                <Tooltip id="tooltip-436082023">
-                                                    Cập nhật..
-                                                </Tooltip>
-                                            }
-                                            placement="right"
-                                        >
-                                            <Button
-                                                // onClick={() => handleUpdate(e.data)}
-                                                // onGridReady={onGridReady}
-                                                onClick={() => {
-                                                    // setserviceEdit(e.Id);
-                                                    // getserviceByID(e.Id);
-                                                    setCustomerModalEdit(true);
-                                                }}
-                                                className="btn-link btn-icon"
-                                                type="button"
-                                                variant="success"
-                                            >
-                                                <i className="fas fa-edit"></i>
-                                            </Button>
-                                        </OverlayTrigger>
+                                       
                                         <OverlayTrigger
                                             onClick={(e) => e.preventDefault()}
                                             overlay={
@@ -888,7 +859,7 @@ export default function Repairman() {
                                             </Button>
                                         </OverlayTrigger>
                                     </td>
-                                </tr>
+                                </tr> */}
                                 {/* })} */}
                             </tbody>
                         </Table>
@@ -981,33 +952,30 @@ export default function Repairman() {
                     </Card.Body>
                 </Card>
             </Col>
-            
+
 
             <Modal isOpen={modalDelete} toggle={toggleDelete}>
                 <ModalHeader
-                    style={{ color: "#B22222" }}
+                    style={{ color: "#1bd1ff" }}
                 >
-                   <h3> Ngưng hoạt động nhân viên </h3>
+                    Ngưng hoạt động nhân viên
                 </ModalHeader>
-                <ModalBody><h3>Bạn có muốn ngưng hoạt động nhân viên này</h3></ModalBody>
+                <ModalBody>Bạn có muốn ngưng hoạt động nhân viên này</ModalBody>
                 <ModalFooter>
-                    <Button
-                        color="danger"
-                        onClick={() => {
-                            handleCustomerDetele();
-                            setCustomerModalDelete(false);
-                        }}
-                    >
-                        Xác nhận
-                    </Button>{" "}
-                    <Button color="secondary" onClick={toggleDelete}>
+                    <Button style={{ color: "white", backgroundColor: "brown" }} onClick={toggleDelete}>
                         Hủy
                     </Button>
+                    <Button onClick={toggleDelete}>
+
+                        Xác nhận
+                    </Button>{" "}
+
                 </ModalFooter>
             </Modal>
             <Modal className="modalCreatene" isOpen={modalCreate} toggle={toggleCreate} centered>
                 <ModalHeader
-                    style={{ color: "#B22222" }}
+                    style={{ color: "#1bd1ff" }}
+
                 >
                     <ModalTitle>Tạo mới thợ sữa chữa</ModalTitle>
                 </ModalHeader>
@@ -1040,7 +1008,6 @@ export default function Repairman() {
                             <Form.Label>Số điện thoại</Form.Label>
                             <Form.Control
                                 type="text"
-                                as="textarea"
                                 onChange={e => setDescription(e.target.value)}
                                 rows={3}
                             />
@@ -1056,20 +1023,20 @@ export default function Repairman() {
                     </Form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="danger" onClick={() => { // handleServiceDetele();
-                        setserviceModalCreate(false);
-                    }}
-                    >
-                        Lưu nhân viên
-                    </Button>
-                    <Button color="secondary" onClick={toggleCreate}>
+                    <Button style={{ color: "white", backgroundColor: "brown" }}
+                        onClick={toggleCreate}>
                         Hủy tạo
                     </Button>
+                    <Button onClick={toggleCreate}>
+                        Lưu nhân viên
+                    </Button>
+
                 </ModalFooter>
             </Modal>
             <Modal className="modalCreatene" isOpen={modalEdit} toggle={toggleEdit} centered>
                 <ModalHeader
-                    style={{ color: "#B22222" }}
+                    style={{ color: "#1bd1ff" }}
+
                 >
                     <ModalTitle>Cập nhật thợ sữa chữa</ModalTitle>
                 </ModalHeader>
@@ -1086,7 +1053,7 @@ export default function Repairman() {
                             <Autocomplete
                                 options={myOptions}
                                 multiple
-                                value={["Thợ sửa Máy Tính" , "thợ sửa ti vi"]}
+                                value={["Thợ sửa Máy Tính", "thợ sửa ti vi"]}
                                 style={{ width: 500 }}
                                 getOptionLabel={(option) => option}
                                 renderInput={(params) => (
@@ -1120,15 +1087,16 @@ export default function Repairman() {
                     </Form>
                 </ModalBody>
                 <ModalFooter>
+                    <Button style={{ color: "white", backgroundColor: "brown" }} onClick={toggleEdit}>
+                        Hủy cập nhật
+                    </Button>
                     <Button color="danger" onClick={() => { // handleServiceDetele();
                         setserviceModalCreate(false);
                     }}
                     >
                         Cập nhật
                     </Button>
-                    <Button color="secondary" onClick={toggleEdit}>
-                        Hủy 
-                    </Button>
+
                 </ModalFooter>
             </Modal>
 

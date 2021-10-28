@@ -76,8 +76,8 @@ export default function Repairman() {
 
 
   const listStates = [
-    "Đã thanh toán",
-    "Đang đợi",
+    "Đã xử lý",
+    "Đang trì hoãn",
     "Đã hủy",
   ];
 
@@ -529,7 +529,7 @@ export default function Repairman() {
                             color: 'white',
                             fontSize: '12px'
                           }}
-                        >Đã thanh toán</Typography>
+                        >Đã xử lý</Typography>
                       </TableCell>
                       <td>
                        
@@ -605,7 +605,7 @@ export default function Repairman() {
                             color: 'white',
                             fontSize: '12px'
                           }}
-                        >Đã thanh toán</Typography>
+                        >Đã xử lý</Typography>
                       </TableCell>
                       <td>
                         
@@ -683,7 +683,7 @@ export default function Repairman() {
                             color: 'white',
                             fontSize: '12px'
                           }}
-                        >Đã thanh toán</Typography>
+                        >Đã xử lý</Typography>
                       </TableCell>
                       <td>
                         
@@ -858,7 +858,7 @@ export default function Repairman() {
                               'rgb(136 70 13)',
                             fontWeight: '700'
                           }}
-                        >Thợ đang đến
+                        >Yêu cầu đang xử lý
                         </Typography>
                       </TableCell>
 
@@ -872,7 +872,7 @@ export default function Repairman() {
                             color: 'white',
                             fontSize: '12px'
                           }}
-                        >Đang đợi</Typography>
+                        >Thợ đang đến</Typography>
                       </TableCell>
                       <td>
                         
@@ -915,30 +915,44 @@ export default function Repairman() {
                         Hư card mạng
                       </td>
                       <td>
-                        Báo giá sau
+                        550,000đ
                         </td>
 
-                      <TableCell>
+                        <td>
                         <Typography
                           style={{
                             color:
-                            'rgb(136 70 13)',
-                            fontWeight: '700'
+                              'green',
+                            width: '133px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
                           }}
-                        >Đang đợi vật tư</Typography>
-                      </TableCell>
+                        >Rất hài Lòng
+                        </Typography>
+
+                        <Typography
+                          style={{
+                            color:
+                              '#e2930b',
+                            width: '133px',
+                            fontWeight: '700',
+                            paddingRight: '15px',
+                            fontSize: '20px',
+                          }}
+                        >✩✩✩✩✩</Typography>
+                      </td>
 
                       <TableCell>
                         <Typography
                           className={classes.Status}
                           style={{
                             backgroundColor:
-                              'orange',
-                            width: '126px',
+                              'rgb(34, 176, 34)',
+                            width: '133px',
                             color: 'white',
                             fontSize: '12px'
                           }}
-                        >Đang đợi</Typography>
+                        >Đã xử lý</Typography>
                       </TableCell>
                       <td>
                         
@@ -1015,7 +1029,7 @@ export default function Repairman() {
                             color: 'white',
                             fontSize: '12px'
                           }}
-                        >Đã thanh toán</Typography>
+                        >Đã xử lý</Typography>
                       </TableCell>
                       <td>
                         
