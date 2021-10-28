@@ -321,7 +321,10 @@ function Customer() {
                     </Col>
                   </div>
                   <Col md={2}>
-                    <Form
+              
+                  </Col>
+                  <Col md={8} align="right">
+                  <Form
                       onClick={(e) => {
                         // onSubmitSearch(e);
                       }}
@@ -334,7 +337,6 @@ function Customer() {
                       </InputGroup>
                     </Form>
                   </Col>
-
                 </Row>
               </div>
 

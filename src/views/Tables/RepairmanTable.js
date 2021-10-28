@@ -89,8 +89,16 @@ export default function Repairman() {
     const [modalEdit, setCustomerModalEdit] = useState(false);
     const toggleEdit = () => setCustomerModalEdit(!modalEdit)
 
-    const myOptions = ['Thợ sửa tivi', 'Thợ Sửa máy tính', 'Thợ điện lạnh', 'Thợ Điện', 'Thợ Sửa ô tô', 'Thợ Sửa xe máy', 'Thợ Sửa đồng hồ']
-
+    // const myOptions = ['Thợ sửa tivi', 'Thợ Sửa máy tính', 'Thợ điện lạnh', 'Thợ Điện', 'Thợ Sửa ô tô', 'Thợ Sửa xe máy', 'Thợ Sửa đồng hồ']
+    const myOptions = [
+        "Tủ Lạnh",
+        "Xe máy",
+        "Máy Tính",
+        "Xe ô tô",
+        "Máy Lạnh",
+        "Máy Giặt",
+        "Bếp Gas",
+      ];
     //modal create
     const [modalCreate, setserviceModalCreate] = useState(false);
     const toggleCreate = () => setserviceModalCreate(!modalCreate)
@@ -189,7 +197,8 @@ export default function Repairman() {
         },
         name: {
             fontWeight: 'bold',
-            color: '#1d98e0f7'
+            color: '#1d98e0f7',
+            width: '120px'
         },
 
         Status: {
@@ -262,7 +271,7 @@ export default function Repairman() {
                                 <tr>
                                     <th className="description">Ảnh</th>
                                     <th
-                                        className="description"
+                                        className="description" style={{width:'155px'}}
                                         onClick={() => {
                                             if (sortedField === "Username" && ascending) {
                                                 setSortedField("Username");
@@ -284,10 +293,9 @@ export default function Repairman() {
                                             <FontAwesomeIcon icon={faCaretDown} />
                                         )}
                                     </th>
-
-                                    <th className="description">Số điện thoại </th>
+                                    <th className="description">Điện thoại </th>
                                     <th className="description">Email</th>
-                                    <th className="description">Chuyên Môn</th>
+                                    <th className="description">Thiết bị chuyên sửa </th>
                                     <th
                                         className="description"
                                         onClick={() => {
@@ -358,7 +366,7 @@ export default function Repairman() {
                         )}
                       </th>
                       <th
-                        className="description"
+                        className="description" style={{width:'150px'}}
                         onClick={() => {
                           if (sortedField === "Username" && ascending) {
                             setSortedField("Username");
@@ -369,7 +377,7 @@ export default function Repairman() {
                           }
                         }}
                       >
-                        Số đơn đã sửa thành công{" "}
+                        Sửa thành công{" "}
                         {sortedField === "Username" ? (
                           ascending === true ? (
                             <FontAwesomeIcon icon={faCaretUp} />
@@ -380,8 +388,8 @@ export default function Repairman() {
                           <FontAwesomeIcon icon={faCaretDown} />
                         )}
                       </th>
-                                    <th className="description">Trạng Thái</th>
-                                </tr>
+                           <th className="description">Trạng Thái</th>
+                            </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -402,7 +410,7 @@ export default function Repairman() {
                                         ThaiDTIrepair@gmail.com
                                     </td>
                                     <td>
-                                        Thợ sửa ô tô, thợ sửa xe máy
+                                        Sửa ô tô, Sửa xe máy
                                     </td> <br/>
                                     <br/>
                                     <Typography
@@ -431,7 +439,7 @@ export default function Repairman() {
                                                 backgroundColor:
                                                     'rgb(34, 176, 34)',
                                                 textAlign: 'center',
-                                                width: '133px'
+                                                width: '103px'
 
                                             }}
                                         >Đang hoạt động</Typography>
@@ -482,7 +490,7 @@ export default function Repairman() {
                                         ThaiTVIrepair@gmail.com
                                     </td>
                                     <td>
-                                        Thợ sửa Máy Tính , thợ sửa ti vi
+                                        Sửa Máy Tính ,Sửa ti vi
                                     </td> <br/>
                                     <br/>
                                     <Typography
@@ -512,7 +520,7 @@ export default function Repairman() {
                                                 backgroundColor:
                                                     'rgb(34, 176, 34)',
                                                 textAlign: 'center',
-                                                width: '133px'
+                                                width: '103px'
 
                                             }}
                                         >Đang hoạt động</Typography>
@@ -551,7 +559,6 @@ export default function Repairman() {
                                     </td>
                                     <TableCell>
                                         <Grid container>
-
                                             <Grid item lg={10}>
                                                 <Typography className={classes.name}>Phạm Hữu Nghĩa</Typography>
                                             </Grid>
@@ -564,7 +571,7 @@ export default function Repairman() {
                                         NghiaPHIrepair@gmail.com
                                     </td>
                                     <td>
-                                        Thợ Điện
+                                        Sửa máy lạnh , máy giặt
                                     </td>
                                     <br/>
                                     <br/>
@@ -595,7 +602,7 @@ export default function Repairman() {
                                                 backgroundColor:
                                                     'rgb(34, 176, 34)',
                                                 textAlign: 'center',
-                                                width: '133px'
+                                                width: '103px'
 
                                             }}
                                         >Đang hoạt động</Typography>
@@ -646,7 +653,7 @@ export default function Repairman() {
                                         KhanhNIrepair@gmail.com
                                     </td>
                                     <td>
-                                        Thợ sửa ô tô
+                                      Sửa Tủ Lạnh, Sửa máy lạnh
                                     </td> <br/>
                                     <br/>
                                     <Typography
@@ -675,7 +682,7 @@ export default function Repairman() {
                                                 backgroundColor:
                                                     'rgb(34, 176, 34)',
                                                 textAlign: 'center',
-                                                width: '133px'
+                                                width: '103px'
 
                                             }}
                                         >Đang hoạt động</Typography>
@@ -726,7 +733,7 @@ export default function Repairman() {
                                         PhatPTIrepair@gmail.com
                                     </td>
                                     <td>
-                                        Thợ điện Lạnh
+                                        Sửa Bếp Gas
                                     </td> <br/>
                                     <br/>
                                     <Typography
@@ -755,7 +762,7 @@ export default function Repairman() {
                                                 backgroundColor:
                                                     'rgb(34, 176, 34)',
                                                 textAlign: 'center',
-                                                width: '133px'
+                                                width: '103px'
 
                                             }}
                                         >Đang hoạt động</Typography>
@@ -983,7 +990,7 @@ export default function Repairman() {
                                 onChange={e => setName(e.target.value)}
                             />
                         </FormGroup>
-                        <Form.Label>Chuyên Môn </Form.Label>
+                        <Form.Label>Các thiết bị chuyên sửa </Form.Label>
                         <FormGroup className="mb-2">
                             <Autocomplete
                                 options={myOptions}
@@ -993,9 +1000,8 @@ export default function Repairman() {
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
-                                        label="Lựa chọn lĩnh vực"
+                                        // label="Lựa chọn lĩnh vực"
                                         variant="standard"
-
                                     />
                                 )}
                             />

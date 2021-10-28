@@ -51,9 +51,7 @@ function Sidebar({ routes, image, background }) {
   // while on the src/views/forms/EditService.jsx - route /admin/regular-forms
   const getCollapseInitialState = (routes) => {
     for (let i = 0; i < routes.length; i++) {
-      if (routes[i].collapse && getCollapseInitialState(routes[i].views) ) {
-        return true;
-      } else if (location.pathname === routes[i].layout + routes[i].path) {
+      if (location.pathname === routes[i].layout + routes[i].path) {
         return true;
       }
     }

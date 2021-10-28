@@ -1,8 +1,20 @@
 import Dashboard from "views/Dashboard.js";
 import Service from "views/Service.js";
+import ServiceMotobike from "views/ServiceMotobike.js";
 // import ManageCompany from "views/Components/ManageCompany";
 // import CreateNewCompany from "views/Components/CreateNewCompany.js";
-// import SweetAlert from "views/Components/SweetAlertPage.js";
+
+
+// import ServiceGas from "views/Components/ServiceGas.js";
+import ServiceGas from "views/Maps/ServiceGas.js";
+import Air from "views/Maps/Air.js";
+import Computer from "views/Maps/Computer.js";
+import Tulanh from "views/Maps/Tulanh.js";
+import washer from "views/Maps/washer.js";
+import Car from "views/Maps/Car.js";
+
+
+
 // import Notifications from "views/Components/Notifications.js";
 // import Icons from "views/Components/Icons.js";
 // import Typography from "views/Components/Typography.js";
@@ -23,22 +35,12 @@ import RegisterPage from "views/Pages/RegisterPage.js";
 
 var routes = [
 
-
   //Dashboard
+  
+  
   {
-    path: "/dashboard",
-    layout: "/company",
-    name: "Trang chủ",
-    icon: "nc-icon nc-chart-pie-35",
-    component: Dashboard,
+
   },
-  // {
-  //   path: "/Sidebar",
-  //   layout: "/company",
-  //   name: "Sidebar",
-  //   icon: "nc-icon nc-chart-pie-35",
-  //   component: Sidebar,
-  // },
   ////////////////////////////////////////////////
 
   //Company
@@ -67,13 +69,7 @@ var routes = [
   //   icon: "nc-icon nc-notes",
   //   component: ServiceTables,
   // },
-  {
-    path: "/customer",
-    layout: "/company",
-    name: "Khách Hàng",
-    icon: "nc-icon nc-badge",
-    component: Customer,
-  },
+  
   {
     path: "/history",
     layout: "/company",
@@ -81,6 +77,14 @@ var routes = [
     icon: "nc-icon nc-tv-2",
     component: CreateNewService,
   },
+  {
+    path: "/customer",
+    layout: "/company",
+    name: "Khách Hàng",
+    icon: "nc-icon nc-badge",
+    component: Customer,
+  },
+ 
   {
     path: "/major",
     layout: "/company",
@@ -207,13 +211,7 @@ var routes = [
   //       mini: "GM",
   //       component: GoogleMaps,
   //     },
-  //     {
-  //       path: "/full-screen-maps",
-  //       layout: "/company",
-  //       name: "Full Screen Map",
-  //       mini: "FSM",
-  //       component: FullScreenMap,
-  //     },
+
   //     {
   //       path: "/vector-maps",
   //       layout: "/company",
@@ -230,19 +228,159 @@ var routes = [
     icon: "nc-icon nc-chart-bar-32",
     component: Service,
   },
+  {
+    path: "/dashboard",
+    layout: "/company",
+    name: "Thống kê",
+    icon: "nc-icon nc-chart-pie-35",
+    component: Dashboard,
+  },
 
 
 
-  // {
-  //   path: "/calendar",
-  //   layout: "/company",
-  //   name: "Calendar",
-  //   icon: "nc-icon nc-single-copy-04",
-  //   component: Calendar,
-  // },
 
-
-
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    path: "/gas",
+    name: "Dịch vụ",
+    layout: "/company",
+    component: ServiceGas,
+  },
+  {
+    path: "/air",
+    name: "Dịch vụ",
+    layout: "/company",
+    component: Air,
+  },
+  {
+    path: "/computer",
+    name: "Dịch vụ",
+    layout: "/company",
+    component: Computer,
+  },
+  {
+    path: "/refrigerator",
+    name: "Dịch vụ",
+    layout: "/company",
+    component: Tulanh,
+  },
+  {
+    path: "/car",
+    name: "Dịch vụ",
+    layout: "/company",
+    component: Car,
+  },
+  {
+    path: "/washer",
+    name: "Dịch vụ",
+    layout: "/company",
+    component: washer,
+  },
+  {
+    path: "/ServiceMotobike",
+    name: "Dịch vụ",
+    layout: "/company",
+    component: ServiceMotobike,
+  },
   // {
   //   collapse: true,
   //   path: "/pages",

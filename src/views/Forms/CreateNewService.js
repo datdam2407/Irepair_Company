@@ -42,7 +42,7 @@ import {
     faCaretDown,
     faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
-export default function Repairman() {
+export default function CreateNewService() {
 
   const [sortedField, setSortedField] = useState("Id");
 
@@ -77,7 +77,7 @@ export default function Repairman() {
 
   const listStates = [
     "Đã xử lý",
-    "Đang trì hoãn",
+    "Thợ đang đến",
     "Đã hủy",
   ];
 
@@ -302,15 +302,15 @@ export default function Repairman() {
   );
   return (
     <>
-
       <Container fluid>
         <Row>
           <Col md="12">
             <Card className="table">
+           
               <div className="header-form">
                 <Row>
                   <div className="header-body-filter">
-                    <Col md={7}>
+                    <Col md={3}>
                       <Row className="fixed">
                         <InputGroup>
                           <InputGroupButtonDropdown
@@ -336,19 +336,22 @@ export default function Repairman() {
                     </Col>
                   </div>
                   <Col md={2}>
-                    <Form
-                      onClick={(e) => {
-                        onSubmitSearch(e);
-                      }}
-                    >
-                      <InputGroup className="fixed">
-                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Tìm kiếm..."></Input>
-                        <Button className="dropdown-filter-css" >
-                          <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
-                        </Button>
-                      </InputGroup>
-                    </Form>
-                  </Col>
+              
+              </Col>
+              <Col md={8} align="right">
+              <Form
+                  onClick={(e) => {
+                    // onSubmitSearch(e);
+                  }}
+                >
+                  <InputGroup className="fixed">
+                    <Input onChange={e => setSearchName(e.target.value)} placeholder="Tìm kiếm..."></Input>
+                    <Button className="dropdown-filter-css" >
+                      <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+                    </Button>
+                  </InputGroup>
+                </Form>
+              </Col>
                 </Row>
               </div>
               <Card.Body className="table-full-width table-responsive px-0">

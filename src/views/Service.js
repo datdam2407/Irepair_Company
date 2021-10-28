@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Dropdown } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import "../assets/css/customSizeCompany.css"
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import {
@@ -112,6 +112,7 @@ function Service() {
   // field edit
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [description2, setDescription2] = useState("");
   const [picture, setImage] = useState("");
   const [price, setPrice] = useState("");
   const [companyId, setCompanyID] = useState("");
@@ -165,8 +166,9 @@ function Service() {
     name: {
       fontWeight: "bold",
       color: "#1d98e0f7",
-      width: "120px",
+      width:'300px'
     },
+   
     Status: {
       fontWeight: "700",
       width: "71px",
@@ -198,48 +200,32 @@ function Service() {
     getserviceList(newListState);
   }
   const myOptions = [
-    "SamSung",
-    "Panasonic",
-    "Daikin",
-    "Electrolux",
-    "LG",
-    "Tosiba",
-    "Sharp",
-    "Mishubíhi",
-    "Electric",
-    "Aqua",
-    "Honda",
-    "Yamaha",
-    "Piggio",
-    "Suzuki",
-    "SYM",
-    "Davidson",
-    "Triump",
-    "Harley",
-    "Ducati",
-    "Rinnai",
-    "Giovani",
-    "Faber",
-    "Teka",
-    "Taka",
-    "Binova",
-    "Paloma",
-    "Sunhouse",
-    "Apple",
-    "Samsung",
-    "Xiaomi",
-    "Oppo",
-    "Huawei",
-    "Pixel",
-    "Nokia",
-    "Samsung",
-    "Apple",
-    "Dell",
-    "Asus",
-    "HP",
-    "Lenovo",
-    "MSI",
-    "Acer",
+    "Phát ra tiếng ồn lớn",
+    "Đèn sáng nhưng không chạy",
+    "Lốc máy nóng hơn bình thường",
+    "Cửa tủ bị chênh",
+    "Ngăn đá bám tuyết nhiều",
+    "Bị chảy nước",
+    "Bản lề cửa bị lệch",
+    "Ron cửa bị hở",
+    "Bị hở các lỗ luồn dây điện, đường ống",
+    "Ngăn đông không hoạt động",
+    "Phát ra tiếng ồn lớn",
+    "Đèn sáng nhưng không chạy",
+    "Lốc máy nóng hơn bình thường",
+    "Ngăn đá bám tuyết nhiều",
+    "Bị hở các lỗ luồn dây điện, đường ống",
+    "Chạy và ngưng liên tục",
+    "Chết máy",
+    "Bể hộp số",
+    "Bị rồ ga",
+    "Bị nóng máy",
+    "Lửa không lên mặc dù đã bật bếp",
+    "Lửa cháy không đều",
+    "Lửa cháy nhỏ",
+    "Bếp không bắt lửa",
+    "Lửa bị phựt, có tiếng kêu",
+
   ];
 
   const dataUpdate = [
@@ -350,43 +336,29 @@ function Service() {
         <Row>
           <Col md="12">
             <Card className="table">
+           
               <div className="header-form">
+             
                 <Row>
+                <p className="abc">Tất cả</p>
+                  <Col md={1}>
+                    <Dropdown>
+                      <Dropdown.Menu>
+                        <Dropdown.Item href="/company/gas">Bếp gas</Dropdown.Item>
+                        <Dropdown.Item href="/company/ServiceMotobike">Xe máy</Dropdown.Item>
+                        <Dropdown.Item href="/company/refrigerator">Tủ lạnh</Dropdown.Item>
+                        <Dropdown.Item href="/company/washer">Máy giặt</Dropdown.Item>
+                        <Dropdown.Item href="/company/air">Máy lạnh</Dropdown.Item>
+                        <Dropdown.Item href="/company/computer">Máy tính</Dropdown.Item>
+                        <Dropdown.Item href="/company/car">Xe ô tô</Dropdown.Item>
+                        <Dropdown.Item href="/company/service">Tất cả</Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </Col>
                   <div className="header-body-filter">
                     <Col md={7}>
                       <Row className="fixed">
-                        <InputGroup>
-                          <InputGroupButtonDropdown
-                            addonType="append"
-                            isOpen={dropdownOpen}
-                            toggle={toggleDropDown}
-                            className="border border-gray-css"
-                          >
-                            <DropdownToggle
-                              className="dropdown-filter-css"
-                              caret
-                            >
-                              {" "}
-                              Filter&nbsp;
-                            </DropdownToggle>{" "}
-                            <DropdownMenu>
-                              <div className="fixed">
-                                <FilterState
-                                  list={filterState}
-                                  onChangeCheckBox={(e, id) => {
-                                    handleChooseState(e, id);
-                                  }}
-                                  key={filterState}
-                                />
-                              </div>
-                            </DropdownMenu>
-                          </InputGroupButtonDropdown>
-                        </InputGroup>
-                      </Row>
-                    </Col>
-                  </div>
-                  <Col md={2}>
-                    <Form
+                      <Form
                       onClick={(e) => {
                         // onSubmitSearch(e);
                       }}
@@ -401,7 +373,10 @@ function Service() {
                         </Button>
                       </InputGroup>
                     </Form>
-                  </Col>
+                      </Row>
+                    </Col>
+                  </div>
+                 
                   <Col md={8} align="right">
                     <Button
                       variant="contained"
@@ -411,7 +386,7 @@ function Service() {
                         setserviceModalCreate(true);
                       }}
                     >
-                      Thêm vấn đề
+                      Thêm vấn đề cần sửa
                     </Button>
                   </Col>
                 </Row>
@@ -421,7 +396,7 @@ function Service() {
                 <Table className="table">
                   <thead>
                     <tr>
-                      <th className="description">thiết bị</th>
+                      <th className="description"  style={{width:'10px'}}>thiết bị</th>
                       <th
                         className="description"
                         onClick={() => {
@@ -474,15 +449,26 @@ function Service() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
-                      <TableCell>
+                       <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Tủ lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              TL001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>               
+                             <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Phát ra tiếng ồn lớn
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 001
+                              SV 0016
                             </Typography>
                           </Grid>
                         </Grid>
@@ -538,15 +524,25 @@ function Service() {
                       </td>
                     </tr>
                     <tr>
-                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
-                      <TableCell>
+                       <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name2}>
+                              Tủ lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              TL001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Đèn sáng nhưng không chạy
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 001
+                              SV 0026
                             </Typography>
                           </Grid>
                         </Grid>
@@ -603,15 +599,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
-                      <TableCell>
+                       <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Tủ lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              TL001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Lốc máy nóng hơn bình thường
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 001
+                              SV 003
                             </Typography>
                           </Grid>
                         </Grid>
@@ -668,15 +674,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
-                      <TableCell>
+                       <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Tủ lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              TL001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Cửa tủ bị chênh
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 001
+                              SV 004
                             </Typography>
                           </Grid>
                         </Grid>
@@ -733,15 +749,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
-                      <TableCell>
+                       <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Tủ lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              TL001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Ngăn đá bám tuyết nhiều
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 001
+                              SV 005
                             </Typography>
                           </Grid>
                         </Grid>
@@ -798,15 +824,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
-                      <TableCell>
+                       <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Tủ lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              TL001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Bị chảy nước
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 001
+                              SV 006
                             </Typography>
                           </Grid>
                         </Grid>
@@ -863,15 +899,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
-                      <TableCell>
+                       <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Tủ lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              TL001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Bản lề cửa bị lệch
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 001
+                              SV 007
                             </Typography>
                           </Grid>
                         </Grid>
@@ -928,15 +974,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
-                      <TableCell>
+                       <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Tủ lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              TL001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Ron cửa bị hở
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 001
+                              SV 008
                             </Typography>
                           </Grid>
                         </Grid>
@@ -993,15 +1049,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
-                      <TableCell>
+                       <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Tủ lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              TL001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Bị hở các lỗ luồn dây điện, đường ống
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 001
+                              SV 009
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1058,15 +1124,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
-                      <TableCell>
+                       <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Tủ lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              TL001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Ngăn đông không hoạt động
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 001
+                              SV 0017
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1124,15 +1200,25 @@ function Service() {
 
                     {/* //////////////////////////////////////////////////////////////////////////// */}
                     <tr>
-                      <td style={{ width: "100px" }}>Máy Lạnh</td>
-                      <TableCell>
+                     <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Máy lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 0011
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                         <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Phát ra tiếng ồn lớn
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 002
+                              SV 0021
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1188,15 +1274,25 @@ function Service() {
                       </td>
                     </tr>
                     <tr>
-                      <td style={{ width: "100px" }}>Máy Lạnh</td>
-                      <TableCell>
+                     <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Máy lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 0012
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                         <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Đèn sáng nhưng không chạy
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 002
+                              SV 0022
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1253,15 +1349,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Máy Lạnh</td>
-                      <TableCell>
+                     <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Máy lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 0013
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                         <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Lốc máy nóng hơn bình thường
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 002
+                              SV 0023
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1318,15 +1424,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Máy Lạnh</td>
-                      <TableCell>
+                     <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Máy lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 0014
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                         <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Cửa tủ bị chênh
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 002
+                              SV 0024
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1383,15 +1499,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Máy Lạnh</td>
-                      <TableCell>
+                     <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Máy lạnh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 0015
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                         <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Ngăn đá bám tuyết nhiều
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 002
+                              SV 0025
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1450,15 +1576,25 @@ function Service() {
                     {/* /////////////////////////////////////////////////////////////////////////         */}
 
                     <tr>
-                      <td style={{ width: "100px" }}>Máy Giặt</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Máy giặt
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 0031
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Bị chảy nước
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 003
+                              SV 0032
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1515,15 +1651,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Máy Giặt</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Máy giặt
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 0033
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Ron cửa bị hở
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 003
+                              SV 0034
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1580,15 +1726,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Máy Giặt</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Máy giặt
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 0035
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Bị hở các lỗ luồn dây điện, đường ống
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 003
+                              SV 0036
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1645,15 +1801,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Máy Giặt</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Máy giặt
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 0037
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Chạy và ngưng liên tục
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 003
+                              SV 0038
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1710,15 +1876,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Máy Giặt</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Máy giặt
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 0039
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Không hoạt động
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 003
+                              SV 0030
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1777,15 +1953,25 @@ function Service() {
                     {/* /////////////////////////////////////////////////////////////////////////// */}
 
                     <tr>
-                      <td style={{ width: "100px" }}>Xe Máy</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Xe máy
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              XM001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                              Chết máy
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 004
+                              SV 0041
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1842,15 +2028,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Xe Máy</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Xe máy
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              XM001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Bể hộp số
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 004
+                              SV 0042
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1907,15 +2103,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Xe Máy</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Xe máy
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              XM001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                              Bị rồ ga
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 004
+                              SV 0043
                             </Typography>
                           </Grid>
                         </Grid>
@@ -1972,15 +2178,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Xe Máy</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Xe máy
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              XM001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                               Bị nóng máy
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 004
+                              SV 0044
                             </Typography>
                           </Grid>
                         </Grid>
@@ -2037,15 +2253,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Xe Máy</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Xe máy
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              XM001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                              Bị cháy cầu trì
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 004
+                              SV 0045
                             </Typography>
                           </Grid>
                         </Grid>
@@ -2104,15 +2330,25 @@ function Service() {
                     {/* /////////////////////////////////////////////////////////////// */}
 
                     <tr>
-                      <td style={{ width: "100px" }}>Bếp Gas</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Bếp Gas
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              BG001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                              Lửa không lên mặc dù đã bật bếp
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 005
+                              SV 0051
                             </Typography>
                           </Grid>
                         </Grid>
@@ -2169,15 +2405,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Bếp Gas</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Bếp Gas
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              BG001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                              Lửa cháy không đều
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 005
+                              SV 0052
                             </Typography>
                           </Grid>
                         </Grid>
@@ -2234,15 +2480,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Bếp Gas</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Bếp Gas
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              BG001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                              Lửa cháy nhỏ"
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 005
+                              SV 0053
                             </Typography>
                           </Grid>
                         </Grid>
@@ -2299,15 +2555,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Bếp Gas</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Bếp Gas
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              BG001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                              Lửa bị phựt, có tiếng kêu
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 005
+                              SV 0054
                             </Typography>
                           </Grid>
                         </Grid>
@@ -2364,15 +2630,25 @@ function Service() {
                     </tr>
 
                     <tr>
-                      <td style={{ width: "100px" }}>Bếp Gas</td>
-                      <TableCell>
+<TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Bếp Gas
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              BG001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>                      <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
                             Bếp không bắt lửa
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 005
+                              SV 0055
                             </Typography>
                           </Grid>
                         </Grid>
@@ -2539,7 +2815,7 @@ function Service() {
         </ModalFooter>
       </Modal>
 
-      <Modal
+      {/* <Modal
         className="modalCreatene"
         isOpen={modalCreate}
         toggle={toggleCreate}
@@ -2582,55 +2858,164 @@ function Service() {
           </Button>
           <Button onClick={toggleCreate}>Lưu sản phẩm</Button>
         </ModalFooter>
-      </Modal>
-      <Modal isOpen={modalEdit} toggle={toggleEdit} centered>
-        <ModalHeader style={{ color: "#1bd1ff" }}>
-          <ModalTitle>Bạn muốn cập nhật?</ModalTitle>
+      </Modal> */}
+      
+      <Modal className="modalCreatene" isOpen={modalCreate} toggle={toggleCreate} centered>
+        <ModalHeader
+          style={{ color: "#1bd1ff" }}
+      
+        >
+          <ModalTitle>Tạo mới vấn đề cần sửa</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
-            <Form.Label>Vấn đề cần sửa </Form.Label>
+          <FormGroup className="mb-2">
+              <Form.Label>Tên Thiết bị</Form.Label>
+              <Form.Control type="text" placeholder="Thiết bị.." value={name}
+                onChange={e => setName(e.target.value)}
+              />
+            </FormGroup>
+          <FormGroup className="mb-2">
+          <Form.Label>Vấn đề cần sửa </Form.Label>
+              <Form.Control type="text" placeholder="Thiết bị.." value={name}
+                onChange={e => setName(e.target.value)}
+              />
+            </FormGroup>
             <FormGroup className="mb-2">
+
+            <Row>
+              <Col>
+              <Form.Label>Giá tiền nhỏ nhất</Form.Label>
+
+              <Form.Control
+                type="number"
+                value={description}
+                step="1000"
+                max="90000000"                min="0"
+
+                onChange={e => setDescription(e.target.value)}
+              />
+              </Col>
+              <Col>
+             
+              <Form.Label>Giá tiền nhỏ nhất</Form.Label>
+              <Form.Control
+                type="number"
+                step="1000"
+                min="0"
+                max="100000000"
+                value={description2}
+                onChange={e => setDescription2(e.target.value)}
+                rows={3}
+              />
+              </Col>
+            </Row>
+            </FormGroup>
+            
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+        <Button  style={{ color: "white" ,backgroundColor:"brown" }} onClick={toggleCreate}>
+            Hủy tạo
+          </Button>
+          <Button  onClick={toggleCreate}>
+            Lưu sản phẩm
+          </Button>
+      
+        </ModalFooter>
+      </Modal>
+      <Modal className="modalCreatene" isOpen={modalEdit} toggle={toggleEdit} centered>
+        <ModalHeader
+          style={{ color: "#1bd1ff" }}
+      
+        >
+          <ModalTitle>Cập nhật vấn đề cần sửa</ModalTitle>
+        </ModalHeader>
+        <ModalBody>
+          <Form>
+          <FormGroup className="mb-2">
+          <Form.Label>Tên thiết bị </Form.Label>
               <Autocomplete
+               
                 options={dataUpdate}
                 Selection
                 style={{ width: 500 }}
-                value={"Tủ Lạnh"}
+                value={'Tủ Lạnh'}
                 getOptionLabel={(option) => option}
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    // label="Lựa chọn Vấn đề cần sửa"
+                    // label="Lựa chọn thiết bị"
                     variant="standard"
                     // placeholder="hãng sản phẩm"
                   />
                 )}
               />
             </FormGroup>
-
+            <Form.Label>Vấn đề cần sửa </Form.Label>
             <FormGroup className="mb-2">
-              <Form.Label>Vấn đề</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Description"
-                as="textarea"
-                value="Chuyên Sửa Các Vấn đề liên quan tới tủ lạnh"
-                onChange={(e) => setDescription(e.target.value)}
-                rows={3}
+              <Autocomplete
+                options={myOptions}
+                
+                style={{ width: 500 }}
+                value={'Lốc máy nóng hơn bình thường'}
+
+                getOptionLabel={(option) => option}
+                renderInput={(params) => (
+                  <TextField
+                  
+                    {...params}
+                  
+                    variant="standard"
+                  />
+                )}
               />
             </FormGroup>
+         
+            <FormGroup className="mb-2">
+
+            <Row>
+              <Col>
+              <Form.Label>Giá tiền nhỏ nhất</Form.Label>
+
+              <Form.Control
+                type="number"
+                value={100000}
+                step="1000"
+                max="90000000"                min="0"
+                
+                onChange={e => setDescription(e.target.value)}
+              />
+              </Col>
+              <Col>
+             
+              <Form.Label>Giá tiền nhỏ nhất</Form.Label>
+              <Form.Control
+                type="number"
+                step="1000"
+                min="0"
+                max="100000000"
+                value={500000}
+                onChange={e => setDescription2(e.target.value)}
+                rows={3}
+              />
+              </Col>
+            </Row>
+            </FormGroup>
+            
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button
-            style={{ color: "white", backgroundColor: "brown" }}
-            onClick={toggleEdit}
-          >
+        <Button  style={{ color: "white" ,backgroundColor:"brown" }} onClick={toggleEdit}>
             Hủy cập nhật
           </Button>
-          <Button onClick={toggleEdit}>Cập nhật</Button>
+          <Button  onClick={toggleEdit}>
+            Cập nhật
+          </Button>
+      
         </ModalFooter>
       </Modal>
+ 
       <Modal isOpen={modalStatus} toggle={toggleDetails}>
         <ModalHeader
           toggle={toggleDetails}
