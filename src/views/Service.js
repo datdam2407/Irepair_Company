@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Dropdown } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css';
+import { Dropdown } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import {
   faSearch,
   faCaretDown,
@@ -42,12 +42,21 @@ import {
 } from "react-bootstrap";
 // import "../../assets/css/customSize.css"
 
-import { del, put, get, getWithParams, getWithToken, getWithTokenParams, putWithToken, postWithToken } from "../service/ReadAPI";
+import {
+  del,
+  put,
+  get,
+  getWithParams,
+  getWithToken,
+  getWithTokenParams,
+  putWithToken,
+  postWithToken,
+} from "../service/ReadAPI";
 import FilterState from "./Forms/FilterState";
 
 // import 'ag-grid-community/dist/styles/ag-grid.css';
 // import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 import {
   TableBody,
@@ -59,14 +68,14 @@ import {
   Avatar,
   Grid,
   Typography,
-} from '@material-ui/core';
+} from "@material-ui/core";
 // import FormDialog from './DialogService';
 function Service() {
-  //delete modal  
+  //delete modal
   const [ServiceDelete, setServiceDelete] = useState(null);
   const [modalDelete, setServiceModalDelete] = useState(false);
   const toggleDelete = () => setServiceModalDelete(!modalDelete);
-  //edit modal  
+  //edit modal
   const [ServiceEdit, setServiceEdit] = useState(null);
   // const [modalEdit, setServiceModalEdit] = useState(false);
   // const toggleEdit = () => setServiceModalEdit(!modalEdit);
@@ -75,22 +84,21 @@ function Service() {
   const [ascending, setAscending] = useState(true);
   //modal create
   const [modalCreate, setserviceModalCreate] = useState(false);
-  const toggleCreate = () => setserviceModalCreate(!modalCreate)
+  const toggleCreate = () => setserviceModalCreate(!modalCreate);
 
   //Edit service
   const [serviceEdit, setserviceEdit] = useState(null);
   const [modalEdit, setserviceModalEdit] = useState(false);
-  const toggleEdit = () => setserviceModalEdit(!modalEdit)
+  const toggleEdit = () => setserviceModalEdit(!modalEdit);
   //Delete service
   const [serviceDelete, setserviceDelete] = useState(null);
   const [modalserviceDelete, setserviceModalDelete] = useState(false);
-  const toggleserviceDelete = () => setserviceModalDelete(!modalserviceDelete)
+  const toggleserviceDelete = () => setserviceModalDelete(!modalserviceDelete);
 
   //view modal
   const [modalStatus, setModalStatus] = useState(false);
   const toggleDetails = () => setModalStatus(!modalStatus);
   const [selectservice, setSelectservice] = useState();
-
 
   //service List
   const [useListserviceShow, setUseListserviceShow] = useState([]);
@@ -109,19 +117,13 @@ function Service() {
   const [companyId, setCompanyID] = useState("");
   const [fieldID, setFieldID] = useState("");
   const [serviceID, setserviceID] = useState("");
-  const [fieldSelect, setfieldSelect] = useState("")
+  const [fieldSelect, setfieldSelect] = useState("");
   const [data1, setData1] = useState({ array: [] });
-  const [FieldSelectID, setFieldSelectID] = useState(-1)
-
-
+  const [FieldSelectID, setFieldSelectID] = useState(-1);
 
   const [listField, setListField] = useState([]);
-  //filter 
-  const listStates = [
-    "Đang Hoạt Động",
-    "Sắp ra mắt",
-    "Ngưng hoạt động",
-  ];
+  //filter
+  const listStates = ["Đang Hoạt Động", "Sắp ra mắt", "Ngưng hoạt động"];
   const [filterState, setListFilterState] = useState(listStates);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownOpen1, setDropdownOpen1] = useState(false);
@@ -135,48 +137,46 @@ function Service() {
     },
     tableContainer: {
       borderRadius: 15,
-      margin: '10px 10px',
-      maxWidth: ' 100%'
+      margin: "10px 10px",
+      maxWidth: " 100%",
     },
     tableHeaderCell: {
-      color: 'burlywood',
-      fontWeight: 'bold',
+      color: "burlywood",
+      fontWeight: "bold",
       backgroundColor: theme.palette.primary.dark,
       color: theme.palette.getContrastText(theme.palette.primary.dark),
-      backgroundColor: 'gray',
-      fontWeight: '700',
-
+      backgroundColor: "gray",
+      fontWeight: "700",
     },
     thmajorheaderform: {
-      fontWeight: 'bold',
-      fontWeight: '700',
+      fontWeight: "bold",
+      fontWeight: "700",
       color: theme.palette.getContrastText(theme.palette.primary.dark),
     },
 
     avatar: {
       backgroundColor: theme.palette.primary.light,
       color: theme.palette.getContrastText(theme.palette.primary.light),
-      fontSize: '200px',
-      right: '10px',
-      overflow: 'unset',
-      borderRadius: '32%',
-
+      fontSize: "200px",
+      right: "10px",
+      overflow: "unset",
+      borderRadius: "32%",
     },
     name: {
-      fontWeight: 'bold',
-      color: '#1d98e0f7',
-      width:'120px'
+      fontWeight: "bold",
+      color: "#1d98e0f7",
+      width: "120px",
     },
     Status: {
-      fontWeight: '700',
-      width: '71px',
-      fontSize: '0.76rem',
-      color: 'white',
-      backgroundColor: 'green',
+      fontWeight: "700",
+      width: "71px",
+      fontSize: "0.76rem",
+      color: "white",
+      backgroundColor: "green",
       borderRadius: 8,
-      padding: '3px 10px',
-      display: 'inline-block'
-    }
+      padding: "3px 10px",
+      display: "inline-block",
+    },
   }));
 
   const classes = useStyles();
@@ -197,30 +197,76 @@ function Service() {
     setstateListFilter(newListState);
     getserviceList(newListState);
   }
-  const myOptions = ['SamSung', 'Panasonic', 'Daikin', 'Electrolux', 'LG','Tosiba','Sharp',
-  'Mishubíhi','Electric','Aqua','Honda','Yamaha','Piggio','Suzuki',
-  'SYM','Davidson','Triump','Harley','Ducati',	'Rinnai','Giovani',
-  'Faber','Teka','Taka','Binova','Paloma','Sunhouse','Apple', 'Samsung',
-   'Xiaomi', 'Oppo', 'Huawei', 'Pixel', 'Nokia',	'Samsung','Apple','Dell','Asus','HP','Lenovo','MSI','Acer'];
+  const myOptions = [
+    "SamSung",
+    "Panasonic",
+    "Daikin",
+    "Electrolux",
+    "LG",
+    "Tosiba",
+    "Sharp",
+    "Mishubíhi",
+    "Electric",
+    "Aqua",
+    "Honda",
+    "Yamaha",
+    "Piggio",
+    "Suzuki",
+    "SYM",
+    "Davidson",
+    "Triump",
+    "Harley",
+    "Ducati",
+    "Rinnai",
+    "Giovani",
+    "Faber",
+    "Teka",
+    "Taka",
+    "Binova",
+    "Paloma",
+    "Sunhouse",
+    "Apple",
+    "Samsung",
+    "Xiaomi",
+    "Oppo",
+    "Huawei",
+    "Pixel",
+    "Nokia",
+    "Samsung",
+    "Apple",
+    "Dell",
+    "Asus",
+    "HP",
+    "Lenovo",
+    "MSI",
+    "Acer",
+  ];
 
-  const dataUpdate=["Tủ Lạnh", "Xe máy", "Máy Tính", "Xe ô tô", "Máy Lạnh", "Máy Giặt", "Bếp Gas"];
+  const dataUpdate = [
+    "Tủ Lạnh",
+    "Xe máy",
+    "Máy Tính",
+    "Xe ô tô",
+    "Máy Lạnh",
+    "Máy Giặt",
+    "Bếp Gas",
+  ];
 
-  const initialValue = { name: "", description: "", imageUrl: "", status: "1" }
+  const initialValue = { name: "", description: "", imageUrl: "", status: "1" };
   const [searchName, setSearchName] = useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-
-  console.log("field", FieldSelectID)
+  console.log("field", FieldSelectID);
   // update
 
   // setting update row data to form data and opening pop up window
   const handleUpdate = (oldData) => {
-    setFormData(oldData)
-    console.log(oldData)
-    handleClickOpen()
-  }
+    setFormData(oldData);
+    console.log(oldData);
+    handleClickOpen();
+  };
 
   function handleOnchangeSelectedAsset(e, value) {
     //console.log(e.target,value);
@@ -238,21 +284,31 @@ function Service() {
     let params = {};
     if (stateList && stateList.length > 0)
       params["Status"] = stateList.reduce((f, s) => `${f},${s}`);
-    getWithTokenParams(`/api/v1.0/services`, params, localStorage.getItem("token")).then((res) => {
-      var temp = res.data.filter((x) => x.state !== "Completed");
-      setserviceList(temp);
-      setUseListserviceShow(temp);
-      setUseListserviceShowPage(temp.slice(numberPage * 80 - 80, numberPage * 80));
-      setTotalNumberPage(Math.ceil(temp.length / 80));
-      setCount(count);
-    }).catch((err) => {
-      console.log(err);
-    });
+    getWithTokenParams(
+      `/api/v1.0/services`,
+      params,
+      localStorage.getItem("token")
+    )
+      .then((res) => {
+        var temp = res.data.filter((x) => x.state !== "Completed");
+        setserviceList(temp);
+        setUseListserviceShow(temp);
+        setUseListserviceShowPage(
+          temp.slice(numberPage * 80 - 80, numberPage * 80)
+        );
+        setTotalNumberPage(Math.ceil(temp.length / 80));
+        setCount(count);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   //Paging
   function onClickPage(number) {
     setNumberPage(number);
-    setUseListserviceShowPage(useListserviceShow.slice(number * 80 - 80, number * 80));
+    setUseListserviceShowPage(
+      useListserviceShow.slice(number * 80 - 80, number * 80)
+    );
     setTotalNumberPage(Math.ceil(useListserviceShow.length / 80));
   }
 
@@ -265,7 +321,7 @@ function Service() {
       X
     </button>
   );
-  // Custom state 
+  // Custom state
   function displayStateName(type) {
     const stateValue = {
       1: "Đang Hoạt Động",
@@ -279,7 +335,8 @@ function Service() {
     const stateValue = {
       "234be13b-421b-40d9-8226-0f162dee7ac8": "Công ty điện lạnh Thành Công",
       "7e179e62-21da-45c1-afe4-114a580f0a12": "Công ty điện lạnh Long Châu",
-      "404f25c6-4f40-4f83-acfd-16a0d7c2f8e9": "Công ty điện lạnh, điện gia dụng Thủy Tiên",
+      "404f25c6-4f40-4f83-acfd-16a0d7c2f8e9":
+        "Công ty điện lạnh, điện gia dụng Thủy Tiên",
       "4bb0a83e-e9d9-47b5-8019-20c19e953181": "Công ty điện lạnh Hòa Hưng",
       "dd0b937a-8e90-4af3-bfe8-0a8cc0722f6a": "IrepairX",
       "17ab8695-daec-4ceb-9f78-07c9528c0009": "CompanyX",
@@ -305,8 +362,15 @@ function Service() {
                             toggle={toggleDropDown}
                             className="border border-gray-css"
                           >
-                            <DropdownToggle className="dropdown-filter-css" caret> Filter&nbsp;</DropdownToggle>                      <DropdownMenu >
-                              <div className="fixed" >
+                            <DropdownToggle
+                              className="dropdown-filter-css"
+                              caret
+                            >
+                              {" "}
+                              Filter&nbsp;
+                            </DropdownToggle>{" "}
+                            <DropdownMenu>
+                              <div className="fixed">
                                 <FilterState
                                   list={filterState}
                                   onChangeCheckBox={(e, id) => {
@@ -318,7 +382,6 @@ function Service() {
                             </DropdownMenu>
                           </InputGroupButtonDropdown>
                         </InputGroup>
-
                       </Row>
                     </Col>
                   </div>
@@ -329,15 +392,27 @@ function Service() {
                       }}
                     >
                       <InputGroup className="fixed">
-                        <Input onChange={e => setSearchName(e.target.value)} placeholder="Tìm kiếm..."></Input>
-                        <Button className="dropdown-filter-css" >
+                        <Input
+                          onChange={(e) => setSearchName(e.target.value)}
+                          placeholder="Tìm kiếm..."
+                        ></Input>
+                        <Button className="dropdown-filter-css">
                           <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
                         </Button>
                       </InputGroup>
                     </Form>
                   </Col>
                   <Col md={8} align="right">
-                    <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Thêm vấn đề</Button>
+                    <Button
+                      variant="contained"
+                      className="add-major-custom"
+                      color="primary"
+                      onClick={() => {
+                        setserviceModalCreate(true);
+                      }}
+                    >
+                      Thêm vấn đề
+                    </Button>
                   </Col>
                 </Row>
               </div>
@@ -346,7 +421,8 @@ function Service() {
                 <Table className="table">
                   <thead>
                     <tr>
-                    <th
+                      <th className="description">thiết bị</th>
+                      <th
                         className="description"
                         onClick={() => {
                           if (sortedField === "Username" && ascending) {
@@ -369,7 +445,7 @@ function Service() {
                           <FontAwesomeIcon icon={faCaretDown} />
                         )}
                       </th>
-                      <th className="description">thiết bị</th>
+
                       <th
                         className="description"
                         onClick={() => {
@@ -397,167 +473,24 @@ function Service() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr >
-                      <TableCell>
-                        <Grid container>
-
-                          <Grid item lg={10}>
-                            <Typography className={classes.name}>Phát ra tiếng ồn lớn</Typography>
-                            <Typography color="textSecondary" variant="body2">SV 001</Typography>
-                          </Grid>
-                        </Grid>
-                      </TableCell>
-                      <td style={{width:'700px'}}>Phát ra tiếng ồn lớn, Đèn sáng nhưng không chạy, Lốc máy nóng hơn bình thường,
-                      Cửa tủ bị chênh, Ngăn đá bám tuyết nhiều,
-                      Bị chảy nước, Bản lề cửa bị lệch,Ron cửa bị hở,
-                      Bị hở các lỗ luồn dây điện, 
-                      Ngăn đông không hoạt động
-                      </td>
-                   
-                      <td>
-                        120,000đ - 220,000đ
-                      </td>
-                   
-                      <td >
-                       
-                        <OverlayTrigger
-                          overlay={
-                            <Tooltip id="tooltip-436082023">
-                              Edit Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            // onClick={() => handleUpdate(e.data)}
-                            // onGridReady={onGridReady}
-                            onClick={() => {
-                              // setserviceEdit(e.Id);
-                              // getserviceByID(e.Id);
-                              setserviceModalEdit(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="success"
-                          >
-                            <i className="fas fa-edit"></i>
-                          </Button>
-                        </OverlayTrigger>
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-334669391">
-                              Remove Post..
-                            </Tooltip>
-                          }
-                          placement="right\"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setserviceDelete(e.Id);
-                              setserviceModalDelete(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="danger"
-                          >
-                            <i className="fas fa-times"></i>
-                          </Button>
-                        </OverlayTrigger>
-
-                      </td>
-                    </tr>
-                    <tr >
-                      <TableCell>
-                        <Grid container>
-
-                          <Grid item lg={10}>
-                            <Typography className={classes.name}>Đèn sáng nhưng không chạy</Typography>
-                            <Typography color="textSecondary" variant="body2">SV 002</Typography>
-                          </Grid>
-                        </Grid>
-                      </TableCell>
-                      <td style={{width:'700px'}}>Phát ra tiếng ồn lớn, Đèn sáng nhưng không chạy, Lốc máy nóng hơn bình thường,
-                      Cửa tủ bị chênh, Ngăn đá bám tuyết nhiều,
-                      Bị chảy nước, Bản lề cửa bị lệch,Ron cửa bị hở,
-                      Bị hở các lỗ luồn dây điện, 
-                      Ngăn đông không hoạt động
-                      </td>
-                      <td>
-                        250,000 - 1,500,000
-                      </td>
-                   
-                      <td >
-                       
-                        <OverlayTrigger
-                          overlay={
-                            <Tooltip id="tooltip-436082023">
-                              Edit Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            // onClick={() => handleUpdate(e.data)}
-                            // onGridReady={onGridReady}
-                            onClick={() => {
-                              // setserviceEdit(e.Id);
-                              // getserviceByID(e.Id);
-                              setserviceModalEdit(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="success"
-                          >
-                            <i className="fas fa-edit"></i>
-                          </Button>
-                        </OverlayTrigger>
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-334669391">
-                              Remove Post..
-                            </Tooltip>
-                          }
-                          placement="right\"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setserviceDelete(e.Id);
-                              setserviceModalDelete(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="danger"
-                          >
-                            <i className="fas fa-times"></i>
-                          </Button>
-                        </OverlayTrigger>
-
-                      </td>
-                    </tr>
                     <tr>
+                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
                       <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Xe máy</Typography>
-                            <Typography color="textSecondary" variant="body2">XM001</Typography>
+                            <Typography className={classes.name}>
+                              Phát ra tiếng ồn lớn
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 001
+                            </Typography>
                           </Grid>
                         </Grid>
-
                       </TableCell>
-                       <td>Phát ra tiếng ồn lớn, Đèn sáng nhưng không chạy, Lốc máy nóng hơn bình thường,
-                      Cửa tủ bị chênh, Ngăn đá bám tuyết nhiều,
-                      Bị chảy nước, Bản lề cửa bị lệch,Ron cửa bị hở,
-                      Bị hở các lỗ luồn dây điện, 
-                      Ngăn đông không hoạt động
-                      </td>
-                  
+
+                      <td>120,000đ - 220,000đ</td>
+
                       <td>
-                        100,000 - 3,500,000
-                      </td>
-                     
-                      <td >
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -605,25 +538,23 @@ function Service() {
                       </td>
                     </tr>
                     <tr>
+                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
                       <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Máy Tính</Typography>
-                            <Typography color="textSecondary" variant="body2">MT001</Typography>
+                            <Typography className={classes.name}>
+                              Đèn sáng nhưng không chạy
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 001
+                            </Typography>
                           </Grid>
                         </Grid>
-
                       </TableCell>
-                      <td>Màn hình xanh, Bị mất mạng Internet, Máy quá nóng, Máy tính không nhận USB, Laptop truyền các tập tin quá lâu,
-                      Bị virus,Hệ điều hành bị lỗi, Bị màn hình đen sau khi khởi động
-                      </td>
-                    
+
+                      <td>120,000đ - 220,000đ</td>
+
                       <td>
-                        140,000 - 5,000,000
-                      </td>
-                     
-                      <td >
-                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -670,100 +601,546 @@ function Service() {
                         </OverlayTrigger>
                       </td>
                     </tr>
-                    {/* <tr>
-                      <TableCell>
-                        <Grid container>
-                          <Grid item lg={10}>
-                            <Typography className={classes.name}>Đồng hồ thông minh</Typography>
-                            <Typography color="textSecondary" variant="body2">DH001</Typography>
-                          </Grid>
-                        </Grid>
-                      </TableCell>
-                      <td>Chuyên Sửa Các Vấn đề liên quan tới đồng hồ</td>
-                      <td>
-                        Apple, Samsung,Xiaomi, Huawei
-                      </td>
-                      <td>
-                        140,000 - 1,500,000
-                      </td>
-                      <TableCell>
-                        <Typography className={classes.Status}
-                          style={{
-                            backgroundColor:
-                              '#d0700d',
-                            width: '120px',
-                            textAlign: 'center'
-                          }}>Sắp ra mắt</Typography>
-                      </TableCell>
-                      <td >
-                       
-                        <OverlayTrigger
-                          overlay={
-                            <Tooltip id="tooltip-436082023">
-                              Edit Post..
-                            </Tooltip>
-                          }
-                          placement="right"
-                        >
-                          <Button
-                            // onClick={() => handleUpdate(e.data)}
-                            // onGridReady={onGridReady}
-                            onClick={() => {
-                              // setserviceEdit(e.Id);
-                              // getserviceByID(e.Id);
-                              setserviceModalEdit(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="success"
-                          >
-                            <i className="fas fa-edit"></i>
-                          </Button>
-                        </OverlayTrigger>
-                        <OverlayTrigger
-                          onClick={(e) => e.preventDefault()}
-                          overlay={
-                            <Tooltip id="tooltip-334669391">
-                              Remove Post..
-                            </Tooltip>
-                          }
-                          placement="right\"
-                        >
-                          <Button
-                            onClick={() => {
-                              // setserviceDelete(e.Id);
-                              setserviceModalDelete(true);
-                            }}
-                            className="btn-link btn-icon"
-                            type="button"
-                            variant="danger"
-                          >
-                            <i className="fas fa-times"></i>
-                          </Button>
-                        </OverlayTrigger>
-                      </td>
-                    </tr> */}
+
                     <tr>
+                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
                       <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Xe ô tô</Typography>
-                            <Typography color="textSecondary" variant="body2">C001</Typography>
+                            <Typography className={classes.name}>
+                              Lốc máy nóng hơn bình thường
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 001
+                            </Typography>
                           </Grid>
                         </Grid>
-
                       </TableCell>
-                      <td>Bể lốp xe, Thay phụ tùng, Vệ sinh cho xe, Chết ắc quy, Phanh có tiếng kêu, chạm sàn và nhao lái,
-                      Động cơ quá nóng, Vô lăng rung lắc, Sự cố về hệ thống làm mát, Vấn đề về nhiên liệu
-                      </td>
-                     
-                      <td>
-                        500,000 - 5,500,000
-                      </td>
 
-                     
-                      <td >
-                       
+                      <td>100,000đ - 500,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Cửa tủ bị chênh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>100,000đ - 220,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Ngăn đá bám tuyết nhiều
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>120,000đ - 220,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Bị chảy nước
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>120,000đ - 320,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Bản lề cửa bị lệch
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>100,000đ - 520,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Ron cửa bị hở
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>100,000đ - 220,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Bị hở các lỗ luồn dây điện, đường ống
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>120,000đ - 520,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Tủ Lạnh</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Ngăn đông không hoạt động
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 001
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>200,000đ - 1,000,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    {/* //////////////////////////////////////////////////////////////////////////// */}
+                    <tr>
+                      <td style={{ width: "100px" }}>Máy Lạnh</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Phát ra tiếng ồn lớn
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 002
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>120,000đ - 220,000đ</td>
+
+                      <td>
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -811,25 +1188,23 @@ function Service() {
                       </td>
                     </tr>
                     <tr>
+                      <td style={{ width: "100px" }}>Máy Lạnh</td>
                       <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Máy Lạnh</Typography>
-                            <Typography color="textSecondary" variant="body2">ML001</Typography>
+                            <Typography className={classes.name}>
+                              Đèn sáng nhưng không chạy
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 002
+                            </Typography>
                           </Grid>
                         </Grid>
-
                       </TableCell>
-                      <td>Phát ra tiếng ồn lớn, Lạnh hơn nhiệt độ điều chỉnh, Dàn lạnh bẩn, Dàn nóng bẩn, Chạy và ngưng liên tục,
-                      Không hoạt động, Có mùi hôi, Lốc máy nóng hơn bình thường, Chạy liên tục nhưng không lạnh
-                      </td>
-                   
+
+                      <td>120,000đ - 220,000đ</td>
+
                       <td>
-                        300,000 - 2,500,000
-                      </td>
-                     
-                      <td >
-                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -876,26 +1251,25 @@ function Service() {
                         </OverlayTrigger>
                       </td>
                     </tr>
+
                     <tr>
+                      <td style={{ width: "100px" }}>Máy Lạnh</td>
                       <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Máy Giặt</Typography>
-                            <Typography color="textSecondary" variant="body2">MG001</Typography>
+                            <Typography className={classes.name}>
+                              Lốc máy nóng hơn bình thường
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 002
+                            </Typography>
                           </Grid>
                         </Grid>
-
                       </TableCell>
-                      <td>Xả tràn nhưng nước không chảy khỏi ống xả, Rung mạnh, Thời gian xả nước giặt quá lâu, Nước không chảy vào thùng khi giặt và vắt,
-                      Không thực hiện chức năng vắt, Giặt quần áo không sạch, Quá trình bơm nước vào rất yếu, Xả nước liên tục không ngừng, 
-                      </td>
-                    
+
+                      <td>100,000đ - 500,000đ</td>
+
                       <td>
-                        300,000 - 1,000,000
-                      </td>
-                     
-                      <td >
-                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -942,26 +1316,25 @@ function Service() {
                         </OverlayTrigger>
                       </td>
                     </tr>
+
                     <tr>
+                      <td style={{ width: "100px" }}>Máy Lạnh</td>
                       <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Bếp Gas</Typography>
-                            <Typography color="textSecondary" variant="body2">BG001</Typography>
+                            <Typography className={classes.name}>
+                              Cửa tủ bị chênh
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 002
+                            </Typography>
                           </Grid>
                         </Grid>
-
                       </TableCell>
-                      <td>Lửa không lên mặc dù đã bật bếp, Lửa cháy không đều, Lửa cháy nhỏ, Lửa bị phựt, có tiếng kêu, Lửa bị đỏ, Bếp không bắt lửa,
-                      Lửa cháy không bình thường, Có mùi gas, Bị tắc gas
-                      </td>
-                  
+
+                      <td>100,000đ - 220,000đ</td>
+
                       <td>
-                        200,000 - 1,700,000
-                      </td>
-                     
-                      <td >
-                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -1008,32 +1381,25 @@ function Service() {
                         </OverlayTrigger>
                       </td>
                     </tr>
-                    {/* <tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Máy Lạnh</td>
                       <TableCell>
                         <Grid container>
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Điện thoại</Typography>
-                            <Typography color="textSecondary" variant="body2">DT001</Typography>
+                            <Typography className={classes.name}>
+                              Ngăn đá bám tuyết nhiều
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 002
+                            </Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
-                      <td>Chuyên Sửa Các Vấn đề liên quan tới điện thoại</td>
+
+                      <td>120,000đ - 220,000đ</td>
+
                       <td>
-                        Apple, Samsung, Xiaomi, Oppo, Huawei, Pixel, Nokia
-                      </td>
-                      <td>
-                        200,000 - 2,700,000
-                      </td>
-                      <TableCell>
-                        <Typography className={classes.Status}
-                          style={{
-                            backgroundColor:
-                              'Red',
-                            width: '120px'
-                          }}>Ngưng Hoạt Động</Typography>
-                      </TableCell>
-                      <td >
-                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -1079,7 +1445,989 @@ function Service() {
                           </Button>
                         </OverlayTrigger>
                       </td>
-                    </tr> */}
+                    </tr>
+
+                    {/* /////////////////////////////////////////////////////////////////////////         */}
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Máy Giặt</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Bị chảy nước
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 003
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>120,000đ - 320,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Máy Giặt</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Ron cửa bị hở
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 003
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>100,000đ - 520,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Máy Giặt</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Bị hở các lỗ luồn dây điện, đường ống
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 003
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>100,000đ - 220,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Máy Giặt</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Chạy và ngưng liên tục
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 003
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>120,000đ - 520,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Máy Giặt</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Không hoạt động
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 003
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>200,000đ - 1,000,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    {/* /////////////////////////////////////////////////////////////////////////// */}
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Xe Máy</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Chết máy
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 004
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>120,000đ - 320,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Xe Máy</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Bể hộp số
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 004
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>100,000đ - 520,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Xe Máy</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Bị rồ ga
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 004
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>100,000đ - 220,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Xe Máy</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                              Bị nóng máy
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 004
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>120,000đ - 520,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Xe Máy</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Bị cháy cầu trì
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 004
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>200,000đ - 1,000,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    {/* /////////////////////////////////////////////////////////////// */}
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Bếp Gas</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Lửa không lên mặc dù đã bật bếp
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 005
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>120,000đ - 320,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Bếp Gas</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Lửa cháy không đều
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 005
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>100,000đ - 520,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Bếp Gas</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Lửa cháy nhỏ"
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 005
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>100,000đ - 220,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Bếp Gas</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                             Lửa bị phựt, có tiếng kêu
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 005
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>120,000đ - 520,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style={{ width: "100px" }}>Bếp Gas</td>
+                      <TableCell>
+                        <Grid container>
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>
+                            Bếp không bắt lửa
+                            </Typography>
+                            <Typography color="textSecondary" variant="body2">
+                              SV 005
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+
+                      <td>200,000đ - 1,000,000đ</td>
+
+                      <td>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+
                   </tbody>
                 </Table>
                 <Row>
@@ -1172,46 +2520,46 @@ function Service() {
               </Card.Body>
             </Card>
           </Col>
-
         </Row>
       </Container>
 
-
       <Modal isOpen={modalserviceDelete} toggle={toggleserviceDelete}>
-        <ModalHeader
-            style={{ color: "#1bd1ff" }}
->
+        <ModalHeader style={{ color: "#1bd1ff" }}>
           Xóa Vấn đề cần sửa
         </ModalHeader>
         <ModalBody>Bạn có muốn xóa Vấn đề cần sửa này?</ModalBody>
         <ModalFooter>
-        <Button style={{ color: "white" ,backgroundColor:"brown" }} onClick={toggleserviceDelete}>
+          <Button
+            style={{ color: "white", backgroundColor: "brown" }}
+            onClick={toggleserviceDelete}
+          >
             Hủy xóa
           </Button>
-          <Button onClick={toggleserviceDelete}>
-            Xóa
-          </Button>{" "}
-     
+          <Button onClick={toggleserviceDelete}>Xóa</Button>{" "}
         </ModalFooter>
       </Modal>
 
-      <Modal className="modalCreatene" isOpen={modalCreate} toggle={toggleCreate} centered>
-        <ModalHeader
-          style={{ color: "#1bd1ff" }}
-      
-        >
+      <Modal
+        className="modalCreatene"
+        isOpen={modalCreate}
+        toggle={toggleCreate}
+        centered
+      >
+        <ModalHeader style={{ color: "#1bd1ff" }}>
           <ModalTitle>Tạo mới một Vấn đề cần sửa</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
-          <FormGroup className="mb-2">
+            <FormGroup className="mb-2">
               <Form.Label>Tên Vấn đề cần sửa</Form.Label>
-              <Form.Control type="text" placeholder="Tên Vấn đề cần sửa" value={name}
-                onChange={e => setName(e.target.value)}
+              <Form.Control
+                type="text"
+                placeholder="Tên Vấn đề cần sửa"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </FormGroup>
-        
-            
+
             <FormGroup className="mb-2">
               <Form.Label>Vấn đề</Form.Label>
               <Form.Control
@@ -1219,37 +2567,35 @@ function Service() {
                 placeholder="Vấn đề chi tiết"
                 as="textarea"
                 value={description}
-                onChange={e => setDescription(e.target.value)}
+                onChange={(e) => setDescription(e.target.value)}
                 rows={3}
               />
             </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
-        <Button  style={{ color: "white" ,backgroundColor:"brown" }} onClick={toggleCreate}>
+          <Button
+            style={{ color: "white", backgroundColor: "brown" }}
+            onClick={toggleCreate}
+          >
             Hủy tạo
           </Button>
-          <Button  onClick={toggleCreate}>
-            Lưu sản phẩm
-          </Button>
-      
+          <Button onClick={toggleCreate}>Lưu sản phẩm</Button>
         </ModalFooter>
       </Modal>
       <Modal isOpen={modalEdit} toggle={toggleEdit} centered>
-        <ModalHeader
-          style={{ color: "#1bd1ff" }}
-        >
+        <ModalHeader style={{ color: "#1bd1ff" }}>
           <ModalTitle>Bạn muốn cập nhật?</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
-              <Form.Label>Vấn đề cần sửa </Form.Label>
+            <Form.Label>Vấn đề cần sửa </Form.Label>
             <FormGroup className="mb-2">
               <Autocomplete
                 options={dataUpdate}
                 Selection
                 style={{ width: 500 }}
-                value={'Tủ Lạnh'}
+                value={"Tủ Lạnh"}
                 getOptionLabel={(option) => option}
                 renderInput={(params) => (
                   <TextField
@@ -1262,8 +2608,6 @@ function Service() {
               />
             </FormGroup>
 
-           
-
             <FormGroup className="mb-2">
               <Form.Label>Vấn đề</Form.Label>
               <Form.Control
@@ -1271,20 +2615,20 @@ function Service() {
                 placeholder="Description"
                 as="textarea"
                 value="Chuyên Sửa Các Vấn đề liên quan tới tủ lạnh"
-                onChange={e => setDescription(e.target.value)}
+                onChange={(e) => setDescription(e.target.value)}
                 rows={3}
               />
             </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
-        <Button style={{ color: "white" ,backgroundColor:"brown" }} onClick={toggleEdit}>
+          <Button
+            style={{ color: "white", backgroundColor: "brown" }}
+            onClick={toggleEdit}
+          >
             Hủy cập nhật
           </Button>
-          <Button onClick={toggleEdit}>
-            Cập nhật
-          </Button>
-   
+          <Button onClick={toggleEdit}>Cập nhật</Button>
         </ModalFooter>
       </Modal>
       <Modal isOpen={modalStatus} toggle={toggleDetails}>
@@ -1307,7 +2651,9 @@ function Service() {
             <Col></Col>
             <Col md={3}>Company</Col>
             <Col md={8}>
-              {selectservice !== undefined ? displayCompanyName(selectservice.CompanyId) : ""}
+              {selectservice !== undefined
+                ? displayCompanyName(selectservice.CompanyId)
+                : ""}
             </Col>
           </Row>
           <Row>
@@ -1328,19 +2674,24 @@ function Service() {
             <Col></Col>
             <Col md={3}>Picture</Col>
             <Col md={8}>
-              {selectservice !== undefined ? <img className="text-left-topic" src={selectservice.ImageUrl} /> : ""}
+              {selectservice !== undefined ? (
+                <img className="text-left-topic" src={selectservice.ImageUrl} />
+              ) : (
+                ""
+              )}
             </Col>
           </Row>
           <Row>
             <Col></Col>
             <Col md={3}>State</Col>
-            <Col md={8}>{selectservice !== undefined ? displayStateName(selectservice.Status) : ""}</Col>
+            <Col md={8}>
+              {selectservice !== undefined
+                ? displayStateName(selectservice.Status)
+                : ""}
+            </Col>
           </Row>
         </ModalBody>
       </Modal>
-
-
-
     </>
   );
 }
