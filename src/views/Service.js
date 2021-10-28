@@ -42,8 +42,8 @@ import {
 } from "react-bootstrap";
 // import "../../assets/css/customSize.css"
 
-import { del, put, get, getWithParams, getWithToken, getWithTokenParams, putWithToken, postWithToken } from "../../service/ReadAPI";
-import FilterState from "./FilterState";
+import { del, put, get, getWithParams, getWithToken, getWithTokenParams, putWithToken, postWithToken } from "../service/ReadAPI";
+import FilterState from "./Forms/FilterState";
 
 // import 'ag-grid-community/dist/styles/ag-grid.css';
 // import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -61,7 +61,7 @@ import {
   Typography,
 } from '@material-ui/core';
 // import FormDialog from './DialogService';
-function ManageSevice() {
+function Service() {
   //delete modal  
   const [ServiceDelete, setServiceDelete] = useState(null);
   const [modalDelete, setServiceModalDelete] = useState(false);
@@ -337,7 +337,7 @@ function ManageSevice() {
                     </Form>
                   </Col>
                   <Col md={8} align="right">
-                    <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Thêm Thiết bị</Button>
+                    <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Thêm vấn đề</Button>
                   </Col>
                 </Row>
               </div>
@@ -358,7 +358,7 @@ function ManageSevice() {
                           }
                         }}
                       >
-                        Thiết bị{" "}
+                        Vấn đề cần sửa{" "}
                         {sortedField === "Username" ? (
                           ascending === true ? (
                             <FontAwesomeIcon icon={faCaretUp} />
@@ -369,8 +369,7 @@ function ManageSevice() {
                           <FontAwesomeIcon icon={faCaretDown} />
                         )}
                       </th>
-                      <th className="description">Vấn đề</th>
-                      <th className="description">Hãng Sản Xuất</th>
+                      <th className="description">thiết bị</th>
                       <th
                         className="description"
                         onClick={() => {
@@ -394,7 +393,6 @@ function ManageSevice() {
                           <FontAwesomeIcon icon={faCaretDown} />
                         )}
                       </th>
-                      <th className="description">Trạng Thái</th>
                       <th className="description">Thao tác</th>
                     </tr>
                   </thead>
@@ -404,8 +402,78 @@ function ManageSevice() {
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Tủ Lạnh</Typography>
-                            <Typography color="textSecondary" variant="body2">TL 001</Typography>
+                            <Typography className={classes.name}>Phát ra tiếng ồn lớn</Typography>
+                            <Typography color="textSecondary" variant="body2">SV 001</Typography>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                      <td style={{width:'700px'}}>Phát ra tiếng ồn lớn, Đèn sáng nhưng không chạy, Lốc máy nóng hơn bình thường,
+                      Cửa tủ bị chênh, Ngăn đá bám tuyết nhiều,
+                      Bị chảy nước, Bản lề cửa bị lệch,Ron cửa bị hở,
+                      Bị hở các lỗ luồn dây điện, 
+                      Ngăn đông không hoạt động
+                      </td>
+                   
+                      <td>
+                        120,000đ - 220,000đ
+                      </td>
+                   
+                      <td >
+                       
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-436082023">
+                              Edit Post..
+                            </Tooltip>
+                          }
+                          placement="right"
+                        >
+                          <Button
+                            // onClick={() => handleUpdate(e.data)}
+                            // onGridReady={onGridReady}
+                            onClick={() => {
+                              // setserviceEdit(e.Id);
+                              // getserviceByID(e.Id);
+                              setserviceModalEdit(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="success"
+                          >
+                            <i className="fas fa-edit"></i>
+                          </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          onClick={(e) => e.preventDefault()}
+                          overlay={
+                            <Tooltip id="tooltip-334669391">
+                              Remove Post..
+                            </Tooltip>
+                          }
+                          placement="right\"
+                        >
+                          <Button
+                            onClick={() => {
+                              // setserviceDelete(e.Id);
+                              setserviceModalDelete(true);
+                            }}
+                            className="btn-link btn-icon"
+                            type="button"
+                            variant="danger"
+                          >
+                            <i className="fas fa-times"></i>
+                          </Button>
+                        </OverlayTrigger>
+
+                      </td>
+                    </tr>
+                    <tr >
+                      <TableCell>
+                        <Grid container>
+
+                          <Grid item lg={10}>
+                            <Typography className={classes.name}>Đèn sáng nhưng không chạy</Typography>
+                            <Typography color="textSecondary" variant="body2">SV 002</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -416,21 +484,9 @@ function ManageSevice() {
                       Ngăn đông không hoạt động
                       </td>
                       <td>
-                        SamSung, Panasonic, Daikin, Electrolux, LG, Tosiba, Sharp, Mishubíhi Electric, Aqua
-                      </td>
-                      <td>
                         250,000 - 1,500,000
                       </td>
-                      <TableCell>
-                        <Typography
-                          className={classes.Status}
-                          style={{
-                            backgroundColor:
-                              'rgb(34, 176, 34)',
-                            width: '120px'
-                          }}
-                        >Đang Hoạt Động</Typography>
-                      </TableCell>
+                   
                       <td >
                        
                         <OverlayTrigger
@@ -496,23 +552,12 @@ function ManageSevice() {
                       Bị hở các lỗ luồn dây điện, 
                       Ngăn đông không hoạt động
                       </td>
-                      <td>
-                        Honda, Yamaha, Piggio, SYM, Suzuki, Triump, Harley Davidson, Ducati
-                      </td>
+                  
                       <td>
                         100,000 - 3,500,000
                       </td>
-
-                      <TableCell>
-                        <Typography className={classes.Status}
-                          style={{
-                            backgroundColor:
-                              'rgb(34, 176, 34)',
-                            width: '120px', textAlign: 'center'
-                          }}>Đang Hoạt Động</Typography>
-                      </TableCell>
+                     
                       <td >
-                       
                         <OverlayTrigger
                           overlay={
                             <Tooltip id="tooltip-436082023">
@@ -572,20 +617,11 @@ function ManageSevice() {
                       <td>Màn hình xanh, Bị mất mạng Internet, Máy quá nóng, Máy tính không nhận USB, Laptop truyền các tập tin quá lâu,
                       Bị virus,Hệ điều hành bị lỗi, Bị màn hình đen sau khi khởi động
                       </td>
-                      <td>
-                        Samsung, Apple, Dell, Asus, HP, Lenovo, MSI, Acer
-                      </td>
+                    
                       <td>
                         140,000 - 5,000,000
                       </td>
-                      <TableCell>
-                        <Typography className={classes.Status}
-                          style={{
-                            backgroundColor:
-                              'rgb(34, 176, 34)',
-                            width: '120px', textAlign: 'center'
-                          }}>Đang Hoạt Động</Typography>
-                      </TableCell>
+                     
                       <td >
                        
                         <OverlayTrigger
@@ -720,21 +756,12 @@ function ManageSevice() {
                       <td>Bể lốp xe, Thay phụ tùng, Vệ sinh cho xe, Chết ắc quy, Phanh có tiếng kêu, chạm sàn và nhao lái,
                       Động cơ quá nóng, Vô lăng rung lắc, Sự cố về hệ thống làm mát, Vấn đề về nhiên liệu
                       </td>
-                      <td>
-                        Honda, Suzuki, Toyota, Chevrolet, Ford, Hyunda, Isuzu, Kia
-                      </td>
+                     
                       <td>
                         500,000 - 5,500,000
                       </td>
 
-                      <TableCell>
-                        <Typography className={classes.Status}
-                          style={{
-                            backgroundColor:
-                              'rgb(34, 176, 34)',
-                            width: '120px', textAlign: 'center'
-                          }}>Đang Hoạt Động</Typography>
-                      </TableCell>
+                     
                       <td >
                        
                         <OverlayTrigger
@@ -796,20 +823,11 @@ function ManageSevice() {
                       <td>Phát ra tiếng ồn lớn, Lạnh hơn nhiệt độ điều chỉnh, Dàn lạnh bẩn, Dàn nóng bẩn, Chạy và ngưng liên tục,
                       Không hoạt động, Có mùi hôi, Lốc máy nóng hơn bình thường, Chạy liên tục nhưng không lạnh
                       </td>
-                      <td>
-                        Samsung, Panasonic, Daikin, Electrolux, LG, Toshiba, Sharp, Sanyo
-                      </td>
+                   
                       <td>
                         300,000 - 2,500,000
                       </td>
-                      <TableCell>
-                        <Typography className={classes.Status}
-                          style={{
-                            backgroundColor:
-                              'rgb(34, 176, 34)',
-                            width: '120px', textAlign: 'center'
-                          }}>Đang Hoạt Động</Typography>
-                      </TableCell>
+                     
                       <td >
                        
                         <OverlayTrigger
@@ -871,20 +889,11 @@ function ManageSevice() {
                       <td>Xả tràn nhưng nước không chảy khỏi ống xả, Rung mạnh, Thời gian xả nước giặt quá lâu, Nước không chảy vào thùng khi giặt và vắt,
                       Không thực hiện chức năng vắt, Giặt quần áo không sạch, Quá trình bơm nước vào rất yếu, Xả nước liên tục không ngừng, 
                       </td>
-                      <td>
-                        Samsung, Panasonic, Daikin, Electrolux, LG, Toshiba, Sharp, Sanyo
-                      </td>
+                    
                       <td>
                         300,000 - 1,000,000
                       </td>
-                      <TableCell>
-                        <Typography className={classes.Status}
-                          style={{
-                            backgroundColor:
-                              'rgb(34, 176, 34)',
-                            width: '120px', textAlign: 'center'
-                          }}>Đang Hoạt Động</Typography>
-                      </TableCell>
+                     
                       <td >
                        
                         <OverlayTrigger
@@ -946,20 +955,11 @@ function ManageSevice() {
                       <td>Lửa không lên mặc dù đã bật bếp, Lửa cháy không đều, Lửa cháy nhỏ, Lửa bị phựt, có tiếng kêu, Lửa bị đỏ, Bếp không bắt lửa,
                       Lửa cháy không bình thường, Có mùi gas, Bị tắc gas
                       </td>
-                      <td>
-                        Rinnai, Giovani, Faber, Teka, Taka, Binova, Paloma, Sunhouse
-                      </td>
+                  
                       <td>
                         200,000 - 1,700,000
                       </td>
-                      <TableCell>
-                        <Typography className={classes.Status}
-                          style={{
-                            backgroundColor:
-                              'rgb(34, 176, 34)',
-                            width: '120px', textAlign: 'center'
-                          }}>Đang Hoạt Động</Typography>
-                      </TableCell>
+                     
                       <td >
                        
                         <OverlayTrigger
@@ -1181,9 +1181,9 @@ function ManageSevice() {
         <ModalHeader
             style={{ color: "#1bd1ff" }}
 >
-          Xóa Thiết bị
+          Xóa Vấn đề cần sửa
         </ModalHeader>
-        <ModalBody>Bạn có muốn xóa Thiết bị này?</ModalBody>
+        <ModalBody>Bạn có muốn xóa Vấn đề cần sửa này?</ModalBody>
         <ModalFooter>
         <Button style={{ color: "white" ,backgroundColor:"brown" }} onClick={toggleserviceDelete}>
             Hủy xóa
@@ -1200,32 +1200,17 @@ function ManageSevice() {
           style={{ color: "#1bd1ff" }}
       
         >
-          <ModalTitle>Tạo mới một Thiết bị</ModalTitle>
+          <ModalTitle>Tạo mới một Vấn đề cần sửa</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
           <FormGroup className="mb-2">
-              <Form.Label>Tên Thiết bị</Form.Label>
-              <Form.Control type="text" placeholder="Tên Thiết bị" value={name}
+              <Form.Label>Tên Vấn đề cần sửa</Form.Label>
+              <Form.Control type="text" placeholder="Tên Vấn đề cần sửa" value={name}
                 onChange={e => setName(e.target.value)}
               />
             </FormGroup>
-            <Form.Label>Hãng Sản Xuất </Form.Label>
-            <FormGroup className="mb-2">
-              <Autocomplete
-                options={myOptions}
-                multiple
-                style={{ width: 500 }}
-                getOptionLabel={(option) => option}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Lựa chọn hãng"
-                    variant="standard"
-                  />
-                )}
-              />
-            </FormGroup>
+        
             
             <FormGroup className="mb-2">
               <Form.Label>Vấn đề</Form.Label>
@@ -1258,7 +1243,7 @@ function ManageSevice() {
         </ModalHeader>
         <ModalBody>
           <Form>
-              <Form.Label>Thiết bị </Form.Label>
+              <Form.Label>Vấn đề cần sửa </Form.Label>
             <FormGroup className="mb-2">
               <Autocomplete
                 options={dataUpdate}
@@ -1269,7 +1254,7 @@ function ManageSevice() {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    // label="Lựa chọn thiết bị"
+                    // label="Lựa chọn Vấn đề cần sửa"
                     variant="standard"
                     // placeholder="hãng sản phẩm"
                   />
@@ -1277,24 +1262,7 @@ function ManageSevice() {
               />
             </FormGroup>
 
-            <Form.Label>Hãng Sản Xuất </Form.Label>
-            <FormGroup className="mb-2">
-              <Autocomplete
-                options={myOptions}
-                multiple
-                style={{ width: 500 }}
-                value={["SamSung", "Panasonic", "Daikin", "Electrolux", "LG", "Tosiba", "Sharp", "Mishubishi","Electric","Aqua"]}
-                getOptionLabel={(option) => option}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Lựa chọn hãng"
-                    variant="standard"
-                    placeholder="hãng sản phẩm"
-                  />
-                )}
-              />
-            </FormGroup>
+           
 
             <FormGroup className="mb-2">
               <Form.Label>Vấn đề</Form.Label>
@@ -1377,4 +1345,4 @@ function ManageSevice() {
   );
 }
 
-export default ManageSevice;
+export default Service;

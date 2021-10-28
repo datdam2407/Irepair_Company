@@ -1,4 +1,5 @@
 import Dashboard from "views/Dashboard.js";
+import Service from "views/Service.js";
 // import ManageCompany from "views/Components/ManageCompany";
 // import CreateNewCompany from "views/Components/CreateNewCompany.js";
 // import SweetAlert from "views/Components/SweetAlertPage.js";
@@ -83,7 +84,7 @@ var routes = [
   {
     path: "/major",
     layout: "/company",
-    name: "Đồ dùng",
+    name: "Thiết bị",
     icon: "nc-icon nc-single-copy-04",
     component: MajorTables,
   },
@@ -222,13 +223,13 @@ var routes = [
   //     },
   //   ],
   // },
-  // {
-  //   path: "/charts",
-  //   layout: "/company",
-  //   name: "Charts",
-  //   icon: "nc-icon nc-chart-bar-32",
-  //   component: Charts,
-  // },
+  {
+    path: "/Service",
+    layout: "/company",
+    name: "Dịch vụ",
+    icon: "nc-icon nc-chart-bar-32",
+    component: Service,
+  },
 
 
 
