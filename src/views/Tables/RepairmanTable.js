@@ -417,12 +417,12 @@ export default function Repairman() {
                                     >✩✩✩✩</Typography>
                                  
                                     <td style={{color:"green", fontWeight:"700"}}>
-                        45 lần
+                        40 lần
                       </td>
                          <td style={{color:"red", fontWeight:"700"}}>
-                        2 lần
+                        10 lần
                       </td>  <td style={{color:"green", fontWeight:"700"}}>
-                        45 lần
+                        30 lần
                       </td>
                                     <TableCell>
                                         <Typography
@@ -498,12 +498,12 @@ export default function Repairman() {
                                  
                                     
                                     <td style={{color:"green", fontWeight:"700"}}>
-                        45 lần
+                        50 lần
                       </td>
                          <td style={{color:"red", fontWeight:"700"}}>
-                        2 lần
+                        22 lần
                       </td>  <td style={{color:"green", fontWeight:"700"}}>
-                        45 lần
+                        28 lần
                       </td>
                                     <TableCell>
                                         <Typography
@@ -581,12 +581,12 @@ export default function Repairman() {
                                  
 
                                     <td style={{color:"green", fontWeight:"700"}}>
-                        45 lần
+                        40 lần
                       </td>
                          <td style={{color:"red", fontWeight:"700"}}>
-                        2 lần
+                        10 lần
                       </td>  <td style={{color:"green", fontWeight:"700"}}>
-                        45 lần
+                        30 lần
                       </td>
                                     <TableCell>
                                         <Typography
@@ -661,12 +661,12 @@ export default function Repairman() {
                                     >✩✩✩✩✩</Typography>
                                  
                                     <td style={{color:"green", fontWeight:"700"}}>
-                        45 lần
+                        20 lần
                       </td>
                          <td style={{color:"red", fontWeight:"700"}}>
-                        2 lần
+                        1 lần
                       </td>  <td style={{color:"green", fontWeight:"700"}}>
-                        45 lần
+                        19 lần
                       </td>
                                     <TableCell>
                                         <Typography
@@ -744,9 +744,9 @@ export default function Repairman() {
                         45 lần
                       </td>
                          <td style={{color:"red", fontWeight:"700"}}>
-                        2 lần
+                        16 lần
                       </td>  <td style={{color:"green", fontWeight:"700"}}>
-                        45 lần
+                        29 lần
                       </td>
                                     <TableCell>
                                         <Typography

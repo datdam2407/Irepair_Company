@@ -568,7 +568,9 @@ function ManageSevice() {
                         </Grid>
 
                       </TableCell>
-                      <td>Chuyên Sửa Các Vấn đề liên quan tới máy tính</td>
+                      <td>Màn hình xanh, Bị mất mạng Internet, Máy quá nóng, Máy tính không nhận USB, Laptop truyền các tập tin quá lâu,
+                      Bị virus,Hệ điều hành bị lỗi, Bị màn hình đen sau khi khởi động
+                      </td>
                       <td>
                         Samsung,Apple,Dell,Asus,HP,Lenovo,MSI,Acer
                       </td>
@@ -716,7 +718,9 @@ function ManageSevice() {
                         </Grid>
 
                       </TableCell>
-                      <td>Chuyên Sửa Các Vấn đề liên quan tới xe ô tô</td>
+                      <td>Bể lốp xe, Thay phụ tùng, Vệ sinh cho xe, Chết ắc quy, Phanh có tiếng kêu, chạm sàn và nhao lái,
+                      Động cơ quá nóng, Vô lăng rung lắc, Sự cố về hệ thống làm mát, Vấn đề về nhiên liệu
+                      </td>
                       <td>
                         Honda,Suzuki,Toyota,Chevrolet,Ford,Hyunda,Isuzu,Kia
                       </td>
@@ -790,7 +794,9 @@ function ManageSevice() {
                         </Grid>
 
                       </TableCell>
-                      <td>Chuyên Sửa Các Vấn đề liên quan tới máy lạnh</td>
+                      <td>Phát ra tiếng ồn lớn, Lạnh hơn nhiệt độ điều chỉnh, Dàn lạnh bẩn, Dàn nóng bẩn, Chạy và ngưng liên tục,
+                      Không hoạt động, Có mùi hôi, Lốc máy nóng hơn bình thường, Chạy liên tục nhưng không lạnh
+                      </td>
                       <td>
                         Samsung,Panasonic,Daikin,Electrolux,LG,Toshiba,Sharp,Sanyo
                       </td>
@@ -863,7 +869,10 @@ function ManageSevice() {
                         </Grid>
 
                       </TableCell>
-                      <td>Chuyên Sửa Các Vấn đề liên quan tới máy giặt</td>
+                      <td>Xả tràn nhưng nước không chảy khỏi ống xả, Rung mạnh, Thời gian xả nước giặt quá lâu, Nước không chảy vào thùng khi giặt và vắt,
+                      Không thực hiện chức năng vắt, Giặt quần áo không sạch, Quá trình bơm nước vào rất yếu, Xả nước liên tục không ngừng, Không đổi được chế độ giặt
+                      Chế độ làm nóng nước không hoạt động
+                      </td>
                       <td>
                         Samsung,Panasonic,Daikin,Electrolux,LG,Toshiba,Sharp,Sanyo
                       </td>
@@ -936,7 +945,9 @@ function ManageSevice() {
                         </Grid>
 
                       </TableCell>
-                      <td>Chuyên Sửa Các Vấn đề liên quan tới bếp gas</td>
+                      <td>Lửa không lên mặc dù đã bật bếp, Lửa cháy không đều, Lửa cháy nhỏ, Lửa bị phựt, có tiếng kêu, Lửa bị đỏ, Bếp không bắt lửa,
+                      Lửa cháy không bình thường, Có mùi gas, Bị tắc gas
+                      </td>
                       <td>
                         Rinnai,Giovani,Faber,Teka,Taka,Binova,Paloma,Sunhouse
                       </td>
