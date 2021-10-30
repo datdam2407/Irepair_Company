@@ -106,8 +106,7 @@ function Dashboard() {
               <Card.Footer>
                 <hr></hr>
                 <div className="stats">
-                  <i className="fas fa-redo mr-1"></i>
-                  Update Now
+                
                 </div>
               </Card.Footer>
             </Card>
@@ -132,8 +131,6 @@ function Dashboard() {
               <Card.Footer>
                 <hr></hr>
                 <div className="stats">
-                  <i className="far fa-calendar-alt mr-1"></i>
-                  Last day
                 </div>
               </Card.Footer>
             </Card>
@@ -158,8 +155,7 @@ function Dashboard() {
               <Card.Footer>
                 <hr></hr>
                 <div className="stats">
-                  <i className="far fa-clock-o mr-1"></i>
-                  In the last hour
+               
                 </div>
               </Card.Footer>
             </Card>
@@ -184,8 +180,7 @@ function Dashboard() {
               <Card.Footer>
                 <hr></hr>
                 <div className="stats">
-                  <i className="fas fa-redo mr-1"></i>
-                  Update now
+             
                 </div>
               </Card.Footer>
             </Card>
@@ -194,16 +189,16 @@ function Dashboard() {
         <Row>
           <Col md="12">
             <Card>
-              <Card.Header>
-                <Card.Title as="h2" style={{
-                  color:
-                    'rgb(27 129 255)',
-                  fontWeight: '700'
-                }}>Đơn hàng gần đây</Card.Title>
-              </Card.Header>
+           
               <Card.Body>
                 <Row>
-                  <Col md="6">
+<Col className="ml-auto mr-auto" md="6">
+                    <Card.Title as="h2" style={{
+                      marginLeft: '15px',
+                      color:
+                        'rgb(27 129 255)',
+                      fontWeight: '700'
+                    }}>Đơn hàng gần đây</Card.Title>
                     <Table responsive>
                       <th
                         className="description"
@@ -492,6 +487,7 @@ function Dashboard() {
                       </PaginationItem>
                     </Pagination>
                   </Col>
+                  
                   <Col className="ml-auto mr-auto" md="6">
                     <Card.Title as="h2" style={{
                       marginLeft: '15px',
@@ -649,7 +645,7 @@ Nguyễn Tiến Long
                             11-10-2021
                           </td>
                         </tr>
-                        <tr>
+                        {/* <tr>
                           <td>
                           Nguyễn Hoàng
                           </td>
@@ -663,7 +659,7 @@ Nguyễn Tiến Long
                           }}>
                             15-9-2021
                           </td>
-                        </tr>
+                        </tr> */}
                       </tbody>
                     </Table>
                     <Pagination

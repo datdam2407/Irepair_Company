@@ -44,7 +44,7 @@ import {
 import "../../assets/css/customSizeCompany.css"
 import { del, put, get, getWithParams, getWithToken, getWithTokenParams, putWithToken, postWithToken } from "../../service/ReadAPI";
 
-const dataUpdate=["Tủ Lạnh", "Xe máy", "Máy Tính", "Xe ô tô", "Máy Lạnh", "Máy Giặt", "Bếp Gas"];
+const dataUpdate=["Tủ Lạnh", "Xe máy", "Máy Tính", "Xe ô tô", "Máy Lạnh", "Máy Giặt", "Máy Giặt"];
 
 
 // import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -358,7 +358,7 @@ function Washer() {
                   
 
                       <Dropdown.Menu  >
-                        <Dropdown.Item href="/company/gas">Bếp gas</Dropdown.Item>
+                        <Dropdown.Item href="/company/gas">Bếp Gas</Dropdown.Item>
                         <Dropdown.Item href="/company/ServiceMotobike">Xe máy</Dropdown.Item>
                         <Dropdown.Item href="/company/refrigerator">Tủ lạnh</Dropdown.Item>
                         <Dropdown.Item href="/company/washer">Máy giặt</Dropdown.Item>
@@ -471,7 +471,7 @@ function Washer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Bếp Gas
+                             Máy Giặt
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
                               BG001
@@ -546,7 +546,7 @@ function Washer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Bếp Gas
+                             Máy Giặt
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
                               BG001
@@ -621,7 +621,7 @@ function Washer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Bếp Gas
+                             Máy Giặt
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
                               BG001
@@ -696,7 +696,7 @@ function Washer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Bếp Gas
+                             Máy Giặt
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
                               BG001
@@ -771,7 +771,7 @@ function Washer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Bếp Gas
+                             Máy Giặt
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
                               BG001

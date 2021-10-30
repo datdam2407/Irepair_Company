@@ -239,7 +239,7 @@ function Car() {
     "Xe máy",
     "Máy Tính",
     "Xe ô tô",
-    "Máy Lạnh",
+    "Máy lạnh",
     "Máy Giặt",
     "Bếp Gas",
   ];
@@ -354,7 +354,7 @@ function Car() {
                         <Dropdown.Item href="/company/ServiceMotobike">Xe máy</Dropdown.Item>
                         <Dropdown.Item href="/company/refrigerator">Tủ lạnh</Dropdown.Item>
                         <Dropdown.Item href="/company/washer">Máy giặt</Dropdown.Item>
-                        <Dropdown.Item href="/company/car">Máy lạnh</Dropdown.Item>
+                        <Dropdown.Item href="/company/air">Máy lạnh</Dropdown.Item>
                         <Dropdown.Item href="/company/computer">Máy tính</Dropdown.Item>
                         <Dropdown.Item href="/company/car">Xe ô tô</Dropdown.Item>
                         <Dropdown.Item href="/company/Service">Tất cả</Dropdown.Item>
@@ -464,7 +464,7 @@ function Car() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                              Máy lạnh
+                              Xe ô tô
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
                               SV 0011
@@ -538,7 +538,7 @@ function Car() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                              Máy lạnh
+                              Xe ô tô
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
                               SV 0012
@@ -613,7 +613,7 @@ function Car() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                              Máy lạnh
+                              Xe ô tô
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
                               SV 0013
@@ -688,7 +688,7 @@ function Car() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                              Máy lạnh
+                              Xe ô tô
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
                               SV 0014
@@ -763,7 +763,7 @@ function Car() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                              Máy lạnh
+                              Xe ô tô
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
                               SV 0015

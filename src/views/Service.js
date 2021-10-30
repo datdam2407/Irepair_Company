@@ -2898,7 +2898,7 @@ function Service() {
               </Col>
               <Col>
              
-              <Form.Label>Giá tiền nhỏ nhất</Form.Label>
+              <Form.Label>Giá tiền lớn nhất</Form.Label>
               <Form.Control
                 type="number"
                 step="1000"
@@ -2989,7 +2989,7 @@ function Service() {
               </Col>
               <Col>
              
-              <Form.Label>Giá tiền nhỏ nhất</Form.Label>
+              <Form.Label>Giá tiền lớn nhất</Form.Label>
               <Form.Control
                 type="number"
                 step="1000"

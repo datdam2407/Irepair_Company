@@ -44,7 +44,7 @@ import {
 import "../../assets/css/customSizeCompany.css"
 import { del, put, get, getWithParams, getWithToken, getWithTokenParams, putWithToken, postWithToken } from "../../service/ReadAPI";
 
-const dataUpdate=["Tủ Lạnh", "Xe máy", "Máy Tính", "Xe ô tô", "Máy Lạnh", "Máy Giặt", "Bếp Gas"];
+const dataUpdate=["Tủ Lạnh", "Xe máy", "Máy Tính", "Xe ô tô", "Máy Lạnh", "Máy Giặt", "Máy Tính"];
 
 
 // import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -354,7 +354,7 @@ function Computer() {
                   <Col md={1}>
                     <Dropdown>
                       <Dropdown.Menu>
-                        <Dropdown.Item href="/company/gas">Bếp gas</Dropdown.Item>
+                        <Dropdown.Item href="/company/gas">Bếp Gas</Dropdown.Item>
                         <Dropdown.Item href="/company/ServiceMotobike">Xe máy</Dropdown.Item>
                         <Dropdown.Item href="/company/refrigerator">Tủ lạnh</Dropdown.Item>
                         <Dropdown.Item href="/company/washer">Máy giặt</Dropdown.Item>
@@ -467,10 +467,10 @@ function Computer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Bếp Gas
+                             Máy Tính
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              BG001
+                              MT001
                             </Typography>
                           </Grid>
                         </Grid>
@@ -478,10 +478,10 @@ function Computer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Lửa không lên mặc dù đã bật bếp
+                            Máy tính không nhận USB
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 0051
+                              SV 0231
                             </Typography>
                           </Grid>
                         </Grid>
@@ -542,10 +542,10 @@ function Computer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Bếp Gas
+                             Máy Tính
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              BG001
+                              MT001
                             </Typography>
                           </Grid>
                         </Grid>
@@ -553,7 +553,7 @@ function Computer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Lửa cháy không đều
+                            Phát ra tiếng kêu gây ồn
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
                               SV 0052
@@ -617,10 +617,10 @@ function Computer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Bếp Gas
+                             Máy Tính
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              BG001
+                              MT001
                             </Typography>
                           </Grid>
                         </Grid>
@@ -628,10 +628,10 @@ function Computer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Lửa cháy nhỏ"
+                            Máy tính không khởi động
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 0053
+                              SV 0153
                             </Typography>
                           </Grid>
                         </Grid>
@@ -692,10 +692,10 @@ function Computer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Bếp Gas
+                             Máy Tính
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              BG001
+                              MT001
                             </Typography>
                           </Grid>
                         </Grid>
@@ -703,10 +703,10 @@ function Computer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Lửa bị phựt, có tiếng kêu
+                            Dây cáp lỏng lẻo
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 0054
+                              SV 0086
                             </Typography>
                           </Grid>
                         </Grid>
@@ -767,10 +767,10 @@ function Computer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                             Bếp Gas
+                             Máy Tính
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              BG001
+                              MT001
                             </Typography>
                           </Grid>
                         </Grid>
@@ -778,10 +778,10 @@ function Computer() {
                         <Grid container>
                           <Grid item lg={10}>
                             <Typography className={classes.name}>
-                            Bếp không bắt lửa
+                            Không kết nối được Wifi
                             </Typography>
                             <Typography color="textSecondary" variant="body2">
-                              SV 0055
+                              SV 00551
                             </Typography>
                           </Grid>
                         </Grid>

@@ -107,6 +107,12 @@ export default function Repairman() {
     const toggleDetails = () => setModalStatus(!modalStatus);
     const [Selectservice, setSelectservice] = useState();
 
+    const myOptions2 = [
+        "Hủy đơn quá nhiều",
+        "Không sửa được cho khách hàng",
+        "Không hoạt động nhiều ngày",
+        
+    ]
     const listStates = [
         "Đang Hoạt Động",
         "Ngưng hoạt động",
@@ -963,7 +969,27 @@ export default function Repairman() {
                 >
                     Ngưng hoạt động nhân viên
                 </ModalHeader>
-                <ModalBody>Bạn có muốn ngưng hoạt động nhân viên này</ModalBody>
+                
+
+                <FormGroup className="mb-2">
+                <ModalBody>Bạn có muốn ngưng hoạt động nhân viên này ?</ModalBody>
+              <Autocomplete
+                options={myOptions2}
+                multiple
+                style={{ width: 500 }}
+                // alue={'Lốc máy nóng hơn bình thường'}v
+
+                getOptionLabel={(option) => option}
+                renderInput={(params) => (
+                  <TextField
+                  
+                    {...params}
+                  
+                    variant="standard"
+                  />
+                )}
+              />
+            </FormGroup>
                 <ModalFooter>
                     <Button style={{ color: "white", backgroundColor: "brown" }} onClick={toggleDelete}>
                         Hủy

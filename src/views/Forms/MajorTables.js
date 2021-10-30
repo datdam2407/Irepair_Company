@@ -1213,17 +1213,7 @@ function ManageSevice() {
               />
             </FormGroup>
             
-            <FormGroup className="mb-2">
-              <Form.Label>Vấn đề</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Mô tả chi tiết"
-                as="textarea"
-                value={description}
-                onChange={e => setDescription(e.target.value)}
-                rows={3}
-              />
-            </FormGroup>
+          
           </Form>
         </ModalBody>
         <ModalFooter>
