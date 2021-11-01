@@ -234,6 +234,11 @@ export default function CreateNewService() {
       color: '#1d98e0f7'
 
     },
+    name2: {
+      fontWeight: 'bold',
+      color: '#cc8e1c'
+
+    },
     Status: {
       fontWeight: '700',
       width: '71px',
@@ -357,8 +362,7 @@ export default function CreateNewService() {
               <Card.Body className="table-full-width table-responsive px-0">
                 <Table className="table-hover table-striped">
                   <thead>
-                    <tr>
-                    <th
+                    <tr>   <th
                         className="description"
                         onClick={() => {
                           if (sortedField === "Username" && ascending) {
@@ -370,7 +374,7 @@ export default function CreateNewService() {
                           }
                         }}
                       >
-                        Thợ sửa chữa{" "}
+                        Khách hàng{" "}
                         {sortedField === "Username" ? (
                           ascending === true ? (
                             <FontAwesomeIcon icon={faCaretUp} />
@@ -381,6 +385,7 @@ export default function CreateNewService() {
                           <FontAwesomeIcon icon={faCaretDown} />
                         )}
                       </th>
+                  
                       <th className="description">Số Điện Thoại </th>
                       <th className="description">Ngày Tạo</th>
                       <th
@@ -395,7 +400,7 @@ export default function CreateNewService() {
                           }
                         }}
                       >
-                        Khách hàng{" "}
+                        Thợ sửa chữa{" "}
                         {sortedField === "Username" ? (
                           ascending === true ? (
                             <FontAwesomeIcon icon={faCaretUp} />
@@ -420,7 +425,7 @@ export default function CreateNewService() {
                           }
                         }}
                       >
-                       Vấn đề{" "}
+                       dịch vụ{" "}
                         {sortedField === "Username" ? (
                           ascending === true ? (
                             <FontAwesomeIcon icon={faCaretUp} />
@@ -462,13 +467,11 @@ export default function CreateNewService() {
                   <tbody>
                     <tr>
 
-                      <TableCell>
+                    <TableCell>
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Phạm Hữu Nghĩa</Typography>
-                            <Typography color="textSecondary" variant="body2">Irepair 001
-                            </Typography>
+                            <Typography className={classes.name}>Lê Thuần</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -478,11 +481,14 @@ export default function CreateNewService() {
                       <td >
                         12-04-2021
                       </td>
+                     
                       <TableCell>
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Lê Thuần</Typography>
+                            <Typography className={classes.name2}>Phạm Hữu Nghĩa</Typography>
+                            <Typography color="textSecondary" variant="body2">Irepair 001
+                            </Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -515,12 +521,12 @@ export default function CreateNewService() {
                           style={{
                             color:
                               '#e2930b',
-                            width: '90px',
+                            width: '120px',
                             fontWeight: '700',
                             paddingRight: '15px',
                             fontSize: '20px',
                           }}
-                        >✩✩✩✩</Typography>
+                        >★★★★✩</Typography>
                       </td>
                       <TableCell>
                         <Typography
@@ -540,13 +546,11 @@ export default function CreateNewService() {
                     </tr>
                     <tr>
 
-                      <TableCell>
+                    <TableCell>
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Nguyễn Khánh</Typography>
-                            <Typography color="textSecondary" variant="body2">Irepair 011
-                            </Typography>
+                            <Typography className={classes.name}>Tâm Đăng</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -556,11 +560,14 @@ export default function CreateNewService() {
                       <td >
                         12-10-2020
                       </td>
+                      
                       <TableCell>
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Tâm Đăng</Typography>
+                            <Typography className={classes.name2}>Nguyễn Khánh</Typography>
+                            <Typography color="textSecondary" variant="body2">Irepair 011
+                            </Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -596,7 +603,7 @@ export default function CreateNewService() {
                             paddingRight: '15px',
                             fontSize: '20px',
                           }}
-                        >✩✩✩✩✩</Typography>
+                        >★★★★★</Typography>
                       </td>
                       <TableCell>
                         <Typography
@@ -617,13 +624,12 @@ export default function CreateNewService() {
 
                     <tr>
 
+                   
                       <TableCell>
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Phạm Hữu Nghĩa</Typography>
-                            <Typography color="textSecondary" variant="body2">Irepair 001
-                            </Typography>
+                            <Typography className={classes.name}>Quốc Thịnh</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -637,7 +643,9 @@ export default function CreateNewService() {
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Quốc Thịnh</Typography>
+                            <Typography className={classes.name2}>Phạm Hữu Nghĩa</Typography>
+                            <Typography color="textSecondary" variant="body2">Irepair 001
+                            </Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -669,12 +677,12 @@ export default function CreateNewService() {
                           style={{
                             color:
                               '#e2930b',
-                            width: '90px',
+                            width: '120px',
                             fontWeight: '700',
                             paddingRight: '15px',
                             fontSize: '20px',
                           }}
-                        >✩✩✩✩</Typography>
+                        >★★★★✩</Typography>
                       </td>
                       <TableCell>
                         <Typography
@@ -693,28 +701,28 @@ export default function CreateNewService() {
                       </td>
                     </tr>
                     <tr>
-
-                      <TableCell>
+                    <TableCell>
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Trần Văn Thái</Typography>
-                            <Typography color="textSecondary" variant="body2">Irepair 003
-                            </Typography>
+                            <Typography className={classes.name}>Tiến Phát</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
+                     
                       <td>
                         0123456789
                       </td>
                       <td >
                         13-02-2021
                       </td>
-                      <TableCell>
+                       <TableCell>
                         <Grid container>
 
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Tiến Phát</Typography>
+                            <Typography className={classes.name2}>Trần Văn Thái</Typography>
+                            <Typography color="textSecondary" variant="body2">Irepair 003
+                            </Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -755,17 +763,14 @@ export default function CreateNewService() {
                       </td>
                     </tr>
                     <tr>
-
-                      <TableCell>
+                    <TableCell>
                         <Grid container>
-
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Nguyễn Lê Thuần</Typography>
-                            <Typography color="textSecondary" variant="body2">Irepair 005
-                            </Typography>
+                            <Typography className={classes.name}>Tiến Long</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
+                   
                       <td>
                         0980921232
                       </td>
@@ -774,8 +779,11 @@ export default function CreateNewService() {
                       </td>
                       <TableCell>
                         <Grid container>
+
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Tiến Long</Typography>
+                            <Typography className={classes.name2}>Nguyễn Lê Thuần</Typography>
+                            <Typography color="textSecondary" variant="body2">Irepair 005
+                            </Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -819,13 +827,10 @@ export default function CreateNewService() {
                     </tr>
                     <tr>
 
-                      <TableCell>
+                    <TableCell>
                         <Grid container>
-
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Đỗ Thành Thái</Typography>
-                            <Typography color="textSecondary" variant="body2">Irepair 004
-                            </Typography>
+                            <Typography className={classes.name}>Phạm Tấn Phát</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -837,8 +842,11 @@ export default function CreateNewService() {
                       </td>
                       <TableCell>
                         <Grid container>
+
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Phạm Tấn Phát</Typography>
+                            <Typography className={classes.name2}>Đỗ Thành Thái</Typography>
+                            <Typography color="textSecondary" variant="body2">Irepair 004
+                            </Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -883,14 +891,10 @@ export default function CreateNewService() {
                     </tr>
 
                     <tr>
-
-                      <TableCell>
+                    <TableCell>
                         <Grid container>
-
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Trần Văn Thái</Typography>
-                            <Typography color="textSecondary" variant="body2">Irepair 003
-                            </Typography>
+                            <Typography className={classes.name}>Đàm Đạt</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -900,10 +904,15 @@ export default function CreateNewService() {
                       <td >
                         25-10-2021
                       </td>
+                    
+                      
                       <TableCell>
                         <Grid container>
+
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Đàm Đạt</Typography>
+                            <Typography className={classes.name2}>Trần Văn Thái</Typography>
+                            <Typography color="textSecondary" variant="body2">Irepair 003
+                            </Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -942,7 +951,7 @@ export default function CreateNewService() {
                             paddingRight: '15px',
                             fontSize: '20px',
                           }}
-                        >✩✩✩✩✩</Typography>
+                        >★★★★★</Typography>
                       </td>
 
                       <TableCell>
@@ -962,14 +971,10 @@ export default function CreateNewService() {
                       </td>
                     </tr>
                     <tr>
-
-                      <TableCell>
+                    <TableCell>
                         <Grid container>
-
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Nguyễn Văn Phát</Typography>
-                            <Typography color="textSecondary" variant="body2">Irepair 002
-                            </Typography>
+                            <Typography className={classes.name}>Phạm Tấn Phát</Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -979,10 +984,15 @@ export default function CreateNewService() {
                       <td >
                         12-04-2021
                       </td>
+                  
+                      
                       <TableCell>
                         <Grid container>
+
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>Phạm Tấn Phát</Typography>
+                            <Typography className={classes.name2}>Nguyễn Văn Phát</Typography>
+                            <Typography color="textSecondary" variant="body2">Irepair 002
+                            </Typography>
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -1020,7 +1030,7 @@ export default function CreateNewService() {
                             paddingRight: '15px',
                             fontSize: '20px',
                           }}
-                        >✩✩✩✩✩</Typography>
+                        >★★★★★</Typography>
                       </td>
                       <TableCell>
                         <Typography

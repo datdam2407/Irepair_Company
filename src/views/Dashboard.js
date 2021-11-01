@@ -258,7 +258,7 @@ function Dashboard() {
                           }
                         }}
                       >
-                        Vấn đề cần sửa{" "}
+                        dịch vụ cần sửa{" "}
                         {sortedField === "Username" ? (
                           ascending === true ? (
                             <FontAwesomeIcon icon={faCaretUp} />

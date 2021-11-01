@@ -12,7 +12,13 @@
     position: relative;
     top: 12px;
 }
-
+svg{
+   size: 20px; 
+}
+.table .btn-danger.btn-link {
+    color: #FB404B;
+    font-size: x-large;
+}
 /* .row{
     display: block;
     flex-wrap: wrap;

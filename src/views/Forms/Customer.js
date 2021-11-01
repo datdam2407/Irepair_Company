@@ -63,9 +63,15 @@ import {
   Grid,
   Typography,
 } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { IconName ,TiStar ,TiLockClosed } from "react-icons/ti";
 // import FormDialog from './DialogService';
 function Customer() {
   //delete modal    
+  const myOptions2 = [
+    "Hủy đơn quá nhiều",
+]
   const [ascending, setAscending] = useState(true);
 
   const [sortedField, setSortedField] = useState("Id");
@@ -122,12 +128,13 @@ function Customer() {
   const [listField, setListField] = useState([]);
   //filter 
   const listStates = [
-    "✩",
-    "✩✩",
-    "✩✩✩",
-    "✩✩✩✩",
-    "✩✩✩✩✩",
+    "★",
+    "★★",
+    "★★★",
+    "★★★★",
+    "★★★★★",
   ];
+ 
   const [filterState, setListFilterState] = useState(listStates);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownOpen1, setDropdownOpen1] = useState(false);
@@ -472,6 +479,28 @@ function Customer() {
                         
                         </td>
                      
+
+<OverlayTrigger
+    onClick={(e) => e.preventDefault()}
+    overlay={
+        <Tooltip id="tooltip-334669391">
+            Remove Post..
+        </Tooltip>
+    }
+    placement="right\"
+>
+    <Button 
+        onClick={() => {
+            // setserviceDelete(e.Id);
+            setserviceModalDelete(true);
+        }}
+        className="btn-link btn-icon"
+        type="button"
+        variant="danger"
+    >
+        <TiLockClosed/>
+    </Button>
+</OverlayTrigger>
                     </tr>
                     <tr >
                     <td>
@@ -501,6 +530,29 @@ function Customer() {
                       <td>
                         
                         </td>
+                        
+
+<OverlayTrigger
+    onClick={(e) => e.preventDefault()}
+    overlay={
+        <Tooltip id="tooltip-334669391">
+            Remove Post..
+        </Tooltip>
+    }
+    placement="right\"
+>
+    <Button
+        onClick={() => {
+            // setserviceDelete(e.Id);
+            setserviceModalDelete(true);
+        }}
+        className="btn-link btn-icon"
+        type="button"
+        variant="danger"
+    >
+        <TiLockClosed/>
+    </Button>
+</OverlayTrigger>
                     </tr>
                     <tr >
                     <td>
@@ -527,9 +579,33 @@ function Customer() {
                       <td style={{color:"red", fontWeight:"700"}}>
                         2 lần
                       </td>
-                      <td>
-                        
-                        </td>
+                     
+                        <td >
+
+</td>
+
+<OverlayTrigger
+    onClick={(e) => e.preventDefault()}
+    overlay={
+        <Tooltip id="tooltip-334669391">
+            Remove Post..
+        </Tooltip>
+    }
+    placement="right\"
+>
+    <Button
+        onClick={() => {
+            // setserviceDelete(e.Id);
+            setserviceModalDelete(true);
+        }}
+        className="btn-link btn-icon"
+        type="button"
+        variant="danger"
+    >
+        <TiLockClosed/>
+    </Button>
+</OverlayTrigger>
+
                     </tr>
                     <tr >
                     <td>
@@ -559,6 +635,28 @@ function Customer() {
                       <td>
                         
                         </td>
+                        <OverlayTrigger
+    onClick={(e) => e.preventDefault()}
+    overlay={
+        <Tooltip id="tooltip-334669391">
+            Remove Post..
+        </Tooltip>
+    }
+    placement="right\"
+>
+    <Button
+        onClick={() => {
+            // setserviceDelete(e.Id);
+            setserviceModalDelete(true);
+        }}
+        className="btn-link btn-icon"
+        type="button"
+        variant="danger"
+    >
+        <TiLockClosed/>
+    </Button>
+</OverlayTrigger>
+                        
                     </tr>
 
                     <tr >
@@ -589,6 +687,28 @@ function Customer() {
                        <td>
                         
                         </td>
+
+<OverlayTrigger
+    onClick={(e) => e.preventDefault()}
+    overlay={
+        <Tooltip id="tooltip-334669391">
+            Remove Post..
+        </Tooltip>
+    }
+    placement="right\"
+>
+    <Button
+        onClick={() => {
+            // setserviceDelete(e.Id);
+            setserviceModalDelete(true);
+        }}
+        className="btn-link btn-icon"
+        type="button"
+        variant="danger"
+    >
+        <TiLockClosed/>
+    </Button>
+</OverlayTrigger>
                     </tr>
 
                     <tr >
@@ -620,6 +740,28 @@ function Customer() {
                         
                       </td>
                      
+
+<OverlayTrigger
+    onClick={(e) => e.preventDefault()}
+    overlay={
+        <Tooltip id="tooltip-334669391">
+            Remove Post..
+        </Tooltip>
+    }
+    placement="right\"
+>
+    <Button
+        onClick={() => {
+            // setserviceDelete(e.Id);
+            setserviceModalDelete(true);
+        }}
+        className="btn-link btn-icon"
+        type="button"
+        variant="danger"
+    >
+        <TiLockClosed/>
+    </Button>
+</OverlayTrigger>
                     </tr>
 
                     <tr >
@@ -650,6 +792,28 @@ function Customer() {
                       <td>
                           
                       </td>
+
+<OverlayTrigger
+    onClick={(e) => e.preventDefault()}
+    overlay={
+        <Tooltip id="tooltip-334669391">
+            Remove Post..
+        </Tooltip>
+    }
+    placement="right\"
+>
+    <Button
+        onClick={() => {
+            // setserviceDelete(e.Id);
+            setserviceModalDelete(true);
+        }}
+        className="btn-link btn-icon"
+        type="button"
+        variant="danger"
+    >
+        <TiLockClosed/>
+    </Button>
+</OverlayTrigger>
                     </tr>
                   </tbody>
                 </Table>
@@ -748,30 +912,45 @@ function Customer() {
       </Container>
 
 
-      <Modal isOpen={modalserviceDelete} toggle={toggleserviceDelete}>
-        <ModalHeader
-          style={{ color: "#B22222" }}
-          close={closeBtn(toggleserviceDelete)}
-          toggle={toggleserviceDelete}
-        >
-          Are you sure?
-        </ModalHeader>
-        <ModalBody>Do you want to delete this service</ModalBody>
-        <ModalFooter>
-          <Button
-            color="danger"
-            onClick={() => {
-              deleteserviceByID();
-              setserviceModalDelete(false);
-            }}
-          >
-            Delete
-          </Button>{" "}
-          <Button color="secondary" onClick={toggleserviceDelete}>
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
+            <Modal isOpen={modalserviceDelete} toggle={toggleserviceDelete}>
+                <ModalHeader
+                    style={{ color: "#1bd1ff" }}
+                >
+                    Chặn hoạt động người dùng
+                </ModalHeader>
+                
+
+                <FormGroup className="mb-2">
+                <ModalBody>Bạn có muốn chặn hoạt động người dùng này ?</ModalBody>
+              <Autocomplete
+                options={myOptions2}
+                multiple
+                style={{ width: 500 }}
+                // alue={'Lốc máy nóng hơn bình thường'}v
+
+                getOptionLabel={(option) => option}
+                renderInput={(params) => (
+                  <TextField
+                  
+                    {...params}
+                  
+                    variant="standard"
+                  />
+                )}
+              />
+            </FormGroup>
+                <ModalFooter>
+                    <Button style={{ color: "white", backgroundColor: "brown" }} onClick={toggleserviceDelete}>
+                        Hủy
+                    </Button>
+                    <Button onClick={toggleserviceDelete}>
+                
+                        Xác nhận
+                    </Button>{" "}
+
+                </ModalFooter>
+            </Modal>
+     
 
       <Modal isOpen={modalCreate} toggle={toggleCreate} centered>
         <ModalHeader

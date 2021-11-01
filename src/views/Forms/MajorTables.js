@@ -369,7 +369,7 @@ function ManageSevice() {
                           <FontAwesomeIcon icon={faCaretDown} />
                         )}
                       </th>
-                      {/* <th className="description">Các vấn đề</th> */}
+                      {/* <th className="description">Các dịch vụ</th> */}
                       <th className="description">Hãng Sản Xuất</th>
                       {/* <th
                         className="description"
@@ -409,7 +409,7 @@ function ManageSevice() {
                           </Grid>
                         </Grid>
                       </TableCell>
-                      {/* <td>Chuyên sửa các vấn đề liên quan tới tủ lạnh</td> */}
+                      {/* <td>Chuyên sửa các dịch vụ liên quan tới tủ lạnh</td> */}
 
                       <td>
                         SamSung, Panasonic, Daikin, Electrolux, LG, Tosiba, Sharp, Mishubíhi Electric, Aqua
@@ -486,7 +486,7 @@ function ManageSevice() {
                         </Grid>
 
                       </TableCell>
-                      {/* <td>Chuyên sửa các vấn đề liên quan tới xe máy</td> */}
+                      {/* <td>Chuyên sửa các dịch vụ liên quan tới xe máy</td> */}
 
                       <td>
                         Honda, Yamaha, Piggio, SYM, Suzuki, Triump, Harley Davidson, Ducati
@@ -561,7 +561,7 @@ function ManageSevice() {
                         </Grid>
 
                       </TableCell>
-                      {/* <td>Chuyên sửa các vấn đề liên quan tới máy tính</td> */}
+                      {/* <td>Chuyên sửa các dịch vụ liên quan tới máy tính</td> */}
 
                       <td>
                         Samsung, Apple, Dell, Asus, HP, Lenovo, MSI, Acer
@@ -634,7 +634,7 @@ function ManageSevice() {
                           </Grid>
                         </Grid>
                       </TableCell>
-                      <td>Chuyên Sửa Các Vấn đề liên quan tới đồng hồ</td>
+                      <td>Chuyên Sửa Các dịch vụ liên quan tới đồng hồ</td>
                       <td>
                         Apple, Samsung,Xiaomi, Huawei
                       </td>
@@ -708,7 +708,7 @@ function ManageSevice() {
                         </Grid>
 
                       </TableCell>
-                      {/* <td>Chuyên sửa các vấn đề liên quan tới xe ô tô</td> */}
+                      {/* <td>Chuyên sửa các dịch vụ liên quan tới xe ô tô</td> */}
 
                       <td>
                         Honda, Suzuki, Toyota, Chevrolet, Ford, Hyunda, Isuzu, Kia
@@ -783,7 +783,7 @@ function ManageSevice() {
                         </Grid>
 
                       </TableCell>
-                      {/* <td>Chuyên sửa các vấn đề liên quan tới máy lạnh</td> */}
+                      {/* <td>Chuyên sửa các dịch vụ liên quan tới máy lạnh</td> */}
 
                       <td>
                         Samsung, Panasonic, Daikin, Electrolux, LG, Toshiba, Sharp, Sanyo
@@ -857,7 +857,7 @@ function ManageSevice() {
                         </Grid>
 
                       </TableCell>
-                      {/* <td>Chuyên sửa các vấn đề liên quan tới máy giặt</td> */}
+                      {/* <td>Chuyên sửa các dịch vụ liên quan tới máy giặt</td> */}
                       <td>
                         Samsung, Panasonic, Daikin, Electrolux, LG, Toshiba, Sharp, Sanyo
                       </td>
@@ -930,7 +930,7 @@ function ManageSevice() {
                         </Grid>
 
                       </TableCell>
-                      {/* <td>Chuyên sửa các vấn đề liên quan tới bếp gas */}
+                      {/* <td>Chuyên sửa các dịch vụ liên quan tới bếp gas */}
                       {/* </td> */}
                       <td>
                         Rinnai, Giovani, Faber, Teka, Taka, Binova, Paloma, Sunhouse
@@ -1003,7 +1003,7 @@ function ManageSevice() {
                           </Grid>
                         </Grid>
                       </TableCell>
-                      <td>Chuyên Sửa Các Vấn đề liên quan tới điện thoại</td>
+                      <td>Chuyên Sửa Các dịch vụ liên quan tới điện thoại</td>
                       <td>
                         Apple, Samsung, Xiaomi, Oppo, Huawei, Pixel, Nokia
                       </td>
@@ -1221,7 +1221,7 @@ function ManageSevice() {
             Hủy tạo
           </Button>
           <Button  onClick={toggleCreate}>
-            Lưu sản phẩm
+            Lưu dịch vụ
           </Button>
       
         </ModalFooter>
@@ -1274,12 +1274,12 @@ function ManageSevice() {
             </FormGroup>
 
             <FormGroup className="mb-2">
-              <Form.Label>Vấn đề</Form.Label>
+              <Form.Label>dịch vụ</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Description"
                 as="textarea"
-                value="Chuyên Sửa Các Vấn đề liên quan tới tủ lạnh"
+                value="Chuyên Sửa Các dịch vụ liên quan tới tủ lạnh"
                 onChange={e => setDescription(e.target.value)}
                 rows={3}
               />

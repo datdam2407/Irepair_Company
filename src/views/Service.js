@@ -386,7 +386,7 @@ function Service() {
                         setserviceModalCreate(true);
                       }}
                     >
-                      Thêm vấn đề cần sửa
+                      Thêm dịch vụ cần sửa
                     </Button>
                   </Col>
                 </Row>
@@ -409,7 +409,7 @@ function Service() {
                           }
                         }}
                       >
-                        Vấn đề cần sửa{" "}
+                        dịch vụ cần sửa{" "}
                         {sortedField === "Username" ? (
                           ascending === true ? (
                             <FontAwesomeIcon icon={faCaretUp} />
@@ -2801,9 +2801,9 @@ function Service() {
 
       <Modal isOpen={modalserviceDelete} toggle={toggleserviceDelete}>
         <ModalHeader style={{ color: "#1bd1ff" }}>
-          Xóa Vấn đề cần sửa
+          Xóa dịch vụ cần sửa
         </ModalHeader>
-        <ModalBody>Bạn có muốn xóa Vấn đề cần sửa này?</ModalBody>
+        <ModalBody>Bạn có muốn xóa dịch vụ cần sửa này?</ModalBody>
         <ModalFooter>
           <Button
             style={{ color: "white", backgroundColor: "brown" }}
@@ -2822,25 +2822,25 @@ function Service() {
         centered
       >
         <ModalHeader style={{ color: "#1bd1ff" }}>
-          <ModalTitle>Tạo mới một Vấn đề cần sửa</ModalTitle>
+          <ModalTitle>Tạo mới một dịch vụ cần sửa</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup className="mb-2">
-              <Form.Label>Tên Vấn đề cần sửa</Form.Label>
+              <Form.Label>Tên dịch vụ cần sửa</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Tên Vấn đề cần sửa"
+                placeholder="Tên dịch vụ cần sửa"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </FormGroup>
 
             <FormGroup className="mb-2">
-              <Form.Label>Vấn đề</Form.Label>
+              <Form.Label>dịch vụ</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Vấn đề chi tiết"
+                placeholder="dịch vụ chi tiết"
                 as="textarea"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -2856,7 +2856,7 @@ function Service() {
           >
             Hủy tạo
           </Button>
-          <Button onClick={toggleCreate}>Lưu sản phẩm</Button>
+          <Button onClick={toggleCreate}>Lưu dịch vụ</Button>
         </ModalFooter>
       </Modal> */}
       
@@ -2865,7 +2865,7 @@ function Service() {
           style={{ color: "#1bd1ff" }}
       
         >
-          <ModalTitle>Tạo mới vấn đề cần sửa</ModalTitle>
+          <ModalTitle>Tạo mới dịch vụ cần sửa</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
@@ -2876,7 +2876,7 @@ function Service() {
               />
             </FormGroup>
           <FormGroup className="mb-2">
-          <Form.Label>Vấn đề cần sửa </Form.Label>
+          <Form.Label>dịch vụ cần sửa </Form.Label>
               <Form.Control type="text" placeholder="Thiết bị.." value={name}
                 onChange={e => setName(e.target.value)}
               />
@@ -2919,7 +2919,7 @@ function Service() {
             Hủy tạo
           </Button>
           <Button  onClick={toggleCreate}>
-            Lưu sản phẩm
+            Lưu dịch vụ
           </Button>
       
         </ModalFooter>
@@ -2929,7 +2929,7 @@ function Service() {
           style={{ color: "#1bd1ff" }}
       
         >
-          <ModalTitle>Cập nhật vấn đề cần sửa</ModalTitle>
+          <ModalTitle>Cập nhật dịch vụ cần sửa</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
@@ -2952,7 +2952,7 @@ function Service() {
                 )}
               />
             </FormGroup>
-            <Form.Label>Vấn đề cần sửa </Form.Label>
+            <Form.Label>dịch vụ cần sửa </Form.Label>
             <FormGroup className="mb-2">
               <Autocomplete
                 options={myOptions}

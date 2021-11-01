@@ -78,7 +78,7 @@ function Tulanh() {
   //modal create
   const [modalCreate, setserviceModalCreate] = useState(false);
   const toggleCreate = () => setserviceModalCreate(!modalCreate);
-
+  const [description2, setDescription2] = useState("");
   //Edit service
   const [serviceEdit, setserviceEdit] = useState(null);
   const [modalEdit, setserviceModalEdit] = useState(false);
@@ -397,7 +397,7 @@ function Tulanh() {
                         setserviceModalCreate(true);
                       }}
                     >
-                      Thêm vấn đề
+                      Thêm dịch vụ
                     </Button>
                   </Col>
                 </Row>
@@ -420,7 +420,7 @@ function Tulanh() {
                           }
                         }}
                       >
-                        Vấn đề cần sửa{" "}
+                        dịch vụ cần sửa{" "}
                         {sortedField === "Username" ? (
                           ascending === true ? (
                             <FontAwesomeIcon icon={faCaretUp} />
@@ -1306,9 +1306,9 @@ function Tulanh() {
 
       <Modal isOpen={modalserviceDelete} toggle={toggleserviceDelete}>
         <ModalHeader style={{ color: "#1bd1ff" }}>
-          Xóa Vấn đề cần sửa
+          Xóa dịch vụ cần sửa
         </ModalHeader>
-        <ModalBody>Bạn có muốn xóa Vấn đề cần sửa này?</ModalBody>
+        <ModalBody>Bạn có muốn xóa dịch vụ cần sửa này?</ModalBody>
         <ModalFooter>
           <Button
             style={{ color: "white", backgroundColor: "brown" }}
@@ -1320,96 +1320,159 @@ function Tulanh() {
         </ModalFooter>
       </Modal>
 
-      <Modal
-        className="modalCreatene"
-        isOpen={modalCreate}
-        toggle={toggleCreate}
-        centered
-      >
-        <ModalHeader style={{ color: "#1bd1ff" }}>
-          <ModalTitle>Tạo mới một Vấn đề cần sửa</ModalTitle>
+      <Modal className="modalCreatene" isOpen={modalCreate} toggle={toggleCreate} centered>
+        <ModalHeader
+          style={{ color: "#1bd1ff" }}
+      
+        >
+          <ModalTitle>Tạo mới dịch vụ cần sửa</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
-            <FormGroup className="mb-2">
-              <Form.Label>Tên Vấn đề cần sửa</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Tên Vấn đề cần sửa"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+          <FormGroup className="mb-2">
+              <Form.Label>Tên Thiết bị</Form.Label>
+              <Form.Control type="text" placeholder="Thiết bị.." value={name}
+                onChange={e => setName(e.target.value)}
               />
             </FormGroup>
-
+          <FormGroup className="mb-2">
+          <Form.Label>dịch vụ cần sửa </Form.Label>
+              <Form.Control type="text" placeholder="Thiết bị.." value={name}
+                onChange={e => setName(e.target.value)}
+              />
+            </FormGroup>
             <FormGroup className="mb-2">
-              <Form.Label>Vấn đề</Form.Label>
+
+            <Row>
+              <Col>
+              <Form.Label>Giá tiền nhỏ nhất</Form.Label>
+
               <Form.Control
-                type="text"
-                placeholder="Vấn đề chi tiết"
-                as="textarea"
+                type="number"
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                step="1000"
+                max="90000000"                min="0"
+
+                onChange={e => setDescription(e.target.value)}
+              />
+              </Col>
+              <Col>
+             
+              <Form.Label>Giá tiền lớn nhất</Form.Label>
+              <Form.Control
+                type="number"
+                step="1000"
+                min="0"
+                max="100000000"
+                value={description2}
+                onChange={e => setDescription2(e.target.value)}
                 rows={3}
               />
+              </Col>
+            </Row>
             </FormGroup>
+            
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button
-            style={{ color: "white", backgroundColor: "brown" }}
-            onClick={toggleCreate}
-          >
+        <Button  style={{ color: "white" ,backgroundColor:"brown" }} onClick={toggleCreate}>
             Hủy tạo
           </Button>
-          <Button onClick={toggleCreate}>Lưu sản phẩm</Button>
+          <Button  onClick={toggleCreate}>
+            Lưu dịch vụ
+          </Button>
+      
         </ModalFooter>
       </Modal>
-      <Modal isOpen={modalEdit} toggle={toggleEdit} centered>
-        <ModalHeader style={{ color: "#1bd1ff" }}>
-          <ModalTitle>Bạn muốn cập nhật?</ModalTitle>
+      <Modal className="modalCreatene" isOpen={modalEdit} toggle={toggleEdit} centered>
+        <ModalHeader
+          style={{ color: "#1bd1ff" }}
+      
+        >
+          <ModalTitle>Cập nhật dịch vụ cần sửa</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <Form>
-            <Form.Label>Vấn đề cần sửa </Form.Label>
-            <FormGroup className="mb-2">
+          <FormGroup className="mb-2">
+          <Form.Label>Tên thiết bị </Form.Label>
               <Autocomplete
+               
                 options={dataUpdate}
                 Selection
                 style={{ width: 500 }}
-                value={"Tủ Lạnh"}
+                value={'Tủ Lạnh'}
                 getOptionLabel={(option) => option}
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    // label="Lựa chọn Vấn đề cần sửa"
+                    // label="Lựa chọn thiết bị"
                     variant="standard"
-                  // placeholder="hãng sản phẩm"
+                    // placeholder="hãng sản phẩm"
                   />
                 )}
               />
             </FormGroup>
-
+            <Form.Label>dịch vụ cần sửa </Form.Label>
             <FormGroup className="mb-2">
-              <Form.Label>Vấn đề</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Description"
-                as="textarea"
-                value="Chuyên Sửa Các Vấn đề liên quan tới tủ lạnh"
-                onChange={(e) => setDescription(e.target.value)}
-                rows={3}
+              <Autocomplete
+                options={myOptions}
+                
+                style={{ width: 500 }}
+                value={'Lốc máy nóng hơn bình thường'}
+
+                getOptionLabel={(option) => option}
+                renderInput={(params) => (
+                  <TextField
+                  
+                    {...params}
+                  
+                    variant="standard"
+                  />
+                )}
               />
             </FormGroup>
+         
+            <FormGroup className="mb-2">
+
+            <Row>
+              <Col>
+              <Form.Label>Giá tiền nhỏ nhất</Form.Label>
+
+              <Form.Control
+                type="number"
+                value={100000}
+                step="1000"
+                max="90000000"                min="0"
+                
+                onChange={e => setDescription(e.target.value)}
+              />
+              </Col>
+              <Col>
+             
+              <Form.Label>Giá tiền lớn nhất</Form.Label>
+              <Form.Control
+                type="number"
+                step="1000"
+                min="0"
+                max="100000000"
+                value={500000}
+                onChange={e => setDescription2(e.target.value)}
+                rows={3}
+              />
+              </Col>
+            </Row>
+            </FormGroup>
+            
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button
-            style={{ color: "white", backgroundColor: "brown" }}
-            onClick={toggleEdit}
-          >
+        <Button  style={{ color: "white" ,backgroundColor:"brown" }} onClick={toggleEdit}>
             Hủy cập nhật
           </Button>
-          <Button onClick={toggleEdit}>Cập nhật</Button>
+          <Button  onClick={toggleEdit}>
+            Cập nhật
+          </Button>
+      
         </ModalFooter>
       </Modal>
       <Modal isOpen={modalStatus} toggle={toggleDetails}>

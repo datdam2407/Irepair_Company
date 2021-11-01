@@ -13,6 +13,8 @@ import logo4 from "../../assets/img/Phatne2.jpg"
 import logo5 from "../../assets/img/thuanne.jpg"
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { IconName ,TiStar ,TiLockClosed } from "react-icons/ti";
+
 // react-bootstrap components
 import {
     Button,
@@ -423,12 +425,12 @@ export default function Repairman() {
                                         style={{
                                             color:
                                                 '#e2930b',
-                                            width: '90px',
+                                            width: '120px',
                                             fontWeight: '700',
                                             paddingRight: '15px',
                                             fontSize: '20px',
                                         }}
-                                    >✩✩✩✩</Typography>
+                                    >★★★★✩</Typography>
                                  
                                     <td style={{color:"green", fontWeight:"700"}}>
                         40 lần
@@ -471,7 +473,7 @@ export default function Repairman() {
                                                 type="button"
                                                 variant="danger"
                                             >
-                                                <i className="fas fa-times"></i>
+                                                <TiLockClosed/>
                                             </Button>
                                         </OverlayTrigger>
                                     </td>
@@ -503,12 +505,12 @@ export default function Repairman() {
                                         style={{
                                             color:
                                                 '#e2930b',
-                                            width: '90px',
+                                            width: '120px',
                                             fontWeight: '700',
                                             paddingRight: '15px',
                                             fontSize: '20px',
                                         }}
-                                    >✩✩✩</Typography>
+                                    >★★★✩✩</Typography>
                                  
                                     
                                     <td style={{color:"green", fontWeight:"700"}}>
@@ -553,7 +555,7 @@ export default function Repairman() {
                                                 type="button"
                                                 variant="danger"
                                             >
-                                                <i className="fas fa-times"></i>
+                                                <TiLockClosed/>
                                             </Button>
                                         </OverlayTrigger>
                                     </td>
@@ -585,12 +587,12 @@ export default function Repairman() {
                                         style={{
                                             color:
                                                 '#e2930b',
-                                            width: '90px',
+                                            width: '120px',
                                             fontWeight: '700',
                                             paddingRight: '15px',
                                             fontSize: '20px',
                                         }}
-                                    >✩✩✩✩</Typography>
+                                    >★★★★✩</Typography>
                                  
 
                                     <td style={{color:"green", fontWeight:"700"}}>
@@ -635,7 +637,7 @@ export default function Repairman() {
                                                 type="button"
                                                 variant="danger"
                                             >
-                                                <i className="fas fa-times"></i>
+                                                <TiLockClosed/>
                                             </Button>
                                         </OverlayTrigger>
                                     </td>
@@ -666,12 +668,12 @@ export default function Repairman() {
                                         style={{
                                             color:
                                                 '#e2930b',
-                                            width: '100px',
+                                            width: '120px',
                                             fontWeight: '700',
                                             paddingRight: '15px',
                                             fontSize: '20px',
                                         }}
-                                    >✩✩✩✩✩</Typography>
+                                    >★★★★★</Typography>
                                  
                                     <td style={{color:"green", fontWeight:"700"}}>
                         20 lần
@@ -715,7 +717,7 @@ export default function Repairman() {
                                                 type="button"
                                                 variant="danger"
                                             >
-                                                <i className="fas fa-times"></i>
+                                                <TiLockClosed/>
                                             </Button>
                                         </OverlayTrigger>
                                     </td>
@@ -746,12 +748,12 @@ export default function Repairman() {
                                         style={{
                                             color:
                                                 '#e2930b',
-                                            width: '90px',
+                                            width: '120px',
                                             fontWeight: '700',
                                             paddingRight: '15px',
                                             fontSize: '20px',
                                         }}
-                                    >✩✩✩✩</Typography>
+                                    >★★★★✩</Typography>
                             
                                     <td style={{color:"green", fontWeight:"700"}}>
                         45 lần
@@ -795,7 +797,7 @@ export default function Repairman() {
                                                 type="button"
                                                 variant="danger"
                                             >
-                                                <i className="fas fa-times"></i>
+                                                <TiLockClosed/>
                                             </Button>
                                         </OverlayTrigger>
                                     </td>
@@ -829,7 +831,7 @@ export default function Repairman() {
                                             paddingRight: '15px',
                                             fontSize: '20px',
                                         }}
-                                    >✩</Typography>
+                                    >★</Typography>
                                     <td >
                                         10-10-2021
                                     </td >
@@ -864,7 +866,7 @@ export default function Repairman() {
                                                 type="button"
                                                 variant="danger"
                                             >
-                                                <i className="fas fa-times"></i>
+                                                <TiLockClosed/>
                                             </Button>
                                         </OverlayTrigger>
                                     </td>
