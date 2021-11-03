@@ -90,15 +90,81 @@ export default function Workon() {
   const [ServiceList, setServiceList] = useState([]);
 
 
-  function handleChangeService(e, value){
+  function handleChangeService(e, value) {
     setSeviceSelect(e.target.ServiceId);
-    setServiceSelectID(value.value);  }
+    setServiceSelectID(value.value);
+  }
   //onchange
 
   function handleOnchangeSelectdmajor(e, value) {
     //console.log(e.target,value);
     setMajorSelect(e.target.MajorID);
     setMajorSelectID(value.value);
+  }
+  function displayRepairName(type) {
+    const stateValue = {
+
+      "304a7d8c-735e-49ef-9ec5-004a4feb3a2f": "Lê Minh Tài",
+      "023c1186-0153-45b2-a3af-065b49deea5e": "Nguyễn Đình Thục",
+      "3f37cd77-95c4-407d-af05-21a3498e28d9": "Nguyễn Hoàng Duy",
+      "4e2f89c7-c0f6-4909-942e-22a41828c9e0": "Gan Feng Du",
+      "26b59676-939e-4f8c-a9af-245ff7313ec0": "Phạm Hoàng Anh",
+      "8a022b6b-95de-4430-82b4-2b2fb6e43abf": "Nguyễn Hoàng Quốc Khánh",
+      "b19c084f-12d6-4785-9a1d-50b15ddce1ec": "Đặng Tuấn Anh",
+      "8f9cd415-da56-44af-8116-6ccbe3e3b037": "Phạm Hữu Nghĩa",
+      "8634c44c-7ebc-4b85-a1a7-862fbe7d162c": "Nguyễn Lê Thuần",
+      "9f5e4a52-c68b-4eab-9358-a8a90af49f3e": "Đỗ Dương Tâm Đăng",
+      "ce714876-383b-4b74-82d9-acefc7061d05": "Hà Lê Phúc",
+      "43b11fa5-c4a8-4618-947f-b03c086dbaef": "Đàm Tiến Đạt",
+      "9a46f2fd-c079-4901-8d6a-b7e10d4fe535": "Đỗ Hoàng Gia Bảo",
+      "27d5f40f-c15b-442b-8881-c8c9b4bc45d5": "Hoàng Đức Anh",
+      "770be83a-d833-4c64-af86-cd282b31305b": "Phạm Tiến Dũng",
+      "06a1d894-e47c-4a22-89aa-ce36c2476a7f": "Trần Quôc Toản",
+      "c1fc7c9f-84e3-4321-991f-cf29ea554fe0": "Nguyễn Minh Hoàng",
+      "94b4c92e-5e46-4f27-8cfd-d4bb340eb187": "Ngô Sa Phiêu",
+      "3a80a0a1-ed57-4cfa-9969-d75962825fa7": "Ngô Thanh Huy",
+      "e0ca88d0-e18d-4127-ae93-d81863c734e0": "Phạm Tấn Phát",
+      "484d58bc-991c-48a7-b6bf-d83fad176b82": "Phạm Gia Nguyên",
+      "d121c840-e54e-4871-ba7f-e32c46586bb1": "Nguyễn Thái Dương",
+      "70e8ab93-1bb2-47c2-9530-e5448cb47ed7": "Phạm Khắc Việt Anh",
+      "376f16ef-e4fc-4cc6-873e-fc5fd1255d86": "Lê Anh Nguyên",
+
+      //
+    };
+    return stateValue[type] ? stateValue[type] : "";
+  }
+  function displayServiceName(type) {
+    const stateValue = {
+      "7e179e62-21da-45c1-afe4-114a580f0a12": "Công ty điện lạnh Long Châu",
+      "404f25c6-4f40-4f83-acfd-16a0d7c2f8e9": "Công ty điện lạnh, điện gia dụng Thủy Tiên",
+      "4bb0a83e-e9d9-47b5-8019-20c19e953181": "Công ty điện lạnh Hòa Hưng",
+      "dd0b937a-8e90-4af3-bfe8-0a8cc0722f6a": "IrepairX",
+      "17ab8695-daec-4ceb-9f78-07c9528c0009": "CompanyX",
+      "234be13b-421b-40d9-8226-0f162dee7ac8": "Công ty điện lạnh Thành Công",
+      "e427ae66-4f89-47c9-8032-0cca6577b28f": "Cty sửa chữa xe máy PHÁT THÀNH VINH 10",
+      "0e9ceddf-9796-478a-87fc-132567a68116": "Tiệm Sửa Xe Đinh Thành",
+      "a9f6fc01-3033-4b57-93eb-13fbc04d4e42": "Tiệm Sửa Xe Trường",
+      "4bb0a83e-e9d9-47b5-8019-20c19e953181": "Công ty điện lạnh Hòa Hưng",
+      "e5260446-f254-4d8c-a2a8-366748f11068": "Tiệm Sửa Xe Khoa Tay Ga",
+      "99e14380-7924-4522-91d5-69533f247258": "Tiệm Sửa Xe Thanh Long",
+      "473274b9-8345-4d0d-b765-87daf43a9bf7": "Sửa xe Tuấn 195 Bạch Đằng",
+      "033c9453-18a7-4066-b40e-923f685071ae": "Tiệm Sửa Xe Thành Trung",
+      "2e0a4a57-7ff9-4f0c-859e-9c6ef6228ca2": "Trung Tâm Kĩ Thuật Xe Máy Hải Dương",
+      "b7153746-4f68-47fb-83e5-e5f1ecbed192": "Sửa xe máy Hoài Thu",
+      "c2dc1cf0-24c1-4e52-9504-f1dad032f6e9": "Sửa xe Đinh Nguyễn 77",
+
+
+
+
+      "86083895-18dc-4fba-a721-a5acce6a26a8": "Xe số",
+      "6eaa4097-e5e5-465e-8f15-f15f81f0e36e": "Xe tay ga",
+      "813a4c08-fa29-48bb-9d76-0beaa4d133f8": "Xe đạp điện",
+      "458dcfdd-d1e1-43cf-9276-176574447f61": "Xe ô tô máy xăng",
+      "b65f8d53-c476-4474-9b45-268ea039ecbf": "Xe ô tô máy điện",
+      "2e316c2d-153e-42cb-8ef8-bb828d8f1d4c": "Xe ô tô máy dầu",
+
+    };
+    return stateValue[type] ? stateValue[type] : "";
   }
   const listStates = [
     "New",
@@ -212,7 +278,7 @@ export default function Workon() {
       );
     })
   }, []);
-// console.log("dataSValue", options[0].value)
+  // console.log("dataSValue", options[0].value)
   //create
   async function handleSubmitCreate(e) {
     await postWithToken(
@@ -233,7 +299,7 @@ export default function Workon() {
         console.log(err);
       });
   }
-  
+
   console.log("aaaaMajor", MajorSelectID)
   console.log("aaaaService", ServiceSelectID)
   function getRepairmanID(Id) {
@@ -540,31 +606,7 @@ export default function Workon() {
                 <Table className="table-hover table-striped">
                   <thead>
                     <tr>
-                      <th
-                        className="description"
-                        onClick={() => {
-                          if (sortedField === "Username" && ascending) {
-                            setSortedField("Username");
-                            setAscending(false);
-                            sort("Username", false, useListRepairmanShowPage);
-                          } else {
-                            setSortedField("Username");
-                            setAscending(true);
-                            sort("Username", true, useListRepairmanShowPage);
-                          }
-                        }}
-                      >
-                        Image{" "}
-                        {sortedField === "Username" ? (
-                          ascending === true ? (
-                            <FontAwesomeIcon icon={faCaretUp} />
-                          ) : (
-                            <FontAwesomeIcon icon={faCaretDown} />
-                          )
-                        ) : (
-                          <FontAwesomeIcon icon={faCaretDown} />
-                        )}
-                      </th>
+
                       <th
                         className="description"
                         onClick={() => {
@@ -590,12 +632,8 @@ export default function Workon() {
                           <FontAwesomeIcon icon={faCaretDown} />
                         )}
                       </th>
-                      <th className="description">Service </th>
-
-                      {/* <th className="description">Username</th> */}
-
+                      <th className="description">Major Field </th>
                       <th className="description">Company</th>
-                      <th className="description">Status</th>
                       <th className="description">Actions</th>
                     </tr>
                   </thead>
@@ -603,19 +641,12 @@ export default function Workon() {
                     {useListRepairmanShowPage.map((e, index) => {
                       return (
                         <tr key={index}>
-                          <td onClick={() => {
-                            setModalStatus(true);
-                            setSelectRepairman(e);
-                          }}>
-                            <img className="avatar-repairman" src={e.Avatar} />
-                          </td>
+
                           <TableCell>
                             <Grid container>
 
                               <Grid item lg={10}>
-                                <Typography className={classes.name}>{e.RepairmanId}</Typography>
-                                <Typography color="textSecondary" variant="body2">{e.Id}
-                                </Typography>
+                                <Typography className={classes.name}>{displayRepairName(e.RepairmanId)}</Typography>
                               </Grid>
                             </Grid>
                           </TableCell>
@@ -624,7 +655,7 @@ export default function Workon() {
                             setModalStatus(true);
                             setSelectRepairman(e);
                           }}>
-                            {e.ServiceId}
+                            {displayServiceName(e.MajorFieldId)}
                           </td>
                           <td onClick={() => {
                             setModalStatus(true);
@@ -633,7 +664,7 @@ export default function Workon() {
                             {displayRepairmanName(localStorage.getItem("IDCompany"))}
                           </td>
 
-                          <TableCell>
+                          {/* <TableCell>
                             <Typography
                               className={classes.Status}
                               style={{
@@ -645,7 +676,7 @@ export default function Workon() {
 
                               }}
                             >{displayStateName(e.Status)}</Typography>
-                          </TableCell>
+                          </TableCell> */}
                           <td>
                             <td className="td-actions">
                               <OverlayTrigger

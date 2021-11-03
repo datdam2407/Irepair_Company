@@ -125,25 +125,14 @@ export default function Repairman() {
         setLoading(false)
     }
 
-    function displayRepairmanName(type) {
-        const stateValue = {
-            "234be13b-421b-40d9-8226-0f162dee7ac8": "Công ty điện lạnh Thành Công",
-            "7e179e62-21da-45c1-afe4-114a580f0a12": "Công ty điện lạnh Long Châu",
-            "404f25c6-4f40-4f83-acfd-16a0d7c2f8e9": "Công ty điện lạnh, điện gia dụng Thủy Tiên",
-            "4bb0a83e-e9d9-47b5-8019-20c19e953181": "Công ty điện lạnh Hòa Hưng",
-            "dd0b937a-8e90-4af3-bfe8-0a8cc0722f6a": "IrepairX",
-            "17ab8695-daec-4ceb-9f78-07c9528c0009": "RepairmanX",
-        };
-        return stateValue[type] ? stateValue[type] : "";
-    }
+    
     async function handleRepairmanDetele() {
         await del(
             `/api/v1.0/repairmans?id=${RepairmanDelete}`, localStorage.getItem("token")
         )
             .then((res) => {
                 if (res.status === 200) {
-                    window.location = "/admin/repairman";
-                    alert("Deleted Successfully")
+                    window.location = "/company/repairman";
                 }
             })
     }
@@ -187,9 +176,7 @@ export default function Repairman() {
             console.log(err);
         });
     }
-    console.log(status)
-    console.log(name)
-
+ 
     async function handleEditSubmit2(e) {
         await putWithToken(
             `/api/v1.0/repairmans`,
@@ -215,7 +202,6 @@ export default function Repairman() {
                 console.log(err);
             });
     }
-    console.log("lisstID", RepairmanList)
     //load repairman
     useEffect(() => {
         getWithToken("/api/v1.0/repairmans", localStorage.getItem("token")).then(
@@ -302,9 +288,9 @@ export default function Repairman() {
         },
         name: {
             fontWeight: 'bold',
-            color: theme.palette.secondary.dark,
-
-        },
+            color: '#e86a10f7',
+            width: '194px',
+          },
         Status: {
             fontWeight: '700',
             width: '71px',
@@ -332,6 +318,13 @@ export default function Repairman() {
             1: "Approved",
             0: "New",
             2: "Updating",
+        };
+        return stateValue[type] ? stateValue[type] : "";
+    }
+    function displayStateWorking(type) {
+        const stateValue = {
+            0: "Busy",
+            1: "Free",
         };
         return stateValue[type] ? stateValue[type] : "";
     }
@@ -540,11 +533,11 @@ export default function Repairman() {
                                             </th>
 
                                             {/* <th className="description">Username</th> */}
-                                            <th className="description">Create Date</th>
+                                            <th className="description">Last Request</th>
                                             <th
                                                 className="description"
                                                 onClick={() => {
-                                                    if (sortedField === "Name" && ascending) {
+                                                    if (sortedField === "lastRequest" && ascending) {
                                                         setSortedField("Name");
                                                         setAscending(false);
                                                         sort("Name", false, useListRepairmanShowPage);
@@ -566,7 +559,7 @@ export default function Repairman() {
                                                     <FontAwesomeIcon icon={faCaretDown} />
                                                 )}
                                             </th>
-                                            <th className="description">Company</th>
+                                            <th className="description">Working</th>
                                             <th className="description">Status</th>
                                             <th className="viewAll">Actions</th>
                                         </tr>
@@ -607,7 +600,7 @@ export default function Repairman() {
                                                     <td onClick={() => {
                                                         setModalStatus(true);
                                                         setSelectRepairman(e);
-                                                    }}>{moment(e.CreateDate).format("MM-DD-YYYY")}
+                                                    }}>{moment(e.lastRequest).format("MM-DD-YYYY")}
                                                     </td>
                                                     <td onClick={() => {
                                                         setModalStatus(true);
@@ -615,11 +608,8 @@ export default function Repairman() {
                                                     }}>
                                                         {e.Name}
                                                     </td>
-                                                    <td onClick={() => {
-                                                        setModalStatus(true);
-                                                        setSelectRepairman(e);
-                                                    }}>
-                                                        {displayRepairmanName(e.CompanyId)}
+                                                    <td> 
+                                                    {displayStateWorking(e.WorkStatus)}
                                                     </td>
 
                                                     <TableCell>
@@ -785,12 +775,15 @@ export default function Repairman() {
 
             <Modal isOpen={modalDelete} toggle={toggleDelete}>
                 <ModalHeader
-                    style={{ color: "#B22222" }}
+                    style={{ color: "#1d98e0f7" }}
                 >
                     Are you sure?
                 </ModalHeader>
                 <ModalBody>Do you want to delete this repairman</ModalBody>
-                <ModalFooter>
+                <ModalFooter style={{ justifyContent: 'space-around'}}>
+                <Button className="cancel-button" onClick={toggleDelete}>
+                        Cancel
+                    </Button>
                     <Button
                         color="danger"
                         onClick={() => {
@@ -800,9 +793,7 @@ export default function Repairman() {
                     >
                         Delete
                     </Button>{" "}
-                    <Button className="cancel-button" onClick={toggleDelete}>
-                        Cancel
-                    </Button>
+                   
                 </ModalFooter>
             </Modal>
 
@@ -850,7 +841,7 @@ export default function Repairman() {
 
             <Modal isOpen={modalApprove} toggle={toggleApprove} centered size="lg" >
                 <ModalHeader
-                    style={{ color: "#B22222" }}>
+                    style={{ color: "#1d98e0f7" }}>
                     <ModalTitle>Do you want to update repairman ?</ModalTitle>
                 </ModalHeader>
                 <ModalBody>
@@ -901,7 +892,10 @@ export default function Repairman() {
                         </Grid>
                     </Form>
                 </ModalBody>
-                <ModalFooter>
+                <ModalFooter style={{ justifyContent: 'space-around'}}>
+                <Button className="cancel-button" onClick={() => { cancelRepairmanByID(); }}>
+                        Cancel
+                    </Button>
                     <Button
                         color="danger"
                         onClick={() => {
@@ -912,14 +906,12 @@ export default function Repairman() {
                     >
                         Update
                     </Button>
-                    <Button className="cancel-button" onClick={() => { cancelRepairmanByID(); }}>
-                        Cancel
-                    </Button>
+                  
                 </ModalFooter>
             </Modal>
             <Modal isOpen={modalCreate} toggle={toggleCreate} centered size="lg" >
                 <ModalHeader
-                    style={{ color: "#B22222" }}>
+                    style={{ color: "#1d98e0f7" }}>
                     <ModalTitle>Do you want to create new repairman ?</ModalTitle>
                 </ModalHeader>
                 <ModalBody>
@@ -970,7 +962,10 @@ export default function Repairman() {
                         </Grid>
                     </Form>
                 </ModalBody>
-                <ModalFooter>
+                <ModalFooter style={{ justifyContent: 'space-around'}}>
+                <Button className="cancel-button" onClick={() => { toggleCreate(); }}>
+                        Cancel
+                    </Button>
                     <Button
                         color="danger"
                         onClick={() => {
@@ -981,9 +976,7 @@ export default function Repairman() {
                     >
                         Save
                     </Button>
-                    <Button className="cancel-button" onClick={() => { toggleCreate(); }}>
-                        Cancel
-                    </Button>
+                  
                 </ModalFooter>
             </Modal>
 

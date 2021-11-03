@@ -9,23 +9,34 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  background-color: #dcdcdc;
+  background-color: #48cbf3;
   padding: 20px;
   border-radius: 10px;
+  height: 435px;
+
 }
 .login__textBox {
   padding: 60px;
   font-size: 18px;
   margin-bottom: 10px;
 }
-
+.login-logon{
+  width: 70px;
+  margin-left: 110px;
+}
 .google-btn {
   margin: 0 auto;
-  width: 384px;
+  width: 306px;
   height: 42px;
-  background-color: #4285f4;
+  background-color: #2e9ce6;
   border-radius: 2px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+  margin-top: 24px;
+}
+.title-login{
+  color: rgb(83, 38, 6);
+  font-weight: bolder;
+  text-align: center;
 }
 .google-btn .google-icon-wrapper {
   position: absolute;
@@ -57,5 +68,235 @@
   cursor: pointer;
 }
 .google-btn:active {
-  background: #1669f2;
+  background: #93a5c2;
+}
+.Login {
+  text-align: left !important;
+   
+}
+
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: rgb(200, 32, 32);
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+
+.col-login {
+  background-color: #e49e07;
+  width: 40%;
+  margin-left: 30%;
+  height: 120%;
+  border-radius: 5px;
+}
+
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+.img {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.login-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+}
+
+/* .img img {
+  width: 700px;
+} */
+
+.Login-form {
+  width: 435px;
+}
+
+.login-content img {
+  height: 100px;
+}
+
+
+.login-content .input-div {
+  position: relative;
+  display: grid;
+  grid-template-columns: 7% 93%;
+  margin: 25px 0;
+  padding: 5px 0;
+  border-bottom: 2px solid #882d2d;
+}
+
+.login-content .input-div.one {
+  margin-top: 0;
+}
+
+.i {
+
+  color: #48cbf3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.i i {
+  transition: .3s;
+}
+
+.input-div>div {
+  position: relative;
+  height: 45px;
+}
+
+.input-div>div>h5 {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 18px;
+  transition: .3s;
+}
+
+.input-div:before,
+.input-div:after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background-color: #c58b03;
+  transition: .4s;
+}
+
+.input-div:before {
+  right: 50%;
+}
+
+.input-div:after {
+  left: 50%;
+}
+
+.input-div.focus:before,
+.input-div.focus:after {
+  width: 50%;
+}
+
+.input-div.focus>div>h5 {
+  top: -5px;
+  font-size: 15px;
+}
+
+.input-div.focus>.i>i {
+  color: #c58b03;
+}
+
+.input-div>div>input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0.5rem 0.7rem;
+  font-size: 1.2rem;
+  color: #555;
+  font-family: 'poppins', sans-serif;
+}
+
+.input-div.pass {
+  margin-bottom: 4px;
+}
+
+.a-login{
+  display: block;
+  text-align: right;
+  text-decoration: none;
+  color: #999;
+  font-size: 0.9rem;
+  transition: .3s;
+}
+
+.a-login :hover {
+  color: #c58b03;
+} 
+
+.login-button {
+  display: block;
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+  background-image: linear-gradient(to right, #c58b03, #c58b03, #c58b03);
+  background-size: 200%;
+  font-size: 1.2rem;
+  color: rgb(146, 45, 45);
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.login-button:hover {
+  background-position: right;
+}
+
+@media screen and (max-width: 1050px) {
+  .container {
+      grid-gap: 5rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  form {
+      width: 290px;
+  }
+  .login-content h2 {
+      font-size: 2.4rem;
+      margin: 8px 0;
+  }
+  .img img {
+      width: 400px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+      grid-template-columns: 1fr;
+  }
+  .img {
+      display: none;
+  }
+  .wave {
+      display: none;
+  }
+  .login-content {
+      justify-content: center;
+  }
 }

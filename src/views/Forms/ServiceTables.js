@@ -99,7 +99,7 @@ function ManageSevice() {
   const [serviceID, setserviceID] = useState("");
   const [fieldSelect, setfieldSelect] = useState("")
   const [data1, setData1] = useState({ array: [] });
-  const [FieldSelectID, setFieldSelectID] = useState(-1)
+  const [FieldSelectID, setFieldSelectID] = useState(1)
 
   const [sortedField, setSortedField] = useState("Id");
   const [ascending, setAscending] = useState(true);
@@ -231,7 +231,7 @@ function ManageSevice() {
     }).then(() => {
     });
 
-    params['Status'] = [1].reduce((f, s) => `${f},${s}`);
+    params['Status'] = [0].reduce((f, s) => `${f},${s}`);
     getWithTokenParams("/api/v1.0/major-fields", params, localStorage.getItem("token")
     ).then(res => {
       setData1(res.data);
@@ -561,7 +561,7 @@ function ManageSevice() {
                           <FontAwesomeIcon icon={faCaretDown} />
                         )}
                       </th>
-                      <th
+                      {/* <th
                         className="description"
                         onClick={() => {
                           if (sortedField === "Price" && ascending) {
@@ -585,7 +585,7 @@ function ManageSevice() {
                         ) : (
                           <FontAwesomeIcon icon={faCaretDown} />
                         )}
-                      </th>
+                      </th> */}
                       <th
                         className="description"
                         onClick={() => {
@@ -631,9 +631,7 @@ function ManageSevice() {
                             {e.Description}
                           </td>
 
-                          <td>
-                            {e.Price}
-                          </td>
+                        
                           <TableCell>
                             <Typography
                               className={classes.Status}
@@ -817,12 +815,15 @@ function ManageSevice() {
       </Container>
       <Modal isOpen={modalserviceDelete} toggle={toggleserviceDelete}>
         <ModalHeader
-          style={{ color: "#B22222" }}
+          style={{ color: "#1d98e0f7" }}
         >
-          Are you sure?
+          <h3>Are you sure?</h3>
         </ModalHeader>
-        <ModalBody>Do you want to delete this service</ModalBody>
-        <ModalFooter>
+        <ModalBody> <h4>Do you want to delete this service ?</h4></ModalBody>
+        <ModalFooter  style={{ justifyContent: 'space-around'}}>
+        <Button className="cancel-button" onClick={() => { toggleserviceDelete(); }}>
+            Cancel
+          </Button>
           <Button
             color="danger"
             onClick={() => {
@@ -832,15 +833,13 @@ function ManageSevice() {
           >
             Delete
           </Button>{" "}
-          <Button className="cancel-button" onClick={() => { toggleserviceDelete(); }}>
-            Cancel
-          </Button>
+         
         </ModalFooter>
       </Modal>
           
       <Modal isOpen={modalCreate} toggle={toggleCreate} centered size="lg" >
         <ModalHeader
-          style={{ color: "#B22222" }}
+          style={{ color: "#1d98e0f7" }}
         >
           <ModalTitle><h3>Do you want to create new service ?</h3></ModalTitle>
         </ModalHeader>
@@ -853,17 +852,18 @@ function ManageSevice() {
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
               <Grid item xs={6}>
+
+              
+
                 <FormGroup className="mb-2">
-                  <Form.Label>Company </Form.Label>
+                  <Form.Label>Service name</Form.Label>
                   <Form.Control
-                    disabled
                     type="text"
-                    placeholder="Name"
-                    value={companyId}
-                    onChange={(e) => setCompanyID(e.target.value)}
+                    placeholder="Service name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </FormGroup>
-
                 <Form.Label>Field </Form.Label>
                 <FormGroup className="mb-2">
                   <Dropdown
@@ -875,27 +875,6 @@ function ManageSevice() {
                     options={listField}
                   />
                 </FormGroup>
-
-                <FormGroup className="mb-2">
-                  <Form.Label>Service name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Service name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </FormGroup>
-
-                <FormGroup className="mb-2">
-                  <Form.Label>Price</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="Price"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                  />
-                </FormGroup>
-
                 <FormGroup className="mb-2">
                   <Form.Label>Description</Form.Label>
                   <Form.Control
@@ -925,7 +904,11 @@ function ManageSevice() {
             </Grid>
           </Form>
         </ModalBody>
-        <ModalFooter>
+      
+        <ModalFooter style={{ justifyContent: 'space-around'}}>
+        <Button className="cancel-button" onClick={toggleCreate}>
+            Cancel
+          </Button>
           <Button
             color="danger"
             onClick={() => {
@@ -936,15 +919,13 @@ function ManageSevice() {
           >
             Save
           </Button>
-          <Button className="cancel-button" onClick={toggleCreate}>
-            Cancel
-          </Button>
+        
         </ModalFooter>
       </Modal>
 
       <Modal isOpen={modalEdit} toggle={toggleEdit} centered size="lg" >
         <ModalHeader
-          style={{ color: "#B22222" }}
+          style={{ color: "#1d98e0f7" }}
         >
           <ModalTitle><h3>Do you want to edit service ?</h3></ModalTitle>
         </ModalHeader>
@@ -956,14 +937,13 @@ function ManageSevice() {
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
               <Grid item xs={6}>
-                <FormGroup className="mb-2">
-                  <Form.Label>Company </Form.Label>
+              <FormGroup className="mb-2">
+                  <Form.Label>Service name</Form.Label>
                   <Form.Control
-                    disabled
                     type="text"
-                    placeholder="Name"
-                    value={companyId}
-                    onChange={(e) => setCompanyID(e.target.value)}
+                    placeholder="Service name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </FormGroup>
                 <Form.Label>Field </Form.Label>
@@ -973,28 +953,12 @@ function ManageSevice() {
                     search
                     selection
                     value={fieldSelect}
+                    
                     onChange={handleOnchangeSelectedAsset}
                     options={listField}
                   />
                 </FormGroup>
-                <FormGroup className="mb-2">
-                  <Form.Label>Service name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Service name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </FormGroup>
-                <FormGroup className="mb-2">
-                  <Form.Label>Price</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="Price"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                  />
-                </FormGroup>
+            
                 <FormGroup className="mb-2">
                   <Form.Label>Description</Form.Label>
                   <Form.Control
@@ -1023,7 +987,10 @@ function ManageSevice() {
             </Grid>
           </Form>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter style={{ justifyContent: 'space-around'}}>
+        <Button className="cancel-button" onClick={() => { cancelServiceByID(); }}>
+            Cancel
+          </Button>
           <Button
             color="danger"
             onClick={() => {
@@ -1034,12 +1001,9 @@ function ManageSevice() {
           >
             Update
           </Button>
-          <Button className="cancel-button" onClick={() => { cancelServiceByID(); }}>
-            Cancel
-          </Button>
+          
         </ModalFooter>
       </Modal>
-
 
 
       <Modal isOpen={modalStatus} toggle={toggleDetails}>
