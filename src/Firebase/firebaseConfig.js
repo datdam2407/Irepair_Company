@@ -53,6 +53,8 @@ async function getToken (FBasetoken){
 
 const logout = () => {
   auth.signOut();
+  localStorage.clear();
+  sessionStorage.clear();
   
 };
 

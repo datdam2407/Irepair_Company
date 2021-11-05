@@ -1,367 +1,391 @@
-import React from "react";
-// react component used to create charts
-// react components used to create a SVG / Vector map
-import { VectorMap } from "react-jvectormap";
-import {
-  UncontrolledCarousel,
-} from "reactstrap";
-// react-bootstrap components
+import React, { useState, useEffect } from "react";
+// node.js library that concatenates classes (strings)
+import classnames from "classnames";
+import { useHistory } from "react-router-dom";
+// import ImageUpload from "./Upload/ImageUpload.js";
+// javascipt plugin for creating charts
 import {
   Badge,
   Button,
   Card,
-  Form,
-  InputGroup,
-  Navbar,
-  Nav,
-  OverlayTrigger,
+  CardHeader,
+  CardBody,
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle,
+  UncontrolledDropdown,
+  Media,
+  Progress,
   Table,
-  Tooltip,
   Container,
   Row,
+  UncontrolledTooltip,
   Col,
+  Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
+import {
+  Form,
+  ModalTitle,
+  Tooltip,
 } from "react-bootstrap";
+import firebase from "firebase";
+import "firebase/storage";
+import 'firebase/firestore';
+import {
+  Avatar,
+} from '@material-ui/core';
+// core components
+import NumberFormat from 'react-number-format';
+import CardsHeader from "../views/Forms/CardsHeader.js";
+import "../assets/css/customSizeCompany.css";
+// import {
+//   chartOptions,
+//   parseOptions,
+//   chartExample1,
+//   chartExample2,
+// } from "variables/charts.js";
+import { getWithToken, postWithToken } from "../service/ReadAPI";
+export default function Dashboard() {
+  const [dataBase, setDataBase] = useState([]);
+  const [loadDataBase, setLoadDatabase] = useState(true);
 
-function Dashboard() {
-  const carouselItems = [
-    {
-      src: require("assets/img/abc.jpeg").default,
-      altText: "Slide 1",
-      caption: "",
-    },
-    {
-      src: require("assets/img/Plumber.jpg").default,
-      altText: "Slide 2",
-      caption: "",
-    },
-    {
-      src: require("assets/img/Electric .jpg").default,
-      altText: "Slide 3",
-      caption: "",
-    },
-  ];
-  const covid19Items = [
-    {
-      src: require("assets/img/covid1.jpg").default,
-      altText: "Slide 1",
-      caption: "",
-    },
-    {
-      src: require("assets/img/covid2.jpg").default,
-      altText: "Slide 2",
-      caption: "",
-    },
-    {
-      src: require("assets/img/covid3.jpg").default,
-      altText: "Slide 3",
-      caption: "",
-    },
-    {
-      src: require("assets/img/covid4.jpg").default,
-      altText: "Slide 4",
-      caption: "",
-    },
-  ];
+  const [modalCreate, setTipsModalCreate] = useState(false);
+  const toggleCreate = () => setTipsModalCreate(!modalCreate)
+
+  const [tips, setTips] = useState([]);
+  const [UseListCustomerShowPage, setUseListCustomerShowPage] = useState([]);
+  const [numberPage, setNumberPage] = useState(1);
+  const [totalNumberPage, setTotalNumberPage] = useState(1);
+  const [ShowRoyalName, setShowRoyal] = useState([]);
+
+
+  const [RepairmanList, setRepairmanList] = useState([]);
+  const [totalRepairMan, setTotalRepairMan] = useState([]);
+  const [totalOrder, setTotalOrder] = useState([]);
+  const [totalCustomerCancelOrder, settotalCustomerCancelOrder] = useState("");
+  const [totalWorkerCanceledOrder, settotalWorkerCanceledOrder] = useState("");
+  const [completedOrder, setcompletedOrder] = useState("");
+  const [customersUsesCompanyService, setcustomersUsesCompanyService] = useState("");
+  const [totalMoney, settotalMoney] = useState("");
+  const [topWorkerOfCompletedOrder, setTopWorkerOfCompletedOrder] = useState([]);
+  const [topWorkerOfCanceledOrder, setTopWorkerOfCanceledOrder] = useState([]);
+  const [topServicesOfCompany, setTopServicesOfCompany] = useState([]);
+
+
+
+  useEffect(() => {
+
+    getWithToken("/api/v1.0/all-count", localStorage.getItem("token")).then(
+      (res) => {
+        var temp = res.data;
+        setTopWorkerOfCanceledOrder(temp.topWorkerOfCanceledOrder);
+        setTopWorkerOfCompletedOrder(temp.topWorkerOfCompletedOrder);
+        setTopServicesOfCompany(temp.topServicesOfCompany);
+        setcompletedOrder(temp.completedOrder);
+        settotalCustomerCancelOrder(temp.totalCustomerCancelOrder);
+        setcustomersUsesCompanyService(temp.customersUsesCompanyService);
+   
+        var totalCanceled = 0;
+        temp.topWorkerOfCanceledOrder.map((e, index) =>{
+            totalCanceled  +=  e.canceledOrder;
+          })
+          console.log(totalCanceled);
+
+          localStorage.setItem("totalCanceled", totalCanceled);
+       
+        var totalCompleted = 0;
+        temp.topWorkerOfCompletedOrder.map((e, index) =>{
+          totalCompleted  +=  e.completedOrder;
+          })
+          console.log(totalCompleted);
+
+          localStorage.setItem("totalComplete", totalCompleted);
+       
+          settotalMoney(temp.totalMoney);
+        setTotalOrder(temp.totalOrder);
+        setTotalRepairMan(temp.totalRepairMan);
+        settotalWorkerCanceledOrder(temp.totalWorkerCanceledOrder);
+        // setShowRoyal(res.data.topCustomer[0].fullName);
+      });
+  }, []);
+  //Paging
+  function onClickPage(number) {
+    setNumberPage(number);
+    setUseListCustomerShowPage(useListCustomerShow.slice(number * 10 - 10, number * 10));
+    setTotalNumberPage(Math.ceil(useListCustomerShow.length / 10));
+  }
+  const [activeNav, setActiveNav] = React.useState(1);
+  // const [chartExample1Data, setChartExample1Data] = React.useState("data1");
+  const toggleNavs = (e, index) => {
+    e.preventDefault();
+    setActiveNav(index);
+    setChartExample1Data(chartExample1Data === "data1" ? "data2" : "data1");
+  };
+
+
 
   return (
     <>
-      <Container fluid>
-        <Row>
-          <Col lg="3" sm="6">
-            <Card className="card-stats">
-              <Card.Body>
-                <Row>
-                  <Col xs="5">
-                    <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-chart text-warning"></i>
-                    </div>
-                  </Col>
-                  <Col xs="7">
-                    <div className="numbers">
-                      <p className="card-category">Number</p>
-                      <Card.Title as="h4">150GB</Card.Title>
-                    </div>
-                  </Col>
-                </Row>
-              </Card.Body>
-              <Card.Footer>
-                <hr></hr>
-                <div className="stats">
-                  <i className="fas fa-redo mr-1"></i>
-                  Update Now
-                </div>
-              </Card.Footer>
-            </Card>
+      <CardsHeader name="Default" parentName="Dashboards" />
+      <Container className="mt--6" fluid>
+        <Row style ={{paddingTop:'10px'}}>
+          <Col xl="8">
+            <Row>
+              <div className="col">
+                <Card>
+                  <CardHeader className="border-0">
+                    <h3 className="title-customer-h3">BEST REPAIRMAN</h3>
+                  </CardHeader>
+                  <Table className="align-items-center table-flush" responsive>
+
+                    <thead className="thead-light">
+                      <tr>
+                        <th className="sort" data-sort="name" scope="col">
+                          #
+                        </th>
+                        <th className="sort" data-sort="name" scope="col">
+                          name
+                        </th>
+                        <th className="sort" data-sort="budget" scope="col">
+                          Completed Order
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="list">
+                      {topWorkerOfCompletedOrder.map((e, index) => {
+                        return (
+                          <tr key={index}>
+                            <td>      <Avatar style={{
+                              backgroundColor: '#FFFFFF',
+                              fontSize: '200px',
+                              right: '10px',
+                              overflow: 'unset',
+                              borderRadius: '32%',
+
+                            }} src={e.avatar}>
+                            </Avatar></td>
+                            <td>
+                              <Badge className="badge-dot mr-4" color="">
+                                <i className="bg-warning" />
+                                <span className="status">{e.name}</span>
+                              </Badge>
+                            </td>
+                            <td  style={{
+                              color: 'green', fontWeight:'700'}}>{e.completedOrder}  completed
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                </Card>
+              </div>
+            </Row>
           </Col>
-          <Col lg="3" sm="6">
-            <Card className="card-stats">
-              <Card.Body>
-                <Row>
-                  <Col xs="5">
-                    <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-light-3 text-success"></i>
-                    </div>
-                  </Col>
-                  <Col xs="7">
-                    <div className="numbers">
-                      <p className="card-category">Revenue</p>
-                      <Card.Title as="h4">$ 1,345</Card.Title>
-                    </div>
-                  </Col>
+
+          <Col xl="4">
+            <Card>
+              <CardHeader className="bg-transparent">
+                <Row className="align-items-center">
+                  <div className="col">
+                    <h1 className="text-uppercase text-muted ls-1 mb-1">
+                    Statistic
+                    </h1>
+                  </div>
                 </Row>
-              </Card.Body>
-              <Card.Footer>
-                <hr></hr>
-                <div className="stats">
-                  <i className="far fa-calendar-alt mr-1"></i>
-                  Last day
-                </div>
-              </Card.Footer>
-            </Card>
-          </Col>
-          <Col lg="3" sm="6">
-            <Card className="card-stats">
-              <Card.Body>
-                <Row>
-                  <Col xs="5">
-                    <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-vector text-danger"></i>
-                    </div>
-                  </Col>
-                  <Col xs="7">
-                    <div className="numbers">
-                      <p className="card-category">Errors</p>
-                      <Card.Title as="h4">23</Card.Title>
-                    </div>
-                  </Col>
-                </Row>
-              </Card.Body>
-              <Card.Footer>
-                <hr></hr>
-                <div className="stats">
-                  <i className="far fa-clock-o mr-1"></i>
-                  In the last hour
-                </div>
-              </Card.Footer>
-            </Card>
-          </Col>
-          <Col lg="3" sm="6">
-            <Card className="card-stats">
-              <Card.Body>
-                <Row>
-                  <Col xs="5">
-                    <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-favourite-28 text-primary"></i>
-                    </div>
-                  </Col>
-                  <Col xs="7">
-                    <div className="numbers">
-                      <p className="card-category">Followers</p>
-                      <Card.Title as="h4">+45K</Card.Title>
-                    </div>
-                  </Col>
-                </Row>
-              </Card.Body>
-              <Card.Footer>
-                <hr></hr>
-                <div className="stats">
-                  <i className="fas fa-redo mr-1"></i>
-                  Update now
-                </div>
-              </Card.Footer>
+              </CardHeader>
+              <Table className="align-items-center table-flush" responsive>
+                <thead className="thead-light">
+                  <tr>
+                    <th scope="col">Customer use service</th>
+                    <th scope="col">Completed Order</th>
+                    <th scope="col">Canceled Order</th>
+                  </tr>
+                </thead>
+                <tbody>
+    
+                      <tr>
+                          <td>{customersUsesCompanyService} customer</td>
+                        <td style={{color:'red',fontWeight:'700'}}>
+                        {localStorage.getItem("totalComplete")} tỉmes  
+                                      </td>
+                        <td style={{color:'green',fontWeight:'700'}}>
+                          {localStorage.getItem("totalCanceled")} times
+                        </td>
+                      </tr>
+                    
+                  
+
+                </tbody>
+              </Table>
             </Card>
           </Col>
         </Row>
+
+
         <Row>
-          <Col md="12">
+        <Col xl="8">
+            <Row>
+              <div className="col">
+                <Card>
+                  <CardHeader className="border-0">
+                    <h3 className="title-customer-h3">WORSE REPAIRMAN</h3>
+                  </CardHeader>
+                  <Table className="align-items-center table-flush" responsive>
+
+                    <thead className="thead-light">
+                      <tr>
+                        <th className="sort" data-sort="name" scope="col">
+                          #
+                        </th>
+                        <th className="sort" data-sort="name" scope="col">
+                          name
+                        </th>
+                        <th className="sort" data-sort="budget" scope="col">
+                          Canceled Order
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="list">
+                      {topWorkerOfCanceledOrder.map((e, index) => {
+                        return (
+                          <tr key={index}>
+                            <td>      <Avatar style={{
+                              backgroundColor: '#FFFFFF',
+                              fontSize: '200px',
+                              right: '10px',
+                              overflow: 'unset',
+                              borderRadius: '32%',
+
+                            }} src={e.avatar}>
+                            </Avatar></td>
+                            <td>
+                              <Badge className="badge-dot mr-4" color="">
+                                <i className="bg-warning" />
+                                <span className="status">{e.name}</span>
+                              </Badge>
+                            </td>
+                            <td style={{
+                              color: 'red', fontWeight:'700'}}>{e.canceledOrder}  Canceled
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                </Card>
+              </div>
+            </Row>
+          </Col>
+          <Col xl="4">
             <Card>
-              <Card.Header>
-                <Card.Title as="h4">Top Company</Card.Title>
-                <p className="card-category">All products that were repaired</p>
-              </Card.Header>
-              <Card.Body>
-                <Row>
-                  <Col md="6">
-                    <Table responsive>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div className="flag">
-                              <img
-                                alt="..."
-                                src={require("assets/img/flags/US.png").default}
-                              ></img>
-                            </div>
-                          </td>
-                          <td>USA</td>
-                          <td className="text-right">50</td>
-                          <td className="text-right">53.23%</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div className="flag">
-                              <img
-                                alt="..."
-                                src={require("assets/img/flags/DE.png").default}
-                              ></img>
-                            </div>
-                          </td>
-                          <td>Germany</td>
-                          <td className="text-right">1.300</td>
-                          <td className="text-right">20.43%</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div className="flag">
-                              <img
-                                alt="..."
-                                src={require("assets/img/flags/AU.png").default}
-                              ></img>
-                            </div>
-                          </td>
-                          <td>Australia</td>
-                          <td className="text-right">760</td>
-                          <td className="text-right">10.35%</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div className="flag">
-                              <img
-                                alt="..."
-                                src={require("assets/img/flags/GB.png").default}
-                              ></img>
-                            </div>
-                          </td>
-                          <td>United Kingdom</td>
-                          <td className="text-right">690</td>
-                          <td className="text-right">7.87%</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div className="flag">
-                              <img
-                                alt="..."
-                                src={require("assets/img/flags/RO.png").default}
-                              ></img>
-                            </div>
-                          </td>
-                          <td>Romania</td>
-                          <td className="text-right">600</td>
-                          <td className="text-right">5.94%</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div className="flag">
-                              <img
-                                alt="..."
-                                src={require("assets/img/flags/BR.png").default}
-                              ></img>
-                            </div>
-                          </td>
-                          <td>Brasil</td>
-                          <td className="text-right">550</td>
-                          <td className="text-right">4.34%</td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </Col>
-                  <Col className="ml-auto mr-auto" md="6">
-                    <VectorMap
-                      map={"world_mill"}
-                      backgroundColor="transparent"
-                      zoomOnScroll={false}
-                      containerStyle={{
-                        width: "100%",
-                        height: "300px",
-                      }}
-                      containerClassName="map"
-                      regionStyle={{
-                        initial: {
-                          fill: "#e4e4e4",
-                          "fill-opacity": 0.9,
-                          stroke: "none",
-                          "stroke-width": 0,
-                          "stroke-opacity": 0,
-                        },
-                      }}
-                      series={{
-                        regions: [
-                          {
-                            values: {
-                              VN: 1300,
-                              BR: 550,
-                              CA: 120,
-                              DE: 1300,
-                              FR: 540,
-                              GB: 690,
-                              GE: 200,
-                              IN: 200,
-                              RO: 600,
-                              RU: 2,
-                              US: 1,
-                            },
-                            scale: ["#AAAAAA", "#444444"],
-                            normalizeFunction: "polynomial",
-                          },
-                        ],
-                      }}
-                    />
-                  </Col>
+              <CardHeader className="border-0">
+                <Row className="align-items-center">
+                  <div className="col">
+                    <h3 className="mb-0">TOP SERVICE</h3>
+                  </div>
+                  <div className="col text-right">
+                    <Button
+                      color="primary"
+                      href="#pablo"
+                      onClick={(e) => window.location.href = "/company/service"}
+                      size="sm"
+                    >
+                      view all
+                    </Button>
+                  </div>
                 </Row>
-              </Card.Body>
+              </CardHeader>
+              <Table className="align-items-center table-flush" responsive>
+                <thead className="thead-light">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Service Name</th>
+                    <th scope="col">Ordered</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {topServicesOfCompany.map((e, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>
+                          {index + 1}
+                        </td>
+                        <td>
+                          {e.serviceName}
+                        </td>
+                        <td>
+                          {e.times} times
+                        </td>
+                      </tr>
+                    );
+                  })}
+
+                </tbody>
+              </Table>
             </Card>
           </Col>
         </Row>
-        <Row>
-        <Col md="5">
-            <Card>
-              <Card.Header>
-                <Card.Title as="h4">Hot Service</Card.Title>
-                <p className="card-category">All products including Taxes</p>
-                <Card.Body>
-              <UncontrolledCarousel
-                items={carouselItems}
-                indicators={false}
-                autoPlay={false}
-              />
-              </Card.Body>
-              </Card.Header>               
-              <Card.Footer>
-                <hr></hr>
-                <div className="stats">
-                  <i className="fas fa-check"></i>
-                  Data information certified
-                </div>
-              </Card.Footer>
-            </Card>
-          </Col>
-          <Col md="7">
-            <Card>
-              <Card.Header>
-                <Card.Title as="h4">Covid News</Card.Title>
-                <p className="card-category">24 Hours performance</p>
-              </Card.Header>
-              <Card.Body>
-              <UncontrolledCarousel
-                items={covid19Items}
-                indicators={false}
-                autoPlay={false}
-              />
-              </Card.Body>
-              <Card.Footer>
-                <hr></hr>
-                <div className="stats">
-                  <i className="fas fa-check"></i>
-                  Data information certified
-                </div>
-              </Card.Footer>
-            </Card>
-          </Col>
-        </Row>
-        
+      
+
       </Container>
+      <Modal isOpen={modalCreate} toggle={toggleCreate} centered>
+        <ModalHeader
+          style={{ color: "#1bd1ff" }}
+
+        >
+          <ModalTitle>Do you want to create new company</ModalTitle>
+        </ModalHeader>
+        <ModalBody>
+          <Form
+          >
+            <Form.Group className="mb-2">
+              <Form.Label>Title</Form.Label>
+              <Form.Control type="text"
+                placeholder="Name"
+                name="title"
+                onChange={e => settitle(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-2">
+              <Form.Label>Content</Form.Label>
+              <Form.Control type="text"
+                placeholder="Content"
+                onChange={e => setcontent(e.target.value)}
+              // onChange={name}
+              />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Label>Image</Form.Label>
+
+
+            </Form.Group>
+          </Form>
+        </ModalBody>
+        <ModalFooter style={{ justifyContent: 'space-around' }}>
+          <Button className="Cancel-button" onClick={toggleCreate}>
+            Cancel
+          </Button>
+          <Button onClick={(e) =>  // handleCompanyDetele();
+            // handleSubmit()
+            createTips()
+            // e.preventDefault()
+            // setCompanyModalEdit(false);
+          }
+          >
+            Save
+          </Button>
+          {/* <ImageUpload setData={setData}/> */}
+
+        </ModalFooter>
+
+      </Modal>
+
     </>
   );
 }
-
-export default Dashboard;

@@ -230,7 +230,7 @@ var routes = [
   {
     path: "/Workon",
     layout: "/company",
-    name: "Workon",
+    name: "Major",
     icon: "nc-icon nc-single-copy-04",
     component: Workon,
   },

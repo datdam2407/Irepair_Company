@@ -103,6 +103,7 @@ function ManageSevice() {
 
   const [sortedField, setSortedField] = useState("Id");
   const [ascending, setAscending] = useState(true);
+  const [serviceListSize, setServiceListSize] = useState([]);
 
 
 
@@ -194,6 +195,7 @@ function ManageSevice() {
   //load service
   useEffect(() => {
     getserviceList();
+    getserviceByID();
   }, []);
   function getserviceList(stateList) {
     let params = {};
@@ -222,7 +224,7 @@ function ManageSevice() {
       `/api/v1.0/major-fields`, localStorage.getItem("token")
     ).then((res) => {
       FieldId = res.data.FieldId
-      console.log(res.data)
+      // console.log(res.data)
       currentField['text'] = `${res.data.name}`;
       currentField['value'] = res.data.fieldId;
       currentField['key'] = res.data.fieldId;
@@ -247,20 +249,15 @@ function ManageSevice() {
     })
   }, []);
 
-  console.log("field", FieldSelectID)
+  // console.log("field", FieldSelectID)
   // update fc
   async function handleEditSubmit(e) {
     await putWithToken(
-      `/api/v1.0/services`,
+      `/api/v1.0/companyServices`,
       {
-        id: serviceID,
-        ServiceName: name,
-        description: description,
         FieldId: FieldSelectID,
-        companyId: companyId,
+        companyId: localStorage.getItem("IDCompany"),
         Price: price,
-        ImageUrl: picture,
-        status: 1,
       },
       localStorage.getItem("token")
     )
@@ -277,16 +274,11 @@ function ManageSevice() {
   // create fc
   async function handleSubmitCreate(e) {
     await postWithToken(
-      `/api/v1.0/services`,
+      `/api/v1.0/companyServices`,
       {
-        id: null,
-        ServiceName: name,
-        description: description,
-        FieldId: FieldSelectID,
+        price: description,
+        serviceId: null,
         companyId: localStorage.getItem("IDCompany"),
-        Price: price,
-        ImageUrl: picture,
-        status: 0,
       },
       localStorage.getItem("token")
     )
@@ -356,8 +348,10 @@ function ManageSevice() {
     setfieldSelect(e.target.fieldId);
     setFieldSelectID(value.value);
   }
-  function getserviceByID(Id) {
-    getWithToken(`/api/v1.0/services/${Id}`, localStorage.getItem("token")).then((res) => {
+  function getserviceByID() {
+    getWithToken(`/api/v1.0/services`, localStorage.getItem("token")).then((res) => {
+      var temp = res.data;
+      setServiceListSize(temp);
       setserviceID(Id);
       setName(res.data.serviceName);
       setDescription(res.data.description);
@@ -369,6 +363,7 @@ function ManageSevice() {
       console.log(err);
     });
   }
+  localStorage.setItem("dataSizeService", serviceListSize.length)
   //delete fc
   function deleteserviceByID() {
     del(`/api/v1.0/services/${serviceDelete}`, localStorage.getItem("token")
@@ -424,7 +419,7 @@ function ManageSevice() {
   const closeBtn = (x) => (
     <button
       className="btn border border-danger"
-      style={{ color: "#B22222" }}
+      style={{ color: "#B22222" ,backgroundColor:"white"}}
       onClick={x}
     >
       X
@@ -448,6 +443,14 @@ function ManageSevice() {
       "4bb0a83e-e9d9-47b5-8019-20c19e953181": "Công ty điện lạnh Hòa Hưng",
       "dd0b937a-8e90-4af3-bfe8-0a8cc0722f6a": "IrepairX",
       "17ab8695-daec-4ceb-9f78-07c9528c0009": "CompanyX",
+
+      
+      "86083895-18dc-4fba-a721-a5acce6a26a8": "Xe số",
+      "6eaa4097-e5e5-465e-8f15-f15f81f0e36e": "Xe tay ga",
+      "813a4c08-fa29-48bb-9d76-0beaa4d133f8": "Xe đạp điện",
+      "458dcfdd-d1e1-43cf-9276-176574447f61": "Xe ô tô máy xăng",
+      "b65f8d53-c476-4474-9b45-268ea039ecbf": "Xe ô tô máy điện",
+      "2e316c2d-153e-42cb-8ef8-bb828d8f1d4c": "Xe ô tô máy dầu",
     };
     return stateValue[type] ? stateValue[type] : "";
   }
@@ -501,9 +504,9 @@ function ManageSevice() {
                       </InputGroup>
                     </Form>
                   </Col>
-                  <Col md={9} align="right">
+                  {/* <Col md={9} align="right">
                     <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setserviceModalCreate(true); }}>Add service</Button>
-                  </Col>
+                  </Col> */}
                 </Row>
               </div>
 
@@ -561,7 +564,8 @@ function ManageSevice() {
                           <FontAwesomeIcon icon={faCaretDown} />
                         )}
                       </th>
-                      {/* <th
+                      <th className="description">Major Field</th>
+                      <th
                         className="description"
                         onClick={() => {
                           if (sortedField === "Price" && ascending) {
@@ -585,7 +589,7 @@ function ManageSevice() {
                         ) : (
                           <FontAwesomeIcon icon={faCaretDown} />
                         )}
-                      </th> */}
+                      </th>
                       <th
                         className="description"
                         onClick={() => {
@@ -630,6 +634,12 @@ function ManageSevice() {
                           <td>
                             {e.Description}
                           </td>
+                          <td>
+                            {displayCompanyName(e.FieldId)}
+                          </td>
+                          <td>
+                            {e.Price}đ
+                          </td>
 
                         
                           <TableCell>
@@ -667,51 +677,6 @@ function ManageSevice() {
                                 variant="info"
                               >
                                 <i className="far fa-image"></i>
-                              </Button>
-                            </OverlayTrigger>
-
-                            <OverlayTrigger
-                              overlay={
-                                <Tooltip id="tooltip-436082023">
-                                  Edit Post..
-                                </Tooltip>
-                              }
-                              placement="right"
-                            >
-                              <Button
-                                // onClick={() => handleUpdate(e.data)}
-                                // onGridReady={onGridReady}
-                                onClick={() => {
-                                  // setserviceEdit(e.Id);
-                                  getserviceByID(e.Id);
-                                  setserviceModalEdit(true);
-                                }}
-                                className="btn-link btn-icon"
-                                type="button"
-                                variant="success"
-                              >
-                                <i className="fas fa-edit"></i>
-                              </Button>
-                            </OverlayTrigger>
-                            <OverlayTrigger
-                              onClick={(e) => e.preventDefault()}
-                              overlay={
-                                <Tooltip id="tooltip-334669391">
-                                  Remove Post..
-                                </Tooltip>
-                              }
-                              placement="right\"
-                            >
-                              <Button
-                                onClick={() => {
-                                  setserviceDelete(e.Id);
-                                  setserviceModalDelete(true);
-                                }}
-                                className="btn-link btn-icon"
-                                type="button"
-                                variant="danger"
-                              >
-                                <i className="fas fa-times"></i>
                               </Button>
                             </OverlayTrigger>
 
@@ -837,92 +802,6 @@ function ManageSevice() {
         </ModalFooter>
       </Modal>
           
-      <Modal isOpen={modalCreate} toggle={toggleCreate} centered size="lg" >
-        <ModalHeader
-          style={{ color: "#1d98e0f7" }}
-        >
-          <ModalTitle><h3>Do you want to create new service ?</h3></ModalTitle>
-        </ModalHeader>
-
-        <ModalBody>
-          <Form>
-            <Grid
-              container
-              rowSpacing={4}
-              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            >
-              <Grid item xs={6}>
-
-              
-
-                <FormGroup className="mb-2">
-                  <Form.Label>Service name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Service name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </FormGroup>
-                <Form.Label>Field </Form.Label>
-                <FormGroup className="mb-2">
-                  <Dropdown
-                    fluid
-                    search
-                    selection
-                    value={fieldSelect}
-                    onChange={handleOnchangeSelectedAsset}
-                    options={listField}
-                  />
-                </FormGroup>
-                <FormGroup className="mb-2">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Description"
-                    as="textarea"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    rows={3}
-                  />
-                </FormGroup>
-              </Grid>
-
-              <Grid item xs={6}>
-                <Form.Group className="mb-2 ml-5">
-                  <Form.Label>Picture</Form.Label>
-                  <Form.Control type="file" onFileChange={picture}
-                    onChange={uploadImage}
-                  />
-                  {loading ? (
-                    <h3>Loading...</h3>
-                  ) : (
-                    <img src={picture} style={{ width: '220px' }} />
-                  )}
-                </Form.Group>
-              </Grid>
-            </Grid>
-          </Form>
-        </ModalBody>
-      
-        <ModalFooter style={{ justifyContent: 'space-around'}}>
-        <Button className="cancel-button" onClick={toggleCreate}>
-            Cancel
-          </Button>
-          <Button
-            color="danger"
-            onClick={() => {
-              // handleServiceDetele();
-              handleSubmitCreate();
-              setserviceModalCreate(false);
-            }}
-          >
-            Save
-          </Button>
-        
-        </ModalFooter>
-      </Modal>
-
       <Modal isOpen={modalEdit} toggle={toggleEdit} centered size="lg" >
         <ModalHeader
           style={{ color: "#1d98e0f7" }}
@@ -931,21 +810,7 @@ function ManageSevice() {
         </ModalHeader>
         <ModalBody>
           <Form>
-            <Grid
-              container
-              rowSpacing={4}
-              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            >
-              <Grid item xs={6}>
-              <FormGroup className="mb-2">
-                  <Form.Label>Service name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Service name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </FormGroup>
+           
                 <Form.Label>Field </Form.Label>
                 <FormGroup className="mb-2">
                   <Dropdown
@@ -960,7 +825,7 @@ function ManageSevice() {
                 </FormGroup>
             
                 <FormGroup className="mb-2">
-                  <Form.Label>Description</Form.Label>
+                  <Form.Label>Price</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Description"
@@ -970,21 +835,6 @@ function ManageSevice() {
                     rows={3}
                   />
                 </FormGroup>
-              </Grid>
-              <Grid item xs={6}>
-                <Form.Group className="mb-2 ml-5">
-                  <Form.Label>Picture</Form.Label>
-                  <Form.Control type="file" onFileChange={picture}
-                    onChange={uploadImage}
-                  />
-                  {loading ? (
-                    <h3>Loading...</h3>
-                  ) : (
-                    <img src={picture} style={{ width: '220px' }} />
-                  )}
-                </Form.Group>
-              </Grid>
-            </Grid>
           </Form>
         </ModalBody>
         <ModalFooter style={{ justifyContent: 'space-around'}}>
@@ -1008,54 +858,29 @@ function ManageSevice() {
 
       <Modal isOpen={modalStatus} toggle={toggleDetails}>
         <ModalHeader
-          toggle={toggleDetails}
-          style={{ color: "#B22222" }}
+          style={{ color: "#1bd1ff" }}
           close={closeBtn(toggleDetails)}
-        >
-          Detailed service information
+          toggle={toggleDetails}>
+          <h3>INFORMATION</h3>
         </ModalHeader>
         <ModalBody>
-          <Row>
-            <Col></Col>
-            <Col md={3}>Name</Col>
-            <Col md={8}>
-              {selectservice !== undefined ? selectservice.ServiceName : ""}
-            </Col>
-          </Row>
-          <Row>
-            <Col></Col>
-            <Col md={3}>Company</Col>
-            <Col md={8}>
-              {selectservice !== undefined ? displayCompanyName(selectservice.CompanyId) : ""}
-            </Col>
-          </Row>
-          <Row>
-            <Col></Col>
-            <Col md={3}>Description</Col>
-            <Col md={8}>
-              {selectservice !== undefined ? selectservice.Description : ""}
-            </Col>
-          </Row>
-          <Row>
-            <Col></Col>
-            <Col md={3}>Price</Col>
-            <Col md={8}>
-              {selectservice !== undefined ? selectservice.Price : ""}
-            </Col>
-          </Row>
-          <Row>
-            <Col></Col>
-            <Col md={3}>Picture</Col>
-            <Col md={8}>
-              {selectservice !== undefined ? <img className="text-left-topic" src={selectservice.ImageUrl} /> : ""}
-            </Col>
-          </Row>
-          <Row>
-            <Col></Col>
-            <Col md={3}>State</Col>
-            <Col md={8}>{selectservice !== undefined ? displayStateName(selectservice.Status) : ""}</Col>
-          </Row>
+          <div className="img-container">
+            {selectservice !== undefined ? <img className="text-left-topic" src={selectservice.ImageUrl} /> : ""}
+          </div>
         </ModalBody>
+        <ModalBody>
+        <a className="name" style={{color:"#1d98e0f7"}}>Name:</a> <a className="name"> {selectservice !== undefined ? selectservice.ServiceName : ""}</a>
+          <br />
+          <a className="name" style={{color:"#1d98e0f7"}}>Description:</a>  <a className="name">{selectservice !== undefined ? selectservice.Description : ""}</a>
+
+          <br />
+          <a className="name" style={{color:"#1d98e0f7"}}>MajorField:</a>  <a className="name">{selectservice !== undefined ? displayCompanyName(selectservice.FieldId) : ""}</a>
+
+          <br />
+          <a className="name" style={{color:"#1d98e0f7"}}>Status</a><a className="name"> {selectservice !== undefined ? displayStateName(selectservice.Status) : ""}</a>
+          <br />
+        </ModalBody>
+
       </Modal>
 
 
