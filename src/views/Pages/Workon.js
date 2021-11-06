@@ -11,8 +11,10 @@ import {
   InputGroupButtonDropdown,
   PaginationItem,
   Input,
-  PaginationLink,
+  PaginationLink,FormGroup,
 } from "reactstrap";
+import { Dropdown } from 'semantic-ui-react'
+
 import {
   Tooltip,
 } from 'react-tippy';
@@ -30,9 +32,8 @@ import {
   ModalTitle,
 } from "react-bootstrap";
 // import "..//css/customSizeCompany.css"
-import "../assets/css/customSizeCompany.css"
-import FilterState from "./Forms/FilterState"
-import { del, getWithTokenParams, getWithToken, putWithToken, postWithToken } from "../service/ReadAPI";
+import "../../assets/css/customSizeCompany.css"
+import { del, getWithTokenParams, getWithToken, putWithToken, postWithToken } from "../../service/ReadAPI";
 import { makeStyles } from '@material-ui/core/styles';
 import {
   TableBody,
@@ -67,7 +68,7 @@ function Workon() {
   const [MajorDelete, setMajorDelete] = useState(null);
   const [modalMajorDelete, setMajorModalDelete] = useState(false);
   const toggleMajorDelete = () => setMajorModalDelete(!modalMajorDelete)
-
+  const [serviceDelete, setserviceDelete] = useState(null);
   //view modal
   const [modalStatus, setModalStatus] = useState(false);
   const toggleDetails = () => setModalStatus(!modalStatus);
@@ -102,6 +103,15 @@ function Workon() {
   const [stateListFilter, setstateListFilter] = useState([]);
   const toggleDropDown = () => setDropdownOpen(!dropdownOpen);
   const toggleDropDown1 = () => setDropdownOpen1(!dropdownOpen1);
+  const [UseListWorkonShow, setUseListWorkonShow] = useState([]); 
+
+  const [modalCreateWorkon, setModalCreateWorkon] = useState(false);
+    const toggleCreateWorkon = () => setModalCreateWorkon(!modalCreateWorkon)
+  const [WorkOnSelectID, setWorkOnSelectID] = useState(IDS)
+  const [IDS, setWorkonID] = useState("");
+  const [workonSelectRPID, setWorkonSelectRPID] = useState("")
+    const [workonSelect, setWorkonSelect] = useState("")
+    const [listSelectService, setListService] = useState([]);
 
   const useStyles = makeStyles((theme) => ({
     table: {
@@ -153,37 +163,51 @@ function Workon() {
     }
   }));
   const classes = useStyles();
+  const [data1, setData1] = useState({ array: [] });
 
-  
-  // get major by ID
-  function getMajorByID(Id) {
-    getWithTokenParams(`/api/v1.0/majors?CompanyId=${localStorage.getItem("IDCompany")}`, localStorage.getItem("token")).then((res) => {
-      setMajorID(Id);
-      setName(res.data.name);
-      setDescription(res.data.description);
-      setImage(res.data.imageUrl);
-      setStatus(res.data.status);
-    }).catch((err) => {
-      console.log(err);
-    });
-  }
+  useEffect(() => {
+    let params = {};
+    let currentField = {};
+    let ServiceId = "";
+    // params['Status'] = [0].reduce((f, s) => `${f},${s}`);
+    getWithToken("/api/v1.0/major-fields?listMajorId=a2bdd6ec-d60c-476e-b53c-7d92900c3bb3", localStorage.getItem("token")
+    ).then(res => {
+        setData1(res.data);
+        const newlistService = res.data.reduce((list, item) => [...list,
+        {
+            text: `${item.Name}`,
+            value: item.Id,
+            key: item.Id
+        }], [])
+        setListService(
+            [currentField, ...newlistService],
+        );
+    })
+}, []);
+  useEffect(() => {
+    getWorkonID();
+  }, []);
+  function handleChangeService(e, value) {
+    setWorkonSelect(e.target.ServiceId);
+    setWorkOnSelectID(value.value);
+}
+function getWorkonID(Id) {
+getWithToken(`/api/v1.0/workson?repairmanId=${localStorage.getItem("assetId")}`, localStorage.getItem("token")).then((res) => {
+    var temp = res.data;
+      setUseListWorkonShow(temp);
+}).catch((err) => {
+    console.log(err);
+});
 
-  //delete fc
-  function deleteMajorByID() {
-    del(`/api/v1.0/majors/${MajorDelete}`, localStorage.getItem("token")
-    )
-      .then((res) => {
-        if (res.status === 200) {
-          window.location = "/admin/major";
+}
+console.log("datta",UseListWorkonShow)
 
-        }
-      }).catch((err) => {
-        console.log(err);
-      });
-  }
+
+
   //Load major
   useEffect(() => {
     getMajorList();
+    getWorkonID();
   }, []);
   function getMajorList(stateList) {
     let params = {};
@@ -226,6 +250,31 @@ function Workon() {
     };
     return stateValue[type] ? stateValue[type] : "";
   }
+  function displayRepairName(type) {
+    const stateValue = {
+      "304a7d8c-735e-49ef-9ec5-004a4feb3a2f": "Lê Minh Tài",
+      "3f37cd77-95c4-407d-af05-21a3498e28d9": "Nguyễn Hoàng Duy",
+      "8a022b6b-95de-4430-82b4-2b2fb6e43abf": "Nguyễn Hoàng Quốc Khánh",
+      "8f9cd415-da56-44af-8116-6ccbe3e3b037": "Phạm Hữu Nghĩa",
+      "8634c44c-7ebc-4b85-a1a7-862fbe7d162c": "Nguyễn Lê Thuần",
+      "9f5e4a52-c68b-4eab-9358-a8a90af49f3e": "Đỗ Dương Tâm Đăng",
+      "ce714876-383b-4b74-82d9-acefc7061d05": "Hà Lê Phúc",
+      "43b11fa5-c4a8-4618-947f-b03c086dbaef": "Đàm Tiến Đạt",
+      "c1fc7c9f-84e3-4321-991f-cf29ea554fe0": "Nguyễn Minh Hoàng",
+      "e0ca88d0-e18d-4127-ae93-d81863c734e0": "Phạm Tấn Phát",
+      "484d58bc-991c-48a7-b6bf-d83fad176b82": "Phạm Gia Nguyên",
+      "376f16ef-e4fc-4cc6-873e-fc5fd1255d86": "Lê Anh Nguyên",
+
+      "7c172d79-7c5d-4ed5-8e71-26ba2e7bf1a3": "nguyen thuan",
+      "84066527-2ba2-421a-8637-35d765b153e1": "Tam Dang",
+      "b123ea59-f40d-495d-b4c8-3be7c96200ad": "Nguyễn Thuần",
+      "50d2c8b8-2a11-4802-9592-4f76e92aed12": "Pham Tan Phat (K14 HCM)",
+      "00c4858a-f32a-4218-9266-641088f1e373": "Do Duong Tam Dang",
+
+      //
+    };
+    return stateValue[type] ? stateValue[type] : "";
+  }
   function onSubmitSearch(e) {
     e.preventDefault();
     if (searchName !== "") {
@@ -254,6 +303,25 @@ function Workon() {
         })
     }
   }
+
+  async function handleSubmitCreateWorkon(Id) {
+    await postWithToken(
+        `/api/v1.0/workson`,
+        {
+            listFieldId: WorkOnSelectID,
+            repairmanId: localStorage.getItem("assetId"),
+        },
+        localStorage.getItem("token")
+    )
+        .then((res) => {
+            if (res.status === 200) {
+                window.location = "/company/workon";
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
   //sort
   function sort(field, status, items) {
     items.sort((a, b) => {
@@ -274,7 +342,17 @@ function Workon() {
       return 0;
     });
   }
-
+  function deleteserviceByID() {
+    del(`/api/v1.0/workson?serviceId=${serviceDelete}&repairmanId=${localStorage.getItem("assetId")}`, localStorage.getItem("token")
+    )
+      .then((res) => {
+        if (res.status === 200) {
+          window.location = "/company/workon";
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+  }
   function cancelRepairmanByID() {
     setName("");
     setDescription("");
@@ -288,6 +366,20 @@ function Workon() {
         <Row>
           <Col md="12">
             <Card className="table">
+
+
+            <div className="header-form">
+                <Row>
+            
+                  <Col md={3}>
+                <h2 style={{paddingLeft:'22px'}}> {displayRepairName(localStorage.getItem("assetId"))} </h2>
+                 
+                  </Col>
+                  <Col md={9} align="right">
+                    <Button variant="contained" className="add-major-custom" color="primary" onClick={() => { setModalCreateWorkon(true); }}>Add service</Button>
+                  </Col>
+                </Row>
+              </div>
               <Card.Body className="table">
                 <TableContainer component={Paper} className={classes.tableContainer}>
                   <Table className={classes.table} aria-label="simple table">
@@ -348,7 +440,7 @@ function Workon() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {useListMajorShowPage.map((e, index) => {
+                      {UseListWorkonShow.map((e, index) => {
                         return (
                           <tr key={index}>
                             <TableCell>
@@ -437,8 +529,27 @@ function Workon() {
                                   <i className="far fa-image"></i>
                                 </Button>
                               </OverlayTrigger>
-
-                            
+                              <OverlayTrigger
+                              onClick={(e) => e.preventDefault()}
+                              overlay={
+                                <Tooltip id="tooltip-334669391">
+                                  Remove Post..
+                                </Tooltip>
+                              }
+                              placement="right\"
+                            >
+                              <Button
+                                onClick={() => {
+                                  setserviceDelete(e.Id);
+                                  setServiceModalDelete(true);
+                                }}
+                                className="btn-link btn-icon"
+                                type="button"
+                                variant="danger"
+                              >
+                                <i className="fas fa-times"></i>
+                              </Button>
+                            </OverlayTrigger>
                             </td>
                           </tr>
                         );
@@ -540,10 +651,6 @@ function Workon() {
         </Row>
       </Container>
 
-    
-
-   
-      
       
       <Modal isOpen={modalStatus} toggle={toggleDetails}>
         <ModalHeader
@@ -593,6 +700,68 @@ function Workon() {
          
         </ModalFooter>
       </Modal>
+
+      <Modal isOpen={modalDelete} toggle={toggleMajorDelete}>
+        <ModalHeader
+          style={{ color: "#1d98e0f7" }}
+        >
+          <h3>Are you sure?</h3>
+        </ModalHeader>
+        <ModalBody> <h4>Do you want to delete this service ?</h4></ModalBody>
+        <ModalFooter  style={{ justifyContent: 'space-around'}}>
+        <Button className="Cancel-button" onClick={() => { toggleMajorDelete(); }}>
+            Cancel
+          </Button>
+          <Button
+            color="danger"
+            onClick={() => {
+              deleteserviceByID();
+              setServiceModalDelete(false);
+            }}
+          >
+            Delete
+          </Button>{" "}
+         
+        </ModalFooter>
+      </Modal>
+      <Modal className="modalCreatene" isOpen={modalCreateWorkon} toggle={toggleCreateWorkon} centered>
+                <ModalHeader
+                    style={{ color: "#B22222" }}
+                    close={closeBtn(toggleCreateWorkon)}
+                    toggle={toggleCreateWorkon}
+                >
+                    <ModalTitle>Workon</ModalTitle>
+                </ModalHeader>
+                <ModalBody>
+                    <Form>
+                        <Form.Group className="mb-2">
+                            <Form.Label>MajorField</Form.Label>
+                            <FormGroup className="mb-2">
+                                <Dropdown
+                                    fluid
+                                    search
+                                    multiple
+                                    value={workonSelect}
+                                    onChange={handleChangeService}
+                                    options={listSelectService}
+                                />
+                            </FormGroup>
+                        </Form.Group>
+                    </Form>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="danger" onClick={() => { // handleServiceDetele();
+                        setModalCreateWorkon(false);
+                        handleSubmitCreateWorkon();
+                    }}
+                    >
+                        Save
+                    </Button>
+                    <Button color="secondary" onClick={toggleCreateWorkon}>
+                        Cancel
+                    </Button>
+                </ModalFooter>
+            </Modal>
     </>
   );
 }

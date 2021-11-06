@@ -210,11 +210,11 @@ export default function Dashboard() {
     
                       <tr>
                           <td>{customersUsesCompanyService} customer</td>
-                        <td style={{color:'red',fontWeight:'700'}}>
-                        {localStorage.getItem("totalComplete")} tỉmes  
-                                      </td>
                         <td style={{color:'green',fontWeight:'700'}}>
-                          {localStorage.getItem("totalCanceled")} times
+                        {localStorage.getItem("totalComplete")} completed  
+                                      </td>
+                        <td style={{color:'red',fontWeight:'700'}}>
+                          {localStorage.getItem("totalCanceled")} canceled
                         </td>
                       </tr>
                     

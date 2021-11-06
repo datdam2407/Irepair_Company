@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { IconName, TiStar, TiLockClosed } from "react-icons/ti";
-
+import { Link } from "react-router-dom";
 // react-bootstrap components
 import {
     Button,
@@ -22,12 +22,11 @@ import {
     Pagination,
     PaginationItem,
     PaginationLink,
-    Dropdown,
     InputGroup,
     DropdownToggle,
     DropdownMenu,
     InputGroupButtonDropdown,
-    Input,
+    Input,Media ,
     FormGroup,
 } from "reactstrap";
 import moment from "moment";
@@ -39,7 +38,7 @@ import {
 import { del, put, get, getWithParams, getWithToken, getWithTokenParams, putWithToken, postWithToken, postWithTokenParams } from "../../service/ReadAPI";
 import { makeStyles } from '@material-ui/core/styles';
 import FilterState from "../Forms/FilterState"
-
+import editImg from "../../assets/img/edit.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faSearch,
@@ -82,6 +81,19 @@ export default function Repairman() {
     const [modalApprove, setModalApprove] = useState(false);
     const toggleApprove = () => setModalApprove(!modalApprove)
 
+  
+
+
+
+
+
+    const [workonSelectRPID, setWorkonSelectRPID] = useState("")
+    const [workonSelect, setWorkonSelect] = useState("")
+    const [WorkOnSelectID, setWorkOnSelectID] = useState(IDS)
+    const [IDS, setWorkonID] = useState("");
+    const [listSelectService, setListService] = useState([]);
+    const [UseListWorkonShow, setUseListWorkonShow] = useState([]);
+
     const [useListRepairmanShow, setUseListRepairmanShow] = useState([]);
     const [useListRepairmanShowPage, setUseListRepairmanShowPage] = useState([]);
     const [numberPage, setNumberPage] = useState(1);
@@ -89,14 +101,16 @@ export default function Repairman() {
     const [RepairmanList, setRepairmanList] = useState([]);
     const [RepairmanListName, setRepairmanListName] = useState([]);
 
-
     const listStates = [
         "New",
         "Approved",
         "Updating",
         "Deleted",
     ];
-
+    const setDataWorkOn = (data) => {
+        let { id } = data;
+        localStorage.setItem("assetId", id);
+    };
     const [filterState, setListFilterState] = useState(listStates);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [dropdownOpen1, setDropdownOpen1] = useState(false);
@@ -165,6 +179,10 @@ export default function Repairman() {
                 console.log(err);
             });
     }
+
+    //onchange
+
+
     function getRepairmanID(Id) {
         getWithToken(`/api/v1.0/repairmans/${Id}`, localStorage.getItem("token")).then((res) => {
             setRepairmanID(Id);
@@ -180,7 +198,7 @@ export default function Repairman() {
             console.log(err);
         });
     }
- 
+    
     async function handleEditSubmit2(e) {
         await putWithToken(
             `/api/v1.0/repairmans`,
@@ -208,6 +226,7 @@ export default function Repairman() {
                 console.log(err);
             });
     }
+  
     //load repairman
     useEffect(() => {
         getWithToken("/api/v1.0/repairmans", localStorage.getItem("token")).then(
@@ -296,7 +315,7 @@ export default function Repairman() {
             fontWeight: 'bold',
             color: '#e86a10f7',
             width: '194px',
-          },
+        },
         Status: {
             fontWeight: '700',
             width: '71px',
@@ -325,22 +344,22 @@ export default function Repairman() {
             0: "New",
             2: "Updating",
             "7e179e62-21da-45c1-afe4-114a580f0a12": "Công ty điện lạnh Long Châu",
-      "404f25c6-4f40-4f83-acfd-16a0d7c2f8e9": "Công ty điện lạnh, điện gia dụng Thủy Tiên",
-      "4bb0a83e-e9d9-47b5-8019-20c19e953181": "Công ty điện lạnh Hòa Hưng",
-      "dd0b937a-8e90-4af3-bfe8-0a8cc0722f6a": "IrepairX",
-      "17ab8695-daec-4ceb-9f78-07c9528c0009": "CompanyX",
-      "234be13b-421b-40d9-8226-0f162dee7ac8": "Công ty điện lạnh Thành Công",
-      "e427ae66-4f89-47c9-8032-0cca6577b28f": "Cty sửa chữa xe máy PHÁT THÀNH VINH 10",
-      "0e9ceddf-9796-478a-87fc-132567a68116": "Tiệm Sửa Xe Đinh Thành",
-      "a9f6fc01-3033-4b57-93eb-13fbc04d4e42": "Tiệm Sửa Xe Trường",
-      "4bb0a83e-e9d9-47b5-8019-20c19e953181": "Công ty điện lạnh Hòa Hưng",
-      "e5260446-f254-4d8c-a2a8-366748f11068": "Tiệm Sửa Xe Khoa Tay Ga",
-      "99e14380-7924-4522-91d5-69533f247258": "Tiệm Sửa Xe Thanh Long",
-      "473274b9-8345-4d0d-b765-87daf43a9bf7": "Sửa xe Tuấn 195 Bạch Đằng",
-      "033c9453-18a7-4066-b40e-923f685071ae": "Tiệm Sửa Xe Thành Trung",
-      "2e0a4a57-7ff9-4f0c-859e-9c6ef6228ca2": "Trung Tâm Kĩ Thuật Xe Máy Hải Dương",
-      "b7153746-4f68-47fb-83e5-e5f1ecbed192": "Sửa xe máy Hoài Thu",
-      "c2dc1cf0-24c1-4e52-9504-f1dad032f6e9": "Sửa xe Đinh Nguyễn 77",
+            "404f25c6-4f40-4f83-acfd-16a0d7c2f8e9": "Công ty điện lạnh, điện gia dụng Thủy Tiên",
+            "4bb0a83e-e9d9-47b5-8019-20c19e953181": "Công ty điện lạnh Hòa Hưng",
+            "dd0b937a-8e90-4af3-bfe8-0a8cc0722f6a": "IrepairX",
+            "17ab8695-daec-4ceb-9f78-07c9528c0009": "CompanyX",
+            "234be13b-421b-40d9-8226-0f162dee7ac8": "Công ty điện lạnh Thành Công",
+            "e427ae66-4f89-47c9-8032-0cca6577b28f": "Cty sửa chữa xe máy PHÁT THÀNH VINH 10",
+            "0e9ceddf-9796-478a-87fc-132567a68116": "Tiệm Sửa Xe Đinh Thành",
+            "a9f6fc01-3033-4b57-93eb-13fbc04d4e42": "Tiệm Sửa Xe Trường",
+            "4bb0a83e-e9d9-47b5-8019-20c19e953181": "Công ty điện lạnh Hòa Hưng",
+            "e5260446-f254-4d8c-a2a8-366748f11068": "Tiệm Sửa Xe Khoa Tay Ga",
+            "99e14380-7924-4522-91d5-69533f247258": "Tiệm Sửa Xe Thanh Long",
+            "473274b9-8345-4d0d-b765-87daf43a9bf7": "Sửa xe Tuấn 195 Bạch Đằng",
+            "033c9453-18a7-4066-b40e-923f685071ae": "Tiệm Sửa Xe Thành Trung",
+            "2e0a4a57-7ff9-4f0c-859e-9c6ef6228ca2": "Trung Tâm Kĩ Thuật Xe Máy Hải Dương",
+            "b7153746-4f68-47fb-83e5-e5f1ecbed192": "Sửa xe máy Hoài Thu",
+            "c2dc1cf0-24c1-4e52-9504-f1dad032f6e9": "Sửa xe Đinh Nguyễn 77",
         };
         return stateValue[type] ? stateValue[type] : "";
     }
@@ -420,6 +439,21 @@ export default function Repairman() {
         setRepairmanID("");
         toggleApprove();
     }
+    useEffect(() => {
+        getWorkonID();
+    }, []);
+    function getWorkonID(Id) {
+        getWithToken(`/api/v1.0/workson?repairmanId=${Id}`, localStorage.getItem("token")).then((res) => {
+            var temp = res.data;
+            //   setRepairmanList(res.data.RepairmanId)
+            setUseListWorkonShow(temp);
+        }).catch((err) => {
+            console.log(err);
+        });
+
+    }
+    console.log("datta", UseListWorkonShow)
+
 
     return (
         <>
@@ -585,6 +619,7 @@ export default function Repairman() {
                                             <th className="description">Stars</th>
                                             <th className="description">Working</th>
                                             <th className="description">Status</th>
+                                            <th className="viewAll"></th>
                                             <th className="viewAll">Actions</th>
                                         </tr>
                                     </thead>
@@ -594,10 +629,12 @@ export default function Repairman() {
                                                 <tr key={index}>
                                                     <td onClick={() => {
                                                         setModalStatus(true);
-                                                        setSelectRepairman(e);
+                                                        getWorkonID(e.id);
+                                                        setSelectRepairman(e);;
                                                     }}>
                                                         <img className="avatar-repairman" src={e.avatar} />
                                                     </td>
+                                               
                                                     <TableCell>
                                                         <Grid container>
 
@@ -611,24 +648,24 @@ export default function Repairman() {
 
                                                     <td onClick={() => {
                                                         setModalStatus(true);
-                                                        setSelectRepairman(e);
+                                                        setSelectRepairman(e);;
                                                     }}>
                                                         {e.phoneNumber}
                                                     </td>
                                                     <td onClick={() => {
                                                         setModalStatus(true);
-                                                        setSelectRepairman(e);
+                                                        setSelectRepairman(e);;
                                                     }}>
                                                         {e.email}
                                                     </td>
                                                     <td onClick={() => {
                                                         setModalStatus(true);
-                                                        setSelectRepairman(e);
+                                                        setSelectRepairman(e);;
                                                     }}>{displayStateName(e.companyId)}
                                                     </td>
                                                     <td onClick={() => {
                                                         setModalStatus(true);
-                                                        setSelectRepairman(e);
+                                                        setSelectRepairman(e);;
                                                     }}>
                                                         {e.name}
                                                     </td>
@@ -640,8 +677,8 @@ export default function Repairman() {
                                                             <td>
                                                             </td>
                                                         )}
-                                                    <td> 
-                                                    {displayStateWorking(e.workStatus)}
+                                                    <td>
+                                                        {displayStateWorking(e.workStatus)}
                                                     </td>
 
                                                     <TableCell>
@@ -658,13 +695,37 @@ export default function Repairman() {
                                                             }}
                                                         >{displayStateName(e.status)}</Typography>
                                                     </TableCell>
-                                                    <td>
-                                                        <td className="td-actions">
+                                                
+                                                            
+                                                            <td>
                                                             <OverlayTrigger
                                                                 onClick={(e) => e.preventDefault()}
                                                                 overlay={
                                                                     <Tooltip id="tooltip-960683717">
-                                                                        Approved Repairman..
+                                                                     Workson Repairman..
+                                                                    </Tooltip>
+                                                                }
+                                                                placement="right"
+                                                            >
+                                                        <Link 
+                                                        to={
+                                                           "/company/workon"
+                                                        }
+                                                        onClick={() => setDataWorkOn(e)}
+                                                    >
+                                                        <i className="far fa-image"></i>
+                                                    </Link>
+                                                    </OverlayTrigger>
+
+                                                </td>
+                                                    <td>
+                                                        <td className="td-actions">
+                                                       
+                                                            <OverlayTrigger
+                                                                onClick={(e) => e.preventDefault()}
+                                                                overlay={
+                                                                    <Tooltip id="tooltip-960683717">
+                                                                        Update Repairman..
                                                                     </Tooltip>
                                                                 }
                                                                 placement="right"
@@ -672,7 +733,7 @@ export default function Repairman() {
                                                                 <Button
                                                                     onClick={() => {
                                                                         setModalApprove(true);
-                                                                        getRepairmanID(e.id)                                                                // setSelectRepairman(e);
+                                                                        getRepairmanID(e.id)                                                                //    setSelectRepairman(e);;
                                                                     }}
                                                                     className="btn-link btn-icon"
                                                                     type="button"
@@ -694,7 +755,7 @@ export default function Repairman() {
                                                                     onClick={() => {
                                                                         setRepairmanDelete(e.id);
                                                                         setRepairmanModalDelete(true);
-                                                                        // setSelectRepairman(e);
+                                                                        //    setSelectRepairman(e);;
                                                                     }}
                                                                     className="btn-link btn-icon"
                                                                     type="button"
@@ -812,8 +873,8 @@ export default function Repairman() {
                     Are you sure?
                 </ModalHeader>
                 <ModalBody>Do you want to delete this repairman</ModalBody>
-                <ModalFooter style={{ justifyContent: 'space-around'}}>
-                <Button className="cancel-button" onClick={toggleDelete}>
+                <ModalFooter style={{ justifyContent: 'space-around' }}>
+                    <Button className="cancel-button" onClick={toggleDelete}>
                         Cancel
                     </Button>
                     <Button
@@ -825,60 +886,11 @@ export default function Repairman() {
                     >
                         Delete
                     </Button>{" "}
-                   
+
                 </ModalFooter>
             </Modal>
 
 
-            <Modal isOpen={modalStatus} toggle={toggleDetails}>
-                <ModalHeader
-                    toggle={toggleDetails}
-                    style={{ color: "#B22222" }}
-                    close={closeBtn(toggleDetails)}
-                >
-                    <h3> INFORMATION </h3>
-                </ModalHeader>
-                <ModalBody>
-
-                    <Row>
-                        <Col></Col>
-                        <Col className="view-item-size-main" md={3}>  Name:</Col>
-                        <Col className="view-item-size" md={8}>
-                            {SelectRepairman !== undefined ? SelectRepairman.name : ""}
-                            {/* {setSelectRepairman !== undefined ? displayMajorName(SelectRepairman.MajorId) : ""} */}
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col></Col>
-                        <Col className="view-item-size-main" md={3}>Company:</Col>
-                        <Col className="view-item-size" md={8}>{SelectRepairman !== undefined ? displayStateName(SelectRepairman.companyId) : ""}</Col>
-                    </Row>
-                    <Row>
-                        <Col></Col>
-                        <Col className="view-item-size-main" md={3}> Email:</Col>
-                        <Col className="view-item-size" md={8}>
-                            {SelectRepairman !== undefined ? SelectRepairman.email : ""}
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col></Col>
-                        <Col className="view-item-size-main" md={3}> UserName:</Col>
-                        <Col className="view-item-size" md={8}>
-                            {SelectRepairman !== undefined ? SelectRepairman.username : ""}
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col></Col>
-                        <Col className="view-item-size-main" md={3}> Phone:</Col>
-                        <Col className="view-item-size" md={8}>{SelectRepairman !== undefined ? SelectRepairman.phoneNumber : ""}</Col>
-                    </Row>
-                    <Row>
-                        <Col></Col>
-                        <Col className="view-item-size-main" md={3}>Status:</Col>
-                        <Col className="view-item-size" md={8}>{SelectRepairman !== undefined ? displayStateName(SelectRepairman.status) : ""}</Col>
-                    </Row>
-                </ModalBody>
-            </Modal>
 
 
             <Modal isOpen={modalApprove} toggle={toggleApprove} centered size="lg" >
@@ -934,8 +946,8 @@ export default function Repairman() {
                         </Grid>
                     </Form>
                 </ModalBody>
-                <ModalFooter style={{ justifyContent: 'space-around'}}>
-                <Button className="cancel-button" onClick={() => { cancelRepairmanByID(); }}>
+                <ModalFooter style={{ justifyContent: 'space-around' }}>
+                    <Button className="cancel-button" onClick={() => { cancelRepairmanByID(); }}>
                         Cancel
                     </Button>
                     <Button
@@ -948,9 +960,10 @@ export default function Repairman() {
                     >
                         Update
                     </Button>
-                  
+
                 </ModalFooter>
             </Modal>
+
             <Modal isOpen={modalCreate} toggle={toggleCreate} centered size="lg" >
                 <ModalHeader
                     style={{ color: "#1d98e0f7" }}>
@@ -1004,8 +1017,8 @@ export default function Repairman() {
                         </Grid>
                     </Form>
                 </ModalBody>
-                <ModalFooter style={{ justifyContent: 'space-around'}}>
-                <Button className="cancel-button" onClick={() => { toggleCreate(); }}>
+                <ModalFooter style={{ justifyContent: 'space-around' }}>
+                    <Button className="cancel-button" onClick={() => { toggleCreate(); }}>
                         Cancel
                     </Button>
                     <Button
@@ -1018,10 +1031,71 @@ export default function Repairman() {
                     >
                         Save
                     </Button>
-                  
+
                 </ModalFooter>
             </Modal>
 
+
+
+            <Modal isOpen={modalStatus} toggle={toggleDetails} centered size="lg" >
+                <ModalHeader
+                    style={{ color: "#1d98e0f7" }}>
+                    <ModalTitle><h2>Information</h2></ModalTitle>
+                </ModalHeader>
+                <ModalBody>
+                    <Form>
+                        <Grid
+                            container
+                            rowSpacing={4}
+                            columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                            <Grid item xs={6}>
+                                <FormGroup className="mb-2">
+                                    <Form.Label style={{ color: '#1d98e0f7' }} >Name: </Form.Label>
+                                    {SelectRepairman !== undefined ? SelectRepairman.name : ""}
+                                </FormGroup>
+                                <FormGroup className="mb-2">
+                                    <Form.Label style={{ color: '#1d98e0f7' }} >Comapny: </Form.Label>
+                                    {SelectRepairman !== undefined ? displayStateName(SelectRepairman.companyId) : ""}
+                                </FormGroup>
+                                <FormGroup className="mb-2">
+                                    <Form.Label style={{ color: '#1d98e0f7' }} >Email: </Form.Label>
+                                    {SelectRepairman !== undefined ? SelectRepairman.email : ""}
+                                </FormGroup>
+                                <FormGroup className="mb-2">
+                                    <Form.Label style={{ color: '#1d98e0f7' }} >Username: </Form.Label>
+                                    {SelectRepairman !== undefined ? SelectRepairman.username : ""}
+                                </FormGroup>
+                                <FormGroup className="mb-2">
+                                    <Form.Label style={{ color: '#1d98e0f7' }} >Phone: </Form.Label>
+                                    {SelectRepairman !== undefined ? SelectRepairman.phoneNumber : ""}
+                                </FormGroup>
+                                <FormGroup className="mb-2">
+                                    <Form.Label style={{ color: '#1d98e0f7' }} >Status: </Form.Label>
+                                    {SelectRepairman !== undefined ? displayStateName(SelectRepairman.status) : ""}
+                                </FormGroup>
+                            </Grid>
+                            <Grid item xs={6}>
+                                {/* <Form.Group className="mb-2 ml-5">
+                                    <Form.Label>Avatar</Form.Label>
+                                    <Form.Control type="file" onFileChange={avatar}
+                                        onChange={uploadImage}
+                                    />
+                                    {loading ? (
+                                        <h3>Loading...</h3>
+                                    ) : (
+                                        <img src={avatar} style={{ width: '300px' }} />
+                                    )}
+                                </Form.Group> */}
+
+                            </Grid>
+                        </Grid>
+                    </Form>
+                </ModalBody>
+            </Modal>
+
+
+
+         
         </>
     );
 }

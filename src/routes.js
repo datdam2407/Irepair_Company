@@ -9,20 +9,17 @@ import Dashboard from "views/Dashboard.js";
 
 import EditService from "views/Forms/EditService.js";
 import ServiceTables from "views/Forms/ServiceTables.js";
-import ValidationForms from "views/Forms/ValidationForms.js";
 // import ManageMajor from "views/Major/ManageMajor.js";
 import CreateNewService from "views/Forms/CreateNewService.js";
 // import CreateNewMajor from "views/Major/CreateNewMajor.js";
 import CreateNewRepairMan from "views/Tables/CreateNewRepairMan.js";
 import RepairmanTable from "views/Tables/RepairmanTable.js";
-import GoogleMaps from "views/Maps/GoogleMaps.js";
-import FullScreenMap from "views/Maps/FullScreenMap.js";
-import VectorMap from "views/Maps/VectorMap.js";
+
 import Charts from "views/Charts.js";
-import Workon from "views/Workon.js";
+import Major from "views/Major.js";
 import UserPage from "views/Pages/UserPage.js";
+import Workon  from "views/Pages/Workon.js";
 // import Sidebar from "views/Sidebar.js";
-import RegisterPage from "views/Pages/RegisterPage.js";
 // import LockScreenPage from "views/Pages/LockScreenPage.js";
 
 var routes = [
@@ -226,14 +223,77 @@ var routes = [
   // },
 
 
-
   {
-    path: "/Workon",
+    path: "/Major",
     layout: "/company",
     name: "Major",
     icon: "nc-icon nc-single-copy-04",
+    component: Major,
+  },
+
+
+
+  
+  {
+    layout: "/company",
+  },
+  
+  {
+    layout: "/company",
+  },
+  
+  {
+    layout: "/company",
+  },
+  
+  {
+    layout: "/company",
+  },
+  
+  {
+    layout: "/company",
+  },
+  
+  {
+    layout: "/company",
+  },
+  
+  {
+    layout: "/company",
+  },
+  
+  {
+    layout: "/company",
+  },
+  
+  {
+    layout: "/company",
+  },
+  
+  {
+    layout: "/company",
+  },
+  
+  {
+    layout: "/company",
+  },
+  
+  {
+    layout: "/company",
+  },
+  
+  {
+    layout: "/company",
+  },
+  
+  {
+    path: "/workon",
+    layout: "/company",
+    name:"Working on",
     component: Workon,
   },
+
+
 
 
 
